@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 谁收藏了我</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+</head>
+<body>
+  <php>$nav = 3;</php>
+  <include file="Public:head" />
+  <!--中间部分开始-->
+  <div class="container_cwrap clear">
+    <!--左边部分开始-->
+    <div class="fm_l_200">
+      <include file="Public:left" />
+    </div>
+    <!--左边部分结束-->
+    <!--右边部分开始-->
+    <div class="emaillist_w">
+      <div class="tip_nav">
+     <ul class="clear fs_14">
+          <li class="word_nowrap"><a href="{$urlsite}/msg/"  class="">信息<if condition="$f['new_msg'] neq 0"><span class="fb_12 f_r1">新！</span> </if></a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/visit/in/" class="">来访者 <if condition="$f['new_visitor'] neq 0"><span class="fb_12 f_r1">新！</span> </if></a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/visit/out/" class="">我去看过谁</a></li>
+          <li><a href="{$urlsite}/fav/out/" class="">我收藏的人</a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/fav/in/" class="current">谁收藏了我</if></a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/attention/more/" class="">动态  <if condition="$f['new_attention'] neq 0"><span class="fb_12 f_r1">新！</span> </if></a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/link/forbid_list/" class="f_9 ">阻止联系</a></li>
+        </ul>
+      </div>
+      <div class="myfrend_list">
+	    <empty name="favlist">
+		<div class="none_record clear">暂无记录</div>
+        <else />
+		<ul>
+          <volist name="favlist" id="m">
+            <li class="clear">
+              <dl class="clear fl w_490">
+			    <eq name="m['status']" value="1">
+				<dt class="w_72"><a onclick="Win.dialog({msg:'对方使用了悄悄关注功能，所以不显示TA是谁。',type:'info',height:100});"><img alt="照片" src="{$urlupload}/000face/{$m['sex']|ui_sex=6}_wh.png"></a></dt>
+				<dd class="w_430 m_t15"><p>某人悄悄关注了您</p><p class="fs_12 f_9">{$m['sex']|ui_sex}收藏我的时间：{$m['add_time']|formatTime}</p></dd>
+				<dd class="collection_btn"></dd>
+				<else />
+                <dt class="w_72"> <a href="{$urldomain}/{$m['uid']}" target="_blank"> <img src="{$urlupload}/{$m['default_pic']}_72x72.jpg" class="face_s{$m['sex']}_b3" alt="照片" /> </a> </dt>
+                <dd class="fl w_430">
+                  <p> <a href="{$urldomain}/{$m['uid']}" target="_blank">{$m['username']}</a> <span class="f_6">{$m|user_tag}</span> </p>
+                  <p class="want_c fs_13"></p>
+                  <p class="fs_12 f_9">{$m['sex']|ui_sex}收藏我的时间：{$m['add_time']|formatTime}</p>
+                </dd>
+				<eq name="m['fav_too']" value="1">
+				<dd class="collection_btn"><img alt="你们已经互相收藏啦！" title="你们已经互相收藏啦！" src="{$urlstatic}/img/eachadd.png" class="eachadd"></dd>
+				<else />
+				<dd class="collection_btn">
+                  <div><a class="collectionbg clear f_3" onclick="show_or({$m['uid']});"><span class="fl">收藏</span><span class="or_i fl"></span></a></div>
+                  <div class="m_dw_inner" id="or_{$m['uid']}" style="display:none">
+                    <p><a class="clear" onclick="fav({$m['uid']},{$m['sex']},'{$m['username']}',2)"><span class="addbg2 fl"></span> <span class="fl p_l5">添加收藏</span></a></p>
+                    <p><a class="clear" onclick="fav({$m['uid']},{$m['sex']},'{$m['username']}',1)"><span class="addbg fl"></span> <span class="fl p_l5">悄悄收藏</span></a></p>
+                  </div>
+                </dd>				
+				</eq>
+				</eq>
+              </dl>
+            </li>
+          </volist>
+        </ul>
+		</empty>
+        <div class="clear">
+          <div class='page'>{$pages} </div>
+        </div>
+      </div>
+    </div>
+    <!--右边部分结束-->
+  </div>
+  <!--中间部分结束-->
+  <script>
+var current_or_uid=0;
+$(document).bind("click",function(e){
+	if($.browser.msie) {
+		var el = event.srcElement;
+	}
+	else {
+		var el = e.target;
+	}
+	if(!(IM.fInObj(el, "collectionbg clear f_3"))) {
+		$(".m_dw_inner").hide();
+	}
+	
+});
+
+function show_or(uid)
+{
+	if(current_or_uid>0)
+	{
+		$("#or_"+current_or_uid).hide();
+	}
+	$("#or_"+uid).show();
+	current_or_uid = uid;
+}
+
+function delete_favi(uid)
+{
+	$.ajax({
+	   type: "POST",
+	   url: "/fav/delete_favi/",
+	   data: 'uid='+uid+'&',
+	   success: function order_result(re)
+	   {
+	   		switch(re)
+	   		{
+	   			case '1':
+	   			case '2': Win.dialog({msg:'已删除<br/>',height:100,cancel:function(){top.location.href='?';}}); break;
+	   			case '0': Win.dialog({msg:'删除失败<br/>',height:100,cancel:function(){top.location.href='?';}}); break;
+	   		}
+	   }
+	});
+}
+
+function check_allow()
+{
+	if(!1)
+	{
+		Win.dialog({type:'alert',msg:'请 <a href="/photo/up_form/">上传一张你的打分照</a> 后，再给Ta贴标签吧!<br/>',height:120,width:350});
+		return false;
+	}
+	
+	return true;
+}
+
+</script>
+  <include file="Public:foot" /> </div>
+</body>
+</html>

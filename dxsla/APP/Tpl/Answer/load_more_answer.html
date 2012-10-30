@@ -1,0 +1,24 @@
+<volist name="answerlist" id="a">
+<dd id="dl_{$a.id}">
+  <div class="clear">
+    <div class="text">
+      <div class="pep_img"><a href="{$urldomain}/{$a.uid}" target="_blank"><img src="{$urlupload}/{$a.default_pic}_48x48.jpg" width="32" height="32"/></a></div>
+      <a href="{$urldomain}/{$a.uid}" target="_blank" class="f_pink fl word_nowrap">{$a.username}：</a><a class="<eq name="a['vote']" value="1">agree<else/>opposition</eq> fl"></a>
+      <p class="word_break">{$a.answer_cont}</p>
+    </div>
+    <div class="remark_info fs_12"><span class="f_9">{$a.answer_time|formatTime}</span>
+	  <gt name="a['star_num']" value="0">
+	  <php>$num = $a['star_num'] > 3 ? $a['star_num'] - 3 : $a['star_num'];</php>
+	  <p class="fr f_6">已给<gt name="a['star_num']" value="3">差<else />好</gt>评：<span class="<gt name="a['star_num']" value="3">sp_defecate<else />sp_star</gt> bg_postion{$num}"></span></p>
+	  <else />
+      <p class="fr f_6" id="tip_{$a.id}_{$a.uid}">给{$a['sex']|ui_sex}好评：<span id="set_{$a.id}"><a class="sp_star bg_postion setstar " data="18090226|294|{$a.id}|{$a.uid}|10829" id="setstar_{$a.id}" onclick="ping_star('setstar_{$a.id}')" onmouseout="setstar_id = 0;this.className = 'sp_star bg_postion setstar';" onmousemove="setstar_id='{$a.id}';DisplayCoord(event,0);"></a></span></p>
+      <p class="fr f_6" id="tippoor_{$a.id}_{$a.uid}">给{$a['sex']|ui_sex}差评：<span id="set_{$a.id}"><a class="sp_defecate bg_postion setstar " data="18090226|294|{$a.id}|{$a.uid}|10829" id="setpoor_{$a.id}" onclick="ping_star('setpoor_{$a.id}')" onmouseout="setpoor_id = 0;this.className = 'sp_defecate bg_postion setstar';" onmousemove="setpoor_id='{$a.id}';DisplayCoord(event,1);"></a></span></p>
+	  </gt>
+	  
+      <p><a class="f_bl" href="javascript:;" onclick="reply({$a.id},{$a.uid},{$a.id})">回复</a> | <a class="f_6 delete_answer" onclick="delete_confirm({$a.id},'answer',1,294)">删除</a></p>
+    </div>
+  </div>
+  <div class="clear comment" id="comment_{$a.id}"></div>
+  <div class="clear border"></div>
+</dd>
+</volist>

@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>后台管理</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link href="{$urlstatic2}/css/admin.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+</head>
+<style type="text/css">
+.search{height:40px; margin:10px auto; float:left;}
+.online{height:40px; margin:10px auto; float:right;}
+.mt20{ margin-top:20px;}
+.clear{clear:both;}
+</style>
+<body>
+<include file="header" />
+<div class="body_container">
+  <div class="body_left"> <include file="body_left" /> </div>
+  <script type="text/javascript">
+topNav(2);
+leftNav(0);
+</script>
+  <div class="body_middle">
+    <div class="title2">
+      <table width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tbody>
+          <tr>
+            <td class="title"><p class="t_left">&nbsp;&nbsp;会员管理<font color="#CCCCCC">共{$count}条记录</font></p></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="search">
+      <form action="" method="post">
+        <select name="type">
+          <option value="1">uid</option>
+          <option value="2">会员名</option>
+        </select>
+        &nbsp;&nbsp;
+        <input type="text" name="nr"  />
+        <input type="submit" value="搜索"  name="submit"/>
+      </form>
+  </div>
+	<div class="online">同时在线人数：{$count_online}</div>
+	<div class="clear"></div>
+   <div class=""><a href="{$urldomain}/admin2qinhan2org/user/">全部</a>&nbsp; &nbsp; <a href="{$urldomain}/admin2qinhan2org/user/?sex=1">只看男生</a>&nbsp; &nbsp;  <a href="{$urldomain}/admin2qinhan2org/user/?sex=2">只看女生</a></div>
+   <div class="mt20"></div>
+    <div class="clr">
+      <table width="100%" cellspacing="0" cellpadding="0" border="0" class="tbl1">
+        <tbody>
+          <tr class="header">
+            <td width="130">uid</td>
+            <td width="130">账号</td>
+            <td width="130">性别</td>
+            <td width="130">在线状态</td>
+            <td width="130">登陆次数</td>
+            <td>学校学院</td>
+          </tr>
+          <volist name="list" id="vo">
+            <tr class="int1">
+              <td valign="top">{$vo.uid}</td>
+              <td><a href="{$urldomain}/{$vo['uid']}" target="_blank">{$vo.username}&nbsp;</a></td>
+              <td><if condition="$vo[sex] eq 1 "> 男
+                  <else />
+                  女 </if>
+                &nbsp;</td>
+              <td><php>$time=$vo["login_time"]; $dur = time () - $time; if($dur<65){echo "在线";}else {echo "离线";}</php>&nbsp;</td>
+              <td>{$vo.login_times}&nbsp;</td>
+              <td>{$vo.college}&nbsp;</td>
+            </tr>
+          </volist>
+        </tbody>
+      </table>
+      <div class="pages">{$page}</div>
+    </div>
+  </div>
+</div>
+<include file="footer" />
+<script type="text/javascript">
+function act_pass(obj, path) {
+	$.ajax({
+	   type: "POST",
+	   url: "<php>echo $urladmin</php>/chk_photo/act/pass",
+	   data: 'path=' + path,
+	   success: function show_desc_result(re)
+	   {
+			$(obj).parent().remove();
+	   }
+	});
+}
+function act_del(obj, path) {
+	$.ajax({
+	   type: "POST",
+	   url: "<php>echo $urladmin</php>/chk_photo/act/del",
+	   data: 'path=' + path,
+	   success: function show_desc_result(re)
+	   {
+			$(obj).parent().remove();
+	   }
+	});
+}
+function act_change_sex(uid) {
+	$.ajax({
+	   type: "POST",
+	   url: "<php>echo $urladmin</php>/chk_photo/act/change_sex",
+	   data: 'uid=' + uid,
+	   success: function show_desc_result(re)
+	   {
+			Win.dialog({type:'info',msg:'更改性别成功！'});
+	   }
+	});
+}
+</script>
+</body>
+</html>

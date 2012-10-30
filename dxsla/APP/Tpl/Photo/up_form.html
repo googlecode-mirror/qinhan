@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 上传照片</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+
+<script language="javascript" src="{$urlstatic2}/js/photo_group.js?gv=148_1"></script>
+<link href="{$urlstatic2}/css/photos.css?gv=161_1" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<php>$nav = 7;</php>
+<include file="Public:head" />
+<style type="text/css">
+._js_show_area,._js_show_pass,#_js_show_pass,._js_show_error,._js_show_pass_error,.photo_area{display:none;}
+</style>
+  <!--中间部分开始-->
+  <div class="newperphoto_w clear">
+    <!--左边部分开始-->
+	<include file="Public:profile_left" />
+    <!--左边部分结束-->
+    <!--右边部分开始-->
+    <div class="photo_manage">
+      <div class="top_nav clear">
+        <dl>
+          <dt><a href="{$urlsite}/photo">我的相册</a></dt>
+          <dd> <a href="{$urlsite}/photo/group?gid={$pg['gid']}"> {$pg['name']} </a> </dd>
+          <dd>上传照片</dd>
+        </dl>
+      </div>
+      <div class="choice_w"> 选择相册：
+        <select id="_js_group_type">
+		<option value="0" > 个人形象照 </option>
+		  <volist name="pglist" id="g">	
+          <option value="{$g['gid']}" > {$g['name']} </option>
+		  </volist>
+        </select>
+        或者　<a href="javascript:void(0);" onclick="group_action.add_group();">创建新相册</a> </div>
+      <div class="upphoto_flash">
+        <form id="form1" name="photo_form" action="{$urlsite}/photo/api_upload" target="photo_frame" method="post" enctype="multipart/form-data" onsubmit="return check_form();">
+          <div class="add_photo_list">
+            <ul class="clear" id="up_row_1">
+              <li>照片1：</li>
+              <li id="uprow_1">
+                <input onkeypress="return false;" onpaste="return false" id="upfile1" type="file" size="30" size="50" name="upfile1" />
+              </li>
+            </ul>
+            <ul class="clear" id="up_row_2">
+              <li>照片2：</li>
+              <li id="uprow_2">
+                <input onkeypress="return false;" onpaste="return false" id="upfile2" type="file" size="30" size="50" name="upfile2" />
+              </li>
+            </ul>
+            <ul class="clear" id="up_row_3">
+              <li>照片3：</li>
+              <li id="uprow_3">
+                <input onkeypress="return false;" onpaste="return false" id="upfile3" type="file" size="30" size="50" name="upfile3" />
+              </li>
+            </ul>
+            <ul class="clear" id="up_row_4">
+              <li>照片4：</li>
+              <li id="uprow_4">
+                <input onkeypress="return false;" onpaste="return false" id="upfile4" type="file" size="30" size="50" name="upfile4" />
+              </li>
+            </ul>
+            <ul class="clear" id="up_row_5">
+              <li>照片5：</li>
+              <li id="uprow_5">
+                <input onkeypress="return false;" onpaste="return false" id="upfile5" type="file" size="30" size="50" name="upfile5" />
+              </li>
+            </ul>
+            <ul class="clear" id="up_row_6">
+              <li>照片6：</li>
+              <li id="uprow_6">
+                <input onkeypress="return false;" onpaste="return false" id="upfile6" type="file" size="30" size="50" name="upfile6" />
+              </li>
+            </ul>
+            <ul class="clear" id="up_row_7">
+              <li>照片7：</li>
+              <li id="uprow_7">
+                <input onkeypress="return false;" onpaste="return false" id="upfile7" type="file" size="30" size="50" name="upfile7" />
+              </li>
+            </ul>
+            <ul class="clear" id="up_row_8">
+              <li>照片8：</li>
+              <li id="uprow_8">
+                <input onkeypress="return false;" onpaste="return false" id="upfile8" type="file" size="30" size="50" name="upfile8" />
+              </li>
+            </ul>
+            <ul class="clear" id="up_row_9">
+              <li>照片9：</li>
+              <li id="uprow_9">
+                <input onkeypress="return false;" onpaste="return false" id="upfile9" type="file" size="30" size="50" name="upfile9" />
+              </li>
+            </ul>
+            <ul class="clear" id="up_row_10">
+              <li>照片10：</li>
+              <li id="uprow_10">
+                <input onkeypress="return false;" onpaste="return false" id="upfile10" type="file" size="30" size="50" name="upfile10" />
+              </li>
+            </ul>
+            <input type="hidden" name="gid" id="_js_form_gid" value="{$pg['gid']}">
+            <p class="list">
+              <label class="f_6">
+              <input type="checkbox" id="_act_per_type">
+              不发布动态通知&nbsp;&nbsp;&nbsp;&nbsp; </label>
+              <a onclick="if(check_form()){photo_form.submit();}" class="btn1 btn_b1">开始上传</a> </p>
+          </div>
+        </form>
+      </div>
+      <img src="{$urlstatic}/img/photo_tip.png" class="photo_tip"/>
+      <iframe name="photo_frame" id="photo_frame" style="width:0;height:0;border:1px solid #ccc; display:none;" src="{$urlsite}/photo/api_upload" ></iframe>
+    </div>
+    <!--右边结束-->
+  </div>
+  <script type="text/javascript">
+$('#_js_group_type').val({$pg['gid']});  
+function check_form()
+{
+    up_fail = 0;
+    var num = 0;
+    for(var i=1; i<=6; i++) 
+    {
+        var file=$("#upfile"+i).get(0);
+        if(file.value!="" && file.value!="http://"  ) {
+            num++;
+        }
+    }
+    if(num == 0)
+    {
+        Win.dialog({msg:'请先点击 [浏览...] 选择一张照片！',type:'info'});
+        return false;
+    }
+    var photo_now_num = num + parseInt($('#photo_num').val());
+    if(photo_now_num >200)
+    {
+        Win.dialog({msg:'照片数量超过上限！',type:'info'});
+        return false;
+    }
+    var msg_code = '<div class="popup_c" id="uploading_div">'
+                 + ' <p>照片正在上传，请稍等....</p>'
+                 + ' <p class="photo_progress"><img src="{$urlstatic}/img/uping.gif" alt="loading" /></p>'
+                 + '</div>' ;
+    Win.dialog({width:420,msg:msg_code,noclose:true,height:100});
+    
+    $('#photo_frame').get(0).onload = check_upload_status;
+    if ( $('#photo_frame').get(0).attachEvent != null )
+    {
+        $('#photo_frame').get(0).attachEvent( 'onload', check_upload_status);
+    }
+    
+    return true;
+}
+function check_upload_status()
+{
+    if(up_fail==0 && !jQuery.browser.safari)
+    {
+        alert('上传图片失败');
+        Win.close();
+    }
+}
+var up_fail = 0;
+function upload_fail(message,i)
+{
+    up_fail = 1;
+    Win.dialog({msg:message,height:100,width:500,type:'info'});
+    $('#uprow_'+i).html($('#uprow_'+i).html());
+}
+$('#_js_group_type').change(function(){
+    $('#_js_form_gid').val($(this).val());
+});
+</script>
+  <include file="Public:foot" /> </div>
+</body>
+</html>

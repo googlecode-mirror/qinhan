@@ -1,0 +1,47 @@
+<!-- :촰۱鶼ôCSS-->
+.messages_w{height:100%;}
+.messages{overflow:auto;height:100%;margin:0 0 100px 201px;padding:0 5px 0 11px;background:url(../img/shadow_bg2.gif) repeat-y scroll 0 0 #fff;display:block;height:expression((document.documentElement.clientHeight -225));}
+* + html .messages{position:absolute;z-index:1;height:auto;_height:100%;margin-bottom:0;top:93px;bottom:133px;left:0;right:0;}
+.messages ul{padding:10px;}
+.messages ul li{margin-bottom:10px;word-break:break-all;word-wrap:break-word;line-height:20px;color:#333;}
+.messages .ta{color:#5D9435;font-size:10px;}
+.messages .ta b{font-size:12px;}
+.messages .me{color:#5788C2;font-size:10px;}
+.messages .me b{font-size:12px;}
+.messages .textbg{background:#eee;padding:5px 10px;margin:5px 0;}
+.type{bottom:0;height:133px;left:0;margin:0 0 0 201px;position:absolute;right:0;z-index:5;background:url(../img/shadow_bg.gif) repeat-y scroll 0 0 #88b9f4;}
+.userlist .status_icon_w{width:30px;}
+.userlist .status_icon{float:left;height:11px;margin:6px 9px 0 8px;width:11px;background:url(../img/chat_online.png) no-repeat scroll 0 0;}
+.userlist .status_icon{background-position:-24px 0;}
+.userlist .online{background-position:-11px 0;}
+.userlist .newmsg{color:#fff;font-size:11px;font-weight:bold;height:18px;line-height:18px;text-align:center;text-indent:0;display:block;width:18px;margin:2px 0 0 5px;background:url(../img/messenger.png) no-repeat -48px 0}
+/**ɾť**/
+.userlist .user_delete{display:none;float:right;margin:4px 9px 0 -20px;position:relative;z-index:7987;width:14px;height:14px;background:url(../img/messenger.png) no-repeat -66px 0;}
+.userlist .user_contact:hover .user_delete,.userlist user_contact.hover .user_delete{visibility:visible}
+.userlist .user_delete:hover{background-position:-80px 0}
+.userlist .current .user_delete{background-position:-66px -18px}
+.userlist .current .user_delete:hover{background-position:-80px -18px}
+.userlist .user_delete span{display:none}
+.type .type-wrap{padding:15px;}
+.type .textarea{background:#fff;border-color:#5788C2 #B1D3FE #B1D3FE #5788C2;border-style:solid;border-width:1px;clear:both;height:68px;margin:0 15px 7px 0;overflow:auto;padding:5px;word-wrap:break-word;word-break:normal;width: expression((document.documentElement.clientWidth -240));}
+.type .submit{_margin-left:-100px;}
+.type .submit span,.type .submit2 span{float:left;}
+.smile_door{background:url(../img/writer_icon.gif) no-repeat 0 0;background-position:-60px 0;height:18px;width:28px;display:block;margin:5px 0 0 15px;}
+a.add_friend_btn{background:url(../img/add_friend_btn.png) no-repeat 0 0;width:94px;height:24px;display:block;margin-top:5px;}
+a.add_friend_btn:hover{background-position:0 -26px;}
+*html .type{width:100%;margin:0;z-index:2;background-position:201px 0}
+*html .type-wrap{margin-left:201px}
+.chat_prev{padding:5px 0 0 10px;}
+.progress{padding-bottom:15px;}
+.submit .title{width:385px;height:33px; line-height:33px;}
+/**/
+.expression{width:397px;height:265px;position:absolute; z-index:1198;background:#fff;}
+.expression ul{height:33px; background:url(../img/exp_03.png);border-left:1px #cccccc solid;border-right:1px #cccccc solid;}
+.expression ul li{height:28px;padding:0px 10px; line-height:28px;margin-top:4px;margin-left:10px;float:left;color:#666666;cursor:pointer;}
+.expression ul li a{color:#666666;text-decoration:none;}
+.expression .changeli{background:url(../img/exp_06.png);border:1px #cccccc solid;border-bottom:none;cursor:pointer;}
+.expression .content{height:229px;}
+.expression .redbox{width:34px;height:34px;border:1px #F30 solid; position:absolute; z-index:4;left:164px;top:32px;}
+.expression .bigimg{position:absolute;z-index:5; left:0px;top:32px; background:#fff;}
+.expression .bigimg img{border:1px #cccccc solid;}
+.expression .close{ float:right;}

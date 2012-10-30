@@ -1,0 +1,299 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+
+<link href="{$urlstatic2}/css/newindex.css?gv=220_1" rel="stylesheet" type="text/css" />
+<link href="{$urlstatic2}/css/login.css?gv=220_1" rel="stylesheet" type="text/css" />
+<style type="text/css">
+html {overflow-x: hidden;}
+body {_overflow-x:hidden;}
+.friend_link {margin:30px 0 -25px 20px; color:#999;}
+.friend_link a {color:#999; text-decoration:none; margin-right:8px;}
+.friend_link a:hover {text-decoration:underline;}
+</style>
+</head>
+<body class="page_main clip_wrap">
+
+<include file="Public:home_head" />
+<script type="text/javascript">
+function check_reg(f) {
+	var msg = '', enter = null;
+	if($("#username2").val() == '') {
+		msg = '用户名未填';
+		enter = function() { $("#username2").select() };
+	} else if($("#password2").val() == '') {
+		msg = '密码未填';
+		enter = function() { $("#password2").select() };
+	} else if($("#password2").val() != $("#rpassword").val()) {
+		msg = '密码不一致';
+	}
+	if(msg) {
+		Win.dialog({msg:msg, type:'info', enter:enter});
+		return false;	
+	}
+   	$.ajax({
+	   type: "POST",
+	   url: "/index.php?s=/member/register/",
+	   data: 'username=' + $('#username2').val() + '&password=' + $('#password2').val(),
+	   success: function show_desc_result(re)
+	   {
+	   		var obj = jQuery.parseJSON(re);
+	   		if(obj.errno != 200) {
+				//$("#msg").html(obj.msg);
+				var enter = function() { $("#username2").select() };
+				Win.dialog({msg:obj.msg, type:'info', enter:enter});
+			} else {
+				location.href = '<php>echo $urlsite;</php>/member/reg_active/';
+			}
+	   }
+	});	
+	return false;
+}
+function check_login(f) {
+	var msg = '', enter = null;
+	if($("#username").val() == '') {
+		msg = '用户名未填';
+		enter = function() { $("#username").select() };
+	} else if($("#password").val() == '') {
+		msg = '密码未填';
+		enter = function() { $("#password").select() };
+	}
+	if(msg) {
+		Win.dialog({msg:msg, type:'info', enter:enter});
+		return false;	
+	}
+   	$.ajax({
+	   type: "POST",
+	   url: "/index.php?s=/member/login/",
+	   data: 'username=' + $('#username').val() + '&password=' + $('#password').val(),
+	   success: function show_desc_result(re)
+	   {
+	   		var obj = jQuery.parseJSON(re);
+	   		if(obj.errno != 200) {
+				Win.dialog({msg:obj.msg, type:'info'});
+			} else {
+				location.href = '/';
+			}
+	   }
+	});	
+	return false;
+}
+</script> 
+  <div id="wrap1">
+    <php>$guest_name = cookie('username');</php>
+    <!--<div style="position:absolute; top:-80px; left:420px;"><a <empty name="guest_name">onclick="show_guest_form();return false;"</empty> href="{$urldomain}/guest/xiaoyuannannv/" title="校园男女" alt="校园男女"><img src="{$urlstatic}/img/up_icon.png" /></a></div>-->
+    <div class="mp_mosaic">
+      <div class="mp_canvas" id="mp_canvas">
+        {$mosaic}
+        <!--登录框开始-->
+        <div class="mp_sg mp_sgin">
+          <ul class="mp_sg_ul clear">
+		  	<li class="upload_pic_btn1" id="upload_show_btn" onclick="change_show(1)"><a href="javascript:;">免费注册</a></li>
+            <li class="login_btn1" id="login_show_btn" onclick="change_show(2)"><a href="javascript:;" class="login_btn_text">已有账号登录</a></li>
+          </ul>
+		  <div id="upload_show" class="mp_sg_cont" style="display:none;">
+            <div class="login_form">
+              <form id="regform" name="loginform" method="post" action="{$urlsite}/member/register/" onsubmit="return check_reg()">
+                <div class="set_box">
+                  <div id="msg" class="item3"></div>
+                  <div class="set_box_main">
+                    <div class="clear"> <b class="fl">用户名：</b>
+                      <div class="fl">
+                        <input type="text" class="inputbg2" value="" maxlength="60" name="username2" id="username2" />
+                      </div>
+                    </div>
+                    <div id="div_pass" class="clear m_t30"> <b class="fl">密码：</b>
+                      <div class="fl">
+                        <input type="password" maxlength="32" id="password2" name="password2" />
+                      </div>
+                    </div>
+					<div id="div_pass" class="clear m_t30"> <b class="fl">重复密码：</b>
+                      <div class="fl">
+                        <input type="password" maxlength="32" id="rpassword" name="rpassword" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="list2 clear"> <span class="fl">
+                    <input type="submit" class="btn1" value="注册" />
+                    </span> <a href="javascript:;" onclick="change_show(2)" class="f1 fs_12">已有账号登录</a> </div>
+                </div>
+              </form>
+            </div>
+			<div class="login_line"></div>
+            <div class="login_text1 m_t20"><a href="{$urlsite}/user/signqq"><img src="{$urlstatic}/img/index_signqq.png" /></a></div>
+		  </div>
+          <div id="login_show" class="mp_sg_cont">
+            <div class="login_form">
+              <form id="loginform" name="loginform" method="post" action="{$urlsite}/member/login/" onsubmit="return check_login()">
+                <div class="set_box">
+                  <div id="msg" class="item3"></div>
+                  <div class="set_box_main">
+                    <div class="clear"> <b class="fl"> 帐号：</b>
+                      <div class="fl">
+                        <input type="text" onblur="if($('#username').val()==''){ $('#username').val('请输入用户名'); };$('#username').css('color','#999');" onfocus="if($('#username').val()=='请输入用户名'){ $('#username').val(''); };$('#username').css('color','#000');" class="inputbg2" value="" maxlength="60" name="username" id="username">
+                      </div>
+                    </div>
+                    <div id="div_pass" class="clear m_t30"> <b class="fl">密码：</b>
+                      <div class="fl">
+                        <input type="password" onblur="$('#password').css('color','#999');" onfocus="$('#password').css('color','#000');" onkeydown="if(event.keyCode==13 &amp;&amp; login_check()){ $('#loginform').submit(); }" class="inputbg2" maxlength="32" id="password" name="password">
+                      </div>
+                    </div>
+                  </div>
+                  <div id="div_box" class="clear checkbox_login m_b25"  style="margin-top:10px;">
+                    <label>
+                    <input type="checkbox" name="auto_login" id="auto_login" value="1" checked="checked" />
+                    在此电脑上记住我</label>
+                  </div>
+                  <div class="list2 clear"> <span class="fl">
+                    <input type="submit" class="btn1" value="登录" />
+                    </span> <a href="javascript:;" onclick="change_show(1)" class="f1 fs_12">免费注册</a> </div>
+                </div>
+              </form>
+            </div>
+            <div class="login_line"></div>
+            <div class="login_text1 m_t20"><a href="{$urlsite}/user/signqq"><img src="{$urlstatic}/img/index_signqq.png" title="简简单单网QQ登录" alt="简简单单网QQ登录" /></a></div>
+          </div>
+        </div>
+        <!--登录框结束-->
+      </div>
+    </div>
+    <div class="container_cwrap mp_ma">
+      <div class="mp_sl">
+        <div class="mp_sl_h">上传照片获得评分，并认识新朋友！</div>
+        <p class="mp_t">不用实名，但需真实照片，这是一个真实照片社区，加入可以获得他人评分！</p>
+      </div>
+      <div class="mp_cnt mp_t" id="counter">
+        <!--<div class="mp_cnt_num">{$counter}</div>
+        已经有这么多人在这里！ -->
+		<a style="margin:20px 0 0 110px; display:block;" <empty name="guest_name">onclick="show_guest_form();return false;"</empty> href="{$urldomain}/guest/xiaoyuannannv/" title="校园男女" alt="校园男女"><img src="{$urlstatic}/img/up_icon.png" /></a>
+<br />	
+<!-- Baidu Button BEGIN -->
+    <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" style="margin-left:100px;">
+        <span class="bds_more">分享到：</span>
+        <a class="bds_qzone"></a>
+        <a class="bds_tsina"></a>
+        <a class="bds_baidu"></a>
+		<a class="shareCount"></a>
+    </div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=658305" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
+</script>
+<!-- Baidu Button END -->
+		
+	  </div>
+    </div>
+  </div>
+  <div class="bp_tt" id="pop_tips">
+    <div class="pngbox bp_ttp">
+      <div class="tpt" id="pop_tips_info">
+        <div class="bpt"></div>
+      </div>
+      <div class="tcn"></div>
+      <div class="bcn"></div>
+    </div>
+    <div class="pngbox bp_ttp_tail"></div>
+  </div>
+
+<!--<div class="friend_link">友情链接: <a href="http://jianjiandandan.ivu1314.com/">简简单单网</a><a href="http://www.php163.com/" target="_blank">PHP技术分享网站</a><a href="http://aizaoqi.com/" target="_blank">爱早起</a><a href="http://www.jhun.net" target="_blank">江汉大学论坛</a><a href="http://www.mycugb.com" target="_blank">中国地质大学BBS</a><a href="http://www.hustky.com/forum.php" target="_blank">华中科技大学考研论坛</a></div>-->
+
+<div id="login_form" style="display:none;">
+  <div class="pop_login">
+    <h1>童鞋，打酱油也得留个名啊</h1>
+    <div class="login_main">
+        <p><label class="zd_w">游客名</label><input name="guest_accout" id="guest_accout" type="text" size="30" class="login_input" value="" /></p>
+		<p id="login_msg" class="f_r1"></p>
+        <p class="login_buttom clear"><input name="submit" type="submit"  value="开始浏览" class="btn1 btn_b1 fl" onclick="popGuest()" /></p>
+    </div>
+    <div class="p_t10"></div>
+  </div>
+</div>
+<script type="text/javascript">
+function change_show(code){
+    if(code==1){
+        $("#upload_show").show();
+        $("#login_show").hide();
+        $("#login_show_btn").attr("class","login_btn");	
+        $("#upload_show_btn").attr("class","upload_pic_btn");
+    }else if(code==2){
+        $("#login_show").show();
+        $("#upload_show").hide();
+        $("#login_show_btn").attr("class","login_btn1");	
+        $("#upload_show_btn").attr("class","upload_pic_btn1");	
+    }
+}
+
+function show_user_tips(u_index,u){
+    var newer_sex= '女';
+    if(u.sex==2){
+        newer_sex= '男';
+    }
+    var movex = -60;
+    var movey = 100
+    if(u_index<=4){
+        movex = 0;
+    }else if (u_index<=16){
+        movex = -30;
+        movey = 90;
+    }else if (u_index<=27){
+        movex = -45;
+        movey = 80;
+    }
+	$("#img_0_"+u_index).mouseout(function(){ $("#pop_tips").hide(); });
+    var pop_left = $("#img_0_"+u_index).offset().left+movex;
+    var pop_top = $("#img_0_"+u_index).offset().top+movey;
+	u.want_content = u.want_content ? u.want_content : '一起告别单身'
+    var tip_userinfo = '<div class="bpt">'+
+                        '<div id="tc_0_'+u_index+'" class="cont">'+
+                            '<div class="bp_ui"><a  href="/'+u.uid+'" target="_blank" class="bp_un"  >'+u.username+'</a>, '+u.college+'</div>'+
+                            '<p>想和一个'+newer_sex+'生,'+u.want_content+'</p>'+
+                            '<p class="bp_us"><span class="bp_us_mark">'+u.score_impress+'分</span><small class="bp_uss">'+u.photonum+'&nbsp;照片</small></p>'+
+                        '</div>'+
+                        '<div class="bpc"></div>';
+    $("#pop_tips_info").html(tip_userinfo);   
+    $("#pop_tips").css({"display":"block","left":pop_left,"top":pop_top});
+    
+}
+function show_guest_form()
+{
+	Win.dialog({ msg:'#login_form',width:360,height:130 });
+}
+function popGuest()
+{
+	if($('#guest_accout').val() == '') {
+		$("#login_msg").html('请输入名字');
+		return false;
+	}
+	
+	$.ajax({
+	   type: "POST",
+	   url: "/index.php?s=/member/chk_username/",
+	   data: 'username=' + $('#guest_accout').val(),
+	   success: function show_desc_result(re)
+	   {
+	   		var obj = jQuery.parseJSON(re);
+	   		if(obj.errno != 200) {
+				//alert($('#login_msg'));
+				$("#login_msg").html('这个名字没啥个性，已经有人用了，换个吧');
+			} else {
+				location.href = '<php>echo $urldomain;</php>/guest/xiaoyuannannv/';
+			}
+	   }
+	});
+	
+	return false;
+}
+</script>
+<include file="Public:foot" />
+</div>
+</body>
+</html>

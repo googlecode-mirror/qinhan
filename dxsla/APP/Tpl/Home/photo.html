@@ -1,0 +1,737 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$m['username']}的{$pg['name']}</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+
+<script language="javascript" src="{$urlstatic2}/js/provinces_zh-CN.js?gv=151_1"></script>
+<link href="{$urlstatic2}/css/personal1.css?gv=163_1" rel="stylesheet" type="text/css" />
+<link href="{$urlstatic2}/css/album.css?gv=163_1" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/photo_group.js?gv=151_1"></script>
+</head>
+<body>
+<include file="Public:home_head" />
+  <div class="container_cwrap clear">
+    <!--左侧相册展示 start-->
+    <div class="fm_l_270 m_t20">
+      <div class="album_show"> <a class="album_show_top" id="group_prev" href="javascript:void(0)"  code="1" onclick="group_animate(0,2)"></a>
+        <div class="album_show_center" >
+          <div class="allphoto clear" id="group_list" style="top:0px;" code="0">
+		  	<volist name="pglist" id="g">
+            <dl>
+              <dt class="curreny">
+                <div class="photo_m <eq name="i" value="1">current</eq>"><a onclick="load_photo_group({$m['uid']}, {$g['gid']})"><img alt="照片" src="{$urlupload}/{$g['default_pic']}_120x120.jpg"></a></div>
+              </dt>
+              <dd class="m_t10 fs_14">{$g['name']}</dd>
+              <dd class="f_6">共<span class="f_r1 fs_14">{$g['photonum']}</span>张</dd>
+            </dl>
+			</volist>
+
+          </div>
+        </div>
+        <a class="album_show_top" id="group_next" code="1" href="javascript:void(0)" onclick="group_animate(1,2)"></a> </div>
+    </div>
+    <!--左侧相册展示 end-->
+    <!--右侧照片展示 start-->
+    <div class="fm_c_710 m_t20">
+      <div class="photo_show">
+        <h1 class="fs_20"><a href="{$urldomain}/{$m['uid']}" class="w">{$m['username']}</a> &gt;<a href="{$urlsite}/home/show_group?uid={$m['uid']}" class="f_bl unline">相册</a>&gt; {$pg['name']}<span class="m_t15 p_l10 fs_14 f_6 ">(<b class="f_r" id = "nonce_num">{$position}</b>/{$pg['photonum']})</span></h1>
+        <div class="photo_show_item m_t20"> <a class="lbtn" href="javascript:void(0)" id="photo_prev" code ="1" onclick="photo_animate(0,4)"></a>
+          <div class="myselt_photo">
+            <ul class="clear" id="photo_list" code="4" score="1265048" style="left:0px" p_left="0">
+			
+			  <volist name="photolist" id="p">	
+              <li id="{$p['pid']}" code="<notempty name="p['hot_score']">1<else />0</notempty>" score="{$p['hot_score']|default=0},{$p['score']}"><a <eq name="p['pid']" value="$pid">class="current"</eq> onclick="view_big_photo({$p['pid']})" code="{$i}"> <img src="{$urlupload}/{$p['path']}_999x80.jpg" class="face_s{$p['sex']}_b2" />
+                <dd style="display: none" id="img_b_{$p['pid']}" data="{$urlupload}{$p['path']}_800x999.jpg" score="{$p['path']|getwh=644,644}" code="{$p['path']|getwh=800,999}"/>
+                <p id="img_desc_{$p['pid']}" style="display: none"></p>
+                </a>
+			  </li>                
+			  </volist>
+			  
+            </ul>
+          </div>
+          <a class="slrbtn" href="javascript:void(0)" id="photo_next" code ="0" onclick="photo_animate(1,4)"></a> </div>
+        <div class="photo_show_cont">
+          <div class="photo_score_flash1" id="ping_flash">
+		  	<notempty name="current_photo['hot_score']">
+            <div id="ping_flash_ok">
+              <h2>您给照片打了<span class="f_r">{$current_photo['hot_score']|default=0}</span>分,照片的平均分为<span class="f_r">{$current_photo['score']}</span>分</h2>
+            </div>
+            <div id="ping_flash_no">
+              <object width="1" height="1" align="middle" id="markObjIE" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000">
+                <param value="always" name="allowScriptAccess">
+                <param value="transparent" name="wmode">
+                <param value="{$urlstatic2}/flash/ping_big.swf" name="movie">
+                <param value="high" name="quality">
+                <param name="FlashVars" value="is_videoauth=0&type=0" />
+                <embed  id="markObj" width="500" height="50" align="middle" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" allowscriptaccess="sameDomain" swliveconnect="true" quality="high" wmode="transparent" src="{$urlstatic2}/flash/ping_big.swf?is_videoauth=0&type=0">
+              </object>
+            </div>
+			<else />
+            <div style="display:none;" id="ping_flash_ok">
+              <h2>您给照片打了<span class="f_r">0</span>分,照片的平均分为<span class="f_r">0</span>分</h2>
+            </div>
+            <div id="ping_flash_no">
+              <object width="500" height="50" align="middle" id="markObjIE" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000">
+                <param value="always" name="allowScriptAccess">
+                <param value="transparent" name="wmode">
+                <param value="{$urlstatic2}/flash/ping_big.swf" name="movie">
+                <param value="high" name="quality">
+                <param name="FlashVars" value="is_videoauth=0&type=0" />
+                <embed  id="markObj" width="500" height="50" align="middle" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" allowscriptaccess="sameDomain" swliveconnect="true" quality="high" wmode="transparent" src="{$urlstatic2}/flash/ping_big.swf?is_videoauth=0&type=0">
+              </object>
+            </div>
+			</notempty>
+          </div>
+          <div class="photo_show_on">
+			<php>
+			$str = getwh($current_photo['path'], 644, 644);
+			$arr = explode(',', $str);
+			</php>
+            <div class="show_img" id="big_img"> <img class="" pid="{$current_photo['pid']}" id="cboxPhoto" width="{$arr[0]}" height="{$arr[1]}" onclick="view_photo()" src="{$urlupload}/{$current_photo['path']}_800x999.jpg" /> </div>
+          </div>
+          <div class="photo_show_reply">
+            <div class="reply_box" id="reply_{$current_photo['pid']}" style="">
+              <p class="list"><img src="{$urlstatic}/img/reaply_bg.gif" alt=""></p>
+              <div class="reply_box_bg">
+                <textarea id="reply_content" name="reply_content" onclick="savePos(this);" onkeydown="if(event.keyCode==13 &amp;&amp; event.ctrlKey) submit_reply({$m['uid']},0)" onkeyup="savePos(this);" onpaste="savePos(this);" onblur="savePos(this);" class="list"></textarea>
+              </div>
+              <div class="clear"> <span class="fl"><a id="reply_button" onclick="submit_reply({$m['uid']},0)" class="btn1">发送评论</a></span><span class="fl"><a href="#reply_box" onclick="face51New.show(this,'reply_content','_textarea');"><img src="{$urlstatic}/img/ico_ce.gif" alt="表情" class="ico_b"></a></span> <span class="fl f_9">(提示：评论只有对方本人可见)</span></div>
+              <div id="divFace" style="display:none;"></div>
+              <link href="{$urlstatic2}/css/checkbox3.css?gv=163_1" rel="stylesheet" type="text/css" />
+              <script language="javascript" src="{$urlstatic2}/js/pub_face_all.js?gv=151_1"></script>
+              <script language="javascript" src="{$urlstatic2}/js/face.js?gv=151_1"></script>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右侧照片展示 end-->
+  </div>
+<script>
+var an_page =0;
+var pn_dist = 0;
+var last_pid = 0;
+var index_pid = parseInt($("#photo_list li:first").attr('id'));
+var is_view_photo = false;
+var first_id = index_pid;
+var is_pid = 0;
+var is_post = 0;
+var is_f = false;
+var is_b = 0;
+function perfect_invite(uid, type) {
+	if(check_login()==false) {
+		return false;
+	}
+	$.post('/index.php?s=/home/perfect', {uid:uid, type:type}, function(data) {
+	alert(data.msg);
+	},'json');
+}
+var opt_view = 0;
+function prevnext(e) {
+	try{
+		var pos = e.pageX?e.pageX:e.clientX;
+		var p_list = $("#photo_list li");
+		if(pos-$("#cboxPhoto").offset().left > $("#cboxPhoto").width()*2/3) {
+			if(last_pid == 0){
+				$("#cboxPhoto").attr("class","mouseright_tip");	
+				opt_view = 2;
+			}
+			return false;
+		}	
+		else if(pos-$("#cboxPhoto").offset().left>$("#cboxPhoto").width()/3) {
+			$("#cboxPhoto").attr("class","mousezoom_tip");	
+			opt_view = 0;
+			return false;
+		}
+		else {
+			if(index_pid != first_id){
+				$("#cboxPhoto").attr("class","mouseleft_tip");	
+				opt_view = 1;
+			}
+			return false;
+		}
+	}catch(e){}
+}
+function check_login(){
+		return true;
+}
+$(document).ready(function() {
+	if(an_page > 0){
+		$("#group_prev").attr('code',0);
+		$("#group_prev").removeClass().addClass("slalbum_show_btm");
+	}
+	$("#cboxPhoto").mousemove(function(event) {
+		prevnext(event);
+	});
+	if(IM.gFlash) {
+		var edit = '<div contenteditable="true" onkeyup="setRange(this)" onmouseup="setRange(this)" ondrop="return false" ondragover="return false" onKeyDown="if(event.keyCode==13 && event.ctrlKey) submit_reply(46930301,0)" onClick="" name="reply_content" id="reply_content" type="text"  maxlength="200" style="padding:3px;overflow-x:hidden;overflow-y:scroll;background:#fff;border-color:#7E7E7E #CFCFCF #CFCFCF #7E7E7E;border-style:solid;border-width:1px;height:60px;box-shadow:2px 2px 2px rgba(0, 0, 0, 0.1) inset;"></div>';
+	}
+	else {
+		var edit = '<textarea onkeydown="if(event.keyCode==13 &amp;&amp; event.ctrlKey) submit_reply(46930301,0)" name="reply_content" id="reply_content" class="input1" maxlength="200" style="overflow-y:hidden;" onkeyup="setRange(this)" onmouseup="setRange(this)"></textarea>';
+	}
+	$(".reply_box_bg").html(edit);
+	current_comment_div = 'reply';
+	current_comment_uid = 46930301;
+	current_comment_type = 5;
+});
+function setMarkFinish() {
+	try{
+		if($.browser.msie)
+		{
+			$("#markObjIE")[0].setMarkFinish();
+		}
+		else
+		{
+			$("#markObj")[0].setMarkFinish();
+		}
+	}
+	catch(e)
+	{
+		alert(e);
+	}
+	return true;
+}
+var marking = false;
+function mark(score,type)
+{
+    if('46930301' == '18090226'){
+        Win.dialog({width:300,height:150,msg:'自己不能给自己打分',type:'info',enter:function(){marking = false;setMarkFinish();}});
+        return;
+    }
+    if('2' == '1'){
+        Win.dialog({width:300,height:150,msg:'同性之间不能打分',type:'info',enter:function(){marking = false;setMarkFinish();}});
+        return;
+    }
+    if((score<5 || score==10) && myuserinfo.group_type < 2)
+    {
+        var msg_code = '<div class="pop_rader fb_14"><p>5分以下，以及10分，都属特殊分数，仅向<span class="f_green">正式会员</span></p>'
+                        +'<p>的用户开放！<a href="<php>echo $urlsite;</php>/usergroup/" target="_blank">我要成为正式会员</a></p></div>';
+        Win.dialog({width:500,height:150,msg:msg_code,type:'info',enter:setMarkFinish,cancel:setMarkFinish});
+        return false;
+    }
+	var photo_id = $("#cboxPhoto").attr('pid');
+	$.ajax({
+	    type: "POST",
+	    url: "/index.php?s=/hot/photo_ping",
+	    data: 'uid=<php> echo $m['uid']</php>&score='+score+'&photo_id='+photo_id+'&key=cca3bfb01b8e000fc8e671125ec3ab19',
+	    success: function result(re)
+	    {
+		    marking = false;setMarkFinish();
+	   		var result_obj = jQuery.parseJSON(re);
+		    if (result_obj.stat == 1) {
+				$("#ping_flash_ok").html('<h2>您给照片打了<span class="f_r">'+score+'</span>分,照片的平均分为<span class="f_r">'+result_obj.ping_score+'</span>分</h2>').show();
+				$("#photo_list #"+photo_id).attr('code',1);
+				$("#photo_list #"+photo_id).attr('score',score+','+result_obj.ping_score);
+				try{
+					if($.browser.msie)
+					{
+						$("#markObjIE").css("width",'1px').css('height','1px');
+					}
+					else
+					{
+						$("#markObj").css("width",'1px').css('height','1px');
+					}
+				}
+				catch(e)
+				{
+					alert(e);
+				}
+			}else{
+				Win.dialog({width:500,height:150,msg:result_obj.errno,type:'info',enter:function(){self.location.href = self.location.href;},cancel:function(){self.location.href = self.location.href;}});
+			}
+	    },
+	    error: function(XMLHttpRequest, textStatus, errorThrown)
+	    {
+			alert('由于您的网速太慢，请求超时，请刷新页面后重试！');
+			self.location.href = self.location.href;
+	    }
+	});
+}
+//计算当前图片在上方可视区域的距离
+function div_distance(pid,p_obj){
+	//$("#photo li")
+	if(pid <0 ) return false;
+    $(".myselt_photo").width();
+	var p_left = Math.abs($("#photo_list").attr('p_left'));
+	var distance = 0;
+	for(var i =0;i<p_obj.length;i++){
+		if(p_obj[i].id == pid) break;
+		d_w = parseInt($("#"+p_obj[i].id).width());
+		distance += d_w;
+		d_w = 0;
+	}
+	p_obj=[];
+	if(arguments[2] == 1){
+		var dist = distance;
+	}else{
+		var dist = distance - p_left;
+	}
+	distance = '';
+	return dist;
+}
+//点击上方的小图，加载下方的大图，同时计算向哪个方向滚动
+function view_big_photo(pid){
+	if(pid <=0)return false;
+	$("#cboxPhoto").remove();
+	$("#photo_list li a").removeClass();
+	var ps_score = $("#img_b_"+pid).attr('score'); 
+	var ps_code = $("#img_b_"+pid).attr('code'); 
+	var ps_src= $("#img_b_"+pid).attr('data'); 
+	var p_score_i = ps_score.split(',');
+	var p_code_i = ps_code.split(',');
+	var p_obj = $("#photo_list li");
+	$("#photo_list #"+pid+" a").addClass('current');
+	$("#nonce_num").html($("#photo_list #"+pid+" a").attr('code'));
+	$("#img_content").html($("#img_desc_"+pid).html());
+	if(p_code_i[0] < 644 && p_code_i[1] < 644){
+		$("#big_img").prepend('<img class="" pid="'+pid+'" style="display:none" id="cboxPhoto" onclick="view_photo()" src="'+ps_src+'" />');
+	}else{
+		$("#big_img").prepend('<img class="" pid="'+pid+'" style="display:none" id="cboxPhoto" width="'+p_score_i[0]+'" height="'+p_score_i[1]+'" onclick="view_photo()" src="'+ps_src+'" />');
+	}
+	var is_bywh =false;
+	first_id = parseInt(pid);
+	$("#cboxPhoto").fadeIn('fast');
+	$("#cboxPhoto").mousemove(function(event) {
+		prevnext(event);
+	});
+	if(pid == p_obj[0].id){
+		$("#cboxPhoto").removeClass();
+		first_id = p_obj[0].id;
+	}
+	if(parseInt($("#"+pid).attr("code")) == 1){
+		var ping_arr = $("#"+pid).attr("score");
+		var ping_obj = ping_arr.split(',');
+		$('#ping_flash_ok').html('<h2>您给照片打了<span class="f_r">'+ping_obj[0]+'</span>分,照片的平均分为<span class="f_r">'+ping_obj[1]+'</span>分</h2>').show();
+		try{
+			if($.browser.msie)
+			{
+				$("#markObjIE").css("width",'1px').css('height','1px');
+			}
+			else
+			{
+				$("#markObj").css("width",'1px').css('height','1px');
+			}
+		}
+		catch(e)
+		{
+			alert(e);
+		}
+	}else{
+		$("#ping_flash_ok").hide();
+		try{
+			if($.browser.msie)
+			{
+				if($.browser.version==9.0){
+					$("#ping_flash_no").html('<object width="500" height="50" align="middle" id="markObjIE" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"><param value="always" name="allowScriptAccess"><param value="transparent" name="wmode"><param value="<php>echo $urlstatic2;</php>/flash/ping_big.swf?is_videoauth=1&type=0" name="movie"><param value="high" name="quality"><param name="FlashVars " value="is_videoauth=1&type=0" /><embed  id="markObj" width="500" height="50" align="middle" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" allowscriptaccess="sameDomain" swliveconnect="true" quality="high" wmode="transparent" src="<php>echo $urlstatic2;</php>/flash/ping_big.swf?is_videoauth=1&type=0"></object>');
+				}else{
+					$("#markObjIE").css("width",'500px').css('height','50px');
+				}
+			}
+			else
+			{
+				$("#markObj").css("width",'500px').css('height','50px');
+			}
+		}
+		catch(e)
+		{
+			alert(e);
+		}
+	}
+	var dist_v = div_distance(pid,p_obj);
+	is_view_photo = false;
+	p_obj = [];
+	var a_width= parseInt($(".myselt_photo").width());
+	var pcount = parseInt($("#photo_list").attr('code'));
+	if(dist_v > (a_width/4*3)){
+		photo_animate(1,pcount);
+	}
+	if(dist_v < (a_width/4)){
+		photo_animate(0,pcount);
+	}
+}
+//左侧的相册的滚动
+function group_animate(type,gcount){
+	if(parseInt($("#group_list").attr('code')) == 1) return false;
+	var group_prev_code = parseInt($("#group_prev").attr('code'));
+	if(group_prev_code == 1 && type == 0){
+			return false;
+	}
+	var group_next_code = parseInt($("#group_next").attr('code'));
+	if(group_next_code == 1 && type == 1){
+		return false;
+	}
+	var v_height = $("#group_list dl").height();
+	if(type == 1){
+		var a_height = (an_page+1)*(parseInt(v_height)+10);
+		$("#group_prev").attr('code','0');
+		$("#group_prev").removeClass().addClass('slalbum_show_btm');
+	}else{
+		var a_height = (an_page-1)*(parseInt(v_height)+10);
+		$("#group_next").attr('code','0');
+		$("#group_next").removeClass().addClass('slalbum_show_top');
+	}
+	 if( !$("#group_list").is(":animated") ){
+		 $("#group_list").animate({top: "-"+a_height},{duration: 'slow'});
+		if(type == 1){
+			an_page++;
+			if(gcount - an_page <= 4 ){
+				$("#group_next").attr('code','1')
+				$("#group_next").removeClass().addClass('album_show_top');
+			}
+		}else{
+			an_page--;
+			if(an_page == 0 ){
+				$("#group_prev").attr('code','1')
+				$("#group_prev").removeClass().addClass('album_show_btm');
+			}
+		}
+	 }
+}
+//右侧上方的图片的滚动
+function photo_animate(type,pcount){
+	var p_width = 0;
+	var photo_prev_code = parseInt($("#photo_prev").attr('code'));
+	if(photo_prev_code== 1 && type == 0){
+			return false;
+	}
+	var photo_next_code = parseInt($("#photo_next").attr('code'));
+	if(photo_next_code== 1 && type == 1){
+		return false;
+	}
+	var a_width= parseInt($(".myselt_photo").width());
+	var p_list = $("#photo_list li");
+	var opt_pid = 0;
+	var pid = 0
+	if(type == 1){
+		$("#photo_prev").attr('code','0');
+		$("#photo_prev").removeClass().addClass('sllbtn');
+		 pn_dist +=(a_width/2);
+		pid = p_list[p_list.length-1].id;
+		var opt_dire = 2;
+		d_pid = p_list[0].id;
+		var dist_li = div_distance(pid,p_list);
+		var dist_pn =dist_li-a_width;
+		var opt_num = parseInt($("#"+p_list[p_list.length-1].id+" a").attr('code'));
+	}else{
+		$("#photo_next").attr('code','0');
+		$("#photo_next").removeClass().addClass('slrbtn');
+		var dist_li = Math.abs(parseInt($("#photo_list").attr('p_left')));
+		pn_dist -= (a_width/2);
+		if(pn_dist <0)pn_dist =0;
+		pid = p_list[0].id;
+		var opt_dire = 1;
+		d_pid = p_list[p_list.length-1].id;
+		var dist_pn = dist_li;
+		var opt_num = parseInt($("#"+p_list[0].id+" a").attr('code'));
+	}
+	 p_list = [];
+		if(type == 0){
+			if(dist_li <=0){
+				$("#photo_prev").attr('code',1);
+				$("#photo_prev").removeClass().addClass('lbtn');
+				return false;
+			}
+		}
+	   if((type == 1)){
+		   if(dist_li <= a_width/2){
+				$("#photo_next").attr('code',1);
+				$("#photo_next").removeClass().addClass('rbtn'); 
+				 return false;
+		   }
+	   }
+	if(dist_pn <= a_width/2 && is_post == 0){
+		$.post('/home/load_newphoto/',{'uid':46930301,'gid':1260117,'direction':opt_dire,'pid':pid,'d_pid':d_pid,'opt_num':opt_num},function(data){
+			if(data.errno == 200){
+			  if(type == 0){
+				  var msg ='';
+				  for(var p=0;p< data.msg.length;p++){
+						msg +=  '<li style="display:none" id="'+data.msg[p].pid+'" code="'+data.msg[p].code+'" score="'+data.msg[p].score+'"><a onclick="view_big_photo('+data.msg[p].pid+')" code = "'+data.msg[p].acode+'"><img src="'+data.msg[p].imgsrc+'" class="face_s2_b2" /><dd style="display: none" id="img_b_'+data.msg[p].pid+'" data="'+data.msg[p].dddata+'" score="'+data.msg[p].ddscore+'" code="'+data.msg[p].ddcode+'"/><p id="img_desc_'+data.msg[p].pid+'" style="display: none">'+data.msg[p].imgdesc+'</p></a></li>';
+					 }
+					 $("#"+pid).before(msg);
+					var prev_dest = div_distance(pid,p_list);
+					if(prev_dest < a_width/2){
+						var qs_dist = a_width/2-prev_dest;
+					}
+					var bj_dist=0;
+					var p_left = parseInt($("#photo_list").attr('p_left'));
+					 for(var pj=0;pj< data.msg.length;pj++){
+						bj_dist += parseInt($("#"+data.msg[pj].pid).width());
+						if(pj == 0){
+							bj_dist +=p_left;
+						}
+					     $("#photo_list").css('left','-'+bj_dist+'px');
+						 $("#"+data.msg[pj].pid).css('display','');
+					 }
+					 pn_dist +=qs_dist;
+					 $("#photo_list").animate({left: "-"+pn_dist},{duration: 'slow'});
+					 $("#photo_list").attr('p_left',pn_dist);
+					return false;
+				  }
+			if(type == 1){
+				 var msg ='';
+				  for(var p=0;p< data.msg.length;p++){
+						msg +=  '<li id="'+data.msg[p].pid+'" code="'+data.msg[p].code+'" score="'+data.msg[p].score+'"><a onclick="view_big_photo('+data.msg[p].pid+')" code = "'+data.msg[p].acode+'"><img src="'+data.msg[p].imgsrc+'" class="face_s2_b2" /><dd style="display: none" id="img_b_'+data.msg[p].pid+'" data="'+data.msg[p].dddata+'" score="'+data.msg[p].ddscore+'" code="'+data.msg[p].ddcode+'"/><p id="img_desc_'+data.msg[p].pid+'" style="display: none">'+data.msg[p].imgdesc+'</p></a></li>';
+					 }
+					$("#"+pid).after(msg);
+					if(data.msg.length < 20){
+						 $("#photo_list").append('<li id="photo_back" onclick="to_first()"><img class="face_s{$m['sex']}_b2" src="<php>echo $urlstatic</php>/img/photo_back.png"></li>');
+						 is_post = 1;
+					}
+					 $("#photo_list").animate({left: "-"+pn_dist},{duration: 'slow'});
+					  $("#photo_list").attr('p_left',pn_dist);
+					return false;
+			}
+		}
+			if(data.errno == 510){
+				 $("#photo_list").animate({left: "-"+pn_dist},{duration: 'slow'});
+				 $("#photo_list").attr('p_left',pn_dist);
+					if(type == 0){
+						if(dist_pn <= a_width/2 ){
+							$("#photo_prev").attr('code',1);
+							$("#photo_prev").removeClass().addClass('lbtn');
+						}
+					 }
+				   if((type == 1)){
+					    var last_width= $("#"+pid).width();
+					   if((dist_li+last_width -a_width/2 - a_width) <0){
+						 $("#photo_list").append('<li id="photo_back" onclick="to_first()"><img class="face_s{$m['sex']}_b2" src="<php>echo $urlstatic</php>/img/photo_back.png"></li>');
+						 is_post = 1;
+					}
+				  }
+			}
+		},'json');
+	}else{
+		 $("#photo_list").animate({left: "-"+pn_dist},{duration: 'slow'});
+		 $("#photo_list").attr('p_left',pn_dist);
+		 
+			if(type == 0){
+				if(dist_pn <= a_width/2 ){
+					$("#photo_prev").attr('code',1);
+					$("#photo_prev").removeClass().addClass('lbtn');
+				}
+			 }
+		   if((type == 1)){
+			   var p_b_w = parseInt($("#photo_back").width());
+			   if(p_b_w  == '')p_b_w =0; 
+			 if((dist_li+p_b_w-a_width/2 - a_width) < 0){
+				$("#photo_next").attr('code',1);
+				$("#photo_next").removeClass().addClass('rbtn'); 
+				is_post = 1;
+			}
+		 }
+	}
+}
+//下方大图的左右下一张
+function view_photo() {
+	try{
+		var pid = $("#cboxPhoto").attr("pid");
+		if(opt_view == 0) {
+			if (document.readyState=="complete") {
+				var ps_code = $("#photo_list #"+pid+" #img_b_"+pid).attr('code'); 
+				var ps_src= $("#photo_list #"+pid+" #img_b_"+pid).attr('data'); 
+				var p_code_i = ps_code.split(',');
+				var d_width = parseInt(p_code_i[0])+15;
+				var d_height = parseInt(p_code_i[1])+15;
+				Win.dialog({width:d_width,height:d_height,msg:'<div class="mousezoom_min" style="width:'+d_width+'px;height:'+d_height+'px"><img id="pop_close_ico" src="'+ps_src+'" alt="关闭" onclick="Win.close()" /></div>',noclose:true});
+			}
+			return;
+		}
+		if(is_view_photo == true){
+			return false;
+		}
+			var p_list = $("#photo_list li");
+			var opt_dist = 0;
+			for(var i=0;i<p_list.length;i++){
+				var p_w = parseInt($("#"+p_list[i].id).width());
+				opt_dist += p_w;
+				p_w = 0;
+				if(pid == p_list[i].id){
+					 if(opt_view == 1){
+						if(i != 0){
+							last_pid = 0;
+							is_view_photo = true;
+							view_big_photo(p_list[i-1].id);
+						}
+						opt_dist = 0;
+						p_list = [];
+						break;
+					 }
+					 if(opt_view == 2){
+						 if(p_list[i+1].id !='' || p_list[i+1].id !=null){
+							 is_view_photo = true;
+							 if(p_list[i+1].id == 'photo_back'){
+								 is_post = 1;
+								 to_first();
+								 view_big_photo(p_list[0].id);
+							 }else{
+								view_big_photo(p_list[i+1].id);
+							 }
+						 }
+						 opt_dist = 0;
+						 p_list = [];
+						break;
+					 }
+				}
+			}
+	}catch(e){}
+}
+function to_first(){
+	    is_post =1;
+		 is_p_f = $("#photo_list li:first").attr('id'); 
+					if(is_f == false){
+				$.post('/home/load_newphoto/',{'uid':46930301,'gid':1260117,'direction':0,'pid':0,'d_pid':0,'opt_num':0,'is_first':1},function(data){
+				if(data.errno == 200){
+					var msg= "";
+					var is_p_f= 0;
+					 for(var p=0;p< data.msg.length;p++){
+						var current ='';
+						 if(p == 0)var current ='class="current"';
+							msg +=  '<li id="'+data.msg[p].pid+'" code="'+data.msg[p].code+'" score="'+data.msg[p].score+'"><a '+current+' onclick="view_big_photo('+data.msg[p].pid+')" code = "'+data.msg[p].acode+'"><img src="'+data.msg[p].imgsrc+'" class="face_s{$m['sex']}_b2" /><dd style="display: none" id="img_b_'+data.msg[p].pid+'" data="'+data.msg[p].dddata+'" score="'+data.msg[p].ddscore+'" code="'+data.msg[p].ddcode+'"/><p id="img_desc_'+data.msg[p].pid+'" style="display: none">'+data.msg[p].imgdesc+'</p></a></li>';
+					}
+					$("#photo_list").html('');
+					$("#photo_list").html(msg);
+					is_f = true;
+					is_post =0;
+					is_p_f = data.msg[0].pid;
+					if(is_b == 1){
+					 $("#photo_list").append('<li id="photo_back" onclick="to_first()"><img class="face_s{$m['sex']}_b2" src="<php>echo $urlstatic</php>/img/photo_back.png"></li>');
+					 is_post = 1;
+				 }
+				}
+			},'json');
+		}
+		 $("#photo_list").animate({left: 0},{duration: 'slow'});
+	 $("#photo_list").attr('p_left',0);
+	 pn_dist = 0;
+	 $("#nonce_num").html('1');
+	 $("#photo_next").attr('code',0);
+	 $("#photo_next").removeClass().addClass('slrbtn'); 
+	 view_big_photo(is_p_f);
+}
+function submit_reply(uid,pay_card) {
+		$("*").bind("keydown",function(e) {
+		if((e || window.event).keyCode==32){
+			if(Win.is_creat) Win.close();
+		}
+	});	
+	if('18090226' == '46930301')
+	{
+		Win.dialog({type:'info',msg:'不能给自己评论！'});
+		return false;
+	}
+
+	if(myuserinfo.profile_completed < 0.5 && myuserinfo.login_times > 6){
+		var msg_code = sysmessage_addprofile('photo_comment',(myuserinfo.sex==1)?2:1);
+		Win.dialog({width:460,msg:msg_code});
+		return false ;
+	}
+	var related = parseInt($("#cboxPhoto").attr('pid'));
+	if(IM.gFlash) {
+		var reply_content = cont_filter($('#reply_content').html());
+	}
+	else {
+		var reply_content = $.trim($('#reply_content').val());
+	}
+	if (reply_content.length<1) {
+		Win.dialog({type:'info',msg:'回复内容不能为空',height:100});
+		return;
+	}
+	if(related<0)
+	{
+		Win.dialog({type:'info',msg:'评论的照片不能为空',height:100});
+		return ;
+	}
+	$("#reply_button").attr("disabled",true);
+	$.ajax({
+		type: "POST",
+		url: "<php>echo $urlsite</php>/msg/send/",
+		data: 'receiver_uid='+uid+'&content='+encodeURIComponent(reply_content)+'&type=5&related='+related+'&pay_card='+pay_card,
+		success: function reply_success(re)
+		{
+			$("#reply_button").attr("disabled",false);
+			var result_obj = jQuery.parseJSON(re);
+			switch(result_obj.stat)
+			{
+				case 0: 
+					Win.dialog({type:'info',msg:'<img src="<php>echo $urlstatic</php>/img/ico_mail_sended.png" class="ico" />照片评论发送成功'});
+					if(IM.gFlash) {
+						$('#reply_content').html('').blur();
+					}
+					else {
+						$('#reply_content').val('').blur();
+					}
+				break;
+				case 5:
+					Win.dialog({msg:redbeans(result_obj.nickname,result_obj.pay_card),width:600,height:400,enter:function
+					(){submit_reply(uid,result_obj.pay_card);}});
+				break;
+				case 4:
+					Win.dialog({type:'info',msg:result_obj.error,enter:function(){},cancel:function(){}});
+				break;
+				case 10: 
+					$("#fengkoujiao").remove();
+					$(result_obj.error).appendTo("body");
+					var pos = Win.pos(320,250);
+					$("#fengkoujiao").css({"top":pos.wt,"left":pos.wl});
+				break;
+				default:
+					Win.dialog({type:'info',msg:result_obj.error,cancel:function(){}});
+				break;
+			}
+		}
+	});
+}
+function readyState_img(){
+	var p_list = $("#photo_list li");
+	var dist_div = div_distance(p_list[p_list.length-1].id,p_list,1);
+	var a_width= parseInt($(".myselt_photo").width());
+	var p_left = parseInt($("#photo_list").attr('p_left'));
+	var l_width = $("#"+p_list[p_list.length-1].id).width();
+	if((dist_div-p_left+l_width+80) < a_width){
+		$("#photo_next").attr('code',1);
+		$("#photo_next").removeClass().addClass('rbtn');
+    }
+	
+	first_id = 1769258;
+	if((dist_div+l_width+80-p_left) > a_width){
+		if(p_list[0].id != 1769258){
+			$("#photo_prev").attr('code',0);
+			$("#photo_prev").removeClass().addClass('sllbtn');
+		}
+		var dist_p = div_distance(1769258,p_list);
+		if(dist_p > a_width/2){
+			var p_width = dist_p - (a_width/2); 
+			$("#photo_list").animate({left: "-"+p_width},{duration: 'fast'});
+			pn_dist = p_width;
+			$("#photo_list").attr('p_left',pn_dist);
+			$("#nonce_num").html($("#photo_list #"+1769258+" a").attr('code'));
+			var p_left_1 = parseInt($("#photo_list").attr('p_left'));
+			if((dist_div-p_left_1) < a_width){
+				$("#photo_next").attr('code',1);
+				$("#photo_next").removeClass().addClass('rbtn');
+				$("#photo_list").append('<li id="photo_back" onclick="to_first()"><img class="face_s{$m['sex']}_b2" src="<php>echo $urlstatic</php>/img/photo_back.png"></li>');
+				is_post = 1;
+				is_b = 1;
+			}
+		}
+	}
+	if(a_width-(dist_div+l_width)>=0){
+		$("#photo_list").append('<li id="photo_back" onclick="to_first()"><img class="face_s{$m['sex']}_b2" src="<php>echo $urlstatic</php>/img/photo_back.png"></li>');
+		is_post = 1;
+		is_b = 1;
+	}
+	p_list=[];
+	dist_div ='';
+}
+window.onload = readyState_img;
+</script>
+<include file="Public:foot" /> </div>
+</body>
+</html>

@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 问问</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+</head>
+<body>
+<php>$nav = 4;</php>
+<include file="Public:head" />
+<!--中间部分开始-->
+<div class="container_cwrap clear">
+  <!--左边部分开始-->
+  <div class="fm_l_200">
+    <include file="Public:left" />
+  </div>
+  <!--左边部分结束-->
+  <!--中间部分 start-->
+  <div class="ask_center ask_w2 clear">
+    <div class="ask_nav clear"> <a target="_blank" href="/other/kf/?mtype=7" class="opinion_fb f_6">对“问问”的意见反馈</a>
+      <ul class="fl">
+        <li><a href="{$urlsite}/question/plaza/" class="" >问问广场</a></li>
+        <li><a href="{$urlsite}/question/add/" class="">我要问问</a></li>
+        <li><a href="{$urlsite}/question/sender/" class=" active_nav">问问管理</a></li>
+        <li><a href="{$urlsite}/wenwen/" class="" >小编专访</a></li>
+      </ul>
+    </div>
+    <div class="ask_main1">
+      <div class="question_options"> <span class="fl"><a href="{$urlsite}/question/sender/">我的提问</a> <a href="{$urlsite}/answer/my_answer/?order=0" class="fontstyle1">我的回答</a> </span>
+        <span class="fr"><a class="<eq name="order" value="1">f_bl<else />f_9</eq>" href="{$urlsite}/answer/my_answer/?order=0" class="f_9">全部回答</a> <a href="{$urlsite}/answer/my_answer/?order=1" class="<eq name="order" value="0">f_bl<else />f_9</eq>">只看有内容的</a></span>
+      </div>
+      <div class="question_list clear">
+        <ul id="choose_question_id">
+		  <empty name="list"><div class="no_question">您还没有回答过问题,<a href="{$urlsite}/question/plaza/">马上去回答&gt;&gt;</a></div></empty>
+          <volist name="list" id="vo">
+              <li id="li_{$vo.id}" class="clear" onmouseout="this.className='clear';$('#show_{$vo.id}').hide();" onmouseover="this.className='bluebg clear';$('#show_{$vo.id}').show();">
+			  	<div class="img">
+			  	<eq name="vo['is_anonymity']" value="0">
+				<a href="{$urldomain}/{$m['uid']}"  target="_blank"><img src="{$urlupload}/{$vo.default_pic}_120x120.jpg" width="48" height="48"/></a>
+				<else/>
+				<php>$sex = 3 - $GLOBALS['i']['sex']</php>
+				<img src="{$urlstatic}/img/none_s{$sex}_48_c.jpg" width="48" height="48"/>				
+				</eq>
+                  <!--头像-->
+                </div>
+                <div class="rightbar">
+                  <div class="title clear">
+                    <p class="fs_14 word_break"><if condition="$vo[is_anonymity] eq 1">匿名<else/><a class="f_bl word_nowrap"  href="{$urldomain}/{$vo['uid']}"  target="_blank">{$vo.username}</a></if>&nbsp;<span class="f_9 word_nowrap">[{$vo['type_name']|default='其它'}]</span>&nbsp;{$vo.question}</p>
+                    <div class="m_t20"><notempty name="vo['photo_url']"> <img id="imgsmall_{$vo.photo_id}" src="{$urlupload}/{$vo.photo_url}_120x120.jpg" onclick="scaleImg({$vo.photo_id},'{$urlupload}/{$vo.photo_url}_480x480.jpg')" class="mousezoom_tip"/> <img id="imgbig_{$vo.photo_id}" style="display:none;" class="mousezoom_min" onclick="scaleImg({$vo.photo_id},'')"> </notempty></div>
+                    <div class="m_t20 botinfo clear">
+                      <p class="fr" id="show_{$vo.id}" style="display:none;"> <a class="close" title="删除" id="del_{$vo.id}" onclick="delete_confirm({$vo.id})"></a></p>
+					  <php>
+					  $agree = round(($vo['agree_count']/($vo['agree_count']+$vo['against_count']))*100);
+					  $against = round(($vo['against_count']/($vo['agree_count']+$vo['against_count']))*100);
+					  </php>					  
+                      <p class="fl clear"> <span class="agree fl">{$agree}%</span> <span class="opposition fl">{$against}%</span> <span class="fl">回答总数({$vo.answer_count})</span><span class="fl"><a target="_blank" href="{$urlsite}/home/question/?uid={$vo.uid}&amp;qid={$vo.qid}">点击查看全部答案</a></span></p>
+                    </div>
+                    <div class="my_reply">
+                      <div class="box clear">
+                        <div class="text fl"><span class="fl f_3">我的回答：</span><a class="agree fl"></a>{$vo.answer_cont}
+                          <p class="word_break"></p>
+                        </div>
+						<gt name="vo['star_num']" value="0">
+						<php>$num = $vo['star_num'] > 3 ? $vo['star_num'] - 3 : $vo['star_num'];</php>
+						<span class="<gt name="vo['star_num']" value="3">sp_defecate<else />sp_star</gt> bg_postion{$num} fr"></span>
+						</gt>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <span id="qtime_{$vo.id}" class="time f_9 fs_12">{$vo.add_time|formatTime}</span></li>
+          </volist>
+        </ul>
+        <div class="turn_page" id="page">
+          <div class='page'>{$page} </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--中间部分 end-->
+</div>
+<!--内容部分结束-->
+</div>
+</div>
+<script>
+var limit =1;
+function delete_ianswer(id) {
+    if (id > 0)
+    {
+        $.ajax({
+            type: "POST",
+            url: "{$urlsite}/answer/delete",
+            data: 'aid_list='+id,
+            success: function(re){ 
+                var obj = jQuery.parseJSON(re);
+                //$("#li_"+id).remove();
+                //Win.dialog({'msg':obj.msg,'type':'info'});
+                location.reload(true);
+            }
+        });
+    }
+    else
+    {
+        Win.dialog({title:'警告', msg:'请选择要删除的问题', type:'alert'});
+        return false;
+    }
+} 
+function delete_confirm(id)
+{
+    Win.dialog({type:'confirm',msg:'是否删除该问题？',height:100,enter:function(){delete_ianswer(id);},enterName:'确定'});
+}
+function scaleImg(id,img)
+{
+    bid = 'imgbig_'+id;
+    sid = 'imgsmall_'+id;
+    if(img){
+        $('#'+bid).attr('src',img);
+        $('#'+bid).show();
+        $('#'+sid).hide();
+    }else{
+        $('#'+bid).hide();
+        $('#'+sid).show();
+    }
+}
+function sync_home(id,aid,order_time){
+    $.get('/answer/sync_home/',{'sync':id, 'answer_id':aid}, function(){
+        if (id){
+            if(order_time > 0){
+                up = "<span class=\"f_9 fl\" >已置顶到我的主页</span>";
+            }else{
+                up = "<a class=\"set_top fl\" onclick=\"answer_up("+aid+")\">置顶到我的主页</a>";
+            }
+            $("#sync"+aid).html(up+"<a class=\"open_myhome fl\" onclick=\"sync_home(0,"+aid+","+order_time+")\">取消公开到我的主页</a>");
+        }
+        else{
+            $("#sync"+aid).html("<a class=\"open_myhome fl\" onclick=\"sync_home(1,"+aid+","+order_time+")\">公开到我的主页</a>");
+        }
+    });
+}
+function answer_up(aid){
+    $.get('/answer/answer_up/',{'answer_id':aid}, function(){
+        window.location.reload();
+    });
+}
+</script>
+<include file="Public:foot" />
+</div>
+</body>
+</html>

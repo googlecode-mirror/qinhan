@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 照片管理</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+
+<script language="javascript" src="{$urlstatic2}/js/photo_group.js?gv=148_1"></script>
+<link href="{$urlstatic2}/css/photos.css?gv=161_1" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+  <php>$nav = 7;</php>
+  <include file="Public:head" />
+  <!--中间部分开始-->
+  <div class="newperphoto_w clear">
+    <!--左边部分开始-->
+	<include file="Public:profile_left" />
+    <!--左边部分结束-->
+    <!--右边部分开始-->
+    <div class="photo_manage">
+      <div class="top_nav clear">
+        <dl>
+          <dt><a href="{$urlsite}/photo">我的相册</a></dt>
+          <dd>{$pg['name']}</dd>
+          <a onclick="group_action.add_group({'name':'<php> echo $pg['name']</php>','content':'<php> echo $pg['content']</php>','per_type':'<php> echo $pg['per_type']</php>','gid':<php> echo $pg['gid']</php>,'pass':'2'});" ><img src="{$urlstatic}/img/edit_pencil.png"></a>
+        </dl>
+        <p class="photoset_nav fr"></p>
+      </div>
+      <div class="upphoto_bg"> <a class="p_l5 fl" href="{$urlsite}/photo/up_form?gid={$gid}"><img alt="上传照片" src="{$urlstatic}/img/upphoto_bnt.png" class="ico"></a> <span class="p_l5 fs_14 f_green fl"> 建议您在此上传您的私人物品、宠物或您与朋友的合影照片! </span> </div>
+      <p class="m_t15 fs_14 f_blue"><span class="f_6">相册描述：</span><span class="f_9">{$pg['content']|default="暂无描述"}</span></p>
+    <!--  <p class="m_t10 fs_14"> <span class="f_6">谁能浏览：</span><span class="f_green">公开我的照片</span> </p>-->
+      <div class="photo_manage_list clear">
+		
+		<volist name="photolist" id="p">
+        <dl class="_js_show" dl="{$p['pid']}">
+          <dt>
+            <p class="photo_m"> <a href="{$urlsite}/photo/show?pid={$p['pid']}"> <img title="照片描述" src="{$urlupload}/{$p['path']}_120x120.jpg"> </a> </p>
+          </dt>
+          <dd class="clear _js_content_css_{$p['pid']}" onclick="photo_action.edit_content({pid:<?php echo($p['pid']);?>,'pass':'2'});"><empty name="p['content']"> <span class="f_9 fl _js_content_{$p['pid']}" dl="">暂无描述</span><else/><span class="fs_14 fl _js_content_{$p['pid']}" dl="{$p['content']}">{$p['content']}</span></empty><a style="display:none;" class="fr _js_photo_area_{$p['pid']}" href="javascript:void(0)"> <img alt="编辑" src="{$urlstatic}/img/ico_photowrite.png"> </a> </dd>
+          <eq name="pg['default_pic']" value="$p['path']"><dd><a class="btn3">已为封面照片</a></dd><else/><dd style="display:none;"  class="_js_photo_area_{$p['pid']}" onclick="photo_action.set_group_face({'gid':<?php echo($p['gid']);?>,'group_face':'<?php echo($p['path']);?>'});" ><a class="btn2">设为封面照片</a></dd></eq>
+          <dd style="display:none;" class="_js_photo_area_{$p['pid']}"> <a href="javascript:void(0);" onclick="photo_action.change_group({'pid':<?php echo($p['pid']);?>,'pass':'2','is_face':0});">移动</a> <a href="javascript:void(0)" onclick="photo_action.del_photo({'gid':<?php echo($p['gid']);?>,'pid':<?php echo($p['pid']);?>,'pass':'2'});">删除</a> </dd>
+        </dl>
+		</volist>
+		
+        <dl>
+          <dt>
+            <p class="tip_upload"> <a href="{$urlsite}/photo/up_form?gid={$gid}"><img src="{$urlstatic}/img/none_upphoto.png"></a> </p>
+          </dt>
+        </dl>
+
+      </div>
+    </div>
+    <!--右边部分结束-->
+  </div>
+  <!--中间部分结束-->
+  <script type="text/javascript">
+$('._js_show').hover(
+    function(){
+        var id=$(this).attr('dl');
+        $('._js_content_css_'+id).addClass('font_w');
+        $('._js_photo_area_'+id).show();
+    },
+    function(){
+         var id=$(this).attr('dl');
+        $('._js_content_css_'+id).removeClass('font_w');
+        $('._js_photo_area_'+id).hide();
+    }
+);
+var photo_action={"edit_content":function(e){
+        var content=$("._js_content_"+e.pid).attr('dl');
+        var html='<div class="photo_desc" style="padding-top:20px;"><h3>照片描述：</h3>'
+                +'<textarea id="_js_content" class="input_1" name="content" maxlength="166">'+content+'</textarea>'
+                +'</div>'
+                +'<p style="padding:30px;padding-left:190px;" class="bot_btn"><a class="btn1" id="_js_submit">确定</a> 或 <a href="javascript:void(0);" onclick="Win.close();">取消</a></p>';
+        Win.dialog({width:500,msg:html});
+        $('#_js_submit').click(function(){
+            var submit_content=$('#_js_content').val();
+            if(submit_content.length>8){
+                var html_content =submit_content.substr(0,8)+'...';
+            }else{
+                var html_content =submit_content;
+            }
+            if(submit_content.length>166){
+                alert("照片描述内容太多，最多输入166个字符");
+                return false;
+            }
+            $.ajax({
+               type: "POST",
+               url: "{$urlsite}/photo/u_p/",
+               data: 'id='+e.pid+'&content='+encodeURIComponent(submit_content),
+               success: function show_desc_result(re)
+               {
+                 if(re == 0 || re == 1 || re == 2)
+                 {
+                     var obj_class=$('._js_content_'+e.pid)
+                     if(submit_content==''){
+                        obj_class.removeClass('fs_14');
+                        obj_class.addClass('f_9'); 
+                        obj_class.attr('dl','暂无描述');                          
+                        obj_class.html("暂无描述");
+                     }else{
+                        obj_class.removeClass('f_9');
+                        obj_class.addClass('fs_14');
+                        obj_class.attr('dl',submit_content);
+                        obj_class.html(html_content);	
+                     }                                                                             
+                     Win.dialog({type:'info',msg:'<img src="http://pic.jjdd.com/v1/i/pub/popup_g.jpg?gv=82_1" class="ico" /> 修改成功！'});
+                 }else if(re == 3){
+                    //什么都不做
+                 }else if(re == 4 || re == 5){
+                    var msg_code = '您填写的信息有敏感字！' ;				
+                    Win.dialog({type:'info',msg:msg_code,enter:function(){history.go(0)}});
+                 }else if(re == 6){
+                    var msg_code = '您填写的信息有敏感字！' ;
+                    Win.dialog({type:'alert',msg:msg_code});			 
+                 }else{
+                    Win.dialog({type:'info',msg:'操作失败，请刷新后重试！'});				
+                 }
+               }
+            });
+        });
+    },"del_photo":function(e){
+        if(e.pass==1 || e.pass=='')
+        {
+           var re =group_action.check_second_password({'action':'del_photo','pid':e.pid,'gid':e.gid});
+           return false;
+        }
+        var ret=confirm('确定删除照片?');
+        if(ret)
+        {
+            $.post("{$urlsite}/photo/d_p",{'id':e.pid,'gid':e.gid},
+            function(data){if(data!=1){alert('不能删除形象照');}else{
+                location.reload();
+            }},"json");
+        }
+    },"change_group":function(e){
+        $.post("{$urlsite}/photo/api_get_group",{'uid':<?php echo $GLOBALS['i']['uid']?>},
+                function(data){if(data.status!=1){alert(data.msg);}else{
+                    var html='<div class="photo_shift fs_14">'
+                            +'<h3>相片转移</h3>'
+                            +'<p class="f_3 m_t10">转移至相册：'
+                            +'<select id="_js_group_value">';
+                    $.each(data.msg,function(id,item){
+                        html=html+'<option value="'+item.gid+'">'+item.name+'</option>';
+                    });
+                    html=html+'</select></p>'
+                    +'<p class="m_t20"><a class="btn1" id="_js_change_group">转移</a>或 <a href="javascript:Win.close();">取消</a></p></div>';
+                    Win.dialog({width:350,msg:html});
+                    $("#_js_change_group").click(function(){
+                        var gid= $("#_js_group_value").val();
+                        $.post("{$urlsite}/photo/api_change_group",{'pid':e.pid,'gid':gid,'is_face':e.is_face},
+                                function(data){if(data.status!=1){alert(data.msg);}else{
+                                    var msg= "转移成功!";
+                                    location.reload();
+                                }},"json");
+                    });
+                }},"json");
+    },"set_face":function(e){
+        var id=e;
+        $.ajax({
+               type: "POST",
+               url: "{$urlsite}/photo/set_face/",
+               data: 'id='+id+'&',
+               success: function set_face_result(re)
+               {
+                    if(re == 1)
+                    {
+                        Win.dialog({type:'info',msg:'<img src="http://pic.jjdd.com/v1/i/pub/popup_g.jpg?gv=82_1" class="ico" /> 设置成功！', cancel:function(){top.location.href='?gid=1017633';},enter:function(){top.location.href='?gid=1017633';}});
+                    }
+                    else
+                    {
+                        Win.dialog({type:'info',msg:'设置失败！',cancel:function(){top.location.href='?gid=1017633';},enter:function(){top.location.href='?gid=1017633';}});
+                    }
+               }
+            });
+    },"set_group_face":function(e){
+        $.post("{$urlsite}/photo/api_edit_group",{'gid':e.gid,'group_face':e.group_face,'content':''},
+                function(data){if(data.status!=1){alert(data.msg);}else{
+                    location.reload();
+                }},"json");
+    }
+}
+var g_ajaxing = false;
+function photo_hide(type) {
+    if(type==1){
+        if(!confirm("如果隐藏照片，除了您本人，所有人都将看不到您的照片（包括打分形象照）。是否确认？")){
+            return false ;
+        }
+    }
+
+    if(g_ajaxing == true) return;
+    g_ajaxing = true;
+    $.getJSON('/photo/hide',{type:type},function(data) {
+        g_ajaxing = false;
+        if(data == 200) {
+            alert("设置成功");
+            if(type == 1) {
+                $("#photo_hide_0").css("display","");
+                $("#photo_hide_1").css("display","none");
+            }
+            else {
+                $("#photo_hide_0").css("display","none");
+                $("#photo_hide_1").css("display","");
+            }
+            
+            location.href = self.location;
+        }
+        else location.href = '/';
+    });
+}
+</script>
+  <include file="Public:foot" /> </div>
+</div>
+</body>
+</html>

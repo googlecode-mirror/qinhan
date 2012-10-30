@@ -1,0 +1,39 @@
+@charset "utf-8";
+/* CSS Document */
+/*边走边记首页*/
+pre { white-space: pre-wrap; /* css-3 */ white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */ white-space: -pre-wrap; /* Opera 4-6 */ white-space: -o-pre-wrap; /* Opera 7 */ word-wrap: break-word; /* Internet Explorer 5.5+ */ width: 99%; }
+.diary_list .reward,.diary_dl .reward{margin-right:2px;margin-top:5px;}
+.diary_r{float:right;}
+.say_img{margin:20px 20px 0px 20px;}
+.newperphoto_r .text_r{text-align:right;}
+.diary_editbox{width:565px;float:left;margin-right:13px;}
+.diary_editbox .clear{width:100%;}
+.diary_editbox .mood{width:85px;height:22px;line-height:20px;padding:0px 2px;border-color: #7E7E7E #CFCFCF #CFCFCF #7E7E7E;border-width:1px;border-style: solid;font-size:12px;}
+.diary_editbox .datatime{width:115px;height:22px;line-height:20px;padding:0px 2px;border:none; background-color:transparent;position:relative;}
+.diary_editbox .t_sel{height:28px;padding:5px 10px 0px 10px;border:1px solid #D6D6D6;background:#efeeec;position:relative;z-index:1;}
+.sel_datatime{width:400px;height:200px;position:absolute;top:31px; z-index:2px; background:#fff;border:1px #3F6 solid;}
+.diary_editbox span{margin-left:10px;}
+.diary_editbox .m_r{margin-top:2px;}
+.diary_editbox select{border:1px solid #CFCFCF;padding:2px 5px;margin:0px 2px;}
+.textbox{ padding:0px;margin:0px;}
+.diary_editbox .textbox{width:548px;padding:8px 5px 5px 10px;height:100px; overflow-y:auto;overflow-x:hidden;word-wrap:word-break;border-color: #7E7E7E #CFCFCF #CFCFCF #7E7E7E;border-width:1px;border-style: solid; font-size:14px; line-height:22px; }
+.diary_list li{width:700px;border-bottom:1px #D6D6D6 dashed;padding:8px 10px 5px 10px;position:relative;}
+.diary_list .text{width:465px;float:left; font-size:14px;color:#333;}
+.diary_list .img{padding:10px 0px;}
+.draft_text{color:#333;}
+.draft_text:hover{color:#2870C4;text-decoration:underline;}
+.diary_list .info{width:185px;float:right;text-align:right;}
+#choose_diary_id .info{min-height:70px;_height:70px;}
+.save_btn .btn1{padding:3px 30px;margin-right:5px;}
+.save_btn .dashed{margin-right:10px;}
+.per_me{position:absolute;bottom:8px;right:78px;}
+.operate{position:absolute;bottom:5px;right:10px;}
+ /*回收站*/
+ .delect_box{margin-top:5px;margin-right:10px;float:left;}
+ .tip_box{padding:10px;margin-top:20px;border:1px solid #ffd863;background:#fdffce; font-size:14px;color:#666;}
+/*日记详情页面*/
+.diary_dl{width:540px;margin-top:20px;padding:42px 60px;background:#e7f4db; line-height:28px; position:relative;}
+.diary_dl .text_r{ position:absolute;top:10px;right:20px;}
+.diary_dl .content{margin-top:10px;font-size:14px;color:#333;word-break:break-all;word-wrap:break-word;}
+.diary_dl .top_info{width:600px;}
+.diary_dl .top_info li{float:left;margin-right:20px;color:#666;}

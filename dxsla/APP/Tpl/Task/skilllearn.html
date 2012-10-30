@@ -1,0 +1,260 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 我的技能</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+
+<script language="javascript" src="{$urlstatic2}/js/pub_face_all.js?gv=148_1"></script>
+<script language="javascript" src="{$urlstatic2}/js/skill.js?gv=179_1"></script>
+</head>
+<body>
+<php>$nav = 5;</php>
+<include file="Public:head" />
+  <!--中间部分开始-->
+  <div class="container_cwrap clear">
+    <!--左边部分开始-->
+	<div class="fm_l_200"> <include file="Public:left" /> </div>
+    <!--左边部分结束-->
+    <!--中间中间部分开始-->
+    <div class="nearby_box">
+	  <div class="ad_play"><a href="javascript:;" id="banner_vip" style="display:inline;"><img src="{$urlstatic}/img/task2.png{$urltail}"></a><a style="display:none;" href="javascript:;" id="banner_map"><img src="{$urlstatic}/img/task1.png{$urltail}"></a></div>
+<script>
+setTimeout("turn_banner()",5000);
+function  turn_banner(){
+	if($("#banner_vip").css('display') == 'none'){
+		$("#banner_map").hide();
+		$("#banner_vip").show();
+		
+	}else{
+		$("#banner_vip").hide();
+		$("#banner_map").show();
+	}
+	
+	setTimeout("turn_banner()",6000);
+}
+</script>	
+	  <div class="skill_mgnav clear" style="margin-top:20px;">
+        <p class="navbg fl clear"><a href="{$urlsite}/task/" class="selected unline">任务大厅</a> <a href="{$urlsite}/task/my_task/" class="unline">我的任务</a> <a href="{$urlsite}/task/my_help/" class="unline">我参与帮忙的任务</a></p>
+        <p class="fr m_t10" style="margin-top:2px;"><a href="{$urlsite}/task/add/" class="btn1">我要发布任务</a></p>
+      </div>      
+      <div class="search_skill clear" style="margin-top:12px; border:0;">
+        <form action="{$urlsite}/task/skilllearn/" method="POST"  name="search_form" >
+          <input type="text" value="输入你要搜索的技能名称(支持模糊搜索)" id="input_skill" name="input_skill" class="input3 f_9" onfocus="input_focus();" onblur="input_blur();" onkeydown="if(event.keyCode == 13){if(check_input_skill()){ search_form.submit();}}">
+          <input type="submit" class="btn1" value="搜索" onclick="if(check_input_skill()){ search_form.submit();}">
+		  <span class="fl">&nbsp;&nbsp;<a href="#" onclick="search_hot_skill('打羽毛球');">打羽毛球</a> <a href="#" onclick="search_hot_skill('旅游');">旅游</a> <a href="#" onclick="search_hot_skill('摄影');">摄影</a> <a href="#" onclick="search_hot_skill('吃零食');">吃零食</a> <a href="###" onclick="search_hot_skill('游泳');">游泳</a> <a href="###" onclick="search_hot_skill('K歌');">K歌</a></span>      
+        </form>
+      </div>
+      <div class="people_skill_w m_b25">
+	  	
+		<volist name="tasklist" id="t">
+        <div class="people_skill clear  ">
+          <ul class="user_info">
+            <li><a href="{$urldomain}/{$t['uid']}" target="_blank"> <img src="{$GLOBALS['s']['urlupload']}{$t['default_pic']}_120x120.jpg" alt="" class="face_s{$t['sex']}_b2" /> </a> </li>
+            <li><a href="{$urldomain}/{$t['uid']}" class="unline fb_14" target="_blank" >{$t['username']}</a></li>
+          </ul>
+          <div class="skill">
+            <dl class="know">
+              <dt class="clear"><span class="fl fs_14"><a href="{$urlsite}/home/task/?uid={$t['uid']}&tid={$t['tid']}">{$t['title']}</a></span><span class="fr f_3">{$t['add_time']|formatTime}</span></dt>
+              <dd class="clear default">
+                <div class="clear">
+                  <p class="text_w"><span class="detail">{$t['content']}</span></p>
+                  <p class="text_w2"><a href="javascript:void(0);" class="exchange_btn" onclick="show_answer_form({$t['uid']},{$t['tid']});">我要帮</a></p>
+                </div>
+				<div class="clear">
+				  <p class="text_w"><span class="f_3">报酬：{$t['reward']}</span></p>
+				  <p class="text_w2">已有{$t['answer_count']}人帮忙</p>
+				</div>
+                <div class="reply_box clear show_comment" id="comment_know_{$t['uid']}_{$t['tid']}" style="display:none"></div>
+              </dd>
+            </dl>
+          </div>
+        </div>
+		</volist>
+		        
+      </div>
+      <!--分页-->
+      <div class='page'>{$pages}</div>
+      <!--中间中间部分结束-->
+    </div>
+    <!--中间部分结束-->
+  </div>
+  <script type="text/javascript">
+$(document).ready(function(){
+	//登陆3次以上用户 如果资料完整度小于50%，显示提示框
+	if(myuserinfo.profile_completed < 0.5 && 1087 > 3){
+		var msg_code = sysmessage_addprofile('profile',(myuserinfo.sex==1)?2:1) ;
+		//Win.dialog({width:460,msg:msg_code});
+		return false ;
+	}
+	var tip = 0 ;
+	if(1 == tip){
+		var msg_code = '3页以后，只允许正式会员查看';
+		Win.dialog({type:'info',msg:msg_code,width:450, enterName:'我是正式会员'});
+				}else if(3 == tip){
+		var msg_code = '<div class="man_invitefriends f_3"><h3 class="m_15">正式会员，才能继续翻页浏览</h3><p class="m_t5">方法一：<a href="/pay/order/?id=2" class="underline">十元升级正式会员</a></p><p class="m_t10">方法二：<span>发送以下注册链接给<img src="<php>echo $urlstatic</php>/img/1.png" align="absmiddle">位好友成功加入，即可成为正式会员</span></p><p class="m_t5"><input type="text" class="input_1 fl" value="http://www.jjdd.com/?iv=18090226"/><span id="clipinner"><object width="50" height="28" id="copyObjIE" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"><param value="always" name="allowScriptAccess"><param value="transparent" name="wmode"><param value="<php>echo $urlstatic</php>/flash/clipboard.swf" name="movie"><param value="high" name="quality"><embed  id="copyObj" width="50" height="28" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" allowscriptaccess="sameDomain" swliveconnect="true" quality="high" wmode="transparent" src="<php>echo $urlstatic</php>/flash/clipboard.swf"></object></span></p><p style="color:red;">您邀请的好友有客服严格审核，虚假注册不予通过，并停用您的帐号</p></div>';
+		Win.dialog({msg:msg_code,width:450});
+	}else if(2 == tip){
+		var msg_code = '通过视频认证后，才能继续翻页浏览。' ;
+		Win.dialog({type:'info',msg:msg_code,width:450,enterName:'快速申请认证！',enter:function(){self.location.href='/videoauth/'}});
+	}
+	//鼠标变色
+	$("dd").hover(function(){
+//		$(this).removeClass("default");
+		$(this).children("div").eq(0).addClass("gray");
+		$(this).find("p").filter(".text_w2").removeAttr("style");
+		$(this).find("p").children("span").filter(".pl").removeAttr("style");
+		$("dd").click(function(){
+			$(this).find("p").children("span").filter(".simple").attr("style","display:none");
+			$(this).find("p").children("span").filter(".detail").removeAttr("style");
+			$(this).find("p").filter(".text_w").removeClass("text_limit");
+		});
+	},function(){
+		$(this).children("div").eq(0).removeClass("gray");
+//		$(this).addClass("default");
+		$(this).find("p").filter(".text_w2").attr("style","display:none");
+		$(this).find("p").filter(".text_w").attr("class","text_w text_limit");
+		$(this).find("p").children("span").filter(".pl").attr("style","display:none");
+		$(this).find("p").children("span").filter(".detail").attr("style","display:none");
+		$(this).find("p").children("span").filter(".simple").removeAttr("style");
+	});
+});
+$(document).bind("click",function(e){
+	if($.browser.msie) {
+		var el = event.srcElement;
+	}
+	else {
+		var el = e.target;
+	}
+	if(!(IM.fInObj(el,"selectbox")) && !(IM.fInObj(el,"down_img"))) {
+		hide_option();
+	}
+});
+function show_answer_form(uid,id)
+{
+	var div_id = 'comment_know' ;
+	var div_from = 'home' ;
+	var div_content_id = 'comment';
+	$.post("/index.php?s=/msg/check/", { friend:uid}, function (data) {
+		if(data.stat == 5) {
+			var msg_info = redbeans(data.nickname,data.pay_card);
+			Win.dialog({'msg':msg_info,'height':400,'width':580,'pay_card':data.pay_card,'enter':function(data){
+				$.post("/index.php?s=/msg/check/", { friend:uid, pay_card:data.pay_card}, function (data) {
+					if(data.stat) {
+						Win.dialog({'msg':data.error, 'type':'alert'});
+					}
+					else show_answer_div(uid,id,div_id,div_from,div_content_id);
+				}, 'json');
+			}});
+		}
+		else if(data.stat) {
+			Win.dialog({'msg':data.error, 'type':'alert'});
+		}
+		else show_answer_div(uid,id,div_id,div_from,div_content_id);
+	}, 'json');
+}
+function show_answer_div(uid,id,div_id,div_from,div_content_id) 
+{	
+    var edit = show_edit(div_id+'_content');
+	var sub_html = '<p class="clear"><span class="fl"><a onclick="submit_answer(0)" id="comment_button" class="btn1">帮忙</a></span><span class="fl"><img src="'+ version_img('ico_ce.gif') +'" alt="表情" onclick="face51New.show(this,\''+div_id+'_content\',\'_textarea\');" style="cursor:pointer;" /></span><label class="fl f_6" style="margin-left:10px;"><input type="checkbox" onclick="" value="1" class="checkbox1" id="anonymity" name="sync">匿名</label></p>';
+	var comment_html = '<p class="top_img"><img src="'+ version_img('reaply_bg.gif') +'" alt="" /></p><div class="reply_box_bg">'+ edit +'</div>'+ sub_html +'<div id="divFace" style="display:none;"></div>';
+
+	if(typeof myuserinfo != "object" || !myuserinfo.uid){
+		 show_login_form();
+		 return false ;
+	}
+	if(myuserinfo.uid == uid){
+		Win.dialog({type:'info',msg:'不能帮忙自己的任务！'});
+		return false;
+	}
+
+	if(current_comment_id>0)
+	{
+		$("#"+div_id+"_"+current_comment_uid+'_'+current_comment_id).slideUp("fast").html('');
+		if(div_from == 'home'){
+			$(".show_comment").html('');
+		}
+	}
+
+	$("#"+div_id+"_"+uid+'_'+id).html(comment_html).slideDown("slow",function(){ $("#"+div_id+"_content").select().focus();$("#"+div_id+"_content").focus(); });
+	current_comment_id = id;
+	current_comment_uid = uid;
+	current_comment_type = 14;
+	current_comment_div = div_id;
+    select_show = 0;
+}
+
+function hide_answer_form()
+{
+	if(current_comment_id>0)
+	{
+		$("#"+current_comment_div+"_"+current_comment_uid+'_'+current_comment_id).slideUp("fast").html('');
+		current_comment_id = 0;
+		current_comment_uid = 0;
+		$("#comment_button").attr("disabled",false);
+	}
+}
+
+function submit_answer(pay_card){
+	var related = current_comment_id;
+	if(IM.gFlash) {
+		var comment_content = cont_filter($("#"+current_comment_div+"_content").html());
+	}
+	else {
+		var comment_content = $.trim($("#"+current_comment_div+"_content").val());
+	}
+    
+	if(typeof myuserinfo != "object" || !myuserinfo.uid){
+		 show_login_form();
+		 return false ;
+	}
+
+	if(myuserinfo.uid == current_comment_uid){
+		Win.dialog({type:'info',msg:'不能帮忙自己的任务！'});
+		return false;
+	}
+
+	if(myuserinfo.profile_completed < 0.5 && myuserinfo.login_times > 6){
+		var msg_code = sysmessage_addprofile('reply',(myuserinfo.sex==1)?2:1) ;
+		Win.dialog({width:460,msg:msg_code});
+		return false ;
+	}
+
+    if (comment_content.length<1) {
+        Win.dialog({type:'info',msg:'内容不能为空！'});
+        return;
+    }
+	var is_anonymity = $('#anonymity').attr('checked') ? 1 : 0;
+
+    $("#comment_button").attr("disabled",true);
+    $.ajax({
+	   type: "POST",
+	   url: "/index.php?s=/task/answer_task/",
+	   data: 'receiver_uid='+current_comment_uid+'&content='+encodeURIComponent(comment_content)+'&related='+related+'&is_anonymity='+is_anonymity+'&pay_card='+pay_card,
+	   success: function comment_success(re)
+				{
+					$("#comment_button").attr("disabled",false);
+					var result_obj = jQuery.parseJSON(re);
+					switch(result_obj.stat)
+					{
+						case 0: 
+							Win.dialog({type:'info',msg:'参与帮忙成功！'});
+							hide_answer_form();
+							break;
+						default://
+							Win.dialog({type:'info',msg:result_obj.error,cancel:function(){}});
+							break;
+					}
+				}
+	});
+}
+</script>
+<include file="Public:foot" />
+</div>
+</body>
+</html>

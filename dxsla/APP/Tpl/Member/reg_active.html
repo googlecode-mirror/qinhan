@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 完善资料</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+<script language="javascript" src="{$urlstatic2}/js/provinces_zh-CN.js"></script>
+<style type="text/css">
+#hideFile a {color:#666; font-size:12px;}
+</style>
+</head>
+<body>
+<include file="Public:home_head" />
+<!--中间部分开始-->
+<script type="text/javascript">
+function girlUse(type) {
+	if(type == 2) {
+		$('#noPhoto').val(0);
+		$('#hideFile').show();
+		$('#hideSpan').show();
+		$('#hideItem').show();
+		$('#hideFile').html('<a href="javascript:;" onclick="girlUse(3)">暂时没有照片？</a>');
+	} else if(type == 1) {
+		$('#noPhoto').val(0);
+		$('#hideFile').hide();
+		$('#hideSpan').show();
+		$('#hideItem').show();
+		$('#hideFile').html('<a href="javascript:;" onclick="girlUse(3)">暂时没有照片？</a>');
+	} else if(type == 3) {
+		$('#noPhoto').val(1);
+		$('#hideItem').hide();
+		$('#hideFile').show();
+		$('#hideFile').html('<a href="javascript:;" onclick="girlUse(4)">上传照片</a>');
+		$('#hideSpan').hide();	
+	} else if(type == 4) {
+		$('#noPhoto').val(0);
+		$('#hideItem').show();
+		$('#hideFile').show();
+		$('#hideFile').html('<a href="javascript:;" onclick="girlUse(3)">暂时没有照片？</a>');
+		$('#hideSpan').show();
+	}
+}
+</script>
+<div class="container_cwrap clear">
+  <div class="email_succeed">
+    <h1><img src="{$urlstatic}/img/popup_g2.png" alt="验证成功" class="ico_b" />{$username}，欢迎您！请完善以下资料：</h1>
+    <div class="box_reg">
+      <form onSubmit="return checkform(this);" id="form1" name="form1" method="post" action="{$urlsite}/member/reg_active_post" enctype="multipart/form-data" target="photo_frame">
+        <eq name="invite_error" value="1">
+		<div id="list_location" class="list clear">
+          <div class="item1 f_yelo" style="width:400px;">提示：和邀请人来自同一IP，注册后邀请人无法获得红豆</div>
+        </div>
+		</eq>  
+        <div id="list_location" class="list clear">
+          <div class="item1">用户名：</div>
+          <div class="item2">
+		    <input type="hidden" name="noPhoto" id="noPhoto" value="0" />
+            <input type="text" name="username" id="username" value="{$username}" class="input_1 f_6" />
+          </div>
+          <div id="msg_location" class="item3"></div>
+        </div>
+        <div id="list_location" class="list clear">
+          <div class="item1">邮箱：</div>
+          <div class="item2">
+            <input type="text" name="email" id="email" value="" class="input_1 f_6" style="width:240px;" />
+          </div>
+          <div id="msg_email" class="item3 f_6">选填</div>
+        </div>		
+        <div id="list_location" class="list clear">
+          <div class="item1">性别：</div>
+          <div class="item2">
+            <label><input name="sex" type="radio" value="1" style="width:15px;" onclick="girlUse(1)" />男</label>&nbsp;&nbsp;<label><input name="sex" type="radio" value="2" style="width:15px;" onclick="girlUse(2)" />女</label>
+          </div>
+          <div id="msg_location" class="item3"></div>
+        </div>
+        <div id="list_location" class="list clear">
+          <div class="item1">学院：</div>
+          <div class="item2">
+            <select id="college" name="college" class="input_1 f_6" />
+			  <option value="">未填</option>
+			  <volist name="list" id="vo">
+              <option value="{$vo.name}">{$vo.name}</option>
+			  </volist>
+            </select>
+          </div>
+          <div id="msg_nickname" class="item3"></div>
+        </div>
+        <div id="list_location" class="list clear">
+          <div class="item1">本人照片：</div>
+          <div class="item2" id="hideItem">
+            <p><input onkeypress="return false;" onpaste="return false" id="upfile1" type="file" name="upfile1"></p>
+          </div>
+          <div id="msg_location" class="item3 f_6"><span id="hideSpan">图片大小不超过2M&nbsp;&nbsp;</span><span id="hideFile" style="display:none;"><a href="javascript:;" onclick="girlUse(3)">暂时没有照片？</a></span></div>
+        </div>
+        <div class="list3 clear end">
+          <div class="item1">&nbsp;</div>
+          <div class="item2">
+            <input type="submit" value="进入首页" class="btn1" />
+          </div>
+        </div>
+      </form>
+	  <iframe name="photo_frame" id="photo_frame" style="width:0;height:0;border:1px solid #ccc; display:none;" src="" ></iframe>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+var gpm = new GlobalProvincesModule;
+gpm.def_province = ["请选择", ""];
+gpm.def_city1 = ["请选择", ""];
+gpm.initProvince(document.getElementById('hometown_prov'));
+gpm.initCity1(document.getElementById('hometown_city'), gpm.getSelValue(document.getElementById('hometown_prov')));
+
+function changeProv(objName) {
+	gpm.initCity1(document.getElementById(objName+'_city'), gpm.getSelValue(document.getElementById(objName+'_prov')));
+}
+jQuery(function($){
+	$("#location_prov").bind("change",function(){changeProv('location');});
+	$("#hometown_prov").bind("change",function(){changeProv('hometown');});
+})
+
+var up_fail = 0;
+function checkform() {
+	var msg = '';
+	if($("input[name='sex']:checked").val() != 1 && $("input[name='sex']:checked").val() != 2){
+		msg = '尚未选择性别';
+	} else if($('#college').val() == '') {
+		msg = '学院未填';
+	}
+	if(msg) {
+		Win.dialog({msg:msg,type:'info'});
+		return false;
+	}
+	var num = 0;
+	for(var i=1; i<=1; i++) {
+		var file=$("#upfile"+i).get(0);
+		if(file.value!="" && file.value!="http://"  ) {
+			num++;
+		}
+	}
+	if(num == 0 && $('#noPhoto').val() == 0) {
+		Win.dialog({msg:'请至少选择上传一张照片！',type:'info'});
+		return false;
+	}
+	var photo_now_num = num + parseInt($('#photo_num').val());
+	if(photo_now_num >200) {
+		Win.dialog({msg:'照片数量超过上限！',type:'info'});
+		return false;
+	}
+	$('#photo_frame').get(0).onload = check_upload_status;
+    if ( $('#photo_frame').get(0).attachEvent != null ) {
+    	$('#photo_frame').get(0).attachEvent( 'onload', check_upload_status);
+    }
+	var msg_code = '<div class="popup_c">'
+				 + ' <p>照片正在上传，请稍等....</p>'
+				 + ' <p class="photo_progress"><img src="<php>echo $urlstatic</php>/img/uping.gif" alt="loading" /></p>'
+				 + '</div>' ;
+	Win.dialog({width:420,msg:msg_code,noclose:true});
+	return true;	
+}
+function check_upload_status() {
+	if(up_fail==0 && !jQuery.browser.safari) {
+		alert('上传图片失败');
+		Win.close();
+	}
+}
+function upload_fail(message,i) {
+	up_fail = 1;
+	Win.dialog({msg:message,height:100,width:500,type:'info'});
+}
+</script>
+<include file="Public:foot" />
+</div>
+</body>
+</html>

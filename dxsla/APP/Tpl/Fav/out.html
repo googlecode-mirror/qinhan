@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 我收藏的人</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+</head>
+<body>
+  <php>$nav = 3;</php>
+  <include file="Public:head" />
+  <!--中间部分开始-->
+  <div class="container_cwrap clear">
+    <!--左边部分开始-->
+    <div class="fm_l_200">
+      <include file="Public:left" />
+    </div>
+    <!--左边部分结束-->
+    <!--右边部分开始-->
+    <div class="emaillist_w">
+      <!--头部导航开始-->
+      <div class="tip_nav clear">
+      <ul class="clear fs_14">
+          <li class="word_nowrap"><a href="{$urlsite}/msg/"  class="">信息<if condition="$f['new_msg'] neq 0"><span class="fb_12 f_r1">新！</span> </if></a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/visit/in/" class="">来访者 <if condition="$f['new_visitor'] neq 0"><span class="fb_12 f_r1">新！</span> </if></a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/visit/out/" class="">我去看过谁</a></li>
+          <li><a href="{$urlsite}/fav/out/" class="current">我收藏的人</a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/fav/in/" class="">谁收藏了我  <if condition="$f['new_fav_in'] neq 0"><span class="fb_12 f_r1">{$f['new_fav_in']}新！</span> </if></a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/attention/more/" class="">动态  <if condition="$f['new_attention'] neq 0"><span class="fb_12 f_r1">新！</span> </if></a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/link/forbid_list/" class="f_9 ">阻止联系</a></li>
+        </ul>
+      </div>
+      <!--头部导航结束-->
+      <div class="new_mail_list">
+        <!--您收藏的人开始-->
+        <!--<div class="collectper_search clear">
+          <ul class="clear fl">
+            <li class=" clear"> <a class="fs_14" href="/fav/out/?online=1">只看在线</a> </li>
+            <li>
+              <div class="menu_area clear"> <a class="city clear" id="location_prov"><span class="fl underline">不限地区</span><b></b></a>
+                <div class="menu_area_list" id="prov_list" style="display:none;"> <a href="/fav/out/?prov=0">不限地区</a><a href="/fav/out/?prov=1">湖北</a><a href="/fav/out/?prov=2">内蒙古</a><a href="/fav/out/?prov=3">江苏</a><a href="/fav/out/?prov=4">海外</a><a href="/fav/out/?prov=5">河北</a> </div>
+              </div>
+            </li>
+          </ul>
+          <div class="search_r fr clear"> <a class="fr" href="/user/set_fav/">收藏设置&nbsp;</a>
+            <input type="text" name="nickname" id="nickname" class="input_1 fl" onblur="if (value=='') {value='昵称或备注模糊搜索'}" onfocus="if(value=='昵称或备注模糊搜索') {value=''}" value="昵称或备注模糊搜索" onkeydown="if(event.keyCode==13){fav_search()}">
+            <span title="按昵称或备注搜索" class="search_ico" onclick="fav_search()"></span> </div>
+        </div>-->
+        <div class="collectper_w clear">
+		<empty name="favlist"><div class="none_record clear">暂无记录</div></empty>
+		  <volist name="favlist" id="m">	
+          <!--内容开始-->
+          <div class="collectper_box" id="box_{$m['uid']}">
+            <div class="collectper_box_m">
+              <p class="del_btn"><a href="javascript:;" onclick="delete_confirm({$m['uid']},'{$m['username']}');"><img src="{$urlstatic}/img/close.gif?gv=83_1" alt="删除" title="删除" /></a></p>
+              <dl>
+                <dt><a href="{$urldomain}/{$m['uid']}" target="_blank"> <img src="{$urlupload}/{$m['default_pic']}_120x120.jpg" alt="" height="120" width="120" class="face_s{$m['sex']}_b3" /> </a></dt>
+                <dd><a href="{$urldomain}/{$m['uid']}" target="_blank">{$m['username']}</a></dd>
+                <dd>{$m['hometown_prov']}&nbsp;{$m['hometown_city']}</dd>
+                <dd class="f_green fs_12">{$m['login_time']|is_online}</dd>
+                <dd class="dd_h"></dd>
+               <if condition="$m[fav_too] eq 1 "> 
+			   <dd class="dd_h">
+<img src="{$urlstatic}/img/eachadd.png">
+</dd>
+ </if>
+                <dd class="remark_text" id="remark_{$m['uid']}" content="{$m['fav_remark']}"><empty name="m['fav_remark']"><span class="none_remark f_9"><else /><span class="fs_12 f_yelo unline"></empty>{$m['fav_remark']|default="备注电话、姓名等..."}</span></dd>
+                <dd class="write_remark"><a href="javascript:;" onclick="show_remark({$m['uid']});" class="unline f_6 fs_12"><img src="{$urlstatic}/img/ico_write.png" alt="添加备注" class="ico" /> 添加备注</a></dd>
+				
+              </dl>
+            </div>
+            <div class="collectper_box_b"></div>
+          </div>
+          <!--内容结束-->
+		  </volist>
+
+        </div>
+        <div class="clear">
+          <div class='page'>{$pages}</a> </div>
+        </div>
+        <!--您收藏的人结束-->
+      </div>
+    </div>
+  </div>
+  <!--中间部分结束-->
+  <div class="collectper_tip" style="display:none;"></div>
+  <script>
+
+$(document).ready(function() {
+	$(".remark_text").mousemove(function(e){
+		if ($(this).attr('content') != '') {
+			var wid = ($(this).attr('content').length > 100) ? '200px' : ($(this).attr('content').length*10 + 'px');
+			$('.collectper_tip').html('<ul><li class="f_6">'+$(this).attr('content')+'</li></ul>').show().css({"top":e.pageY+20, "left":e.pageX+10, "width":wid});
+		}
+	}).mouseout(function(e){
+		$('.collectper_tip').hide();
+	});
+	$("#location_prov").click(function (){
+		$("#prov_list").show();
+	});	
+});
+$(document).bind("click",function(e){
+	if($.browser.msie) {
+		var el = event.srcElement;
+	}
+	else {
+		var el = e.target;
+	}
+	if(!(IM.fInObj(el, "city clear"))) {
+		$("#prov_list").hide();
+	}
+	
+});
+function fav_search(){
+	if($("#nickname").val()=='昵称或备注模糊搜索'){
+		var nickname='';
+	}else{
+		var nickname='?nickname='+encodeURIComponent($("#nickname").val());
+	}
+	location.href='{$urlsite}/fav/out/'+nickname;
+}
+function delete_confirm(uid,name)
+{
+	Win.dialog({type:'confirm',msg:'是否取消收藏“'+name+'”？',height:100,enter:function(){delete_ifav(uid);},enterName:'确定'});
+}
+
+function delete_ifav(uid)
+{
+	$.ajax({
+	   type: "POST",
+	   url: "{$urlsite}/fav/delete_ifav/",
+	   data: 'uid='+uid+'&',
+	   success: function order_result(re)
+	   {
+	   		switch(re)
+	   		{
+	   			case '1':
+	   			case '2': 
+					Win.dialog({type:'info',msg:'<img border="0" class="ico" alt="" src="<php>echo $urlstatic;</php>/img/popup_g.jpg">取消收藏成功！',height:100});
+					$("#box_"+uid).remove();
+					break;
+	   			case '0': 
+					Win.dialog({type:'info',msg:'取消收藏失败！',height:100,cancel:function(){top.location.href='?';},enter:function(){top.location.href='?';}}); 
+					break;
+	   		}
+	   }
+	});
+}
+
+function show_remark(uid)
+{
+	if (uid == '') return false;
+	var $remark = $('#remark_'+uid);
+	if($remark.attr('content')=='备注电话、姓名等...'){
+		var content='';
+	}else{
+		var content=$remark.attr('content');
+	}
+	$remark.html('<textarea id="area_'+uid+'">'+content+'</textarea>');
+	$remark.next().html('<a href="javascript:;" onclick="add_remark('+uid+');" class="btn1">保存</a><a href="javascript:;" onclick="cancel_remark('+uid+');" class="btn3">取消</a>  ');
+}
+
+function cancel_remark(uid)
+{
+	if (uid == '') return false;
+
+	var $remark = $('#remark_'+uid);
+	var $area	= $('#area_'+uid);
+	var show_remark = '';
+	var desc	= '修改备注';
+	if ($area.val().length == 0) {
+		show_remark = '<span class="none_remark f_9">备注电话、姓名等...</span>';
+		desc = '添加备注';
+	}
+	if($remark.attr('content')==''){
+		show_remark = '<span class="none_remark f_9">备注电话、姓名等...</span>';
+		desc = '添加备注';
+	}
+	else {
+		show_remark = '<span class="fs_12 f_yelo unline" >'+$remark.attr('content')+'</span>';
+	}
+	$remark.html(show_remark);
+	$remark.next().html('<a href="javascript:;" onclick="show_remark('+uid+');" class="unline f_6 fs_12"><img src="<php>echo $urlstatic;</php>/img/ico_write.png" alt="'+desc+'" class="ico" /> '+desc+'</a>');
+}
+
+function add_remark(uid)
+{
+	if (uid == '') return false;
+	var $remark = $('#area_'+uid);
+	//验证长度
+	if ($remark.val().length > 500) {
+		alert('填写备注内容过长！');
+		return false;
+	}
+
+	$.ajax({
+		type: "POST",
+		url: "{$urlsite}/fav/add_remark/",
+		data: 'uid='+uid+'&remark='+$remark.val()+'&',
+		success: function order_result(re)
+		{
+			var ret = jQuery.parseJSON(re);
+			switch (ret.ret)
+			{
+				case '2': Win.dialog({type:'alert',msg:'添加备注失败<br/>',height:100,cancel:function(){top.location.href='?';},enter:function(){top.location.href='?';}}); 
+					break;
+				case '3': alert('备注内容不能超过500字!'); 
+					break;
+				default:
+					$mark = $('#remark_'+ret.uid);
+					$mark.attr('content', ret.remark);
+					$mark.html('<span class="fs_12 f_yelo unline" >'+ret.show_remark+'</span>');
+					$mark.next().html('<a href="javascript:;" onclick="show_remark('+ret.uid+');" class="unline f_6 fs_12"><img src="'+ret.bt_img+'" alt="修改备注" class="ico" /> 修改备注</a>');
+					break;
+			}
+		}
+	});
+}
+
+
+function check_allow()
+{
+	if(!1)
+	{
+		Win.dialog({type:'alert',msg:'请 <a href="/photo/up_form/">上传一张你的打分照</a> 后，再给Ta贴标签吧!<br/>',height:120,width:350});
+		return false;
+	}
+	
+	return true;
+}
+
+</script>
+  <include file="Public:foot" /> </div>
+</body>
+</html>

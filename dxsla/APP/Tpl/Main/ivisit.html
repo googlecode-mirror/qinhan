@@ -1,0 +1,33 @@
+<ul>
+  <volist name="visitlist" id="m">	
+  <li>
+    <dl class="clear">
+      <dt class="w_48"><a href="{$urldomain}/{$m['uid']}" target="_blank"> <img src="{$urlupload}/{$m['default_pic']}_48x48.jpg" class="face_s{$m['sex']}_b3" alt="照片" /> </a></dt>
+      <dd class="w_360">
+        <p><a href="{$urldomain}/{$m['uid']}" target="_blank">{$m['username']}</a> <span class="f_6">{$m|user_tag}</span> </p>
+        <notempty name="m['want_content']">
+          <p>{$m['want_content']|do_things=$m['sex']} <a class="f_r underline" onclick="try_meet({$m['uid']},2,'{$m['username']}','{$m['want_content']}')" >约{$m['sex']|ui_sex}</a></p>
+        </notempty>
+        <p class="fs_12 f_9">{$m['photonum']}照片</p>
+      </dd>
+      <dd class="w_120">
+		<gt name="m['score_impress']" value="0">
+		<p>你对{$m['sex']|ui_sex}的评分：</p>
+		<p class="fs_12 f_9">印象打了<span class='score'>{$m['score_impress']}</span>分</p>
+		<gt name="m['score_face']" value="0">
+		<p class="fs_10 f_9">长相打了<span class="score1">{$m['score_face']}</span>分</p>
+		</gt>
+		<gt name="m['score_body']" value="0">
+		<p class="fs_10 f_9">身材打了<span class="score1">{$m['score_body']}</span>分</p>
+		</gt>
+		<gt name="m['score_temper']" value="0">
+		<p class="fs_10 f_9">{$m['sex']|ui_sex=5}打了<span class="score1">{$m['score_temper']}</span>分</p>
+		</gt>				
+		</gt>
+		<p class="fs_12 f_9">{$m['add_time']|formatTime}</p>
+      </dd>
+    </dl>
+  </li>
+  </volist>
+</ul>
+<p class="list"><a href="{$urlsite}/visit/out/">查看更多>></a></p>

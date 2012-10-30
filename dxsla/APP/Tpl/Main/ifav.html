@@ -1,0 +1,20 @@
+<ul>
+  <volist name="favlist" id="m">	
+  <li>
+    <dl class="clear">
+      <dt class="w_48"><a href="{$urldomain}/{$m['uid']}" target="_blank"> <img src="{$urlupload}/{$m['default_pic']}_48x48.jpg" class="face_s{$m['sex']}_b3" alt="照片" /> </a></dt>
+      <dd class="w_360">
+        <p><a href="{$urldomain}/{$m['uid']}" target="_blank">{$m['username']}</a> <span class="f_6">{$m|user_tag}</span> </p>
+        <notempty name="m['want_content']">
+          <p>{$m['want_content']|do_things=$m['sex']} <a class="f_r underline" onclick="try_meet({$m['uid']},2,'{$m['username']}','{$m['want_content']}')" >约{$m['sex']|ui_sex}</a></p>
+        </notempty>
+        <p class="fs_12 f_9">{$m['photonum']}照片</p>
+      </dd>
+      <dd class="w_120">
+        <p class="fs_12 f_9"> {$m['add_time']|formatTime}</p>
+      </dd>
+    </dl>
+  </li>
+  </volist>
+</ul>
+<p class="list"><a href="{$urlsite}/fav/out/">查看更多>></a></p>

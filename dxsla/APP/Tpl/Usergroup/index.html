@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 我要成为正式会员</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+
+<link href="{$urlstatic2}/css/vipnew.css{$urltail}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<php>$nav = 0;</php>
+<include file="Public:head" />
+<!--中间部分开始-->
+<div class="container_cwrap clear">
+  <!--左边部分开始-->
+  <div class="fm_l_200"> <include file="Public:left" /> </div>
+  <!--左边部分结束-->
+  <!--右边部分开始-->
+  <div class="nearby_box">
+    <div class="vipmain">
+	  <div class="vipbox">
+		<dl class="clear">
+			<dt></dt>
+			<dd>
+				<gt name="GLOBALS['i']['group_type']" value="1">
+				<p class="text_little">{$GLOBALS['i']['username']}，你目前拥有{$GLOBALS['i']['card_num']}颗红豆。你已经是正式会员。</p>
+				<else />
+				<p class="text_little">{$GLOBALS['i']['username']}，你目前拥有{$GLOBALS['i']['card_num']}颗红豆。支付10颗红豆，即可成为正式会员。</p>
+				<p class="text_little" style="padding:10px 0 0 200px;"><input type="button" value="支付红豆成为正式会员" class="btn1" onclick="upgrade_user()"></p>
+				</gt>
+			</dd>
+		</dl>
+		<dl class="clear">
+			<dt></dt>
+			<dd>
+				<p class="text_little">如何获取红豆？发送以下注册链接每邀请1位好友成功加入，奖励1颗红豆。</p>
+				<p class="text_little" style="margin-top:10px;"><input type="text" size="40" class="input_1 fl" value="http://jianjiandandan.ivu1314.com/?uid={$GLOBALS['i']['uid']}" />
+				<span style="padding-left:5px;">
+				<object width="50" height="28" id="copyObjIE" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000">
+				  <param value="always" name="allowScriptAccess">
+				  <param value="transparent" name="wmode">
+				  <param value="{$urlstatic2}/flash/clipboard.swf?1310729489" name="movie">
+				  <param value="high" name="quality">
+				  <embed  id="copyObj" width="50" height="28" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" allowscriptaccess="sameDomain" swliveconnect="true" quality="high" wmode="transparent" src="{$urlstatic2}/flash/clipboard.swf?1310729489">
+				</object>
+        		</span></p>
+			</dd>
+		</dl>
+		<dl class="clear">
+			<dt></dt>
+			<dd>
+				<p class="text_little">分享网站到QQ空间获得红豆<span class="f_6 fs_14">（分享一次将获得0.5颗红豆，每天限分享1次）</span></p>
+				<p class="text_little" style="margin-top:10px;">方法1: 分享自己的照片得分，<a target="_blank" href="{$urlsite}/usergroup/share_score/">现在就去分享</a></p>
+				<p class="text_little" style="margin-top:10px;">方法2: 分享网站链接，<a href="javascript:;" onclick="share_to_qq()">立即分享</a></p>
+			</dd>
+		</dl>
+		<dl class="clear">
+			<dt></dt>
+			<dd>
+				<p class="text_big">正式会员的好处</p>
+				<p class="text_little" style="margin-top:20px;">1，可以给你心动的异性打10分，或者你不喜欢的人打低分(1~5分)。</p>
+				<p class="text_little" style="margin-top:20px;">2，在寻找新朋友的时候翻页没有限制。</p>
+			</dd>
+		</dl>
+	  </div>
+	  <div class="vipbtnbox clear" style="height:55px;"></div>
+    </div>
+  </div>
+  <!--右边部分结束-->
+</div>
+<script type="text/javascript">
+function upgrade_user() {
+	Win.dialog({'msg':'正在修改数据，请稍等......<br /><br />','type':'warn','noclose':true});
+	$.ajax({
+		type: "POST",
+		url: "/index.php?s=/usergroup/upgrade/",
+		data: '',
+		success: function(re) {
+			var obj = jQuery.parseJSON(re);
+			if(obj.errno == 200) {
+				 Win.dialog({'msg':obj.msg,'type':'info',enter:function() {location.reload(true);},cancel:function() {location.reload(true);}});
+			}else{
+				 Win.dialog({'msg':obj.msg,'type':'info'});	
+			}
+		}
+	});
+	return false;
+}
+function get_copy_str()
+{
+    var str = 'http://jianjiandandan.ivu1314.com/?uid=<php>echo $GLOBALS['i']['uid'];</php>';
+    return str;
+}
+function copy_finish()
+{
+    alert('邀请链接地址复制成功\n您可以在QQ、MSN上粘贴发送给您的朋友！'); 
+}
+function share_to_qq() {
+	if(myuserinfo.qq_api != 1) {
+        var msg_code = '<div class="pop_rader fb_14"><p>你不是通过QQ账号登录本网站，不能分享到QQ空间</p>'
+                        +'<p>可以点击<a href="<php>echo $urlsite;</php>/user/rsync/" target="_blank">设置QQ账号同步</a>后再分享。</p></div>';
+        Win.dialog({width:500,height:150,msg:msg_code,type:'info'});
+        return false;
+	}
+	var html='<div class="photo_desc" style="padding-top:20px;"><h3>分享网站到QQ空间</h3>'
+			+'<textarea id="_js_content" class="input_1" name="content" maxlength="166">推荐一个现在很火的网站——简简单单网</textarea>'
+			+'<div class="f_6">分享到QQ空间一次将获得0.5颗红豆，每天限分享1次</div></div>'
+			+'<p style="padding:30px;padding-left:190px;" class="bot_btn"><a class="btn1" id="_js_submit">立即分享</a> 或 <a href="javascript:void(0);" onclick="Win.close();">取消</a></p>';
+	Win.dialog({width:500,msg:html});
+	$('#_js_submit').click(function(){
+		var submit_content=$('#_js_content').val();
+		if(submit_content.length>166){
+			alert("最多输入166个字符");
+			return false;
+		}
+		$.ajax({
+		   type: "POST",
+		   url: "/index.php?s=/user/share_to_qq/",
+		   data: 'content='+encodeURIComponent(submit_content),
+		   success: function show_desc_result(re)
+		   {
+				return true;
+		   }
+		});
+		Win.dialog({type:'info',msg:'分享成功！'});
+	});
+}
+</script>
+<include file="Public:foot" />
+</div>
+</body>
+</html>

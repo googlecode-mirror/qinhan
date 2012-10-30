@@ -1,0 +1,25 @@
+<div id="attention_more" class="myfrend_new">
+<include file="Attention:feed" />
+</div>
+<php>
+$js_act = ACTION_NAME == 'attention' ? 'load_index' : 'load_more';
+</php>
+<p class="list" id="load_more_dt"><a href="javascript:void(0)" onclick="{$js_act}();"><img src="{$urlstatic}/img/morebar.png" width="99" height="25" /></a></p>
+<script>
+var answers = null;
+var is_last = 0;
+var last_id = 1518137;
+var limit = 1;
+var face_size = 48;
+</script>
+<script language="javascript" src="{$urlstatic2}/js/pub_face_all.js"></script>
+<script language="javascript" src="{$urlstatic2}/js/attention.js"></script>
+<script>
+$(document).ready(function() {
+        if(Cookies.get("locat_pay_card") == 1) {
+            show_mask_info(2,0);
+            Cookies.clear("locat_pay_card");
+            Cookies.clear("locat_pay_uid");
+        }
+});
+</script>

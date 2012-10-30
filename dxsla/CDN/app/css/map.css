@@ -1,0 +1,52 @@
+@charset "utf-8";
+/* CSS Document */
+/*地图*/
+/*手机图标*/
+.nearby_1 {margin-left:20px;}
+.nearby_sj {padding-left: 10px;vertical-align:middle;}
+/*手机图标*/
+.map_w100{width:100%;}
+.city_bg{width:718px;height:30px;line-height:30px;position:relative;padding:0px 10px;background:#F3F3F3;border-bottom:1px solid #C9C9C9;z-index:100; }
+.city_bg .mark_pst{background:url(../img/map_ico1.gif) left center no-repeat;padding-left:20px;color:#F60;}
+#mapbar{width:738px;height:500px;z-index:0;overflow-x:hidden;overflow-y:hidden;position: relative; cursor: default;}
+.map_border{border:1px #C9C9C9 solid;width:738px;}
+.city_box{width:280px;padding:5px 0px 10px 10px;position:absolute;border:1px #99BFCC solid;background:#fff;left:-1px;top:28px;z-index:100;line-height:24px;}
+.city_bg select{width:80px;margin-left:5px;padding:2px 0px;}
+.city_box .input_1{font-size:12px;width:178px; }
+.city_box  .search_ico{margin-left:5px;vertical-align:middle; cursor:pointer;}
+.city_box .clear{width:100%;}
+.city_box a{margin-right:5px;white-space:nowrap;}
+.city_box .ico{ cursor:pointer;margin-right:10px;}
+.map {width:155px;height:70px;background:#f1f1f1 url(../img/ico_can.png) 50px 40px no-repeat;font-size:14px;font-weight:bold; padding:40px 0px 0px 75px; border:1px solid #999;}
+.map_mian{width:988px;margin:0px auto;}
+#ds .h1 {height: 1px;}
+#ds .h2 {height: 2px;}
+#ds .h3 {height: 3px;}
+#ds .h4 {height: 4px;}
+#ds .h5 {height: 5px;}
+#ds .h6 {height: 6px;}
+#ds-v{height:0px;float:left;}
+#ds .v1 {width: 1px;}
+#ds .v2 {width: 2px;}
+#ds .v3 {width: 3px;}
+#ds .v4 {width: 4px;}
+#ds .v5 {width: 5px;}
+#ds .v6 {width: 6px;}
+#ds .o1 {opacity: 0.05;*filter: alpha(opacity=5);}
+#ds .o2 {opacity: 0.04;*filter: alpha(opacity=4);}
+#ds .o3 {opacity: 0.03;*filter: alpha(opacity=3);}
+#ds .o4 {opacity: 0.02;*filter: alpha(opacity=2);}
+#ds .o5 {opacity: 0.01;*filter: alpha(opacity=1);}
+.ds{background:#000000;overflow: hidden;position: absolute;top:0px;left:0px;z-index:3;}
+.panel-width{width: 29.32em;}
+#ds-h div {width: 100%;}
+.people_sel{float:left;}
+.people_sel .btn1{margin-left:5px;padding:2px 10px;}
+.people_sel .current{text-decoration:none;color:#666666;font-weight:bold;}
+.people_sel a{margin-right:10px;}
+.people_sel input{cursor:pointer;}
+.people_sel .cut{margin-right:8px;}
+.city_bg .btn1{margin-left:5px;padding:1px 10px;}
+.map_tip{width:728px;background:#FDFFCE;border:1px solid #FFD863;font-size:13px;line-height: 18px;padding:5px;margin-top:5px;position:relative;}
+.map_tip .close{right:5px;top:5px;position:absolute;cursor:pointer;}
+/*地图end*/

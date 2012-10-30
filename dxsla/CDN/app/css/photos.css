@@ -1,0 +1,90 @@
+@charset "utf-8";
+/* CSS Document */
+._js_show_area,._js_show_pass,#_js_show_pass,._js_show_error,._js_show_pass_error,.photo_area{display:none;}
+.photo_ico_bg .ico_myself,.photo_ico_bg .ico_password,.photo_ico_bg .ico_collect{background-image:url(../img/ico_2.png);_background-image:url(../img/ico_2.gif);background-repeat:no-repeat;cursor:pointer;display:inline-block;right:2px;bottom:10px;position:absolute;z-index:100;}
+.photo_ico_bg .ico_myself{width:17px;height:21px;background-position:-3px -1px;}
+.photo_ico_bg .ico_password{width:17px;height:21px;background-position:-3px -25px;}
+.photo_ico_bg .ico_collect{width:20px;height:18px;background-position:-3px -50px;}
+.photo_manage{width:720px;padding:15px 0 15px 40px;margin-left:-23px;float:left;background:url(../img/dlbg.png) left repeat-y;float:left;}
+.photo_manage .top_nav{width:100%;border-bottom:1px solid #cfcfcf;padding-bottom:15px;}
+.photo_manage .top_nav dl{width:500px;float:left;}
+.photo_manage .upload_w{width:100%;position:relative;}
+.photo_manage .upload_w .dynamic{position:absolute;left:250px;top:28px;}
+.top_nav dl{width:100%;font-size:16px;}
+.top_nav dt{float:left;}
+.top_nav a{text-decoration:none;}
+.top_nav dt{font-weight:bolder;}
+.top_nav dt a:hover{color:#f60;}
+.top_nav dd{margin-left:10px;float:left;_display:inline;padding-left:11px;background:url(../img/ico_leftarrows.png) no-repeat left center;}
+.top_nav dd{color:#666;}
+.top_nav dd a:hover{color:#f60;}
+.photoset_nav a{padding-left:20px;font-size:14px;text-decoration:none;}
+.photoset_nav a:hover{text-decoration:underline;}
+.photoset_nav .set_bg{background:url(../img/ico_set.png) no-repeat left center;}
+.photoset_nav .del_bg{background:url(../img/ico_del.png) no-repeat left center;}
+.photo_manage .choice_w{width:100%;margin-top:10px;color:#666;}
+.choice_w select{border:1px solid #cfcfcf;padding:2px;font-size:14px;}
+.photo_manage .upphoto_flash{width:447px;margin-top:20px;float:left;}
+.photo_manage  .photo_tip{float:left;margin-left:10px;margin-top:30px;}
+.photo_manage .upphoto_bg,.else_photos_t{width:704px;height:35px; clear:both;font-size:14px;color:#666;line-height:25px;background:#f5f5f6;padding:10px 8px 0 8px;}
+.photo_manage_list{width:100%;margin-top:15px;}
+.photo_manage_list dl{width:156px;height:242px;overflow:hidden;margin-left:18px;float:left;_display:inline;}
+.photo_manage_list dt{width:138px;height:138px;padding:7px;background:url(../img/photos_bg6.png);position:relative;}
+.photo_manage_list .photo_m{width:120px;height:120px;padding:9px;border:1px #cfcfcf solid;background:#fff;}
+.photo_manage .photo_m:hover{border:2px #FF99DB solid;width:120px;height:120px;padding:8px;}
+.photo_manage_list dd{margin-top:5px;margin-left:6px;width:140px;}
+.photo_manage_list dd .f_9{font-size:14px;}
+.photo_manage_list dd a{text-decoration:none;}
+.photo_manage_list .font_w{background:#F6F8FF;}
+.myself_photos{width:100%;margin-top:12px;}
+.myself_photos dt,.else_photos_list dt{width:138px;height:138px;padding:16px;background:url(../img/photos_bg1.png) no-repeat left top;position:relative;z-index:1;cursor:pointer;}
+.myself_photos dd,.else_photos_list dd{padding-left:20px;}
+.no_photobg{background:#efefed;}
+.tip_upload{padding:9px;background:#efefed;width:120px;height:120px;border:1px #cfcfcf solid;}
+.myself_photos .photo_m,.else_photos_list .photo_m{background:#fff;}
+.no_photobg,.myself_photos .photo_m,.else_photos_list .photo_m{width:120px;height:120px;padding:9px;border:1px #cfcfcf solid;}
+.else_photos_t{border-top:solid 1px #cfcfcf;margin-top:20px;}
+.else_photos_list{width:100%;margin-top:15px;}
+.else_photos_list .click_upload{margin-top:16px;cursor:pointer;}
+.else_photos_list dl{width:165px;height:255px;margin:0 7px;_margin:0 3px;float:left;}
+.else_photos_list dd a{text-decoration:none;}
+.photo_big_w{width:500px;margin:25px auto 0 auto;}
+.photo_big_font{width:100%;text-align:center;}
+.photo_big_font a{text-decoration:none;padding:0 3px;}
+.photo_big_img{width:480px;padding:10px;border:1px solid #ddd;text-align:center;margin-top:10px;cursor:pointer;}
+.photo_comment_w{width:480px;margin-top:10px;padding:10px;background:#f5f5f5;}
+.photo_comment_w textarea{width:470px;height:44px;}
+.photo_comment_w .btn1{padding:3px 20px;}
+.photo_comment_w .btn_w{width:100%;margin-top:5px;}
+.photo_big_w .description{line-height:20px;margin-top:10px; font-size:14px;color:#333;}
+.photo_big_w .description img{margin-left:5px; cursor:pointer;}
+.tip_uplowd{margin-top:5px;}
+/**我的个人相册_二级密码 end**/
+.photo_manage .arrow{background-image:url(../img/photo_jt2.png);background-position:left center;background-repeat:no-repeat;margin:0px 5px;padding:0px 10px;}
+.line{border-bottom:1px solid #e1e1e1;padding-bottom:10px;margin-bottom:15px;}
+.photo_manage .jt2 a{font-size:16px;background:url(../img/photo_jt3.png) left center no-repeat;text-decoration:none;display:block;margin-top:10px;padding:3px 40px;width:110px;}
+.photo_manage .jt2 .current{background:url(../img/photo_jt22.png);}
+.photo_manage .jt2 a:hover {font-size:16px;background:url(../img/photo_jt22.png) no-repeat left;display:block;margin-top:10px;padding:3px 40px;width:110px;color:#1A4DC1;text-decoration:underline;}
+.photo_manage .span_w{width:100px;text-align:right;display:block;float:left;font-size:14px;color:#666;}
+.photo_manage .span_w1{padding-left:100px;display:block;font-size:12px;color:#666;}
+.photo_manage .f_lh{line-height:25px;font-size:12px;color:#666;margin-top:5px;padding-right:20px;}
+/**我的个人相册_二级密码 end**/
+/**我的个人相册_回收站 end**/
+.recycle1 {height:35px;border-top:1px solid #ddd;background-color:#F5F5F5;line-height:35px;}
+.recycle1 p {float:left;display:block;}
+.recycle1 .delete {background-image:url(../img/photo_recycle1.png);background-repeat:no-repeat;background-position:left center;padding-left:20px; margin-left:10px;}
+.recycle1 .return {background-image:url(../img/photo_recycle2.png);background-repeat:no-repeat;background-position:left center;padding-left:20px;margin-left:10px;}
+.recycle1 .ClearRecycle {padding-left:530px;}
+.recycle3 li{float:left;width:215px;height:200px;display:block;margin-left:10px;}
+.recycle3 li span {float:left;display:block;}
+.recycle_photo1 p{padding-left:15px;margin-top:5px;}
+.recycle3 .f_3{font-size:14px;}
+.recycle_photo1 .recycle4{width:138px;height:138px;padding:16px;background:url(../img/photos_bg1.png) no-repeat left top;}
+.recycle_photo2 {width:100%;}
+.recycle_photo1 .recycle4 a,.recycle_photo2 .border{display:inline-block;width:120px;height:120px;padding:9px;border:1px #cfcfcf solid;background:#fff;}
+.recycle_photo2 .recycle6{width:138px;height:138px;padding:7px;background:url(../img/photos_bg6.png);}
+.recycle_photo2 .recycle6{margin-bottom:5px;}
+.recycle_photo2 p{padding-left:6px;margin-top:5px;}
+.recycle5 {padding-top:75px;padding-right:10px;}
+p.recycle4_2 {width:120px;height:120px;border:1px solid #cfcfcf;padding:1px;margin-bottom:7px;}
+/**我的个人相册_回收站 end**/

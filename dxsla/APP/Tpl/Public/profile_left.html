@@ -1,0 +1,13 @@
+	<div class="newperphoto_l">
+	  <dl>
+		<dt>我的档案</dt>
+		<dd><a <if condition="MODULE_NAME == 'Profile'">class="cur"</if> href="{$urlsite}/profile/">基本资料</a></dd>
+		<dd><a <if condition="MODULE_NAME == 'Diary'">class="cur"</if> href="{$urlsite}/diary/">{$GLOBALS['i']['diary_name']}</a></dd>
+		<dd><a <if condition="MODULE_NAME == 'Photo'">class="cur"</if> href="{$urlsite}/photo/">我的相册</a></dd>
+	  </dl>
+	  <dl>
+		<dt>其他</dt>
+		<dd><a <if condition="MODULE_NAME == 'Pay'">class="cur"</if> href="{$urlsite}/pay/card_log/?type=link">红豆帐户</a></dd>
+		<dd><a <if condition="MODULE_NAME == 'User'">class="cur"</if> href="{$urlsite}/user/password/">设置</a></dd>
+	  </dl>
+	</div>

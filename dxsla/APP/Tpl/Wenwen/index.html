@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 小编专访</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+</head>
+<body>
+<php>$nav = 4;</php>
+<include file="Public:head" />
+<!--中间部分开始-->
+<div class="container_cwrap clear">
+  <!--左边部分开始-->
+  <div class="fm_l_200">
+  <include file="Public:left" />
+  </div>
+  <!--左边部分结束-->
+  <!--中间部分 start-->
+  <div class="ask_center ask_w2 clear">
+    <!--问问菜单 start-->
+    <div class="ask_nav clear"> <a target="_blank" href="{$urlsite}/other/kf/?mtype=7" class="opinion_fb f_6">对“问问”的意见反馈</a>
+      <ul class="fl">
+        <li><a href="{$urlsite}/question/plaza/" class="" >问问广场</a></li>
+        <li><a href="{$urlsite}/question/add/" class="">我要问问</a></li>
+        <li><a href="{$urlsite}/question/sender/" class="">问问管理</a></li>
+        <li><a href="{$urlsite}/question/wenwen/" class=" active_nav" >小编专访</a></li>
+      </ul>
+    </div>
+    <!--问问菜单 end-->
+    <div class="ask_main">
+      <div class="editor">
+        <h2>有空的时候，来这里回答自己感兴趣的问题。别只顾埋头向前走，偶尔歇下脚步，给自己做一回人生专访！</h2>
+        <!-- <p class="m_t10">如果您有好的专访问题，也可以<a href="/other/kf/?mtype=5" class="fb_12 f_r">提交</a>给我们编辑部，我们将择优添加到题库中。</p>-->
+        <div class="line1 m_t10"></div>
+        <ul class="interview_ul">
+          <volist name="list" id="vo">
+            <empty name="vo['content']">
+              <li class="clear">
+                <p class="word_break"><span class="f_6">小编：</span><span class="comment_{$vo.qid}">{$vo.wenwen_question}</span>
+                <p class="word_break fs_14 f_6" id="area_{$vo.qid}" style="display:none;"></p>
+                <p class="fr" id="bn_{$vo.qid}"><a onclick="action_comment(this,'{$vo.qid}')" class="btn2">回答问题</a></p>
+              </li>
+              <div id="comment_{$vo.qid}" class="reply_box" style="display:none;"></div>
+              <else />
+              <li class="clear">
+                <p class="word_break"><span class="f_6">小编：</span><span class="comment_{$vo.qid}">{$vo.wenwen_question}</span>
+                <p class="word_break fs_14 f_6" id="area_{$vo.qid}"><span class="f_blue1">{$GLOBALS['i']['username']}：</span>{$vo.content}</p>
+                <p class="fr" id="bn_{$vo.qid}"><a onclick="action_comment(this,'{$vo.qid}')" dl="{$vo.content}" class="btn1">修改</a><a href="javascript:delete_answer({$vo.qid})" class="btn3">删除</a></p>
+              </li>
+              <div id="comment_{$vo.qid}" class="reply_box" style="display:none;"></div>
+            </empty>
+          </volist>
+          <!--回复下拉框 start-->
+          <div class="reply_box" id="_js_reply_box" style="display:none;">
+            <p class="list"><img alt="" src="http://pic.jjdd.com/v1/i/pub/reaply_bg.gif?gv=54_1"></p>
+            <div class="reply_box_bg">
+              <textarea rows="3" class="list" name="content"></textarea>
+            </div>
+            <div class="clear"> <span class="fr p_btn m_t5"><a class="btn1 btn_b1" onclick="action_submit();">保存答案</a></span> <span class="fr f_6 pt_5">
+              <!--<label onclick="set_tsina(this);">是否同步到新浪微博：<b title="未同步到新浪微博" id="tsina_ico" class="sina_bg1"></b></label>-->
+              </span> </div>
+          </div>
+          <!--回复下拉框 end-->
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!--中间部分结束-->
+</div>
+<script>
+//---------------------//
+//弹出回答问题
+var comment_id = '';
+function action_comment(obj,id)
+{
+	if(comment_id!=''){
+		$("#comment_"+comment_id).slideUp("fast");
+		$("#bn_"+comment_id).show();
+	}
+	comment_id =id;
+	$( "#comment_"+comment_id).html($("#_js_reply_box").html());
+	$( "#comment_"+comment_id).slideDown("fast",function(){
+		var content = $(obj).attr('dl');
+		if(content){
+			$( "#comment_"+comment_id+' textarea').val(unescape(content));
+		}
+		$("#bn_"+comment_id).hide();
+	});
+}
+var a="{$GLOBALS['i']['username']}";
+function action_submit()
+{
+	//$(comment_id).hide();
+	var comment_content = $( "#comment_"+comment_id+' textarea').val();
+	if(comment_content.length <2 || comment_content.length > 500 ){
+		Win.dialog({type:'info',msg:'回答至少2个字,多于500字！'});
+		return false;
+	}
+	var rsync_tsina;
+	$("#tsina_ico").hasClass("sina_bg2")?rsync_tsina = 1:rsync_tsina = 0;
+	pid = comment_id;
+	$.post("{$urlsite}/wenwen/answer",{'qid':pid,content:comment_content,rsync_tsina:rsync_tsina},
+	function(re){
+		if(re==0 || re==1 || re==2)
+   		{
+   			if(1 || 0){
+   				Win.dialog({type:'info',msg:'答案保存成功！',enter:function(){
+				
+   					var _html='<span class="f_blue1">'+a+'：</span><span>'+comment_content+'</span>';
+   					$("#area_"+comment_id).html(_html);
+   					$("#area_"+comment_id).show();
+   					_html='<a class="btn1" dl='+escape(comment_content)+' onclick=action_comment(this,"'+comment_id+'");>修改</a><a class="btn3" href=javascript:delete_answer("'+pid+'")>删除</a>';
+   					$("#bn_"+comment_id).show();
+   					$("#bn_"+comment_id).html(_html);
+   	   				$("#comment_"+comment_id).slideUp("fast");
+   				}});
+   			}else{
+   				var code = '<div class="tsina_tip"><p>答案保存成功，下一步设置同步。</p>\
+   							<p>将好玩的小编问答同步到你的新浪微博，为你的微博创造更多话题吧！</p>\
+   							<p class="opt"><img src="http://pic.jjdd.com/v1/i/pub/sina_logo2.png?gv=48_1"  class="ico" alt="新浪微博"> <a href="/tsina/bind/?qid=7" class="btn1">去新浪微博设置同步</a> &nbsp;<span class="fs_12">或</span> &nbsp;<a href="/wenwen/?no_rsync=1" class="fs_12 f_6">暂不设置</a></p>\
+   							</div>';
+   				Win.dialog({msg:code,width:500});
+   			}
+   		}else if(re == 4 || re == 5){
+			var msg_code = '您填写的信息有敏感字！';
+			Win.dialog({type:'info',msg:msg_code,enter:function(){history.go(0)}});
+		}else if(re == 6){
+			var msg_code = '您填写的信息有敏感字！';
+			Win.dialog({type:'info',msg:msg_code});				
+		}else{
+   			Win.dialog({type:'info',msg:'操作失败，请刷新后重试！'});
+   		}
+		//$(comment_id).slideUp("fast");
+   },"json");
+}
+
+function set_tsina(obj)
+{
+	if(0)
+	{
+		var code	= '<div class="tsina_tip">\
+							<div class="clear">\
+							<p class="fl"> <img border="0" src="http://pic.jjdd.com/v1/i/pub/sina_logo.gif?gv=48_1" alt="新浪微博"></p>\
+							<p class="fl m_t30">初次使用本功能，需要绑定您的微博账号</p>\
+							</div>\
+							<div class="opt" >\
+								<a id="bind_start" class="btn1 btn_b1" href="/tsina/bind/" onclick="$(\'#bind_start\').css(\'display\',\'none\');$(\'#bind_finish\').css(\'display\',\'\');" target="_blank" >立即绑定</a>\
+								<a id="bind_finish" style="display:none" class="btn1 btn_b1" onclick="self.location.href=self.location.href" >绑定好了</a>\
+							</div>\
+						</div>\
+						';
+		Win.dialog({msg:code,width:550});
+	}
+	else
+	{
+		var tsina_ico = $(obj).children("#tsina_ico");
+		if(tsina_ico.hasClass("sina_bg1"))
+		{
+			tsina_ico.attr("class","sina_bg2");
+			tsina_ico.attr('title','同步到新浪微博');
+		}
+		else
+		{
+			tsina_ico.attr("class","sina_bg1");
+			tsina_ico.attr('title','未同步到新浪微博');
+		}
+	}
+}
+
+function delete_answer(question_id)
+{
+	Win.dialog({type:'confirm',msg:'确认删除么，删除后无法恢复!',enter:function(){send_delete(question_id);}});
+}
+
+function send_delete(question_id)
+{
+	$.ajax({
+	   type: "POST",
+	   url: "{$urlsite}/wenwen/delete/",
+	   data: 'qid='+question_id+'&',
+	   success: function reply_success(re)
+				{
+					self.refresh();
+				}
+	});
+}
+//---------------------//
+function get_copy_str()
+{
+	var str = 'http://jianjiandandan.ivu1314.com/?iv=18090226';
+	return str;
+}
+
+function copy_finish()
+{
+	alert('邀请链接地址复制成功\n您可以在QQ、MSN上粘贴发送给您的朋友！'); 
+}
+</script>
+<include file="Public:foot" />
+</div>
+</body>
+</html>

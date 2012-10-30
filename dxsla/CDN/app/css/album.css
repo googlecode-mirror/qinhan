@@ -1,0 +1,40 @@
+@charset "utf-8";
+/* CSS Document */
+/*相册页面左 start*/
+.album_show{width:250px; margin:0 20px 0 0;}
+.album_show .album_show_top,.slalbum_show_top,.album_show .album_show_btm,.slalbum_show_btm{width:250px; height:29px;display:block;}
+.slalbum_show_top{ background:url(../img/album_top_slbtn.png);}
+.slalbum_show_btm{ background:url(../img/album_btm_slbtn.png);}
+.album_show .album_show_top{background:url(../img/album_top_btn.png) no-repeat;}
+.album_show .album_show_btm{background:url(../img/album_btm_btn.png) no-repeat; position:relative; z-index:100}
+.album_show .album_show_center{position:relative; height:928px;background-color:#eaeae9; overflow:hidden; z-index:0}
+.album_show .allphoto{width:250px;padding:0px;position:absolute; height:960px;}
+.album_show .allphoto dl{float:left; width:170px; margin:0;padding:5px 40px;}
+.album_show .allphoto dt{background:url(../img/album_bg.png) no-repeat;}
+.allphoto .invite_upload{text-align:center;margin-top:100px;}
+.allphoto .invite_upload p{margin-top:20px;}
+/*相册页面左 end*/
+/*相册页面右 start*/
+.photo_show{width:710px; margin:0 auto;}
+.photo_show_top_real{width:710px;height:30px; padding-top:10px;background-color:#f7f7f7;}
+.photo_show h1 a.w {color: #FF0090;text-decoration: underline;}
+.photo_show_item{width:710px;height:84px;}
+.sllbtn,.slrbtn,.photo_show_item .lbtn,.photo_show_item .rbtn{float:left;display:block;width:29px;height:80px;margin:2px 0;}
+.sllbtn{background:url(../img/slphoto_show_item_lbtn.png);}
+.slrbtn{background:url(../img/slphoto_show_item_rbtn.png);}
+.photo_show_item .lbtn{background:url(../img/photo_show_item_lbtn.png) no-repeat;}
+.photo_show_item .rbtn{background:url(../img/photo_show_item_rbtn.png) no-repeat;}
+.photo_show_item .myselt_photo{width:652px;height:84px;float:left;position:relative; overflow:hidden}
+.photo_show_item .myselt_photo ul{position:absolute;top:0;left:0;height:84px;width:1000000px;}
+.myselt_photo ul li{float:left;}
+.myselt_photo ul li a{ display:block;position:relative;text-decoration:none}
+.myselt_photo ul li .num{display:block;position:absolute;bottom:2px;right:2px;background-color:#999;width:16px;height:16px;line-height:16px;text-align:center;font-size:12px;color:#fff;}
+.myselt_photo ul li .current img{border: 2px solid #FF7900; padding:0; display:block}
+.photo_show_cont{width:680px;margin:15px; overflow:hidden}
+.photo_show_cont .photo_score_flash1{width:500px;margin-left:90px;height:50px;margin-top:20px;margin-bottom:10px;}
+.photo_show_cont .photo_score_flash1 h2{ text-align:center;line-height:50px;}
+.photo_show_cont .photo_show_on{width:644px;margin:0px auto; overflow:hidden;background:#f5f5f3;}
+.photo_show_on .show_img{text-align:center;}
+.photo_show_on .text{padding:10px;font-size:14px;color:#333333;}
+.photo_show_reply{width:480px;margin:20px 0px 0px 20px;}
+

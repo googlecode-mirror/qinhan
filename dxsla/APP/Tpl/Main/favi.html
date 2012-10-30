@@ -1,0 +1,25 @@
+<ul>
+  <volist name="favlist" id="m">	
+  <li>
+    <dl class="clear">
+	  <eq name="m['status']" value="1">
+	  <dt class="w_48"><a onclick="Win.dialog({msg:'对方使用了悄悄关注功能，所以不显示TA是谁。',type:'info',height:100});"><img alt="照片" width="48" height="48" src="{$urlupload}/000face/{$m['sex']|ui_sex=6}_wh.png"></a></dt>
+	  <dd class="w_360"><p>某人悄悄关注了您</p><p class="fs_12 f_9">{$m['sex']|ui_sex}收藏我的时间：{$m['add_time']|formatTime}</p></dd>
+	  <else />	
+      <dt class="w_48"><a href="{$urldomain}/{$m['uid']}" target="_blank"> <img src="{$urlupload}/{$m['default_pic']}_48x48.jpg" class="face_s{$m['sex']}_b3" alt="照片" /> </a></dt>
+      <dd class="w_360">
+        <p><a href="{$urldomain}/{$m['uid']}" target="_blank">{$m['username']}</a> <span class="f_6">{$m|user_tag}</span> </p>
+        <notempty name="m['want_content']">
+          <p>{$m['want_content']|do_things=$m['sex']} <a class="f_r underline" onclick="try_meet({$m['uid']},2,'{$m['username']}','{$m['want_content']}')" >约{$m['sex']|ui_sex}</a></p>
+        </notempty>
+        <p class="fs_12 f_9">{$m['photonum']}照片</p>
+      </dd>
+      <dd class="w_120">
+        <p class="fs_12 f_9"> {$m['add_time']|formatTime}</p>
+      </dd>
+	  </eq>
+    </dl>
+  </li>
+  </volist>
+</ul>
+<p class="list"><a href="{$urlsite}/fav/in/">查看更多>></a></p>

@@ -1,0 +1,70 @@
+@charset "utf-8";
+/* 头部伪类 start */
+/*.headerbox .prop:hover{width:75px;height:30px;background:url(../img/top_arrow2.png) no-repeat 65px;padding-left:10px;background-color:#f1f1f1;color:#000;}
+
+.g_nav .menu_more:hover{background:url(../img/menu_morebg.png); text-decoration:none;}
+.g_nav .menu_more:hover .menu_mo{background-position:left top;}*/
+.headerbox .propbox a:hover,.headerbox .admbox a:hover{background:#f1f1f1;width:75px;height:30px;display:block;padding:0 10px;_width:95px;_padding-right:0}
+.menu_morelist .more_skillbox:hover{background:#f1f1f1;width:80px;display:block;text-decoration:none;}
+.more_skillbox:hover .more_skillico{background:url(../img/menu_more.png) -2px -16px;width:26px;height:20px;display:block;margin:0 0 5px 27px;_margin-left:0;*margin-left:0}
+.more_skillbox:hover .more_skillico2{background:url(../img/menu_more.png) left -37px;width:28px;height:25px;display:block;margin:0 0 5px 27px;_margin-left:0;*margin-left:0}
+.more_skillbox:hover .more_skillico3{background:url(../img/menu_more.png) 0 bottom;width:24px;height:26px;display:block;margin:0 0 5px 27px;_margin-left:0;*margin-left:0}
+/* 头部伪类 end */
+/* 头部公用样式 start */
+/*.headerbox{width:100%;height:30px;line-height:30px;color:#FFF;border-bottom:1px solid #C9C9C9;font-size:12px;background:url(../img/christmas_topbg.png) no-repeat center #cd0811;}*/
+.headerbox{color: #FFFFFF;font-size: 12px;height: 30px;line-height: 30px;min-width: 980px;width: 100%;}
+.headerbox .header{width:980px;margin:0 auto;position:relative;z-index:99999}
+.headerbox .header a{color:#fff;text-decoration:none;}
+.headerbox .hovf60{padding-left:10px;}
+.headerbox .hovf60:hover{color:#fff;}
+/*.menu_posi{position:relative;z-index:-999;}*/
+/* 头部公用样式 end */
+/* 头部样式--已登录 start */
+.headerbox .header_l{width:300px;height:30px;overflow:hidden;}
+.headerbox .header_l a:hover{color:#f60;text-decoration:underline;}
+.headerbox .list{width:100%;}
+.headerbox .list li{width:100%;height:30px;line-height:30px;text-indent:20px;float:left;}
+.headerbox .header_r{padding-right:15px;_padding-top:5px;}
+.headerbox .header_r a{float:left; margin-left:15px;}
+.headerbox .search{visibility:hidden;float:left;background:url(../img/top_search.png);width:197px;height:22px;border:0;display:block;margin-top:4px;position:relative;_margin-top:1px;}
+.headerbox .top_search{width:156px;height:22px;line-height:22px;font-size:12px;color:#666;float:left;padding-left:5px;background:url(../img/top_search.png);border:0;overflow:hidden;position:absolute;left:0;top:0;}
+.headerbox .search .btn{float:right;width:32px;height:22px;cursor:pointer;background:url(../img/top_search.png) right;border:0;position:absolute;right:0;top:0;}
+.headerbox .prop{width:75px;height:30px;background:url(../img/chrismas_top_arrow1.png) no-repeat 65px;padding-left:10px;}
+/* 头部下拉框 start */
+.propbox,.admbox{display:none;background:#fff;border-right:1px solid #999;border-left:1px solid #DDD;border-bottom:1px solid #999;}
+.headerbox .propbox a,.headerbox .admbox a{color:#000;width:75px;height:30px;display:block;padding:0 10px;_width:95px;_padding-right:0;white-space:nowrap;}
+.headerbox .propbox{position:absolute;top:32px;right:163px;color:#000;width:95px;z-index:1000;_top:37px;_right:164px}
+.headerbox .admbox{position:absolute;top:32px;right:63px;color:#000;width:95px;z-index:1000;_top:37px}
+.headerbox .down_dw{position:absolute;z-index:10000;width:155px;background:url(../img/br_shadow.png) no-repeat left top;top:1px}
+.headerbox .down_tr{width:3px;height:3px;background:url(../img/br_shadow.png) 100% 0 no-repeat;_display:none;top:-3px;right:0;}
+.headerbox .down_inner{position:absolute;z-index:99999;top:-3px;left:-3px;background:#fff;border:1px solid;border-color:#f1f1f1 #a3a3a3 #a3a3a3 #e0e0e0;}
+.headerbox .down_inner p{height:30px;line-height:30px;display:block;_width:95px}
+.headerbox .down_bl{width:3px;height:3px;background:url(../img/br_shadow.png) 100% 0 no-repeat;_display:none;top:-3px;right:0}
+/*-------图标 start---------*/
+.headerbox .ico_in,.headerbox .ico_set,.headerbox .ico_video,.headerbox .ico_redbean{background:url(../img/top_set1.png) no-repeat;_background:url(../img/top_set2.gif) no-repeat;width:16px;display:block;float:left;}
+.headerbox .ico_in{background-position:top;height:14px;margin:8px 5px 0 0;}
+.headerbox .ico_set{background-position:0 -16px;height:20px;margin:5px 5px 0 0;}
+.headerbox .ico_video{background-position:0 -37px;height:15px;margin:7px 5px 0 0;}
+.headerbox .ico_redbean{background-position:bottom;height:17px;margin:6px 5px 0 0;}
+/*-------图标 end---------*/
+/* 头部下拉框 end */
+/* 头部样式--已登录 end */
+/* 头部样式--未登录 start */
+.headerbox .header_r .ico_img1{ background:url(../img/new2_indexphone.png) no-repeat left 45%; padding-left:15px;}
+.headerbox .header_r .ico_img2{background:url(../img/top_logig.png) no-repeat left 50%;padding-left:20px;}
+.headerbox .header_r .ico_img3{background:url(../img/ico_sina1.png) no-repeat left 45%;padding-left:20px;}
+/* 头部样式--未登录 end */
+/* 菜单更多 start */
+.g_nav .menu_more{width:70px;height:20px;background:#fff;position:relative;z-index:105;cursor:pointer;}
+.menu_more .pd0{padding:0;}
+.menu_more .menu_mo{display:block;height:15px;width:15px;float:left;background:url(../img/menu_more.png) -30px top;_background:url(../img/menu_more.gif) -30px top;padding:0;margin:2px 3px 0 0;white-space:nowrap}
+.g_nav .pos_re{}
+/*-------更多下拉框-------*/
+.g_nav .pos_re_box{width:72px;float:left;margin-left:55px;_display:inline;_margin-left:48px;margin-top:25px;}
+.g_nav .menu_morelist{border:1px solid #c9c9c9;margin:0;width:80px;background:#fff;z-index:99;display:block;padding:0;position:absolute;z-index:105;top:30px; left:0;}
+.menu_morelist li{border-bottom:1px dashed #E0E0E0;width:80px;margin:0;_padding:0}
+.menu_morelist li a{background:#fff;width:80px;padding:10px 0 15px 0;height:40px;}
+.more_skillbox .more_skillico{background:url(../img/menu_more.png) -32px -16px;width:26px;height:20px;display:block;margin:0 0 5px 27px;_margin-left:0;*margin-left:0}
+.more_skillbox .more_skillico2{background:url(../img/menu_more.png) -30px -37px;width:28px;height:25px;display:block;margin:0 0 5px 27px;_margin-left:0;*margin-left:0}
+.more_skillbox .more_skillico3{background:url(../img/menu_more.png) -30px bottom;width:24px;height:26px;display:block;margin:0 0 5px 27px;_margin-left:0;*margin-left:0}
+/* 菜单更多 end */

@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 师兄帮帮忙</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+
+<script language="javascript" src="{$urlstatic2}/js/pub_face_all.js?gv=148_1"></script>
+<script language="javascript" src="{$urlstatic2}/js/skill.js?gv=179_1"></script>
+<style type="text/css">
+.icon-title, .icon-desc, .icon-award {background-image:url("<php> echo $urlstatic; </php>/img/icons-deep-50X50.png"); float:left; height:20px; width:20px; margin:3px 5px 0 0;}
+.icon-title {background-position:-88px -123px;}
+.icon-desc {background-position:-316px -9px;}
+.icon-award {background-position:-162px -85px;}
+</style>
+</head>
+<body>
+<php>$nav = 5;</php>
+<include file="head" />
+  <!--中间部分开始-->
+  <div class="container_cwrap clear">
+    <!--左边部分开始-->
+	<div class="fm_l_200"> <include file="left" /> </div>
+    <!--左边部分结束-->
+		
+    <!--中间中间部分开始-->
+    <div class="nearby_box">
+	  <div class="ad_play"><a href="javascript:;" id="banner_vip" style="display:inline;"><img src="{$urlstatic}/img/task2.png{$urltail}"></a><a style="display:none;" href="javascript:;" id="banner_map"><img src="{$urlstatic}/img/task1.png{$urltail}"></a></div>
+<script>
+setTimeout("turn_banner()",5000);
+function  turn_banner(){
+	if($("#banner_vip").css('display') == 'none'){
+		$("#banner_map").hide();
+		$("#banner_vip").show();
+		
+	}else{
+		$("#banner_vip").hide();
+		$("#banner_map").show();
+	}
+	
+	setTimeout("turn_banner()",6000);
+}
+</script>	  
+	  <div class="skill_mgnav clear" style="margin-top:20px;">
+        <p class="navbg fl clear"><a href="javascript:;" class="selected unline">任务大厅</a> <a href="javascript:;" onclick="show_register_form();" class="unline">我的任务</a> <a href="javascript:;" onclick="show_register_form();" class="unline">我参与帮忙的任务</a></p>
+        <p class="fr" style="margin-top:2px;"><a href="javascript:;" onclick="show_register_form();" class="btn1">我要发布任务</a></p>
+		<p class="fr f_6" style="margin:5px 5px 0 0;">目前仅限女生发布任务</p>
+      </div>
+
+	  <!--<div class="area_mg clear">
+        <p class="fl" style="margin-left:20px;"><b class="fs_20">三峡大学</b>&nbsp;&nbsp;<a onclick="alert('其他校区暂未开放');" class="unline f_6 skmore_down" href="javascript:void(0);">更改学校</a></p>
+		<p class="fr m_t10"></p>
+      </div>-->
+      <div class="search_skill clear" style="margin-top:12px; border:0;">
+        <form action="{$urlsite}/task/skilllearn/" method="POST"  name="search_form" >
+          <input type="text" value="输入你要搜索的技能名称(支持模糊搜索)" id="input_skill" name="input_skill" class="input3 f_9" onfocus="input_focus();" onblur="input_blur();" onkeydown="if(event.keyCode == 13){if(check_input_skill()){ search_form.submit();}}">
+          <input type="submit" class="btn1" value="搜索" onclick="if(check_input_skill()){ search_form.submit();}">
+		  <span class="fl">&nbsp;&nbsp;<a href="#" onclick="search_hot_skill('打羽毛球');">打羽毛球</a>&nbsp;&nbsp;<a href="#" onclick="search_hot_skill('旅游');">旅游</a>&nbsp;&nbsp;<a href="#" onclick="search_hot_skill('摄影');">摄影</a>&nbsp;&nbsp;<a href="#" onclick="search_hot_skill('吃零食');">吃零食</a>&nbsp;&nbsp;<a href="###" onclick="search_hot_skill('游泳');">游泳</a>&nbsp;&nbsp;<a href="###" onclick="search_hot_skill('K歌');">K歌</a></span>      
+        </form>
+      </div>
+      <div class="people_skill_w m_b25">
+	  	
+		<volist name="tasklist" id="t">
+        <div class="people_skill clear  ">
+          <ul class="user_info">
+            <li><a href="{$urldomain}/{$t['uid']}" target="_blank"> <img src="{$GLOBALS['s']['urlupload']}{$t['default_pic']}_120x120.jpg" alt="" class="face_s{$t['sex']}_b2" /> </a> </li>
+            <li><a href="{$urldomain}/{$t['uid']}" class="unline fb_14" target="_blank" >{$t['username']}</a></li>
+          </ul>
+          <div class="skill" style="width:570px;">
+            <dl class="know">
+             
+              <dd class="clear default">
+                <div class="clear">
+                  <p class="text_w"><span class="icon-title"></span><span class="simple f_3">{$t['title']}</span></p>
+                  <p class="text_w2"><span class="fr f_6">{$t['add_time']|formatTime}</span></p>
+                </div>			  
+                <div class="clear">
+                  <p class="text_w"><span class="icon-desc"></span><span class="detail">{$t['content']}</span></p>
+                  <p class="text_w2 js_text_w2" style="display:none;"><a href="javascript:;" onclick="show_register_form();" class="exchange_btn" onclick="show_answer_form({$t['uid']},{$t['tid']});">我要帮</a><a class="study_btn" href="javascript:;" onclick="show_register_form();">详情</a></p>
+                </div>
+				<div class="clear">
+				  <p class="text_w"><span class="icon-award"></span><span class="f_3">{$t['reward']}</span></p>
+				  <p class="text_w2">已有{$t['answer_count']}人帮忙</p>
+				</div>
+                <div class="reply_box clear show_comment" id="comment_know_{$t['uid']}_{$t['tid']}" style="display:none"></div>
+              </dd>
+            </dl>
+          </div>
+        </div>
+		</volist>
+
+      </div>
+      <!--分页-->
+      <div class='page'>{$pages}</div>
+      <!--中间中间部分结束-->
+    </div>
+    <!--中间部分结束-->
+	</div>
+<div id="register_form" style="display:none;">
+  <div class="pop_login">
+    <h1>注册成会员后才能继续操作</h1>
+    <div class="login_main">
+	  <form action="{$urlsite}/member/register/" onsubmit="return popRegister()">
+        <p>
+          <label class="zd_w">用户名 </label>
+          <input name="username" id="username" type="text" size="30" class="login_input" value="{$guest_name}" />
+        </p>
+        <p id="login_msg" class="f_r1"></p>
+        <p>
+          <label class="zd_w">密码 </label>
+          <input id="password" name="password" type="password" size="30" class="login_input" onkeydown="if(event.keyCode==13){login();}" />
+        </p>
+        <p style="margin-left:-10px">
+          <label class="zd_w" style="width:55px;">重复密码</label>
+          <input id="rpassword" name="rpassword" type="password" size="30" class="login_input" onkeydown="if(event.keyCode==13){login();}" />
+        </p>
+        <p class="login_buttom clear">
+          <input name="submit" type="submit"  value="注 册" class="btn1 btn_b1 fl" />
+		</p>
+	  </form>	
+    </div>
+    <div class="pop_login_reg">
+      <p class="fs_14"><a href="{$urlsite}/user/signqq"><img src="{$urlstatic}/img/index_signqq.png" title="简简单单网QQ登录" alt="简简单单网QQ登录" /></a></p>
+    </div>
+  </div>
+</div>
+  <script type="text/javascript">
+$(document).ready(function(){
+	$("dd").hover(function(){
+		$(this).find("p").filter(".js_text_w2").removeAttr("style");
+	},function(){
+		$(this).find("p").filter(".js_text_w2").attr("style","display:none");
+	});
+});
+
+$(document).bind("click",function(e){
+	if($.browser.msie) {
+		var el = event.srcElement;
+	}
+	else {
+		var el = e.target;
+	}
+	if(!(IM.fInObj(el,"selectbox")) && !(IM.fInObj(el,"down_img"))) {
+		hide_option();
+	}
+});
+function show_register_form()
+{
+	Win.dialog({ msg:'#register_form',width:360,height:130 });
+	$("#password").select();
+}
+function popRegister()
+{
+
+	if($("#username").val() == ""){
+		$("#login_msg").html('请填写E-mail帐号!');
+		return false ;
+	}
+
+	if($("#password").val() == ""){
+		$("#login_msg").html('请填写密码!');
+		return false ;
+	}
+    
+    if($("#password").val() != $("#rpassword").val()){
+        $("#login_msg").html('密码不一致');
+		return false;
+	}
+    
+   	$.ajax({
+	   type: "POST",
+	   url: "/index.php?s=/member/chk_username/",
+	   data: 'username=' + $('#username').val(),
+	   success: function show_desc_result(re)
+	   {
+	   		var obj = jQuery.parseJSON(re);
+	   		if(obj.errno != 200) {
+				$("#login_msg").html(obj.msg);
+			} else {
+				location.href = '<php>echo $urlsite;</php>/member/reg_active/';
+			}
+	   }
+	});
+	
+	return false;
+}
+</script>
+<include file="Public:foot" />
+</div>
+</body>
+</html>

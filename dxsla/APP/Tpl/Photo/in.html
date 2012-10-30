@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 谁来看过我</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+</head>
+<body>
+<php>$nav = 3;</php>
+<include file="Public:head" />
+
+  <!--中间部分开始-->
+  <div class="container_cwrap clear">
+    <!--左边部分开始-->
+    <div class="fm_l_200">
+      <include file="Public:left" />
+    </div>
+    <!--左边部分结束-->
+    <!--右边部分开始-->
+    <div class="emaillist_w">
+      <div class="tip_nav">
+         <ul class="clear fs_14">
+          <li class="word_nowrap"><a href="{$urlsite}/msg/"  class="">信息<if condition="$f['new_msg'] neq 0"><span class="fb_12 f_r1">新！</span> </if></a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/visit/in/" class="current">来访者</a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/visit/out/" class="">我去看过谁</a></li>
+          <li><a href="{$urlsite}/fav/out/" class="">我收藏的人</a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/fav/in/" class="">谁收藏了我  <if condition="$f['new_fav_in'] neq 0"><span class="fb_12 f_r1">{$GLOBALS['i']['new_fav_in']}新！</span> </if></a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/attention/more/" class="">动态  <if condition="$f['new_attention'] neq 0"><span class="fb_12 f_r1">新！</span> </if></a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/link/forbid_list/" class="f_9 ">阻止联系</a></li>
+        </ul>
+      </div>
+      <div class="myfrend_list">
+        <div class="nav_mobx_sub_vout"><a href="{$urlsite}/visit/in/">全部</a> | <a href="{$urlsite}/hot/in/" >只看打过我的</a> | <a class="fb_13 f_yelo unline" href="{$urlsite}/photo/in/">每张照片收到的打分</a></div>
+		<empty name="photo_hotlist">
+		<div class="none_record clear">暂无记录</div>
+        <else />
+		<ul class="visit_list">
+		
+		  <volist name="photo_hotlist" id="m">	
+          <li class="clear">
+            <dl class="clear">
+              <dt class="w_72"><a href="{$urldomain}/{$m['uid']}" target="_blank"> <img src="{$urlupload}/{$m['default_pic']}_72x72.jpg" class="face_s{$m['sex']}_b3" alt="照片" /> </a></dt>
+              <dd class="w_400">
+                <p> <a href="{$urldomain}/{$m['uid']}" target="_blank">{$m['username']}</a> <span class="f_6">{$m|user_tag}</span></p>
+                <notempty name="m['want_content']"><p class="want_c fs_13">{$m['want_content']|do_things=$m['sex']}</p></notempty>
+                <p class="fs_12 f_9">{$m['photonum']}照片</p>
+              </dd>
+			  <dd class="w_120">
+                <p class="fs_12 f_9"> {$m['add_time']|formatTime}</p>
+              </dd>
+            </dl>
+			<div class="w_400 clear scorephoto"><p><span class="dp">打了<span class="score">{$m['score']}</span>分</span><span class="photo_bord"><a href="{$urlsite}/photo/show/?pid={$m['pid']}" target="_blank"><img border="0" src="{$urlupload}{$m['path']}_120x120.jpg"></a></span></p></div>
+          </li>
+		  </volist>
+
+        </ul>
+		</empty>
+        <div class="clear">
+          <div class='page'>{$pages}</div>
+        </div>
+      </div>
+    </div>
+    <!--右边部分结束-->
+  </div>
+  <!--中间部分结束-->
+  <!-- 
+<input name="" type="button" value="打招呼" class="btn34" onclick="hello(39435141,'HN');"/>
+<input name="" type="button" value="发消息" class="btn34" onclick="self.location.href='/mbox/form/?uid=39435141'" />
+<input name="" type="button" value="收藏" class="btn35" onclick="fav(39435141);" />
+-->
+  <script>
+function show_visit_time(uid,id)
+{	
+	$.ajax({
+	   type: "POST",
+	   url: "/visit/visit_time/",
+	   data: 'uid='+uid+'&id='+id+'&',
+	   success: function reply_success(re)
+				{
+					switch(re)
+					{
+						case '-2'://未登陆
+								show_login_form();
+								break;
+						case '-3'://提示升级正式会员
+								var msg_code = '<div class="popup_c_fmember"><div><p class="fmember_t fb_14 f_r1">正式会员才能查看来访时间！ <img src="http://pic.jjdd.com/v1/i/pub/ico_ismember.png?gv=83_1" alt="正式会员" class="ico" /></p><p class="fmember_c_1 fb_13">正式会员功能：</p><ul class="fs_14 f_6"><li>1. 被推荐，获得更多被打分机会；</li><li class="f_r1">2. 每天获赠5张邮票(当天使用，不累积)；</li><li class="f_yelo">3. 获得正式会员徽章；</li><li>4. 查看来信、来访时间；</li><li>5. 使用表情功能；</li><li>更多功能增加中...</li></ul></div><div class="opt"><a href="/pay/order/?for=6" target="_blank" class="btn1 btn_b1">1元激活正式会员</a> &nbsp; 或 &nbsp; <a onclick="Win.close();" class="dashed">关闭</a></div></div>' ;
+								Win.dialog({title:'消息提示',width:500,msg:msg_code});
+								break;
+						default:
+								Win.dialog({type:'info',msg:'<p>来访时间：'+re+'</p>'});
+								break;
+					}
+				}
+	});
+}
+</script>
+  <include file="Public:foot" /> </div>
+</div>
+</body>
+</html>

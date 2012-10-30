@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 {$m['username']}的相册</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+
+<script language="javascript" src="{$urlstatic2}/js/photo_group.js?gv=151_1"></script>
+<link href="{$urlstatic2}/css/personal.css?gv=163_1" rel="stylesheet" type="text/css" />
+</head>
+<body>
+ <include file="Public:home_head" />
+  <!--中间部分开始-->
+  <div class="container_cwrap clear">
+    <div class="photo_flbar">
+      <div class="your_ptaddress"> <span class="fs_16">相册地址：</span> <span class="address _js_open_url">{$urlsite}/home/show_group/?uid={$m['uid']}</span> <span class="copy_btn">
+        <object width="50" height="28" id="copyObjIE" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000">
+          <param value="always" name="allowScriptAccess">
+          <param value="transparent" name="wmode">
+          <param value="{$urlstatic2}/flash/clipboard.swf?1310729489" name="movie">
+          <param value="high" name="quality">
+          <embed  id="copyObj" width="50" height="28" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" allowscriptaccess="sameDomain" swliveconnect="true" quality="high" wmode="transparent" src="{$urlstatic2}/flash/clipboard.swf?1310729489">
+        </object>
+        </span> <a class="invite" onclick="perfect_invite(78149948, 1);">邀请TA上传更多照片</a> </div>
+      <div class="newotherperson_main m_t10">
+        <p class="f_6 fs_16"> <a class="w" href="{$urldomain}/{$m['uid']}">{$m['username']}</a> 的相册</p>
+      </div>
+      <div class="allphoto clear m_t20">
+	    <volist name="pglist" id="g">
+        <dl>
+          <dt>
+            <div class="photo_m"> <a onclick="photo_action.goto_url({$g['gid']});"> <img alt="照片" src="{$urlupload}/{$g['default_pic']}_120x120.jpg"> </a> </div>
+          </dt>
+          <dd class="m_t10 fs_14"><a href="javascript:photo_action.goto_url({$g['gid']});">{$g['name']}</a></dd>
+          <dd class="f_6">共<span class="f_r1 fs_14">1</span>张</dd>
+        </dl>
+		</volist>
+      </div>
+    </div>
+    <div class="photo_frbar"> <img src="{$urlstatic}/img/photo_banner.png">
+      <p class="fs_14 m_t20"> 即使不小心删除照片，也可
+        自行恢复！ </p>
+    </div>
+  </div>
+<script type="text/javascript">
+var uid = <php>echo $m['uid'];</php>;
+var photo_action = {"goto_url": function(e){
+    	load_photo_group(uid, e);
+    }
+}
+function perfect_invite(uid, type) {
+	if(check_login()==false) {
+		return false;
+	}
+	$.post('/index.php?s=/home/perfect', {uid:uid, type:type}, function(data) {
+		alert(data.msg);
+	},'json');
+}
+function check_login(){
+    return true;
+}
+function get_copy_str() {
+    var str = '<php>echo $urlsite;</php>/home/show_group/?uid=<php>echo $m['uid'];</php>';
+    return str;
+}
+function copy_finish()
+{
+    alert('邀请链接地址复制成功\n您可以在QQ、MSN上粘贴发送给您的朋友！'); 
+}
+$(document).ready(function() {
+});
+</script>
+  <include file="Public:foot" /> </div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 阻止联系</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+</head>
+<body>
+<php>$nav = 3;</php>
+<include file="Public:head" />
+<!--中间部分开始-->
+<div class="container_cwrap clear">
+  <!--左边部分开始-->
+  <div class="fm_l_200"> <include file="Public:left" /> </div>
+  <!--左边部分结束-->
+  <!--右边部分开始-->
+  <div class="emaillist_w">
+    <div class="tip_nav">
+    <ul class="clear fs_14">
+          <li class="word_nowrap"><a href="{$urlsite}/msg/"  class="">信息<if condition="$f['new_msg'] neq 0"><span class="fb_12 f_r1">新！</span> </if></a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/visit/in/" class="">来访者 <if condition="$f['new_visitor'] neq 0"><span class="fb_12 f_r1">新！</span> </if></a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/visit/out/" class="">我去看过谁</a></li>
+          <li><a href="{$urlsite}/fav/out/" >我收藏的人</a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/fav/in/" class="">谁收藏了我  <if condition="$f['new_fav_in'] neq 0"><span class="fb_12 f_r1">{$f['new_fav_in']}新！</span> </if></a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/attention/more/" class="">动态  <if condition="$f['new_attention'] neq 0"><span class="fb_12 f_r1">新！</span> </if></a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/link/forbid_list/"  class="current">阻止联系</a></li>
+        </ul>
+    </div>
+    <div class="stoprelation_box clear">
+      <div class="stoprelation_box_m clear">
+     	<empty name="linklist">
+		<div class="none_record clear">暂无记录</div>
+		<else />
+		
+		<volist name="linklist" id="m">	
+        <dl class="clear">
+          <dt> <a href="{$urldomain}/{$m['uid']}" target="_blank"> <img src="{$urlupload}/{$m['default_pic']}_72x72.jpg" class="face_s{$m['sex']}_b3" alt="{$m['username']}" /> </a>
+            <p class="f_r"><eq name="m['status']" value="2">明确阻止<else/>静默阻止</eq></p>
+          </dt>
+          <dd>
+            <p><a href="{$urldomain}/{$m['uid']}" target="_blank">{$m['username']}</a></p>
+            <p>ID:{$m['uid']}</p>
+            <p class="m_t10"><a onclick="cancel_forbid({$m['uid']},'{$m['username']}',refresh);" class="btn1">取消阻止</a></p>
+          </dd>
+        </dl>
+		</volist>
+		
+    	</empty>
+      </div>
+      <div class="clear"><div class='page'>{$pages}</div> </div>
+    </div>
+  </div>
+  <!--右边部分结束-->
+</div>
+<include file="Public:foot" />
+</div>
+</body>
+</html>

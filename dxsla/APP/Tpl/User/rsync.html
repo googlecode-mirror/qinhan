@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 同步设置</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+</head>
+<body>
+<php>$nav = 99;</php>
+<include file="Public:head" />
+<div class="container_cwrap clear">
+  <!--左边部分开始-->
+  <include file="Public:profile_left" />
+  <!--左边部分结束-->
+  <!--左边部分结束-->
+  <!--右边部分开始-->
+  <div class="newperphoto_r">
+    <div class="shop_box">
+      <div class="title_nav">
+        <ul class="clear">
+		  <li><a id="rsync" class="currt1"  href="{$urlsite}/user/password/">密码安全</a></li>
+          <li><a id="rsync" class="currt2"  href="{$urlsite}/user/rsync/">同步设置</a></li>
+		  <li><a id="rsync" class="currt1"  href="{$urlsite}/user/invite/">邀请有奖</a></li>
+        </ul>
+      </div>
+      <div class="synchro_box">
+        <div class="synchro_box_t"> 同步后可以通过此账号登录网站，分享动态，让更多人关注你。 </div>
+        <div class="synchro_box_m">
+          <ul>
+            <li> <span><img src="{$urlstatic}/img/qq_logo.png" alt="同步腾讯QQ" title="同步腾讯QQ" class="ico"/></span> 
+			<empty name="GLOBALS['i']['qquid']">
+			<span class="p_l20">点击“同步”按钮去腾讯QQ网页设置同步</span> <span class="p_l20"><a href="{$urlsite}/user/signqq/" class="btn1">同步</a></span> 
+			<else />
+			<span class="p_l20">已设置同步</span>
+			</empty>
+			</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--中间中间部分结束-->
+</div>
+<!--中间部分结束-->
+<include file="Public:foot" />
+</div>
+</body>
+</html>

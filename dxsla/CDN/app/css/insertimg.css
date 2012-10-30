@@ -1,0 +1,79 @@
+@charset "utf-8";
+/* CSS Document */
+/* 日记插入图片 */
+.t_sel .icotxt{height:24px;display:block;margin-top:1px;}
+.t_sel .icotxt img{margin-top:1px;}
+/* 上传电脑中的图片 start */
+.insertimg_flashbox{font-size:16px;color:#000;width:620px;padding:10px 20px 30px 20px;}
+.insertimg_flashbox .left{width:450px;float:left;}
+.insertimg_flashbox .right{width:169px;float:right;border-bottom:1px solid #cfcfcf;border-right:1px solid #cfcfcf;height:607px;}
+.insertimg_flashbox .imgbox{height:560px;_height:559px;overflow-x:hidden;overflow-y:auto;position:relative;}
+.insertimg_flashbox .right li{margin:15px auto 0 auto;width:80px;height:80px;border:5px solid #ccc;_border:0;position:relative;}
+.insertimg_flashbox .right .closeimg{background:url(../img/closeimg.png) no-repeat;_background:url(../img/closeimg.gif) no-repeat;width:18px;height:18px;display:block;position:absolute;top:-9px;right:-9px;}
+.insertimg_flashbox .right li img{width:80px;height:80px;_border:5px solid #ccc;}
+.insertimg_flashbox .righttitle{height:47px;line-height:47px;font-size:12px;text-align:center;background:#efefef;border-bottom:1px solid #cfcfcf;display:block;}
+.insertimg_flashbox .menu{height:30px;font-size:12px;border-bottom:1px solid #cfcfcf;margin-top:10px;}
+.insertimg_flashbox .menu a{margin-right:5px;}
+.insertimg_flashbox .menu .menu_tab1{height:31px;line-height:31px;background:url(../img/tab_bg1.png) repeat-x;display:block;float:left;padding:0 10px;border-left:1px solid #cfcfcf;border-right:1px solid #cfcfcf;border-top:1px solid #cfcfcf;color:#000;text-decoration:none;}
+.insertimg_flashbox .menu .menu_tab2{height:29px;line-height:31px;background:url(../img/tab_bg2.png) repeat-x;display:block;float:left;padding:0 10px;border-top:1px solid #cfcfcf;border-left:1px solid #cfcfcf;border-right:1px solid #cfcfcf;text-decoration:none;color:#000;}
+/* 上传电脑中的图片 end */
+/* 插入我的相册中的图片 start*/
+.insertimg_flashbox .choice{height:47px;line-height:47px;background:url(../img/poppho_bg.png) repeat-x;border-left:1px solid #cfcfcf;border-right:1px solid #cfcfcf;font-size:12px;clear:both;padding-left:10px;_padding-top:15px;_height:32px;}
+.photobox{border:1px solid #cfcfcf;padding:15px 0 20px 13px;font-size:12px;height:524px;}
+.photobox .page{width:100%;display:block}
+.photobox li{display:block;float:left;height:120px;margin-left:5px;width:140px;_width:135px}
+.photobox li span {display:block;float:left;}
+.photobox li .photoinp{padding-top:45px;}
+.photobox .photoimg {height:100px;padding:7px;width:100px;}
+.photobox .border {border:1px solid #CFCFCF;display:inline-block;height:80px;padding:9px;width:80px;}
+.photobox .border img{width:80px;height:80px;}
+.photobox .btn{text-align:right;margin-right:20px;}
+.photobox .btn a{display:block;width:70px;float:right;}
+/* 插入我的相册中的图片 end*/
+/* 插入图片 start */
+.instertimgbox{margin-top:10px;background:#efeeec;padding:15px;_padding:15px 0}
+.instertimgbox .btn1{_margin-left:15px;}
+.instertimgbox .text_r{_margin-right:15px;}
+.instertimgbox .imgboxlist{margin-top:15px;width:100%;}
+.imgboxlist dl{float:left;height:220px;margin-left:18px;overflow:hidden;width:156px;}
+.imgboxlist dl .eite{background:#f6f8ff;display:block;width:140px;}
+.imgboxlist dt{height:138px;padding:7px;position:relative;width:138px;}
+.imgboxlist dd{margin-left:6px;margin-top:5px;width:140px;}
+.imgboxlist dd .f_9{font-size:14px;}
+.imgboxlist dd a{text-decoration:none;}
+.imgboxlist .photo_m{background:none repeat scroll 0 0 #FFFFFF;border:1px solid #CFCFCF;height:120px;padding:9px;width:120px;}
+.imgboxlist .photo_m:hover{border:2px #FF99DB solid;width:120px;height:120px;padding:8px;}
+/* 插入图片 end */
+/* 预览效果 start */
+.preview_diary{padding:20px;width:500px;}
+.preview_diary .preview_diarybox{width:500px;height:300px;overflow-x:hidden;overflow-y:auto;padding:10px;font-size:14px;line-height:25px;border:1px solid #e2e0e0;}
+.preview_diarybox .diary_tex{margin:30px auto;}
+.preview_diarybox .diary_texbg{background:#666;font-size:12px;color:#fff;border-top:5px solid #fff;padding:5px;}
+/*.preview_diarybox .diary_tex p{display:inline;}*/
+.preview_diarybox img{max-width:480px;max-height:480px;}
+.preview_diary .diarybtn{width:500px;text-align:center;margin-top:15px;}
+.preview_diary .diarybtn a{margin-left:20px;}
+.preview_diary .diaryimg{margin:40px auto 0 auto;display:block;text-align:center;}
+/* 预览效果 end */
+/* 图片显示 start */
+.imgdisplay img{max-height:80;width: expression(this.width >80 ? (80*(this.height/this.width)): true);width: expression(this.width >80 ? 80: true);margin:5px 5px 0 0;}
+.imgdisplay a{text-decoration:none;}
+/* 图片显示 end */
+/* 日记展示页面 start */
+
+/* 日记展示页面 end */
+/*个人主页展示 start2*/
+.diary_texbox{margin-top:50px;font-size:12px;}
+.diary_texbox .diary_tex{display:block;line-height:20px;margin-top:10px;color:#999;}
+.diary_texbox .diary_img{display:block;}
+.diary_texbox .diary_img img{border:2px solid #fff;max-width:540px;min-width:160px;}
+
+/* 个人主页展示2 end */
+/* 图片描述 start */
+.descriptionbox{padding-top:20px;}
+/* 图片描述 end */
+/* flash插入图片 start */
+.insertimg_flashbox .photoflash{height:547px;width:620px;border-bottom:1px solid #cfcfcf;border-left:1px solid #cfcfcf;border-right:1px solid #cfcfcf;text-align:center;}
+.insertimg_flashbox .photoflash2{height:580px;width:620px;border-bottom:1px solid #cfcfcf;border-left:1px solid #cfcfcf;border-right:1px solid #cfcfcf;text-align:center;}
+.insertimg_flashbox .photoflash2 .add_photo_list{padding:20px;margin:0}
+/* flash插入图片 end */

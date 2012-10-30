@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 我的相册</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+
+<script language="javascript" src="{$urlstatic2}/js/photo_group.js?gv=150_1"></script>
+<link href="{$urlstatic2}/css/photos.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<php>$nav = 7;</php>
+<include file="Public:head" />
+
+<style type="text/css">
+.photo_area{display:none;}
+</style>
+<link href="{$urlstatic2}/css/photos.css" rel="stylesheet" type="text/css" />
+  <!--中间部分开始-->
+  <div class="newperphoto_w clear">
+    <!--左边部分开始-->
+	<include file="Public:profile_left" />
+    <!--左边部分结束-->
+    <!--右边部分开始-->
+    <div class="photo_manage">
+      <div class="top_nav clear">
+        <dl>
+          <dt><a href="{$urlsite}/photo">我的相册</a></dt>
+          <dd><a href="{$urlsite}/photo/group?gid={$pg['gid']}">{$pg['name']}</a></dd>
+          <dd>当前照片</dd>
+        </dl>
+        <p class="photoset_nav fr"></p>
+      </div>
+      <div class="upphoto_bg"> <a class="p_l5" href="{$urlsite}/photo/up_form?gid={$pg['gid']}"><img alt="上传照片" src="{$urlstatic}/img/upphoto_bnt.png" class="ico"></a> <span class="p_l5 fs_14 f_green"> </span> </div>
+      <div class="photo_big_w">
+        <div class="photo_big_font"> <a href="javascript:void(0);" onclick="photo_action.change_group({'pid':<php> echo ($p['pid']);</php>,'pass':'2','is_face':1});">转移</a> <a href="javascript:void(0);" onclick="javascript:photo_action.del_photo({'gid':<php> echo ($p['gid']);</php>,'pid':<php> echo ($p['pid']);</php>,'pass':'2'});">删除</a> </div>
+        <div class="photo_big_img">
+          <p><img alt="照片" id="cboxPhoto" dl="{$urlupload}/{$p['path']}_800x999.jpg" code="{$p['path']|getwh=800,999}" onclick="view_photo({$p['pid']});" class="mousezoom_tip" src="{$urlupload}/{$p['path']}_480x999.jpg"></p>
+        </div>
+        <p class="description bluebg" onclick="photo_action.show_edit({'_class':'photo_comment_w'})"><span id="_js_content_short">{$p['content']|default='暂无描述'}</span> <a href="javascript:void(0);"><img width="13" height="13" title="编辑" src="{$urlstatic}/img/ico_photowrite.png"></a> </p>
+        <div class="photo_comment_w" style="display:none;">
+          <textarea class="input_1 _js_content">{$p['content']}</textarea>
+          <div class="clear btn_w">
+            <p class="fl f_6">还可以输入<span id="_js_show_num"></span>个字</p>
+            <p class="fr">
+              <input type="button" value="保存" onclick="photo_action.edit_content({'pass':'2','pid':<php>echo $p['pid']</php>})" class="btn1">
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--右边部分结束-->
+  </div>
+  <!--中间部分结束-->
+  <script>
+var _cont = $("._js_content").val();
+$("#_js_show_num").html((166-_cont.length));
+var photo_action={"del_photo":function(e){
+        if(e.pass==''||e.pass==1)
+        {
+           var re =group_action.check_second_password({'action':'del_photo','pid':e.pid,'gid':e.gid});
+           return false;
+        }
+        var ret=confirm('确定删除照片?');
+        if(ret)
+        {
+            $.post("{$urlsite}/photo/d_p",{'id':e.pid,'gid':e.gid},
+                function(data){if(data!=1){if(data==2){alert('不能删除形象照');}else{alert('该图片不存在');}}else{
+                    location.href="{$urlsite}/photo?gid="+e.gid;
+                }},"json");
+        }
+    },"change_group":function(e){
+        $.post("{$urlsite}/photo/api_get_group",{'uid':<?php echo ($GLOBALS['i']['uid'])?>},
+                function(data){if(data.status!=1){alert(data.msg);}else{
+                    var html='<div class="photo_shift fs_14">'
+                            +'<h3>相片转移</h3>'
+                            +'<p class="f_3 m_t10">转移至相册：'
+                            +'<select id="_js_group_value">';
+                    $.each(data.msg,function(id,item){
+                        html=html+'<option value="'+item.gid+'">'+item.name+'</option>';
+                    });
+                    html=html+'</select></p>'
+                    +'<p class="m_t20"><a class="btn1" id="_js_change_group">转移</a>或 <a href="javascript:Win.close();">取消</a></p></div>';
+                    Win.dialog({width:350,msg:html});
+                    $("#_js_change_group").click(function(){
+                        var gid= $("#_js_group_value").val();
+                        $.post("{$urlsite}/photo/api_change_group",{'pid':e.pid,'gid':gid,'is_face':e.is_face},
+                                function(data){if(data.status!=1){alert(data.msg);}else{
+                                    var msg= "转移成功!";
+                                    Win.dialog({type:'info',width:500,msg:msg,enter:function(){location.href="index.php?s=/photo?gid="+gid;}});
+                                }},"json");
+                    });
+                }},"json");
+    },"set_face":function(e){
+        var id=e;
+        $.ajax({
+               type: "POST",
+               url: "{$urlsite}/photo/set_face/",
+               data: 'id='+id+'&',
+               success: function set_face_result(re)
+               {
+                    if(re == 1)
+                    {
+                        Win.dialog({type:'info',msg:'<img src="http://pic.jjdd.com/v1/i/pub/popup_g.jpg?gv=82_1" class="ico" /> 设置成功！', cancel:function(){top.location.href='?pid=1780606';},enter:function(){top.location.href='?pid=1780606';}});
+                    }
+                    else
+                    {
+                        Win.dialog({type:'info',msg:'设置失败！',cancel:function(){top.location.href='?pid=1780606';},enter:function(){top.location.href='?pid=1780606';}});
+                    }
+               }
+            });
+    },"set_group_face":function(e){
+        $.post("/photo/api_edit_group",{'gid':e.gid,'group_face':e.group_face},
+                function(data){if(data.status!=1){alert(data.msg);}else{
+                    location.reload();
+                }},"json");
+    }
+}
+photo_action.edit_content=function(e){
+        var submit_content=$('._js_content').val();
+        if(submit_content.length>166){
+            alert("照片描述内容太多，最多输入166个字符");
+            return false;
+        }
+        $.ajax({
+           type: "POST",
+           url: "{$uelsite}/index.php?s=/photo/u_p",
+           data: 'id='+e.pid+'&content='+encodeURIComponent(submit_content),
+           success: function show_desc_result(re)
+           {
+             if(re == 0 || re == 1 || re == 2)
+             {
+                 if(submit_content==''){
+                    $("._js_content").html("暂无描述");
+                    $("#_js_content_short").html("暂无描述");
+                 }else{
+                    $("._js_content").html(submit_content);	
+                    $("#_js_content_short").html(submit_content);
+                 }
+                 Win.dialog({type:'info',msg:'<img src="http://pic.jjdd.com/v1/i/pub/popup_g.jpg?gv=82_1" class="ico" /> 修改成功！',enter:function(){$(".photo_comment_w").slideUp('fast');}});
+             }else if(re == 3){
+                //什么都不做
+             }else if(re == 4 || re == 5){
+                var msg_code = '您填写的信息有敏感字！' ;				
+                Win.dialog({type:'info',msg:msg_code,enter:function(){history.go(0)}});
+             }else if(re == 6){
+                var msg_code = '您填写的信息有敏感字！' ;
+                Win.dialog({type:'alert',msg:msg_code});			 
+             }else{
+                Win.dialog({type:'info',msg:'操作失败，请刷新后重试！'});				
+             }
+           }
+        });
+    }
+var show_content=false;
+photo_action.show_edit=function(e){
+    if(show_content==false){
+        $('.'+e._class).slideDown("fast");
+        show_content=true;
+    }else{
+        $('.'+e._class).slideUp("fast");
+        show_content=false;
+    }
+}
+
+$("._js_content").bind("keyup change drop",function(){
+    var num = 166 - $("._js_content").val().length;
+    if(num<0){
+        num ='<span style="color:red;">'+num+'</span>';
+        $('#_js_show_num').html(num);
+    }else{
+        $('#_js_show_num').html(num);
+    }
+});
+
+/////////////////////////
+var opt_view = 0;
+function prevnext(e) {
+    try{
+        var pos = e.pageX?e.pageX:e.clientX;
+        if(pos-$("#cboxPhoto").offset().left>$("#cboxPhoto").width()*2/3) {
+            $("#cboxPhoto").attr("class","mouseright_tip");	
+            opt_view = -1;
+        }	
+        else if(pos-$("#cboxPhoto").offset().left>$("#cboxPhoto").width()/3) {
+            $("#cboxPhoto").attr("class","mousezoom_tip");	
+            opt_view = 0;
+        }
+        else {
+            $("#cboxPhoto").attr("class","mouseleft_tip");	
+            opt_view = 1;
+        }
+    }catch(e){}
+}
+function view_photo(e) {
+    if(opt_view == 0) {
+            //window.open($("#cboxPhoto").attr("source"));
+            if (document.readyState=="complete") {
+                var img = $("#cboxPhoto").attr("dl");
+                var ps_code = $("#cboxPhoto").attr("code");
+				var p_code_i = ps_code.split(',');
+                var wsize = p_code_i[0];//$("#_js_open_img").width();
+                var hsize = p_code_i[1];//$("#_js_open_img").height();
+                var send_width  = Math.floor(wsize)+15;
+                var send_height = Math.floor(hsize)+15;
+                Win.dialog({width:send_width,height:send_height,msg:'<div class="mousezoom_min" style="width:'+wsize+'px;height:'+send_height+'px;"><img id="pop_close_ico" src="'+img+'" alt="关闭" onclick="Win.close()" /></div>',noclose:true});
+                $('#WinMask').css('background','#000');
+            }
+            return;
+        }
+    if(opt_view<0){
+        if(e=={$prev_pid}){
+            return false;
+        }
+        location.href='/index.php?s=/photo/show?pid={$prev_pid}';
+    }
+    if(opt_view>0){
+        if(e=={$next_pid}){
+            return false;
+        }
+        location.href='/index.php?s=/photo/show?pid={$next_pid}';
+    }
+}
+$(document).ready(function() {	
+    $(".photo_big_img").mousemove(function(event) {
+            prevnext(event);
+        });
+});
+/////////////////
+</script>
+  <include file="Public:foot" /> </div>
+</body>
+</html>

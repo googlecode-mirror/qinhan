@@ -1,0 +1,314 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 校园男女</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+<link href="{$urlstatic2}/css/map.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+/*附近的人*/
+.per_t_lw .vip_ico img{margin-bottom:-5px;margin-left:3px;}
+.vip_listtext{text-align:right;height:30px;line-height:30px;font-size:14px;margin-top:10px;padding:0 5px; position:relative;}
+.vip_listtext .leftbox{float:left;color:#666;margin-top:2px;*margin-top:3px;}
+.vip_listtext .leftbox a.text{text-decoration:none;}
+.vip_listtext .leftbox input{margin:0 5px 0 10px;*margin:0 5px;}
+.vip_listtext .rightbox{float:right;position:relative;}
+.vip_listtext .viptips{width:265px;height:47px;padding:5px;position:absolute;top:-60px;right:-20px;background:#fff;color:#575757;font-size:14px;z-index:10;text-align:left;background:url(../i/pub/viptipsbg.png) no-repeat 0 0;
+line-height:22px;}
+.vip_listtext .vipimg1 img{vertical-align:sub;*vertical-align:top;}
+.vip_listtext .vipimg2{margin-left:5px;}
+.vip_toptips{width:50px;margin-top:47px;text-align:right;position:absolute;z-index:1500;right:0;bottom:0;}
+.vip_toptips img{margin-left:5px;}
+.viptopbox{width:100%;height:1px;position:relative;}
+</style>
+</head>
+<body>
+<php>$nav = 2;</php>
+<include file="head" />
+<!--中间部分开始-->
+<div class="container_cwrap clear">
+  <!--左边部分开始-->
+  <div class="fm_l_200"> <include file="left" /> </div>
+  <!--左边部分结束-->
+  <!--中间中间部分开始-->
+  <div class="nearby_box">
+    <div class="clear map_w100">
+      <p class="people_sel"><a href="{$urldomain}/guest/xiaoyuannannv/?orderby=login_time" <eq name="orderby" value="login_time">class="current"</eq>>按登录时间排序</a><span class="cut">|</span><a href="{$urldomain}/guest/xiaoyuannannv/?orderby=register_time" <eq name="orderby" value="register_time">class="current"</eq>>按最新加入排序</a></p>
+      <p class="fr m_t10"></p>
+    </div>
+    <div class="nav_list m_t10">
+      <div class="middlebg clear">
+        <div class="middlebg_t　clear">
+          <if condition="$cid eq NULL "> <a class="currt" href="{$urldomain}/find/">全部</a>
+            <else/>
+            <a  href="{$urldomain}/find/">全部</a></if>
+          <volist name="collegeList" id="co" offset="0" length='14'>
+            <if condition="$co['id'] eq $cid "><a class="currt" href="{$urldomain}/guest/xiaoyuannannv/?college={$co['id']}">{$co['name']}</a>
+              <else/>
+              <a  href="{$urldomain}/guest/xiaoyuannannv/?college={$co['id']}">{$co['name']}</a></if>
+          </volist>
+          <span style="display: inline;" id="_js_more" class="_js_show"><a href="javascript:void(0)">
+          <if condition="$cid gt 15">
+            <else/>
+            更多</if>
+          </a></span> </div>
+        <if condition="$cid gt 15">
+        <div class="middlebg_b　clear" >
+          <else/>
+          <div class="middlebg_b　clear" style="display: none;">
+            </if>
+            <volist name="collegeList" id="co" offset="14" >
+              <if condition="$co['id'] eq $cid "><a class="currt" href="{$urldomain}/guest/xiaoyuannannv/?college={$co['id']}">{$co['name']}</a>
+                <else/>
+                <a href="{$urldomain}/guest/xiaoyuannannv/?college={$co['id']}">{$co['name']}</a></if>
+            </volist>
+            <span id="_js_close" class="_js_show"><a href="javascript:void(0)">关闭</a></span></div>
+        </div>
+      </div>
+	  <div class="vip_listtext clear">
+         <div class="leftbox"><a href="{$urldomain}/guest/xiaoyuannannv/" class="text <eq name="sex" value="0">f_6</eq>">全部</a><span class="cut">&nbsp;&nbsp;|&nbsp;</span><a href="{$urldomain}/guest/xiaoyuannannv/?sex=1" class="text <eq name="sex" value="1">f_6</eq>">只看男生</a><span class="cut">&nbsp;&nbsp;|&nbsp;</span><a href="{$urldomain}/guest/xiaoyuannannv/?sex=2" class="text <eq name="sex" value="2">f_6</eq>">只看女生</a></div>
+        <div class="rightbox"></div>
+      </div>	  
+      <!--列表开始-->
+      <div class="nearby_main">
+        <ul class="clear">
+          <volist name="memberlist" id="m">
+            <li class="clear">
+              <dl>
+                <dt><a href="{$urldomain}/{$m['uid']}" target="_blank"> <img src="{$urlupload}{$m['default_pic']}_120x120.jpg" alt="" title="" class="face_s{$m['sex']}_b3"  height="120" width="120"/> </a></dt>
+                <dd>
+                  <div class="per_t clear">
+                    <div class="per_t_l">
+                      <p> <a href="{$urldomain}/{$m['uid']}" target="_blank" class="fs_16 f_blue1">{$m['username']}</a> <span class="fs_12 f_6">，{$m['college']}</span> &nbsp; <span class="fs_12 f_6"> <img src="{$urlstatic}/img/ico_{$m['sex']|ui_sex=7}.{$m['login_time']|is_online=1}"/></span>&nbsp;&nbsp;<span class="f_green {$m['login_time']|is_online=2}">{$m['login_time']|is_online}</span></p>
+                      <p class="fs_12"><span class="pr15">身高：{$m['height']}cm</span><notempty name="m['constellation']"><span>星座：{$m['constellation']}</span></notempty></p>
+                      <notempty name="m['want_content']">
+                        <p class="fs_12">{$m['want_content']|do_things=$m['sex']} <a class="f_r underline" href="javascript:;" onclick="show_register_form();">约{$m['sex']|ui_sex}</a></p>
+                      </notempty>
+                      <p class="fs_12 f_6 text_h">{$m['photonum']} 照片 </p>
+                    </div>
+                    <div class="per_t_r">
+                      <div class="chat_bar clear"> <a class="chat_bg clear" onclick="show_register_form()" ><span class="ico_chatbg fl"></span><span class="fl">打开聊天</span></a> <a class="or_bg clear" onclick="show_or({$m['uid']});" ><span class="fl">或者</span><span class="or_i fl"></span></a> </div>
+                      <div class="m_dw_box">
+                        <div class="m_dw" id="or_{$m['uid']}" style="display:none;"> <i class="tr"></i>
+                          <div class="m_dw_inner">
+                            <!-- <p><a class="clear" href="{$urldomain}/goods/my?uid={$m['uid']}" target="_blank"><span class="ico_sendgift fl"></span><span class="fl">给{$m['sex']|ui_sex}送礼</span></a></p>-->
+                            <p><a onclick="show_register_form()"  class="clear"><span class="yuebg fl"></span> <span class="fl p_l5">约会</span></a></p>
+                            <p><a onclick="show_register_form()" class="clear"><span class="addbg2 fl"></span><span class="fl p_l5">添加收藏</span></a></p>
+                            <p><a onclick="show_register_form()" class="clear"><span class="addbg fl"></span> <span class="fl p_l5">悄悄收藏</span></a></p>
+                            </p>
+                          </div>
+                          <i class="bl"></i> </div>
+                      </div>
+                      <div class="hot_bar clear" title="点击查看什么是热度？" onclick="show_link_hot_tips();">
+                        <p class="fl">热度:</p>
+                        <p class="hotbg1 fl"> </p>
+                      </div>
+                    </div>
+                  </div>
+                </dd>
+              </dl>
+            </li>
+          </volist>
+        </ul>
+        <div class='page'>{$pages}</div>
+      </div>
+      <!--列表结束-->
+    </div>
+    <!--中间中间部分结束-->
+  </div>
+  <!--中间部分结束-->
+<div id="register_form" style="display:none;">
+  <div class="pop_login">
+    <h1>注册成会员后才能继续操作</h1>
+    <div class="login_main">
+	  <form action="{$urlsite}/member/register/" onsubmit="return popRegister()">
+        <p>
+          <label class="zd_w">用户名 </label>
+          <input name="username" id="username" type="text" size="30" class="login_input" value="{$guest_name}" />
+        </p>
+        <p id="login_msg" class="f_r1"></p>
+        <p>
+          <label class="zd_w">密码 </label>
+          <input id="password" name="password" type="password" size="30" class="login_input" onkeydown="if(event.keyCode==13){login();}" />
+        </p>
+        <p style="margin-left:-10px">
+          <label class="zd_w" style="width:55px;">重复密码</label>
+          <input id="rpassword" name="rpassword" type="password" size="30" class="login_input" onkeydown="if(event.keyCode==13){login();}" />
+        </p>
+        <p class="login_buttom clear">
+          <input name="submit" type="submit"  value="注 册" class="btn1 btn_b1 fl" />
+		</p>
+	  </form>	
+    </div>
+    <div class="pop_login_reg">
+      <p class="fs_14"><a href="{$urlsite}/user/signqq"><img src="{$urlstatic}/img/index_signqq.png" title="简简单单网QQ登录" alt="简简单单网QQ登录" /></a></p>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$('._js_show').click(function(){
+    var show_id = $(this).attr('id');
+    switch(show_id){
+        case '_js_more':
+            $('.middlebg_b　clear').show();  
+            $(this).hide();
+            $('._add_city').show();
+            break;
+        case '_js_close' :
+            $('#_js_more').css('display','inline');
+            $('.middlebg_b　clear').hide();
+            $('._add_city').hide();
+            break;
+    }
+});
+
+//列表认证图标绑定
+$('.nearby_main').find('.ico').hover(
+    function () {
+        $(this).parent().next().show();
+    },
+    function () {
+        $(this).parent().next().hide();
+    }
+);
+
+function refresh_want_things()
+{
+    var page = $("#want_item_page").val() ;
+    
+    $.ajax({
+       type: "POST",
+       url: "/index.php?s=/home/get_want_things/",
+       data: "page="+page,
+       success: function order_result(re)
+       {
+            var obj = jQuery.parseJSON(re);
+            var code = '';
+            for (key in obj['rs'])   {
+               code += "<li><a onclick=\"$('#want_content').val('"+obj['rs'][key]+"');$('#want_things_div').css('display','none');\" >"+obj['rs'][key]+"</a></li>";
+            }
+            $("#want_things_list").html(code);
+            $("#want_item_page").val(''+obj['page']+'') ;
+       }
+    });
+}
+
+function check_want_things(){
+    var age_min = $("#want_age_begin").val();
+    var age_max = $("#want_age_end").val();
+    var want_c = $.trim($("#want_content").val()) ;
+
+    if($("#want_age_end").val() < $("#want_age_begin").val()){
+        age_min = $("#want_age_end").val();
+        age_max = $("#want_age_begin").val();
+    }
+
+    if(want_c == '')
+    {
+        var msg_code = '请填写我想...！' ;
+        Win.dialog({type:'info',msg:msg_code,enter:function(){$('#want_content').select();}});
+
+        return false ;
+    }
+
+    if(want_c.length < 2 || want_c.length > 20)
+    {
+        var msg_code = '我想内容不能少于2个字，多于20个字！' ;
+        Win.dialog({type:'info',msg:msg_code,enter:function(){$('#want_content').select();}});
+
+        return false ;
+    }
+    return true;
+}
+
+var current_or_uid=0;
+$(document).bind("click",function(e){
+    if($.browser.msie) {
+        var el = event.srcElement;
+    }
+    else {
+        var el = e.target;
+    }
+    
+    if(!(IM.fInObj(el, "tiw_text fl")) && !(IM.fInObj(el,"refresh_want"))) {
+        $("#want_things_div").hide();
+    }
+    if(!(IM.fInObj(el, "chat_bar clear"))) {
+        $(".m_dw").hide();
+    }
+    
+});
+function show_or(uid)
+{
+    if(current_or_uid>0)
+    {
+        $("#or_"+current_or_uid).hide();
+    }
+    $("#or_"+uid).show();
+    current_or_uid = uid;
+}
+var current_page = <php>echo intval($_GET['p']);</php>;
+if(myuserinfo.group_type < 2 && current_page > 3) {
+	show_register_form();
+}
+function get_copy_str()
+{
+    var str = 'http://www.jjdd.com/?iv=18090226';
+    return str;
+}
+
+function copy_finish()
+{
+    alert('邀请链接地址复制成功\n您可以在QQ、MSN上粘贴发送给您的朋友！'); 
+}
+
+function show_register_form()
+{
+	Win.dialog({ msg:'#register_form',width:360,height:130 });
+	$("#password").select();
+}
+
+function popRegister()
+{
+
+	if($("#username").val() == ""){
+		$("#login_msg").html('请填写E-mail帐号!');
+		return false ;
+	}
+
+	if($("#password").val() == ""){
+		$("#login_msg").html('请填写密码!');
+		return false ;
+	}
+    
+    if($("#password").val() != $("#rpassword").val()){
+        $("#login_msg").html('密码不一致');
+		return false;
+	}
+    
+   	$.ajax({
+	   type: "POST",
+	   url: "/index.php?s=/member/chk_username/",
+	   data: 'username=' + $('#username').val(),
+	   success: function show_desc_result(re)
+	   {
+	   		var obj = jQuery.parseJSON(re);
+	   		if(obj.errno != 200) {
+				$("#login_msg").html(obj.msg);
+			} else {
+				location.href = '<php>echo $urlsite;</php>/member/reg_active/';
+			}
+	   }
+	});
+	
+	return false;
+}
+</script>
+  <include file="Public:foot" /> </div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 好友动态</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+
+<script language="javascript" src="{$urlstatic2}/js/provinces_zh-CN.js{$urltail}"></script>
+<script language="javascript" src="{$urlstatic2}/js/skill.js{$urltail}"></script>
+</head>
+<body>
+<php>$nav = 3;</php>
+<include file="Public:head" />
+<!--中间部分开始-->
+<div class="container_cwrap clear">
+  <!--左边部分开始-->
+  <div class="fm_l_200"> <include file="Public:left" /> </div>
+  <!--左边部分结束-->
+  <!--右边部分开始-->
+  <div class="emaillist_w">
+    <!--谁来看过我开始-->
+    <div class="tip_nav">
+    <ul class="clear fs_14">
+          <li class="word_nowrap"><a href="{$urlsite}/msg/"  class="">信息<if condition="$f['new_msg'] neq 0"><span class="fb_12 f_r1">新！</span> </if></a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/visit/in/" class="">来访者 <if condition="$f['new_visitor'] neq 0"><span class="fb_12 f_r1">新！</span> </if></a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/visit/out/" class="">我去看过谁</a></li>
+          <li><a href="{$urlsite}/fav/out/" class="">我收藏的人</a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/fav/in/" class="">谁收藏了我  <if condition="$f['new_fav_in'] neq 0"><span class="fb_12 f_r1">{$f['new_fav_in']}新！</span> </if></a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/attention/more/" class="current">动态 </if></a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/link/forbid_list/" class="f_9 ">阻止联系</a></li>
+        </ul>
+    </div>
+    <div class="myfrend_new2">
+      <div class="nav_mobx_sub_vout"><a class="fb_13 f_yelo unline" href="{$urlsite}/attention/">我关注的动态</a> | <a href="{$urlsite}/attention/more">更多人在干嘛</a><font class="f_r1" id="is_new_dt" style="display:inline-block;">（新）</font></div>
+      <span id="attention_more"> <include file="feed" /> </span>
+      <div class="clear bottexbg" id="load_more_dt"> <a href="javascript:void(0)" onclick="load_index();"><img src="{$urlstatic}/img/morebar.png" width="99" height="25" /></a> </div>
+    </div>
+  </div>
+  <!--右边部分结束-->
+</div>
+<!--中间部分结束-->
+<script>
+var answers = null;
+var limit = 1;
+var face_size = 72;
+</script>
+<script language="javascript" src="{$urlstatic2}/js/pub_face_all.js{$urltail}"></script>
+<script language="javascript" src="{$urlstatic2}/js/attention.js{$urltail}"></script>
+<script>
+back_to_tip();
+</script>
+<include file="Public:foot" />
+</div>
+</body>
+</html>

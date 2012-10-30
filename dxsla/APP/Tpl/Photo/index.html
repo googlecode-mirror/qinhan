@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 我的相册</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+
+<script language="javascript" src="{$urlstatic2}/js/photo_group.js"></script>
+<link href="{$urlstatic2}/css/photos.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<php>$nav = 7;</php>
+<include file="Public:head" />
+<!--中间部分开始-->
+<div class="newperphoto_w clear">
+  <!--左边部分开始-->
+  <include file="Public:profile_left" />
+  <!--左边部分结束-->
+  <!--右边部分开始-->
+  <div class="photo_manage">
+    <div class="top_nav clear">
+      <dl>
+        <dt>我的相册</dt>
+      </dl>
+      <p class="photoset_nav fr"></p>
+    </div>
+    <div class="upphoto_bg"> 个人形象照<a href="{$urlsite}/photo/up_form?gid=0" class="p_l5"><img class="ico" src="{$urlstatic}/img/upphoto_bnt.png" alt="上传照片"></a> <span class="p_l5 fs_14 f_green"> 请上传您本人的单人真实照，本分类中所有照片均须接受审核！ </span> </div>
+    <div class="myself_photos">
+      <dl>
+        <dt>
+          <div class="photo_m">
+            <p> <a href="{$urlsite}/photo/group?gid=0"> <img src="{$urlupload}/{$GLOBALS['i']['default_pic']}_120x120.jpg" title="个人形象照"> </a> </p>
+          </div>
+        </dt>
+        <dd class="m_t10 fs_14">个人形象照</dd>
+        <dd class="fs_12 f_6">共<span class="f_r1 fs_14">{$GLOBALS['i']['default_photonum']}</span>张</dd>
+      </dl>
+    </div>
+    <div class="else_photos_t"> 其他相册<a class="p_l5" href="{$urlsite}/photo/up_form?from=other"><img class="ico" alt="上传照片" src="{$urlstatic}/img/upphoto_bnt.png"></a> <span class="p_l5 fs_14 f_green"> 建议您在此上传您的私人物品、宠物或您与朋友的合影照片! </span></div>
+    <div class="else_photos_list clear">
+      <volist name="pglist" id="g">
+        <dl class="_js_show" dl="{$g['gid']}">
+          <dt>
+            <gt name="g['photonum']" value="0">
+              <div class="photo_m">
+                <p> <a href="{$urlsite}/photo/group?gid={$g['gid']}"> <img title="{$g['content']|default="相册描述"}
+" src="{$urlupload}/{$g['default_pic']}_120x120.jpg"> </a> </p>
+              </div>
+              <else />
+              <div class="no_photobg">
+                <p> <a href="{$urlsite}/photo/up_form?gid={$g['gid']}"> <img title="{$g['content']|default="相册描述"}
+" src="{$urlstatic}/img/none_upphoto.png"> </a> </p>
+              </div>
+            </gt>
+          </dt>
+          <dd class="m_t10 fs_14">{$g['name']}</dd>
+          <dd class="f_6">共<span class="f_r1 fs_14">{$g['photonum']}</span>张</dd>
+          <dd style="display: none;" class="m_t5 _js_photo_area_{$g.gid}"> <a href="javascript:void(0);" onclick="group_action.add_group({'name':'<php> echo $g['name']</php>','content':'<php> echo $g['content']</php>','per_type':'<php> echo $g['per_type']</php>','gid':'<php> echo $g['gid']</php>','pass':'1'});">编辑</a> <a href="javascript:void(0);" onclick="group_action.del_group({'del_type':'recover','gid':'<php> echo $g['gid']</php>','pass':'2'});">删除</a> </dd>
+        </dl>
+      </volist>
+      <dl>
+        <dd class="click_upload"> <img onclick="group_action.add_group();" src="{$urlstatic}/img/photos_none.png" alt="点击新建相册"> </dd>
+      </dl>
+    </div>
+  </div>
+  <!--右边部分结束-->
+</div>
+<!--中间部分结束-->
+<script>
+$('._js_show').hover(
+    function(){
+        var id=$(this).attr('dl');
+        $('._js_photo_area_'+id).show();
+    },
+    function(){
+         var id=$(this).attr('dl');
+        $('._js_photo_area_'+id).hide();
+    }
+);
+</script>
+<include file="Public:foot" />
+</div>
+</body>
+</html>

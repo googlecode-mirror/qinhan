@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>后台管理</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link href="{$urlstatic2}/css/admin.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+</head>
+<body>
+<include file="header" />
+
+<div class="body_container">
+  <div class="body_left">
+	<include file="body_left" />
+  </div>
+  <div class="body_middle">
+    <div class="title2">
+      <table width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tbody>
+          <tr>
+            <td class="title"><p class="t_left">&nbsp;&nbsp;照片审核</p></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="clr">
+      <table width="100%" cellspacing="0" cellpadding="0" border="0" data="190996,47280," class="tbl1">
+        <tbody>
+          <tr class="header">
+            <td>摘要</td>
+            <td align="center">监控类型</td>
+            <td align="right"><span id="__TIPS_TASK_FREQUENCY" class="text_tips3">监控频率</span></td>
+            <td align="right">可用率</td>
+            <td align="right">平均响应时间</td>
+            <td align="center" width="70">操作</td>
+          </tr>
+          <tr id="__task_190996" class="int1">
+            <td style="overflow:hidden;"><span style="width:140px; white-space:nowrap; overflow:hidden; display:block" title="http://jianjiandandan.ivu1314.com">http://jianjiandandan.ivu1314.com</span></td>
+            <td align="center"><a href="/site/task/list?type=http">http</a></td>
+            <td align="right"><a id="__task_freq_edit_190996" href="" title="快速修改监控频率" style="float:right; margin-left:5px; display:inline;"><img src="/images/freq_edit.gif"></a><span style="float:right; white-space:nowrap;" id="__task_freq_190996">15分钟</span></td>
+            <td align="right"><a href="/task/http/190996/report/uptime"><span class="up_rate_2">99.79%</span></a></td>
+            <td align="right"><a href="/task/http/190996/report/resptime_period"><span class="resp_time_2">580.24 ms</span></a></td>
+            <td align="center"><a href=""><img title="暂停监控" src="/images/pause.gif" id="__task_pause_190996"><img title="开启监控" src="/images/play.gif" style="display:none;" id="__task_open_190996"></a> <a href="/task_create_step2.php?task_type=http&amp;task_id=190996"><img title="编辑" src="/images/cog_edit.gif"></a> <a target="__hidden_call" href="/dispose.php?__action=task_del&amp;task_id=190996"><img title="删除" src="/images/trash.gif"></a> </td>
+          </tr>
+          <tr id="__task_47280" class="int2">
+            <td style="overflow:hidden;"><span style="width:140px; white-space:nowrap; overflow:hidden; display:block" title="http://www.qinhan.org">http://www.qinhan.org</span></td>
+            <td align="center"><a href="/site/task/list?type=http">http</a></td>
+            <td align="right"><a id="__task_freq_edit_47280" href="" title="快速修改监控频率" style="float:right; margin-left:5px; display:inline;"><img src="/images/freq_edit.gif"></a><span style="float:right; white-space:nowrap;" id="__task_freq_47280">15分钟</span></td>
+            <td align="right"><a href="/task/http/47280/report/uptime"><span class="up_rate_1">100%</span></a></td>
+            <td align="right"><a href="/task/http/47280/report/resptime_period"><span class="resp_time_1">-</span></a></td>
+            <td align="center"><a href=""><img title="暂停监控" src="/images/pause.gif" style="display:none;" id="__task_pause_47280"><img title="开启监控" src="/images/play.gif" id="__task_open_47280"></a> <a href="/task_create_step2.php?task_type=http&amp;task_id=47280"><img title="编辑" src="/images/cog_edit.gif"></a> <a target="__hidden_call" href="/dispose.php?__action=task_del&amp;task_id=47280"><img title="删除" src="/images/trash.gif"></a> </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="pages"><a href="#" class="this">1</a> <a href="javascript:goPage(2)">下一页</a></div>
+    </div>
+  </div>
+</div>
+
+<include file="footer" />
+</body>
+</html>

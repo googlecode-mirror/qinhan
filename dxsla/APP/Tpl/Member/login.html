@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 登录</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+</head>
+<body>
+
+<include file="Public:home_head" />
+
+  <div class="container_cwrap clear">
+    <div class="login_index2">
+      <form id="form1" name="form1" method="post" onsubmit="return chkLogin()">
+        <div class="set_box">
+          <h1>登录</h1>
+          <div id="msg" class="item3"></div>
+          <div class="set_box_main">
+            <div class="clear"> <b class="fl">用户名：</b>
+              <div class="box_r fl">
+                <input type="text" id="username" name="username" />
+              </div>
+            </div>
+            <div class="clear"> <b class="fl">密码：</b>
+              <div class="fl">
+                <input type="password" id="password" name="password"/>
+              </div>
+            </div>
+          </div>
+          <p class="f_6">
+            <input id="auto_login" name="auto_login" type="checkbox" value="1" class="ico" checked="checked" />
+            在此电脑上记住我</label>
+          </p>
+          <p class="list2 clear"> <span class="fl">
+            <input type="submit" value="登 录" class="btn1 btn_b1"/>
+            </span> <!--<a href="{$urlsite}/member/forgetpw" class="f1 fs_12">忘记密码？</a>--> </p>
+          <p class="reg fs_14">如果您还没账号，请先<a href="{$urlsite}/member/register" class="fb_14">注册为会员</a>！</p>
+        </div>
+      </form>
+    </div>
+  </div>
+<script type="text/javascript">
+function chkLogin()
+{
+	if($("#username").val() == ""){
+		$("#msg").html('请填写用户名!');
+		return false ;
+	}
+
+	if($("#password").val() == ""){
+		$("#msg").html('请填写密码!');
+		return false ;
+	}
+    
+   	$.ajax({
+	   type: "POST",
+	   url: "/index.php?s=/member/login/",
+	   data: 'username=' + $('#username').val() + '&password=' + $('#password').val(),
+	   success: function show_desc_result(re)
+	   {
+	   		var obj = jQuery.parseJSON(re);
+	   		if(obj.errno != 200) {
+				$("#msg").html(obj.msg);
+			} else {
+				location.href = '/';
+			}
+	   }
+	});
+	
+	return false;
+}
+</script>
+<include file="Public:foot" />
+
+</div>
+</body>
+</html>

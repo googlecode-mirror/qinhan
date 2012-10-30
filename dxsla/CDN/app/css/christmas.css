@@ -1,0 +1,45 @@
+@charset "utf-8";
+/* 圣诞节样式 */
+.new2_index{width:100%;}
+.new2_index .christmas_header{width:100%;height:30px;line-height:30px;color:#FFF;border-bottom:1px solid #C9C9C9;background:url(../img/christmas_topbg.png) no-repeat center #cd0811;}
+.christmas_header_r a{color:#fff;text-decoration:none;}
+.christmas_header_r a:hover{color:#fff;}
+.christmas_header .a_w a{padding:0 8px;}
+.christmas_header .a_w a.hover{font-weight:bolder;}
+.christmas_header .fl{_padding-top:5px;}
+.christmas_header .p_l20{padding-left:20px;}
+.christmas_header_r .christmas_ico_b1{ background:url(../img/christmas_new2_indexphone.png) no-repeat left 45%; padding-left:15px;}
+.christmas_header_r a.christmas_ico_img2{background:url(../img/christmas_ico_sina1.png) no-repeat left 45%;padding-left:20px;}
+.christmas_leftimg{background:url(../img/christmas_left_img.png) no-repeat;width:268px;height:176px;position:absolute;left:-50px;top:0;z-index:99;_background:url(a.png) repeat-x 0 0;_background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://pic.dxslaw.com/CDN/app/img/christmas_left_img.png" ,sizingMethod="crop");}
+.christmas_rightimg{background:url(../img/christmas_right_img.png) no-repeat;width:239px;_width:239px;height:168px;position:absolute;right:0;top:0;z-index:99;_background:none; _filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://pic.dxslaw.com/CDN/app/img/christmas_right_img.png" ,sizingMethod="crop");}
+.christmas_header_r{position:absolute;top:5px;right:240px;}
+.christmas_header_r .ico_b1{ background:url(../img/new2_indexphone.png) no-repeat left 45%; padding-left:15px;}
+.christmas_header_r a{float:left; margin-left:15px;}
+.christmas_mp_sgin{background:#6692cd url(../img/christmas_mainpage_sign_gradient_bg.png) repeat-x 0 0;width:375px;height:315px}
+.christmas_mp_sg_ul{ font-size:14px;width:375px;height:34px; line-height:30px; color:#fff; list-style:none; margin:0; padding:0;}
+.christmas_mp_sg_ul li{float:left;color:#fff; cursor:pointer}
+.christmas_mp_sg_ul li a:link{color:#fff;text-decoration:none}
+.christmas_mp_sg_ul li a:hover{color:#fff;font-weight:bold;text-decoration:none}
+.christmas_mp_sg_ul li a:active{color:#fff;font-weight:bold;text-decoration:none}
+.christmas_mp_sg_ul li a:visited{color:#fff;text-decoration:none}
+.christmas_upload_pic_btn1{background-color:#fd5e5e;border-bottom:1px solid #860505;border-right:1px solid #860505;width:115px;height:28px; margin-top:1px;line-height:30px;text-align:center;padding:0;}
+.christmas_login_btn{background-color:#fd5e5e;border-bottom:1px solid #860505;border-left:1px solid #860505;width:259px;height:28px; margin-top:1px;line-height:30px;padding:0;}
+.christmas_login_btn .login_btn_text{ display:block; width:229px; padding-left:30px;}
+.set_box .christmas_list2 .loginbtn{background:url(../img/christmas_loginbtn.png) no-repeat;width:120px;height:37px;border:0; font-weight:bold;cursor:pointer;padding-bottom:5px;}
+.set_box .christmas_list2{width:305px;margin-top:10px;*margin-top:4px;margin-left:115px;line-height:30px;}
+.hristmas_login_line{ border-top:1px solid #6a0106; border-bottom:1px solid #f34747;width:305px; margin-left:35px; margin-right:35px;height:0px; font-size:0; line-height:0; overflow:hidden; text-align:center}
+.hristmas_footer{width:980px;font-family:Arial,"宋体";background:url(../img/christmas_endbg.png) no-repeat center;height:99px;padding-top:20px;margin:0 auto;}
+.hristmas_footer p a{color:#000;font-size:12px;padding:0 10px;}
+.hristmas_footer p a:hover{color:#000;}
+.hristmas_up_btn{ background:url(../img/christmas_up_icon.png) no-repeat; width:253px; height:50px; border:none; background-color:transparent; box-shadow:none; cursor:pointer; position:relative; z-index:50}
+
+.hristmas_login_text p{ margin:0; padding:0}
+.hristmas_login_text{font-size:12px; line-height:14px;width:305px; margin-left:35px;margin-right:35px;color:#fff;_margin-top:-20px;}
+.hristmas_login_text1{ font-size:12px; line-height:14px;color:#fff; text-align:center}
+.hristmas_login_text1 a{ color:#fff;}
+
+/* 头部样式--未登录 start */
+.headerbox .hristmas_ico_img1{ background:url(../img/christmas_new2_indexphone.png) no-repeat left 45%; padding-left:15px;}
+.headerbox .hristmas_ico_img2{background:url(../img/christmas_top_logig.png) no-repeat left 50%;padding-left:20px;}
+.headerbox .hristmas_ico_img3{background:url(../img/christmas_ico_sina1.png) no-repeat left 45%;padding-left:20px;}
+/* 头部样式--未登录 end */

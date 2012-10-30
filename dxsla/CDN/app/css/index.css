@@ -1,0 +1,10 @@
+* {padding:0; margin:0;}
+img {border:0;}
+body {background:url(../img/index_bg.gif) white repeat-x; font-size:13px;}
+#main {width:1070px; margin:0 auto; position:relative;}
+#login {position:absolute; top:245px; left:255px; background:url(../img/index_login.gif) repeat-x; height:220px; width:330px;}
+.hristmas_footer {background: url(../img/christmas_endbg.png) no-repeat scroll center center transparent; font-family: Arial,"宋体"; height: 99px; margin: 0 auto; padding-top: 20px; width: 980px;}
+.hristmas_footer p a {color: #000000; font-size: 12px; padding: 0 10px;}
+.hristmas_footer p a:hover {color: #000000;}
+.fl {float: left;}
+.fr {float: right;}

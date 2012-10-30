@@ -1,0 +1,30 @@
+@charset "utf-8";
+/* CSS Document */
+/*vip页面 start*/
+/**vip介绍购买页**/
+.vipmain{width:740px;background:url(../img/vip_topbg.png) no-repeat center top;padding-top:70px;}
+.vipmain .vipbox{padding-left:55px;}
+.vipmain .vipbox dl{width:100%;padding-top:50px;}
+.vipmain .vipbox dt{float:left;}
+.vipmain .vipbox dd{float:left;}
+.vipmain .vipbox .text_big{font-size:36px;color:#ff7e00;line-height:35px;}
+.vipmain .vipbox .text_little{font-size:18px;color:#7a3c00;line-height:25px;}
+.vipmain .vipfoottex{font-size:22px;font-weight:bold;color:#666;margin-bottom:10px;}
+.vipmain .vipbtnbox{background:url(../img/vip_footbg.png) repeat-x bottom;padding:40px 70px 50px 70px;*height:280px;}
+.vipmain .vipbtnbox p{display:block;width:100%;}
+.vipmain .vipbtn{display:block;width:250px;height:58px;line-height:58px;text-align:center;color:#fff;font-size:24px;background:url(../img/vipbtn.gif) no-repeat 0 0; text-decoration:none;float:right;}
+.vipmain .vipbtnbox ul{width:280px;height:235px;border:2px solid #ff9600;}
+.vipbtnbox .zftitle{font-size:16px;font-weight:bold;color:red;margin:15px 0 0 20px;}
+.vipbtnbox .zflist{margin-left:20px;margin-top:10px;}
+.vipbtnbox .zflist label{width:100px;display:block;float:left;}
+.vipbtnbox .zflist span{display:block;float:left;word-break:break-all;width:140px;}
+.vipmain .vipbtnbox .btn1{margin-top:30px;padding:5px 20px;}
+/*vip页面 end*/
+.member_date{width:740px;height:167px; padding-top:50px;background:url(../img/member_date.gif) no-repeat; margin:15px auto;}
+.member_date .member_date_w{width:740px; height:156px;}
+.member_date ul{ padding:0px 10px 0 5px; width:729px; height:156px;}
+.member_date ul li{ float:left; width:344px; line-height:30px;border-bottom:1px solid #efefef; background:url(../img/ico_memer.png.png) no-repeat 5px 10px; padding-top:0px;padding-left:20px; }
+.right_b{border-right:1px solid #efefef;}
+/*客服*/
+.vip_service2{margin:10px 0px 0px 2px;width:149px;height:200px;background:url(../img/vip_service.png); position:absolute;top:50%;right:10px;}
+.vip_service2 a{ display:inline-block;width:90px;height:30px; position:absolute; bottom:8px;left:32px;}

@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 搭讪</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+</head>
+<body>
+  <php>$nav = 3;</php>
+  <include file="Public:head" />
+  <!--中间部分开始-->
+  <div class="container_cwrap clear">
+    <!--左边部分开始-->
+    <div class="fm_l_200">
+      <include file="Public:left" />
+    </div>
+    <!--左边部分结束-->
+    <!--右边部分开始-->
+    <div class="emaillist_w">
+      <div class="tip_nav">
+        <ul class="clear fs_14">
+          <li class="word_nowrap"><a href="{$urlsite}/msg/" class="current">信息</a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/visit/in/" class="">来访者 <if condition="$f['new_visitor'] neq 0"><span class="fb_12 f_r1">新！</span> </if></a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/visit/out/" class="">我去看过谁</a></li>
+          <li><a href="{$urlsite}/fav/out/" class="">我收藏的人</a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/fav/in/" class="">谁收藏了我  <if condition="$f['new_fav_in'] neq 0"><span class="fb_12 f_r1">{$f['new_fav_in']}新！</span> </if></a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/attention/more/" class="">动态  <if condition="$f['new_attention'] neq 0"><span class="fb_12 f_r1">新！</span> </if></a></li>
+          <li class="word_nowrap"><a href="{$urlsite}/link/forbid_list/" class="f_9 ">阻止联系</a></li>
+        </ul>
+      </div>
+      <div class="new_mail_list">
+        <!--<div class="top clear">
+          <div class="fl top_a"><a href="{$urlsite}/msg" class="bg">全部</a><a href="{$urlsite}/msg?class=1" >新信息</a></div>
+          <div class="fr clear">
+            <form action="{$urlsite}/msg/" method="get" id="msg_search">
+              <input type="hidden" name="class" value="4">
+              <input type="text" onkeydown="" value="昵称模糊搜索" onfocus="if(this.value == '昵称模糊搜索') this.value= '';" onblur="if(this.value=='') this.value='昵称模糊搜索';" class="input_1 fl" id="nickname" name="nickname">
+              <span class="search_ico fl" title="按昵称搜索" onclick="msg_search()"></span>
+            </form>
+          </div>
+        </div>-->
+        <div class="top clear">
+          <div class="fl">
+            <label>
+            <input type="checkbox" value="0" name="msg_opt" onclick="select_all(this)">
+            <span class="fs_12 f_6">全选/全不选</span></label>
+            <input class="btn3" onclick="return msg_del()" type="button" value="删除信息" disabled=true title="删除所选">
+          </div>
+		  <div class="fr"><input class="btn3" onclick="msg_slient_all()" type="button" value="一键消除提醒" title="一键消除新消息提醒"></div>
+        </div>
+    <empty name="msglist"><p class="noone">没有消息哦。</p></empty>
+		<volist name="msglist" id="u">
+        <!--信件列表开始-->
+        <div class="maillist clear">
+          <div class="maillist_l fl">
+            <input type="checkbox" name="msg_list" value="{$u['id']}">
+          </div>
+		  <eq name="u['uid']" value="0">
+          <dl class="clear fl maillist_m">
+            <dt class="w_72"><a href="javascript:;"><img src="{$urlupload}/000face/system.jpg_72x72.jpg"></a></dt>
+            <dd class="clear">
+              <div class="l_m_wrap clear">
+                <div class="last_message msgr-lnk clear" onclick="IM.open({$u['uid']})"> <span class="tr clear"> <span class="br clear"> <span class="bl clear"> <span class="text clear">{$u['content']}</span> </span> </span> </span> </div>
+              </div>
+              <div class="block_new"><notempty name="u['new']"><a id="new_{$u['uid']}" onclick="IM.open({$u['uid']})" href="javascript:;" class="new msgr-lnk"><b><b><b><b>{$u['new']} 新信息</b></b></b></b></a></notempty><span class="f_6 fs_12">一共{$u['count']}条</span></div>
+            </dd>
+          </dl>
+		  <div class="fr maillist_r"></div> 
+		  <else />
+		  
+          <dl class="clear fl maillist_m">
+            <dt class="w_72"><a href="{$urldomain}/{$u['uid']}" target="_blank"><img class="face_s{$u['sex']}_b2" src="{$urlupload}/{$u['default_pic']}_72x72.jpg"></a></dt>
+            <dd class="clear">
+              <p><a class="fs_14" href="{$urldomain}/{$u['uid']}" target="_blank">{$u['username']}</a><span class="fs_12 f_9">，{$u['college']}</span></p>
+              <div class="l_m_wrap clear <notempty name="u['is_last']">lm_myself</notempty>">
+                <div class="last_message msgr-lnk clear" onclick="IM.open({$u['uid']})"> <span class="tr clear"> <span class="br clear"> <span class="bl clear"> <span class="text clear">{$u['content']}</span> </span> </span> </span> </div>
+              </div>
+              <div class="block_new"><notempty name="u['new']"><a id="new_{$u['uid']}" onclick="IM.open({$u['uid']})" href="javascript:;" class="new msgr-lnk"><b><b><b><b>{$u['new']} 新信息</b></b></b></b></a></notempty><span class="f_6 fs_12">一共{$u['count']}条</span></div>
+            </dd>
+          </dl>
+          <div class="fr maillist_r">
+            <div class="per_t_r">
+              <div class="chat_bar clear"> <a href="javascript:;" onclick="IM.open({$u['uid']})" class="chat_bg clear"><span class="ico_chatbg fl"></span><span class="fl">打开聊天</span></a> <a href="javascript:;" onclick="menuOpt({$u['uid']});" class="or_bg clear"><span class="fl">或者</span><span class="or_i fl"></span></a> </div>
+              <div class="m_dw_box">
+                <div id="or_{$u['uid']}" class="m_dw" style="display:none;"> <i class="tr"></i>
+                  <div class="m_dw_inner">
+					<!--<p><a class="clear" href="{$urlsite}/goods/my?uid={$u['uid']}" target="_blank"><span class="ico_sendgift fl"></span><span class="fl">给{$u['sex']|ui_sex}送礼</span></a></p>-->
+					<p><a onclick="try_meet({$u['uid']},{$u['sex']},'{$u['username']}','{$u['want_content']}');"  class="clear"><span class="yuebg fl"></span> <span class="fl p_l5">约会</span></a></p>
+					<p><a onclick="fav({$u['uid']},{$u['sex']},'{$u['username']}',2)" class="clear"><span class="addbg2 fl"></span><span class="fl p_l5">添加收藏</span></a></p>
+					<p><a onclick="fav({$u['uid']},{$u['sex']},'{$u['username']}',1)" class="clear"><span class="addbg fl"></span> <span class="fl p_l5">悄悄收藏</span></a></p>
+                  </div>
+                  <i class="bl"></i> </div>
+              </div>
+            </div>
+          </div>
+		  </eq>
+		  
+        </div>
+        <!--信件列表结束-->		
+		
+		</volist>
+		
+        <div class="bottom">
+          <label>
+          <input type="checkbox" class="ico" name="msg_opt" value="0" onclick="select_all(this)">
+          <span class="fs_12 f_6">全选/全不选</span></label>
+          <input class="btn3" onclick="return msg_del()" type="button" value="删除信息" disabled=true title="删除所选">
+        </div>
+        <div class="clear">
+          <div class='page'>{$pages}</div>
+        </div>
+      </div>
+    </div>
+    <!--右边部分结束-->
+  </div>
+  <!--中间部分结束-->
+  <script>
+	function select_all(obj) {
+		$("input[name=msg_list]").attr("checked", obj.checked);
+		$("input[name=msg_opt]").attr("checked", obj.checked);
+		$(".btn3").attr("disabled",obj.checked?false:true).css("color",obj.checked?'#333333':'#000000');
+	}
+	function msg_del() {
+		var o_list = $("input[name=msg_list]:checked");
+		if(o_list.length == 0) {
+			alert("请选择要删除的聊天信息");
+			return false;
+		}
+		var del_list = Array();
+		for(var i=0; i<o_list.length; i++) {
+			del_list[i] = o_list[i].value;
+		}
+		msg_del_ajax(del_list.toString());
+	}
+	function msg_del_ajax(uids) {
+		var res =window.confirm("与用户的聊天记录将被删除，确定要删除吗？");
+		if(res == false) return false;
+		$.post('/index.php?s=/msg/del/',{fids:uids}, function(data) {
+			if(data > 0) {
+				alert("删除成功");
+				location.reload(true);
+			}
+			else {
+				alert("删除失败");
+			}
+		});
+	}
+	function msg_slient_all() {
+		$.post('/index.php?s=/msg/slient_all/',{}, function(data) {
+			if(data > 0) {
+				alert("消除成功");
+				location.reload(true);
+			}
+			else {
+				alert("删除失败");
+			}
+		});
+	}
+
+	var gShowMenuUid = 0;
+	function menuOpt(uid) {
+		if(uid == 10000) return;
+		if(gShowMenuUid != uid) {
+			$("#or_"+gShowMenuUid).css("display", "none");
+		}
+		if($("#or_"+uid).css("display") != "none") {
+			$("#or_"+uid).css("display", "none");
+		}
+		else {
+			$("#or_"+uid).css("display","block");
+		}
+		gShowMenuUid = uid;
+	}
+	$(document).ready(function() {
+		$(document).bind("click",function(e) {
+			if($.browser.msie) {
+				var el = event.srcElement;
+			}
+			else {
+				var el = e.target;
+			}
+			if(!IM.fInObj(el, "per_t_r")) {
+				$(".m_dw").hide();
+			}
+		});
+		$("input[name=msg_list]").click(function() {
+			if($("input[name=msg_list]:checked").length > 0) {
+				$(".btn3").attr("disabled",false);
+			}
+			else $(".btn3").attr("disabled",true);
+		});
+	});
+	function msg_search() {
+		if($("#nickname").val() == "" || $("#nickname").val() == "昵称模糊搜索") {
+			return;
+		}
+		else $("#msg_search").submit();
+	}
+	</script>
+  <include file="Public:foot" /> </div>
+</body>
+</html>

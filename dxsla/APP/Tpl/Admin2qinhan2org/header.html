@@ -1,0 +1,27 @@
+<script type="text/javascript">
+var gShowLog = 0;
+var g_chat_msg = 0;
+function topNav(n) {
+	$('#top_nav2 .left li:eq(' + n + ') a').addClass('selected');
+}
+function leftNav(n) {
+	$('.body_left .menu_title2:eq(' + n + ') a').addClass('selected');
+}
+</script>
+<div id="adm_header">
+  <div class="left"> <a href="{$urladmin}"><img src="{$urlstatic}/img/admin_logo.png" /></a> </div>
+  <div class="right">
+    <div class="top_link"><a class="link2" href="{$urladmin}">管理首页</a></div><div class="top_link"><a class="link2" href="/" target="_blank">网站首页</a></div><div class="top_link"><a class="link2" href="/">退出系统</a></div>
+  </div>
+</div>
+<div id="top_nav2">
+  <div class="left">
+    <li><a href="{$urladmin}">首页</a></li>
+    <li><a href="{$urladmin}/chk_photo/">照片审核</a></li>
+	<li><a href="{$urladmin}/user/">用户管理</a></li>
+	<li><a href="{$urladmin}">内容审核</a></li>
+	<li><a href="{$urladmin}">数据统计</a></li>
+	<li><a href="{$urladmin}/chk_word/">留言建议</a></li>
+	<li><a href="{$urladmin}/other/">其他功能</a></li>
+  </div>
+</div>

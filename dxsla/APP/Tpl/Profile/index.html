@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 资料修改</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+
+<script language="javascript" src="{$urlstatic2}/js/provinces_zh-CN.js?gv=146_1"></script>
+</head>
+<body>
+<php>$nav = 7;</php>
+<include file="Public:head" />
+
+  <div class="newperphoto_w clear">
+    <!--左边部分开始-->
+	<include file="Public:profile_left" />		
+    <!--左边部分结束-->
+    <!--右边部分开始-->
+    <div class="newperphoto_r">
+      <div class="basics_box">
+        <div class="basics_box_top clear">
+          <h1>基本资料</h1>
+          <div class="fillbar_box_completed">
+            {$myuserinfo['profile_completed_show3']}
+            <span class="fillbar_info fl">资料完成度 {$myuserinfo['profile_completed_show2']} &nbsp;</span> </div>
+        </div>
+		<form method="post" action="" onsubmit="return modify_profile()">
+        <dl class="clear">
+          <dt>用户名：</dt>
+          <dd>{$m['username']}</dd>
+          <p id="nickname_msg" class="f_r1 fb_13"></p>
+        </dl>
+        <dl class="clear">
+          <dt>性别：</dt>
+          <dd><eq name="m['sex']" value="1">男<else />女</eq></dd>
+        </dl>			
+          <dl class="clear">
+          <dt>学院：</dt>
+          <dd>
+          <select name="college" id="college" class="select_1" >
+              <option value="">未填</option>
+			 <volist name="list" id="vo">
+              <option value="{$vo.name}"  >{$vo.name}</option>
+        </volist>
+            </select>
+          </dd>
+        </dl>
+		  <dl class="clear">
+          <dt>年级：</dt>
+          <dd>
+            <select id="grade" name="grade" class="select_1" >
+              <option value="0">未填</option>
+              <option value="高中">高中&nbsp;&nbsp;</option>
+              <option value="大一">大一&nbsp;&nbsp;</option>
+              <option value="大二">大二&nbsp;&nbsp;</option>
+              <option value="大三">大三&nbsp;&nbsp;</option>
+              <option value="大四">大四&nbsp;&nbsp;</option>
+              <option value="研一">研一&nbsp;&nbsp;</option>
+              <option value="研二">研二&nbsp;&nbsp;</option>
+              <option value="研三">研三&nbsp;&nbsp;</option>
+            </select>
+          </dd>
+        </dl>
+         <dl class="clear">
+          <dt>家乡：</dt>
+          <dd>
+            <select id="hometown_prov" name="hometown_prov" id="select" >
+            </select>
+            <select id="hometown_city" name="hometown_city" id="select" >
+            </select>
+            <label style="display:none">隐藏:
+            <input id="hometown_hidden" name="hometown_hidden" type="checkbox" checked="checked" disabled value="1" />
+            </label>
+          </dd>
+        </dl>
+        <dl class="clear">
+          <dt>生日：</dt>
+          <dd>
+            <p>
+              <select id="birth_y" name="birth_y" >
+			    <for start="1" end="21">
+				<php>$year = date('Y') - 32 + $i;</php>
+		        <option value="{$year}">{$year}&nbsp;&nbsp;</option>
+                </for>
+              </select>
+              年
+              <select id="birth_m" name="birth_m" >
+                <option value="0">--&nbsp;&nbsp;</option>
+                <option value="1">1&nbsp;&nbsp;</option>
+                <option value="2">2&nbsp;&nbsp;</option>
+                <option value="3">3&nbsp;&nbsp;</option>
+                <option value="4">4&nbsp;&nbsp;</option>
+                <option value="5">5&nbsp;&nbsp;</option>
+                <option value="6">6&nbsp;&nbsp;</option>
+                <option value="7">7&nbsp;&nbsp;</option>
+                <option value="8">8&nbsp;&nbsp;</option>
+                <option value="9">9&nbsp;&nbsp;</option>
+                <option value="10">10&nbsp;&nbsp;</option>
+                <option value="11">11&nbsp;&nbsp;</option>
+                <option value="12">12&nbsp;&nbsp;</option>
+              </select>
+              月
+              <select id="birth_d" name="birth_d" >
+                <option value="0">--&nbsp;&nbsp;</option>
+                <option value="1">1&nbsp;&nbsp;</option>
+                <option value="2">2&nbsp;&nbsp;</option>
+                <option value="3">3&nbsp;&nbsp;</option>
+                <option value="4">4&nbsp;&nbsp;</option>
+                <option value="5">5&nbsp;&nbsp;</option>
+                <option value="6">6&nbsp;&nbsp;</option>
+                <option value="7">7&nbsp;&nbsp;</option>
+                <option value="8">8&nbsp;&nbsp;</option>
+                <option value="9">9&nbsp;&nbsp;</option>
+                <option value="10">10&nbsp;&nbsp;</option>
+                <option value="11">11&nbsp;&nbsp;</option>
+                <option value="12">12&nbsp;&nbsp;</option>
+                <option value="13">13&nbsp;&nbsp;</option>
+                <option value="14">14&nbsp;&nbsp;</option>
+                <option value="15">15&nbsp;&nbsp;</option>
+                <option value="16">16&nbsp;&nbsp;</option>
+                <option value="17">17&nbsp;&nbsp;</option>
+                <option value="18">18&nbsp;&nbsp;</option>
+                <option value="19">19&nbsp;&nbsp;</option>
+                <option value="20">20&nbsp;&nbsp;</option>
+                <option value="21">21&nbsp;&nbsp;</option>
+                <option value="22">22&nbsp;&nbsp;</option>
+                <option value="23">23&nbsp;&nbsp;</option>
+                <option value="24">24&nbsp;&nbsp;</option>
+                <option value="25">25&nbsp;&nbsp;</option>
+                <option value="26">26&nbsp;&nbsp;</option>
+                <option value="27">27&nbsp;&nbsp;</option>
+                <option value="28">28&nbsp;&nbsp;</option>
+                <option value="29">29&nbsp;&nbsp;</option>
+                <option value="30">30&nbsp;&nbsp;</option>
+                <option value="31">31&nbsp;&nbsp;</option>
+              </select>
+              日 </p>
+          </dd>
+        </dl>
+        <dl class="clear">
+          <dt>身高：</dt>
+          <dd>
+            <select id="height" name="height" class="select_1" >
+              <option value="0">未填</option>
+              <option value="150">150cm&nbsp;&nbsp;</option>
+              <option value="151">151cm&nbsp;&nbsp;</option>
+              <option value="152">152cm&nbsp;&nbsp;</option>
+              <option value="153">153cm&nbsp;&nbsp;</option>
+              <option value="154">154cm&nbsp;&nbsp;</option>
+              <option value="155">155cm&nbsp;&nbsp;</option>
+              <option value="156">156cm&nbsp;&nbsp;</option>
+              <option value="157">157cm&nbsp;&nbsp;</option>
+              <option value="158">158cm&nbsp;&nbsp;</option>
+              <option value="159">159cm&nbsp;&nbsp;</option>
+              <option value="160">160cm&nbsp;&nbsp;</option>
+              <option value="161">161cm&nbsp;&nbsp;</option>
+              <option value="162">162cm&nbsp;&nbsp;</option>
+              <option value="163">163cm&nbsp;&nbsp;</option>
+              <option value="164">164cm&nbsp;&nbsp;</option>
+              <option value="165">165cm&nbsp;&nbsp;</option>
+              <option value="166">166cm&nbsp;&nbsp;</option>
+              <option value="167">167cm&nbsp;&nbsp;</option>
+              <option value="168">168cm&nbsp;&nbsp;</option>
+              <option value="169">169cm&nbsp;&nbsp;</option>
+              <option value="170">170cm&nbsp;&nbsp;</option>
+              <option value="171">171cm&nbsp;&nbsp;</option>
+              <option value="172">172cm&nbsp;&nbsp;</option>
+              <option value="173">173cm&nbsp;&nbsp;</option>
+              <option value="174">174cm&nbsp;&nbsp;</option>
+              <option value="175">175cm&nbsp;&nbsp;</option>
+              <option value="176">176cm&nbsp;&nbsp;</option>
+              <option value="177">177cm&nbsp;&nbsp;</option>
+              <option value="178">178cm&nbsp;&nbsp;</option>
+              <option value="179">179cm&nbsp;&nbsp;</option>
+              <option value="180">180cm&nbsp;&nbsp;</option>
+              <option value="181">181cm&nbsp;&nbsp;</option>
+              <option value="182">182cm&nbsp;&nbsp;</option>
+              <option value="183">183cm&nbsp;&nbsp;</option>
+              <option value="184">184cm&nbsp;&nbsp;</option>
+              <option value="185">185cm&nbsp;&nbsp;</option>
+              <option value="186">186cm&nbsp;&nbsp;</option>
+              <option value="187">187cm&nbsp;&nbsp;</option>
+              <option value="188">188cm&nbsp;&nbsp;</option>
+              <option value="189">189cm&nbsp;&nbsp;</option>
+              <option value="190">190cm&nbsp;&nbsp;</option>
+              <option value="191">191cm&nbsp;&nbsp;</option>
+              <option value="192">192cm&nbsp;&nbsp;</option>
+              <option value="193">193cm&nbsp;&nbsp;</option>
+              <option value="194">194cm&nbsp;&nbsp;</option>
+              <option value="195">195cm&nbsp;&nbsp;</option>
+              <option value="196">196cm&nbsp;&nbsp;</option>
+              <option value="197">197cm&nbsp;&nbsp;</option>
+              <option value="198">198cm&nbsp;&nbsp;</option>
+              <option value="199">199cm&nbsp;&nbsp;</option>
+              <option value="200">200cm&nbsp;&nbsp;</option>
+              <option value="201">201cm&nbsp;&nbsp;</option>
+              <option value="202">202cm&nbsp;&nbsp;</option>
+              <option value="203">203cm&nbsp;&nbsp;</option>
+              <option value="204">204cm&nbsp;&nbsp;</option>
+              <option value="205">205cm&nbsp;&nbsp;</option>
+              <option value="206">206cm&nbsp;&nbsp;</option>
+              <option value="207">207cm&nbsp;&nbsp;</option>
+              <option value="208">208cm&nbsp;&nbsp;</option>
+              <option value="209">209cm&nbsp;&nbsp;</option>
+              <option value="210">210cm&nbsp;&nbsp;</option>
+            </select>
+          </dd>
+        </dl>
+		  <dl class="clear">
+                            <dt>体形：</dt>
+                            <dd>
+                                <select id="stature" name="stature" class="select_1" >
+                                    <option value="">未填</option><option value="标准"  >标准</option><option value="匀称"  >匀称</option><option value="丰满"  >丰满</option><option value="性感"  >性感</option><option value="苗条"  >苗条</option><option value="精炼"  >精炼</option><option value="高挑"  >高挑</option><option value="小鸟依人"  >小鸟依人</option><option value="较瘦"  >较瘦</option><option value="较胖"  >较胖</option><option value="健壮"  >健壮</option><option value="残缺之美"  >残缺之美</option>                                </select>
+
+                            </dd>
+                        </dl>
+
+        <dl class="clear">
+          <dt>星座：</dt>
+          <dd>
+            <select name="constellation" id="constellation" class="select_1" >
+              <option value="">未填</option>
+              <option value="水瓶座"  >水瓶座</option>
+              <option value="双鱼座"  >双鱼座</option>
+              <option value="白羊座"  >白羊座</option>
+              <option value="金牛座"  >金牛座</option>
+              <option value="双子座"  >双子座</option>
+              <option value="巨蟹座"  >巨蟹座</option>
+              <option value="狮子座"  >狮子座</option>
+              <option value="处女座"  >处女座</option>
+              <option value="天秤座"  >天秤座</option>
+              <option value="天蝎座"  >天蝎座</option>
+              <option value="射手座"  >射手座</option>
+              <option value="摩羯座"  >摩羯座</option>
+            </select>
+          </dd>
+        </dl>
+ <dl class="clear">
+          <dt>血型：</dt>
+          <dd>
+            <select name="blood" id="blood" class="select_1" >
+              <option value="">未填</option>
+              <option value="A型"  >A型</option>
+              <option value="B型"  >B型</option>
+              <option value="AB型"  >AB型</option>
+              <option value="O型"  >O型</option>
+            </select>
+          </dd>
+        </dl>
+		<!--<dl class="clear">
+			<dt>交友目的：</dt>
+			<dd>
+				<select id="makefriend" name="makefriend" class="select_1" >
+					<option value="">未填</option><option value="随缘"  >随缘</option><option value="都可以"  >都可以</option><option value="找男友"  >找男友</option><option value="找女友"  >找女友</option><option value="征婚"  >征婚</option>                                </select>
+			</dd>
+		</dl>-->
+        <div class="input_box"><a href="javascript:;" class="btn1" id="modify_submit" onclick="return modify_profile()" >确定</a></div>
+		</form>
+      </div>
+      <div class="basics_box_r">
+        <div class="preview"><a class="f_f" href="{$urldomain}/{$GLOBALS['i']['uid']}" target="_blank">预览我的主页</a></div>
+      </div>
+    </div>
+    <!--右边部分结束-->
+  </div>
+  <script>
+    function modify_profile() {
+		//return false;
+        Win.dialog({'msg':'正在修改数据，请稍等......<br /><br />','type':'warn','noclose':true});
+        $.ajax({
+            type: "POST",
+            url: "/index.php?s=/profile",
+            data: '&college='+$('#college').val()+'&hometown_prov='+$('#hometown_prov').val()+'&hometown_city='+$('#hometown_city').val()+'&birth_y='+$('#birth_y').val()+'&birth_m='+$('#birth_m').val()+'&birth_d='+$('#birth_d').val()+'&height='+$('#height').val()+'&constellation='+$('#constellation').val()+'&blood='+$('#blood').val()+'&stature='+$('#stature').val()+'&grade='+$('#grade').val()+'&makefriend='+$('#makefriend').val()+'&introduce='+$('#introduce').val(),
+            success: function(re) {
+                var obj = jQuery.parseJSON(re);
+                if(obj.errno == 200) {
+                     Win.dialog({'msg':obj.msg,'type':'info',enter:function() {location.reload(true);},cancel:function() {location.reload(true);}});
+                }else{
+                     Win.dialog({'msg':obj.msg,'type':'info'});	
+                }
+            }
+        });
+		return false;
+    }
+    $("#college").val('{$m["college"]}');
+    $("#birth_y").val('{$m["birth_y"]}');
+    $("#birth_m").val('{$m["birth_m"]}');
+    $("#birth_d").val('{$m["birth_d"]}');
+    $("#constellation").val('{$m["constellation"]}');
+    $("#height").val('{$m["height"]}');
+	$("#blood").val('{$m["blood"]}');
+	$("#stature").val('{$m["stature"]}');
+	$("#makefriend").val('{$m["makefriend"]}');
+	$("#grade").val('{$m["grade"]}');
+	$("#makefriend").val('{$m["makefriend"]}');
+
+    var gpm = new GlobalProvincesModule;
+    gpm.def_province = ["请选择", ""];
+    gpm.def_city1 = ["请选择", ""];
+    gpm.initProvince(document.getElementById('hometown_prov'));
+    gpm.selectProvincesItem(document.getElementById("hometown_prov"), "{$m["hometown_prov"]}");
+    gpm.initCity1(document.getElementById('hometown_city'), gpm.getSelValue(document.getElementById('hometown_prov')));
+    gpm.selectCity1Item(document.getElementById("hometown_city"), "{$m["hometown_city"]}");
+
+    function changeProv(objName) {
+        gpm.initCity1(document.getElementById(objName+'_city'), gpm.getSelValue(document.getElementById(objName+'_prov')));
+    }
+    jQuery(function($){
+        $("#location_prov").bind("change",function(){changeProv('location');});
+        $("#hometown_prov").bind("change",function(){changeProv('hometown');});
+    });
+    </script>
+
+<include file="Public:foot" />
+
+</div>
+</body>
+</html>

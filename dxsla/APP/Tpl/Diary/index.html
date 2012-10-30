@@ -1,0 +1,730 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 {$GLOBALS['i']['diary_name']}</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+<script language="javascript" src="{$urlstatic2}/js/face.js{$urltail}"></script>
+<script language="javascript" src="{$urlstatic2}/js/pub_face_all.js{$urltail}"></script>
+<script language="javascript" src="{$urlstatic2}/js/calendar.js{$urltail}"></script>
+<script language="javascript" src="{$urlstatic2}/js/diary_photo.js{$urltail}"></script>
+<link href="{$urlstatic2}/css/diary.css{$urltail}" rel="stylesheet" type="text/css" />
+<link href="{$urlstatic2}/css/calendar.css{$urltail}" rel="stylesheet" type="text/css" />
+<link href="{$urlstatic2}/css/insertimg.css{$urltail}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<php>$nav = 8;</php>
+<include file="Public:head" />
+<div class="newperphoto_w clear">
+  <!--左边部分开始-->
+  <include file="Public:profile_left" />
+  <!--左边部分结束-->
+  <!--右边部分开始-->
+  <div class="newperphoto_r">
+    <div class="text_r"><a href="{$urlsite}/other/kf/?mtype=10" class="f_6" target="_blank">对“{$GLOBALS['i']['diary_name']}”的意见反馈</a></div>
+    <div class="top_operate clear">
+      <p class="fl"><b><a class="diary_name" title="自定义名称"  onclick="edit_diary_name()">{$GLOBALS['i']['diary_name']}</a></b> <a style="font-size:12px;color:#1A4DC1;" onclick="edit_diary_name()" title="自定义名称"><img src="{$urlstatic}/img/edit_pencil.png"></a></p>
+      <!--<p class="fr fs_14"><a href="/diary/draft">草稿箱</a><a href="/diary/recy">回收站</a></p>-->
+    </div>
+    <div class="clear m_t30">
+      <div class="diary_editbox">
+        <div class="t_sel"> <img width="39" height="20" src="{$urlstatic}/img/ico_ce.gif?gv=87_1" class="ico fl" onclick="foucsContent();$('#content').trigger('click');face51New.show(this,'content','_textarea','','b');">
+          <!--<span class="fl icotxt" onclick="display_photo();" style="cursor:pointer;"><img src="{$urlstatic}/img/ico_img.png?gv=87_1" class="ico fl">&nbsp;图片</span>-->
+          <span class="fl">心情
+          <select name="mood" id="mood" class="ico">
+            <option value="一般"  >一般</option>
+            <option value="开心"  >开心</option>
+            <option value="雀跃"  >雀跃</option>
+            <option value="难过"  >难过</option>
+            <option value="纠结"  >纠结</option>
+            <option value="郁闷"  >郁闷</option>
+            <option value="说不清"  >说不清</option>
+            <option value="茫然"  >茫然</option>
+            <option value="自填心情"  >自填心情</option>
+          </select>
+          <input id="mood_memo" name="mood_memo" type="text" class="mood" maxlength="5" style="display:none">
+          </span> <span class="m_r fr">
+          <php>$set_time = date("Y-m-d H:i");</php>
+          <input id="set_time" type="text" name="set_time" value="{$set_time}" onclick="return false" style="width:2px;height:0px;border:0px"/>
+          <span id="show_time">{$set_time}</span> <a onclick="popUpCal.showFor($('#set_time')[0])"><img title="修改时间" src="{$urlstatic}/img/date_edit.png?gv=87_1" class="ico"></a> </span> </div>
+        <div id="edit_type">
+          <div name="content" id="content" class="textbox" style="color: rgb(153, 153, 153); " contenteditable="true" onkeyup="setRange(this)" onmouseup="setRange(this)" ondrop="return false" ondragover="return false" onblur="blurContent()" onfocus="foucsContent()">写两句...</div>
+        </div>
+        <!--插入图片 start-->
+        <div class="instertimgbox" id="instertimgbox" style="display:none;"> <a class="btn1" href="#" onclick="display_photo();">+&nbsp;添加图片</a>
+          <div class="imgboxlist clear" id="imgboxlist"> </div>
+          <p class="dp text_r"><a onclick="photo_action.preview_diary();">预览效果</a></p>
+        </div>
+        <!--插入图片 end-->
+        <div class="m_t10 clear">
+          <p class="fl"> 谁可见：
+            <label>
+            <input type="radio" name="read_type" value="0" class="checkbox1" checked/>
+            所有人</label>
+            <label>
+            <input type="radio" name="read_type" value="1" class="checkbox1"/>
+            我收藏的人</label>
+            <label>
+            <input type="radio" name="read_type" value="2" class="checkbox1"/>
+            仅限我自己</label>
+          </p>
+          <p class="fr" id="dt_notice_span">
+            <label>
+            <input name="dt_notice" id="dt_notice" type="checkbox" class="checkbox1"/>
+            不发布动态通知</label>
+          </p>
+        </div>
+        <p class="save_btn m_t10">
+          <input type="button" value="发 布" class="btn1" onclick="return modify_diary(1)"/>
+          或 <a class="fs_14 dashed" onclick="return modify_diary(0)">保存到草稿箱</a> <span id="diary_draft"></span> </p>
+      </div>
+      <img src="{$urlstatic}/img/diary_bg2.png" class="fl"/></div>
+    <ul class="diary_list m_t30" id="choose_diary_id">
+      <volist name="diarylist" id="d">
+        <li class="clear" onmouseout="this.className='clear';$('#do_{$d['did']}').hide();" onmouseover="this.className='clear bluebg';$('#do_{$d['did']}').show();">
+          <div class="text">
+            <p class="word_break">{$d['content']}</p>
+            <!--<p class="m_t10"><a target="_blank" href="/other/mobile/" class="f_9 fs_12">来自网页版</a></p>-->
+            <php> $praise= $m['sex']== 1 ? 'ico_diay1' : 'ico_diay';
+              for($i=0;$i<$d['praise_0'];$i++)
+              {
+              $a="<img class='reward' src=".$urlstatic."/img/".$praise.".gif?jv=1".">";
+              echo $a;
+              }
+              for($i=0;$i<$d['praise_0'];$i++)
+              {
+              $a="<img class='reward' src=".$urlstatic."/img/ico_brick.gif?jv=1".">";
+              echo $a;
+              }
+			</php>
+          </div>
+          <div class="info">
+            <p class="f_6 fs_14">公元 {$d['set_time']|date="Y年m月d日",###}</p>
+            <p class="fs_12 f_6 m_t5">心情 <span class="f_green">({$d['mood']})</span></p>
+          </div>
+          <p class="operate" id="do_{$d['did']}" style="display:none;">
+            <!--<a href="/diary/edit?diary_id=1491">修改</a>-->
+            <a href="javascript:;" onclick="delete_confirm({$d['did']})">删除</a></p>
+        </li>
+      </volist>
+    </ul>
+    <div class="page" id="page">
+      <div class='page'>{$pages}</div>
+    </div>
+  </div>
+  <!--右边部分结束-->
+</div>
+<div id="_form_pic">
+  <form method="post" action="" target="photo_frame" name="photo_frame" id="up_photo_frame" style="display:none">
+    <input name="upfile1" id="_js_data" />
+    <input name="key" value="0c7af17f7d15882f418fb31af148e75d"/>
+    <input name="time" value="1323410503"/>
+    <input name="permission_type" value="0" id="_js_per_type" />
+    <input name="from" value="my" />
+    <input name="uid" value="18090226" />
+    <input name="up_type" value="flash" />
+  </form>
+</div>
+<!-- end -->
+<iframe name="photo_frame" id="photo_frame" style="width:0;height:0;border:1px solid #ccc; display:none;" src=""></iframe>
+<script>
+var is_submit = false;
+var content_ago = '';
+var diary_id = 0;
+var diary_draft_id = 0;
+oTimer = null;
+function delete_confirm(id)
+{
+  Win.dialog({type:'confirm',msg:'是否删除该日记？',height:100,enter:function(){delete_diary(id);},enterName:'确定'});
+}
+function delete_diary(id) {
+    if (id > 0)
+    {
+        $.ajax({
+            type: "POST",
+            url: "/index.php?s=/diary/to_recy",
+            data: 'diary_id='+id,
+            success: function(re){ 
+                var obj = jQuery.parseJSON(re);
+                location.reload(true);
+            }
+        });
+    }
+    else
+    {
+        Win.dialog({title:'警告', msg:'请选择要删除的问题', type:'alert'});
+        return false;
+    }
+} 
+function checkContent(){
+	if(IM.gFlash) {
+		var content = cont_filter($('#content').html());
+	}
+	else {
+		var content = $('#content').val();
+	}
+	if(content == "" || content == "写两句..."){
+		$("#content").focus();
+		return false;
+	}
+	return true;
+}
+
+function modify_diary(status,is_auto) {
+	var dt_notice=0;    
+    if($('#dt_notice').attr("checked")=="checked")
+    {
+        dt_notice=1;
+    }
+   
+   if(is_auto != 1)
+   {
+        var imgboxlist_dl_num = $('#imgboxlist dl').length;
+        if(imgboxlist_dl_num > 10){Win.dialog({'msg':'您添加的图片不得超过10张','type':'info'});return false;}
+   }
+    
+    
+	if(checkContent()==false){
+        if(is_auto != 1)
+        {
+            var imgboxlist_dl_num = $('#imgboxlist dl').length;
+            if(imgboxlist_dl_num > 10){Win.dialog({'msg':'您添加的图片不得超过10张','type':'info'});return false;}
+            
+            Win.dialog({'msg':'请输入写两句内容','type':'info'});
+            return false;
+        }   
+        return false;        
+	}
+    
+
+	if(status == 1) {
+		Win.dialog({'msg':'正在修改数据，请稍等......','type':'warn','noclose':true});
+	}
+    
+    
+	var mood = $('#mood').val();
+	var mood_memo = $('#mood_memo').val(); 
+	if(IM.gFlash) {
+		var content = cont_filter($('#content').html());
+	}else{
+		var content = $('#content').val();
+	}
+
+    var diary_photo_data = get_already_dairy_data();
+    
+	$.ajax({
+		type: "POST",
+		url: "/index.php?s=/diary/add/",
+		data: 'mood='+encodeURIComponent(mood)+'&mood_memo='+encodeURIComponent(mood_memo)+'&set_time='+$('#set_time').val()+'&content='+encodeURIComponent(content)+'&read_type='+$("input[name='read_type']:checked").val()+'&dt_notice='+dt_notice+'&status='+status+'&diary_id='+diary_id+'&diary_draft_id='+diary_draft_id+'&diary_photo_data='+encodeURIComponent(diary_photo_data)+'&is_edit=0',
+		success: function(re){ 
+			var obj = jQuery.parseJSON(re);
+			if(obj.errno == 200) {
+				if(status == 1) {
+					is_submit = true;
+					window.clearInterval(oTimer);
+					Win.dialog({'msg':'发布成功','type':'info',enter:function() {location.reload(true);},cancel:function() {location.reload(true);}});
+					 setTimeout("$('#WinDiv').hide();location.reload(true);",1000);
+				}else{	
+					var datetime=new Date();
+					var HH=datetime.getHours();
+					var mm=datetime.getMinutes();
+					var SS=datetime.getSeconds();
+					if (HH<10) HH="0"+HH;
+					if (mm<10) mm="0"+mm;
+					if (SS<10) SS="0"+SS;
+					var saveTime=+HH+":"+mm+":"+SS;
+
+					diary_draft_id = obj.diary_draft_id;
+					$('#diary_draft').html('<img src="<php>echo $urlstatic</php>/img/gtk-save-as.png" class="ico"/> 已保存到草稿箱 '+saveTime);
+
+					setTimeout("$('#diary_draft').hide()",5000);
+					if(IM.gFlash) {
+						content_ago = cont_filter($('#content').html());
+					}
+					else {
+						content_ago = $('#content').val();
+					}
+				}
+			}else{
+				if(status == 1) Win.dialog({'msg':obj.msg,'type':'info'});	
+			}
+		}
+	});
+}
+function onChangeMood(){
+	if($("#mood").val() == '自填心情'){
+		$('#mood_memo').css('display','');
+	}
+	else{
+		$('#mood_memo').css('display','none');
+	}
+}
+jQuery(function($){
+	if(!IM.gFlash || ($.browser.msie && $.browser.version >= 9)) {
+		$("#edit_type").html('<textarea name="content" id="content" class="textbox" onkeyup="setRange(this)" onmouseup="setRange(this)" onblur="blurContent()" onfocus="foucsContent()">写两句...</textarea>');
+	}
+	$("input[name='read_type']").change(function() { 
+		var selectedvalue = $("input[name='read_type']:checked").val();
+		selectedvalue = parseInt(selectedvalue);
+		if(selectedvalue == 2) {
+			setTimeout($("#dt_notice_span").hide(),5000);
+		}else{
+			setTimeout($("#dt_notice_span").show(),5000);
+		}
+	});
+	$("#mood").bind("change",function(){onChangeMood('mood');});
+	$(window).bind("beforeunload",function(){
+		if(IM.gFlash) {
+			var content = cont_filter(document.getElementById('content').innerHTML);
+		}
+		else {
+			var content = $('#content').val();
+		}
+		if(content != content_ago && content != '写两句...' && !is_submit)
+		{
+			modify_diary(0);
+			return "离开前请先保存您输入的内容！";
+		}
+	});
+	clockon();
+    
+    oTimer = setInterval('modify_diary(0,1)',120000);
+    
+	$('input#set_time').calendar();
+});
+
+
+
+function clockon(){
+	var date=new Date();
+	var KK=date.getDay();
+	var HH=date.getHours();
+	var mm=date.getMinutes();
+	var SS=date.getSeconds();
+	if (HH<10) HH="0"+HH;
+	if (mm<10) mm="0"+mm;
+	if (SS<10) SS="0"+SS;
+	var str_date=+HH+":"+mm;//+":"+SS
+	$('#date').html(str_date);
+	var timer=setTimeout("clockon()",200);
+}
+function foucsContent(){
+	if(IM.gFlash) {
+		if($("#content").html() == "写两句...") {
+			$("#content").html("");
+			$("#content").css("color","#000000");
+		}
+	}
+	else {
+		if($("#content").val() == "写两句...") {
+			$("#content").val("");
+			$("#content").css("color","#000000");
+		}
+	}
+}
+function blurContent(){
+	if(IM.gFlash) {
+		if($("#content").html() == "") {
+			$("#content").html("写两句...");
+			$("#content").css("color","#999999");
+		}
+	}
+	else {
+		if($("#content").val() == "") {
+			$("#content").val("写两句...");
+			$("#content").css("color","#999999");
+		}
+	}
+}
+
+function edit_diary_name()
+{
+	var data = '<div class="exchange_day">'+
+					'<div class="select_diary1 zindx_di2" onmouseover="this.className=\'select_diary1 zindx_di100\';" onmouseout="this.className=\'select_diary1 zindx_di2\';"><p onclick="set_diary_name(\'胡言乱语\')">胡言乱语</p></div>'+
+				    '<div class="select_diary2 zindx_di5" onmouseover="this.className=\'select_diary2 zindx_di100\';" onmouseout="this.className=\'select_diary2 zindx_di5\';"><p onclick="set_diary_name(\'想说就说\')">想说就说</p></div>'+
+					'<div class="select_diary3 zindx_di1" onmouseover="this.className=\'select_diary3 zindx_di100\';" onmouseout="this.className=\'select_diary3 zindx_di1\';"><p onclick="set_diary_name(\'自言自语\')">自言自语</p></div>'+
+				    '<div class="select_diary4"  onmouseover="this.className=\'select_diary4 zindx_di100\';" onmouseout="this.className=\'select_diary4\';"><p onclick="set_diary_name(\'流氓语录\')">流氓语录</p></div>'+
+				    '<div class="select_diary6 zindx_di6" onmouseover="this.className=\'select_diary6 zindx_di100\';" onmouseout="this.className=\'select_diary6 zindx_di6\';"><p onclick="set_diary_name(\'自说自话\')">自说自话</p></div>'+
+				    '<div class="select_diary7 zindx_di7" onmouseover="this.className=\'select_diary7 zindx_di100\';" onmouseout="this.className=\'select_diary7 zindx_di7\';"><p onclick="set_diary_name(\'草民日记\')">草民日记</p></div>'+
+				    '<div class="select_diary8 zindx_di8" onmouseover="this.className=\'select_diary8 zindx_di100\';" onmouseout="this.className=\'select_diary8 zindx_di8\';"><p onclick="set_diary_name(\'碎碎念\')">碎碎念</p></div>'+
+				    '<div class="select_diary9 zindx_di9" onmouseover="this.className=\'select_diary9 zindx_di100\';" onmouseout="this.className=\'select_diary9 zindx_di9\';"><p onclick="set_diary_name(\'嘟囔\')">嘟囔</p></div>'+
+				    '<div class="select_diary10 zindx_di10" onmouseover="this.className=\'select_diary10 zindx_di100\';" onmouseout="this.className=\'select_diary10 zindx_di10\';"><p onclick="set_diary_name(\'私房话\')">私房话</p></div>'+
+				    '<h3>自定义日记名称：</h3>'+
+				    '	<p class="m_t10">'+
+				    '      <input name="diary_name" id="diary_name" type="text" class="input_1 inpt_h" value="流氓语录" maxlength="10" />'+
+				    '  </p>'+
+				    '<p class="tex_dayzi">'+
+				    '<span class="fr"><input type="button" value="确定" class="btn1" onclick="return modify_diary_name()"></span><span class="fr">限定输入10个字符</span></p>            '+
+				    '</div>';
+	Win.dialog({title:'自定义日记名称',msg:data,width:370});
+}
+function set_diary_name(diary_name){
+	$("#diary_name").val('');
+	$("#diary_name").val(diary_name);
+}
+
+function modify_diary_name()
+{
+	var diary_name = $.trim($("#diary_name").val());
+	if(diary_name == ""){
+		$("#diary_name").focus();
+		return false;
+	}
+	$.ajax({
+		type: "POST",
+		url: "/index.php?s=/diary/diary_name/",
+		data: 'diary_name='+diary_name,	
+		success: function(re){ 
+			var obj = jQuery.parseJSON(re);
+			if(obj.errno == 200) {
+				Win.dialog({'msg':obj.msg,'type':'info',enter:function() {location.reload(true);},cancel:function() {location.reload(true);}});
+			}else{
+				 Win.dialog({'msg':obj.msg,'type':'info'});
+			}
+		}
+	});
+}
+
+
+/*********相册上传      S*********************/
+        //flash上传
+        var _is_webup = false;
+        var _g_data='';
+        var error_num = 0;
+
+        function check_timeout()
+        {
+            if(_is_webup==false)
+            {                        
+                location.href='/diary/';
+            }else{
+                return false;
+            }
+        }
+        function flash_onload()
+        {
+            _is_webup = true;
+        }
+        
+        function web_up_sure()
+        {
+            if(web_check_form())
+            {
+                $("#up_photo_frame").submit();
+                $('#photo_frame').get(0).onload = check_upload_status;
+                if ( $('#photo_frame').get(0).attachEvent != null )
+                {
+                    $('#photo_frame').get(0).attachEvent( 'onload', check_upload_status);
+                }                
+            }
+        }
+        
+        function _is_webup_status_act()
+        {
+            
+            //$('#_pic_up').html('<div class="add_photo_list"><ul class="clear" id="up_row_1"><li>照片1:</li><li id="uprow_1"><input onkeypress="return false;" onpaste="return false" id="upfile1" type="file" size="30" size="50" name="upfile1" /></li></ul><ul class="clear" id="up_row_2"><li>照片2:</li><li id="uprow_2"><input onkeypress="return false;" onpaste="return false" id="upfile2" type="file" size="30" size="50" name="upfile2" /></li></ul><ul class="clear" id="up_row_3"><li>照片3:</li><li id="uprow_3"><input onkeypress="return false;" onpaste="return false" id="upfile3" type="file" size="30" size="50" name="upfile3" /></li></ul><ul class="clear" id="up_row_4"><li>照片4:</li><li id="uprow_4"><input onkeypress="return false;" onpaste="return false" id="upfile4" type="file" size="30" size="50" name="upfile4" /></li></ul><ul class="clear" id="up_row_5"><li>照片5:</li><li id="uprow_5"><input onkeypress="return false;" onpaste="return false" id="upfile5" type="file" size="30" size="50" name="upfile5" /></li></ul><ul class="clear" id="up_row_6"><li>照片6:</li><li id="uprow_6"><input onkeypress="return false;" onpaste="return false" id="upfile6" type="file" size="30" size="50" name="upfile6" /></li></ul><ul class="clear" id="up_row_7"><li>照片7:</li><li id="uprow_7"><input onkeypress="return false;" onpaste="return false" id="upfile7" type="file" size="30" size="50" name="upfile7" /></li></ul><ul class="clear" id="up_row_8"><li>照片8:</li><li id="uprow_8"><input onkeypress="return false;" onpaste="return false" id="upfile8" type="file" size="30" size="50" name="upfile8" /></li></ul><ul class="clear" id="up_row_9"><li>照片9:</li><li id="uprow_9"><input onkeypress="return false;" onpaste="return false" id="upfile9" type="file" size="30" size="50" name="upfile9" /></li></ul><ul class="clear" id="up_row_10"><li>照片10:</li><li id="uprow_10"><input onkeypress="return false;" onpaste="return false" id="upfile10" type="file" size="30" size="50" name="upfile10" /></li></ul><input type="hidden" id="photo_num" name="photo_num" value="" /><input type="hidden" id="time" name="time" value="1323410503" /><input type="hidden" id="key" name="key" value="0c7af17f7d15882f418fb31af148e75d" /><input type="hidden" name="uid" value="18090226" /><input type="hidden" name="permission_type" value="0" /><input name="up_type" value="file" type="hidden"/><p class="list"><a onclick="web_up_sure();" class="btn1 btn_b1">开始上传</a></p></div>');
+            $('#flash_up').html('<form method="post" action="" target="photo_frame" name="photo_frame" id="up_photo_frame" enctype="multipart/form-data"><div class="add_photo_list"><ul class="clear" id="up_row_1"><li>照片1:</li><li id="uprow_1"><input onkeypress="return false;" onpaste="return false" id="upfile1" type="file" size="30" size="50" name="upfile1" /></li></ul><ul class="clear" id="up_row_2"><li>照片2:</li><li id="uprow_2"><input onkeypress="return false;" onpaste="return false" id="upfile2" type="file" size="30" size="50" name="upfile2" /></li></ul><ul class="clear" id="up_row_3"><li>照片3:</li><li id="uprow_3"><input onkeypress="return false;" onpaste="return false" id="upfile3" type="file" size="30" size="50" name="upfile3" /></li></ul><ul class="clear" id="up_row_4"><li>照片4:</li><li id="uprow_4"><input onkeypress="return false;" onpaste="return false" id="upfile4" type="file" size="30" size="50" name="upfile4" /></li></ul><ul class="clear" id="up_row_5"><li>照片5:</li><li id="uprow_5"><input onkeypress="return false;" onpaste="return false" id="upfile5" type="file" size="30" size="50" name="upfile5" /></li></ul><ul class="clear" id="up_row_6"><li>照片6:</li><li id="uprow_6"><input onkeypress="return false;" onpaste="return false" id="upfile6" type="file" size="30" size="50" name="upfile6" /></li></ul><ul class="clear" id="up_row_7"><li>照片7:</li><li id="uprow_7"><input onkeypress="return false;" onpaste="return false" id="upfile7" type="file" size="30" size="50" name="upfile7" /></li></ul><ul class="clear" id="up_row_8"><li>照片8:</li><li id="uprow_8"><input onkeypress="return false;" onpaste="return false" id="upfile8" type="file" size="30" size="50" name="upfile8" /></li></ul><ul class="clear" id="up_row_9"><li>照片9:</li><li id="uprow_9"><input onkeypress="return false;" onpaste="return false" id="upfile9" type="file" size="30" size="50" name="upfile9" /></li></ul><ul class="clear" id="up_row_10"><li>照片10:</li><li id="uprow_10"><input onkeypress="return false;" onpaste="return false" id="upfile10" type="file" size="30" size="50" name="upfile10" /></li></ul><input type="hidden" id="photo_num" name="photo_num" value="" /><input type="hidden" id="time" name="time" value="1323410503" /><input type="hidden" id="key" name="key" value="0c7af17f7d15882f418fb31af148e75d" /><input type="hidden" name="uid" value="18090226" /><input type="hidden" name="permission_type" value="0" /><input name="up_type" value="file" type="hidden"/><p class="list"><a onclick="web_up_sure();" class="btn1 btn_b1">开始上传</a></p></div></form>');
+            $('#_form_pic').html('');             
+        }
+        
+        function _is_webup_status()
+        {
+            if(_is_webup == false)
+            {                
+                _is_webup_status_act();
+            }
+        }
+        
+        
+
+
+        function up_finish(result)
+        {
+          
+            var obj = jQuery.parseJSON(result.toString());
+            if(obj.result=='1' && obj.file_md5!='')
+            {
+                if(_g_data!=''){
+                    if(_g_data.indexOf(obj.file_md5)<0){
+                       _g_data = _g_data+' '+obj.file_md5;
+                    }
+                }else{
+                    _g_data = obj.file_md5;
+                }
+            }
+            else
+            {
+                if(obj.file_md5==1){
+                    error_num++;
+                }
+            }
+            
+        }
+        function up_all_finish()
+        {
+            var data = _g_data;
+            _g_data  = '';
+            $("#_js_data").val(data);
+            if(data==''){
+                var msg_code='您上传的图片因像素过小等原因上传失败,请重新上传!';
+                Win.dialog({type:'info',width:420,msg:msg_code,noclose:true,height:100,enter:function(){location.reload();}});
+                return false;
+            }else
+            {
+                if(error_num>0)
+                {
+                    var msg_code='<div class="photo_resume fs_14"><p><h3>您有<span style="color:red;">'+error_num+'</span>张图片因像素过小等原因上传失败,是否继续上传其他照片!</h3></p>'
+                                +'<p class="m_t20"><a class="btn1" id="_js_box_submit">确定</a>或 <a href="javascript:location.reload();">取消</a></p></div>';
+                    Win.dialog({width:550,height:100,msg:msg_code});
+                    $("#_js_box_submit").click(function(){
+                        $('#up_photo_frame').submit();
+                        waiting();
+                    });
+                }else{
+                    $('#up_photo_frame').submit();
+                    $('#photo_frame').get(0).onload = check_upload_status;
+                    if ( $('#photo_frame').get(0).attachEvent != null )
+                    {
+                        $('#photo_frame').get(0).attachEvent( 'onload', check_upload_status);
+                    }
+                    waiting();
+                }
+            }
+        }
+        var up_fail = 0;
+        function check_upload_status()
+        {
+            var insert_photo_data_html = '';
+            if(up_fail==0)
+            {
+                Win.close();
+                var data = $("iframe").contents().find("body").html();
+                $.post("/photo/api_photo_bydiary",{'data': data},
+                function(data){
+                    if(data.status==1){                        
+                        var photo_info_data = data.msg;
+                       
+                        for(var i=0;i<photo_info_data.length;i++)
+                        {
+                            var url_img_path_120 = photo_info_data[i]['url_img_path_120'];
+                            var dl = photo_info_data[i]['photo_id'];
+                            insert_photo_data_html+= '<dl onmouseover="photo_action._overContent(this,'+dl+');" onmouseout="_outContent(this,'+dl+');" pp="0"><dt><p class="photo_m"><a><img src="'+url_img_path_120+'" title="照片描述" dl='+dl+'></a></p><dd class="clear eite" style="cursor:pointer;" onclick="photo_action.display_edit_content(this);"><a class="f_9 fl" cc="" id="'+dl+'_content" dl='+dl+'>暂无描述</a><a class="fr"><img src="<php>echo $urlstatic</php>/img/ico_photowrite.png" alt="编辑"></a></dd><dd style="display:none;"><a style="display: none;" id="'+dl+'_per" onclick="photo_action.move_pre(this);">上移</a> <a style="display: none;" id="'+dl+'_next" onclick="photo_action.move_next(this);">下移</a> <a style="display: none;" id="'+dl+'_del" onclick="photo_action.del_photo(this);">删除</a></dd></dt></dl>';    
+                        }                        
+                        $('#imgboxlist').append(insert_photo_data_html);
+                        $('#instertimgbox').show();
+                    }
+                },"json");
+            }
+            return true;
+        }
+        function waiting(){
+            var msg_code = '<div class="popup_c" id="uploading_div">'
+            + ' <p>照片正在上传，请稍等....</p>'
+            + ' <p class="photo_progress"><img src="<php>echo $urlstatic</php>/img/uping.gif" alt="loading" /></p>'
+            + '</div>' ;
+            Win.dialog({width:420,msg:msg_code,noclose:false,height:100});
+        }
+        
+        
+        //PHP相册上传
+        function show_more_up(i)
+        {
+            i++;
+            if(i>10) return ;
+            $("#up_row_"+i).fadeIn("fast",function(){show_more_up(i);})
+        }
+
+        function web_check_form()
+        {
+            up_fail = 0;
+            var num = 0;
+            for(var i=1; i<=6; i++) 
+            {
+                var file=$("#upfile"+i).get(0);
+                if(file.value!="" && file.value!="http://"  ) {
+                    num++;
+                }
+            }
+            if(num == 0)
+            {
+                Win.dialog({msg:'请先点击 [浏览...] 选择一张照片！',type:'info'});
+                return false;
+            }
+            
+            var photo_now_num = num + parseInt($('#photo_num').val());
+            if(photo_now_num >200)
+            {
+                Win.dialog({msg:'照片数量超过上限！',type:'info'});
+                return false;
+            }
+            
+          //////////
+            return true;
+        }
+
+/*
+        function check_upload_status()
+        {
+            if(up_fail==0 && !jQuery.browser.safari)
+            {
+                alert('上传图片失败');
+                Win.close();
+            }
+        }
+*/
+        var up_fail = 0;
+
+        function upload_fail(message,i)
+        {
+            up_fail = 1;
+            Win.dialog({msg:message,height:100,width:500,type:'info'});
+            $('#uprow_'+i).html($('#uprow_'+i).html());
+            //$('#upfile'+i).get(0).attr('value','');
+            //HidePreImg($('#upfile'+i).get(0),$('#prev_img_'+i).get(0))
+        }
+
+        function DelImg(i)
+        {
+            var delfile=$("#file"+i).get(0);
+            delfile.innerHTML=i+".<input type=file id=upfile"+i+ " name=upfile"+i+" size=30 onchange='ShowImg("+i+", this)'>";
+            $('#prev_td_'+i).get(0).style.display="none";
+        }
+
+        function SleepImg(num)
+        {
+                if(SleepTotal>10) return false;
+                var view=$("#hidimg_"+num).get(0);
+                var isize=$("#prev_title_"+num).get(0);
+                if(view.readyState=="complete") {
+                    if(view.fileSize>1024*1024*10) {
+                        Win.dialog({msg:'该图片超过10M，请使用高级上传方式上传'});
+                        DelImg(num);
+                        return false;
+                    }
+
+                    isize.innerHTML=num+"(大小:"+Math.ceil(view.fileSize/1024)+"K)";
+                }       
+                else
+                {
+                    setTimeout("SleepImg("+num+")", 1000);
+                }
+        }
+
+        function HidePreImg(file_obj, img_obj)
+        {
+            file_obj.outerHTML = file_obj.outerHTML;
+            try{
+                    img_obj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").enabled = false;
+            }catch(e){
+                
+            }
+        }
+        function PreImg(file_obj, img_obj)
+        {
+            if(file_obj.value == "")
+                return;
+            if(!file_obj.value.match(/\.jpg|\.jpeg|\.gif|\.png|\.bmp$/i) )
+            {
+                Win.dialog({type:'info',msg:'文件格式不正确！'});
+                HidePreImg(file_obj, img_obj);
+                return;
+            }
+            //var newPreview = document.getElementById("newPreview");
+            try{ 
+                img_obj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").enabled = true;
+                img_obj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = file_obj.value;
+            }catch(e){
+            }
+            
+            //img_obj.src = file_obj.value;
+
+            var img	= new Image(); 
+            img.onload = function() {
+                if(img.fileSize > 1024*1024*5) {
+                    Win.dialog({type:'info',msg:'图片不能超过5M！'});
+                    HidePreImg(file_obj, img_obj);
+                }
+                img.onload = null;
+                img=null;
+            }
+            img.src	= file_obj.value;
+        }
+
+        //显示图片
+        function ShowImg(num,obj)
+        {
+            if(obj.value=="")
+            {
+                return false;
+            }
+
+            if (!is_ie7())
+            {
+                var view=$("#hidimg_"+num).get(0);
+                view.src=obj.value;
+            }
+
+            if(obj.value.search(/\.jpg|\.jpeg|\.gif|\.png|\.bmp$/i) == -1)
+            {
+                Win.dialog({type:'info',msg:'文件格式不正确！'});
+                DelImg(num);
+                return false;
+            }
+
+            var img	= new Image(); 
+            img.src	= obj.value; 
+            var pic = $("#prev_img_"+num).get(0);
+            var title = $("#prev_title_"+num).get(0);
+
+            if (!is_ie7())
+            {
+                if(view.readyState=="complete") {
+                    if(view.fileSize>1024*1024*5) {
+                        Win.dialog({type:'info',msg:'图片不能超过5M！'});
+                        DelImg(num);
+                        return false;
+                    }
+
+                    title.innerHTML=num+"(大小:"+Math.ceil(view.fileSize/1024)+"K)";
+                }
+                else
+                {
+                    setTimeout("SleepImg("+num+")", 1000);
+                }
+            }
+            try{
+            //预览图片
+                $('#prev_td_'+num).get(0).style.display="block";
+                pic.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = obj.value;
+            }catch(e){}
+        }
+
+
+        function is_ie7(){
+            var browser_name = navigator.appName;
+            var browser_ver  = navigator.appVersion;
+            var ver_array    = browser_ver.split(";");
+            if (browser_name.indexOf("Internet Explorer") != -1)
+            {
+                if (ver_array.length > 1 && ver_array[1].length > 0  )
+                {
+                    var ie_ver = parseInt(ver_array[1].replace("MSIE",""));
+                    if (ie_ver == 7)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }    
+/*********相册上传      E*********************/
+</script>
+<include file="Public:foot" />
+</div>
+</body>
+</html>

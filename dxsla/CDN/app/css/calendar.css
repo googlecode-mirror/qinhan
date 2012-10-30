@@ -1,0 +1,138 @@
+@charset "utf-8";
+/* calendar styles */
+#calendar_div{position: absolute;left:860px;top:240px;display: block;}
+#calendar_div {
+	display: none;
+	border: 1px solid #777;
+	z-index: 10; 
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	padding: 0;
+	margin: 0;
+}
+#calendar_div a {
+	cursor: pointer;
+	cursor: hand;
+}
+button.calendar_trigger {
+	width: 25px;
+}
+img.calendar_trigger {
+	margin: 2px;
+	vertical-align: middle;
+}
+#calendar_control, #calendar_links, #calendar_header, #calendar, #calendar_time {
+	clear:both;
+	float:left;
+	width:315px;
+	color:#fff;
+    font-size:12px;
+}
+#calendar_control {
+	background:#474c5b;
+}
+#calendar_links {
+	background:#474c5b;
+}
+#calendar_control a {
+	font-weight: bold;
+	font-size: 80%;
+	letter-spacing: 1px;
+	color: #eee;
+	padding:2px;
+}
+#calendar_links a{color:#333;}
+#calendar_control a:hover {
+
+	color: #fff;
+}
+#calendar_links a:hover, .calendar_titleRow a:hover {
+	background: #ddd;
+	color: #333;
+}
+#calendar_clear{
+	float: left;
+}
+#calendar_current {
+	float: left;margin-left:5px;
+}
+#calendar_close{
+	float: right;margin-right:5px;
+}
+#calendar_header{
+	background:#eeeeee;
+	font-weight:bold;
+	color:#333;
+	border-bottom:1px #dddddd solid;
+	padding:2px 0px;
+}
+#calendar_header select, #calendar_time select {
+	color: #333;
+	border: 0px;
+	font-weight: bold;
+	margin-right:2px;
+}
+#calendar {
+	background: #ccc;
+	text-align: center;
+	font-size: 100%;
+}
+#calendar a {
+	width: 100%;
+	display: block;
+}
+#calendar a:hover {
+	color: #eee;
+}
+#calendar .calendar_titleRow {
+	background: #efefef;
+}
+#calendar .calendar_titleRow a {
+	color:#666;
+}
+#calendar .calendar_titleRow a:hover {
+	color: #000;
+}
+#calendar .calendar_daysRow {
+	background:#fbfbfb;
+	color:#666;
+}
+#calendar .calendar_daysCell {
+	border: 1px solid #ddd;
+}
+#calendar .calendar_daysCell a {
+	color: #000;
+}
+#calendar .calendar_daysCell a:hover {
+   ackground:#f1f1f1;
+}
+#calendar .calendar_weekEndCell {
+
+}
+#calendar .calendar_daysCellOver {
+	background: #fff;
+}
+#calendar .calendar_unselectable {
+	color: #888;
+}
+#calendar_today {
+	background: #fcc !important;
+}
+#calendar_currentDay,#calendar_currentDay:hover{
+	background:#fa7103 !important;color:#fff !important;
+}
+
+#calendar_cover {
+    display: none; /*sorry for IE5*/
+    display/**/: block; /*sorry for IE5*/
+    position: absolute; /*must have*/
+    z-index: -1; /*must have*/
+    filter: mask(); /*must have*/
+    top: -1px; /*must have*/
+    left: -1px; /*must have*/
+    width: 300px; /*must have to match width and borders*/
+    height: 300px; /*must have to match maximum height*/ 
+}
+#calendar_prev,#calendar_next{padding:2px 5px;}
+#calendar_hour{margin-left:2px;}
+#calendar_hour,#calendar_minute{width:54px;}

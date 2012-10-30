@@ -1,0 +1,227 @@
+<style type="text/css">
+body{ background:url(<php>echo $urlstatic</php>/img/body_bg.png) no-repeat top center;}	
+</style>
+<script>
+var myuserinfo = {$myuserinfo|json_encode};
+</script>
+<!--header start-->
+<div class="headerbox">
+  <div class="header clear">
+    <div class="fl header_l" id="list_con">
+      <ul class="list" id="news_list">
+      </ul>
+    </div>
+    <script language="javascript">
+        $.get('/index.php?s=/main/operations/',function(data){
+			if(data != ''){
+				var json_data = eval("("+data+")");
+				var lihtml = '';
+				var j = 0;
+				for(var i in json_data){
+					lihtml += '<li>' + json_data[i]['memo'] + '</li>';
+					j++;
+				}
+				$('#news_list').html(lihtml);
+
+				var margin_top = 0;
+				$('#list_con').append($("#news_list").clone());
+				var scroll_news = function(){
+
+					$('#news_list').animate({'marginTop':-margin_top},1000,function(){
+						if(margin_top == j*30){
+							$(this).css({'margin-top':'0px'});
+							margin_top = 0;
+						}
+						margin_top += 30;
+						setTimeout(scroll_news, 5000);
+					});
+				};
+				if(j>1){
+				scroll_news();
+				}
+			}
+        });
+        </script>
+    <div class="fr header_r" id="header-right"> <span class="search">
+      <input class="top_search" name="搜索ID" type="text" value="搜索ID找人">
+      <input id="top_search_btn" class="btn" name="搜索" type="button">
+      </span><a class="hovf60" href="javascript:;" onclick="addFavorite()">加入收藏</a> <a class="hovf60" href="/">首页</a> <a class="hovf60 p_l10" href="{$urldomain}/{$GLOBALS['i']['uid']}" target="_blank">我的主页</a>
+      <!--<a class="prop" id="prop_link" href="javascript:void(0);">道具礼品</a>-->
+      <a class="prop" id="admprop_link" href="javascript:void(0);">我的管理</a> <a class="hovf60" href="{$urlsite}/member/logout">退出</a> </div>
+    <!-- 道具礼品下拉选项 start-->
+    <div class="propbox" id="propbox" style="">
+      <p><a href="{$urlsite}/goods">道具礼品中心</a></p>
+      <p><a href="{$urlsite}/goods/my">我的小仓库</a></p>
+      <p><a href="{$urlsite}/goods/log/?uid=0">历史记录</a></p>
+    </div>
+    <!--道具礼品下拉选项 end-->
+    <!-- 我的管理下拉选项 start-->
+    <div class="admbox" id="admbox" style="">
+      <p class="clear"><a href="{$urlsite}/profile"><span class="ico_in"></span><span class="fl">基本资料</span></a></p>
+      <P><a href="{$urlsite}/user/rsync/"><span class="ico_set"></span><span class="fl">账号设置</span></a></P>
+      <P><a href="{$urlsite}/pay/card_log?type=link"><span class="ico_redbean"></span><span class="fl">红豆账户</span></a></P>
+    </div>
+    <!--我的管理下拉选项 end-->
+  </div>
+</div>
+<!--header end-->
+<script type="text/javascript">
+$(function(){
+    //搜索框获得焦点时
+    $('.top_search').focus(function(){
+        if(/^\d+$/.test($(this)[0].value) == false){
+            $(this)[0].value = '';
+        }
+    });
+    //搜索框失去焦点时
+    $('.top_search').blur(function(){
+        if(/^\s*$/.test($(this)[0].value)){
+            $(this)[0].value = "搜索ID找人";
+        }
+    });
+    
+    function search_logic(obj){
+        if(/^\d+$/.test(obj.value) == false){
+                Win.dialog({'type':'info','width':250,'msg':'ID为数字类型，输入无效！'});
+            }else{
+                var uid = obj.value
+                $.get('/user/search?uid='+uid,function(data){
+                    var j_data = eval("("+data+")");
+                    if(parseInt(j_data['error']) != 0){
+                        Win.dialog({'type':'info','width':250,'msg':j_data['msg']});
+                    }else{
+                        window.location.href="/"+uid;
+                    }
+                });
+            }
+    }
+    //搜索框输入enter时
+    $('.top_search').keydown(function(e){
+        if(e.which == 13){
+            search_logic($(this)[0]);
+        }
+    });
+    //或者点击搜索按钮时
+    $('#top_search_btn').click(function(){
+        search_logic($('.top_search').eq(0)[0]);
+    });
+
+    //道具礼品下拉菜单
+    $('#prop_link').mouseover(function(){
+        $(this).css({'color':'black','background':'#FFF url(<php>echo $urlstatic</php>/img/top_arrow2.png?gv=88_1) no-repeat scroll 65px 50%'});
+        $('#propbox').css({'display':'block'});
+        
+    });
+    $('#header-right').mouseover(function(e){
+        if($(e.target).parents('#propbox')[0] == undefined && e.target.id != 'prop_link'){
+            $('#propbox').css({'display':'none'});
+            $('#prop_link').css({'color':'white','background':'url(<php>echo $urlstatic</php>/img/chrismas_top_arrow1.png?gv=88_1) no-repeat scroll 65px 50%'});
+        }
+    });
+    $('#propbox').mouseleave(function(){
+        $('#propbox').css({'display':'none'});
+        $('#prop_link').css({'color':'white','background':'url(<php>echo $urlstatic</php>/img/chrismas_top_arrow1.png?gv=88_1) no-repeat scroll 65px 50%'});
+    });
+    
+    //我的管理下拉菜单
+    
+    $('#admprop_link').mouseover(function(){
+         $(this).css({'color':'black','background':'#FFF url(<php>echo $urlstatic</php>/img/top_arrow2.png?gv=88_1) no-repeat scroll 65px 50%'});
+        $('#admbox').css({'display':'block'});
+        
+    });
+    $('#header-right').mouseover(function(e){
+        if($(e.target).parents('#admbox')[0] == undefined && e.target.id != 'admprop_link'){
+            $('#admprop_link').css({'color':'white','background':'url(<php>echo $urlstatic</php>/img/chrismas_top_arrow1.png?gv=88_1) no-repeat scroll 65px 50%'});
+            $('#admbox').css({'display':'none'});
+        }
+    });
+    $('#admbox').mouseleave(function(){
+        $('#admbox').css({'display':'none'});
+        $('#admprop_link').css({'color':'white','background':'url(<php>echo $urlstatic</php>/img/chrismas_top_arrow1.png?gv=88_1) no-repeat scroll 65px 50%'});
+    });
+});
+</script>
+<div class="wrap">
+<div class="head clear">
+  <h1 class="newlogo fl clear"><a href="/" class="g_logo_a fl"><img src="{$urlstatic}/img/logo.gif?gv=88_1" alt="简简单单网" title="简简单单网" /></a></h1>
+  <script>
+            var gShowLog = 0;
+            var g_chat_msg = 0;
+        </script>
+  <div class="g_nav">
+    <ul>
+      <li class="g_nav_bg1"> <a href="/" class="<eq name="nav" value="1">current</eq>"><span>打分</span></a> </li>
+      <li class="g_nav_bg6"> <a href="{$urlsite}/find" class="<eq name="nav" value="2">current</eq>"><span>{$GLOBALS['i']['sex']|ui_sex='2'}</span></a> </li>
+      <li class="g_nav_bg2">
+        <if condition="$f['new_msg'] neq 0"> <b class="sm_mb sm_mb_w" id="new_mail_call" style="" title="mailnew" > <b class="sm_mb sm_mb_a"> <b id="_new_mail_num" class="sm_mb sm_mb_b">{$f['new_msg']}</b> </b> </b> </if>
+        <a href="{$urlsite}/msg/" class="<eq name="nav" value="3">current</eq>"><span>搭讪</span></a> </li>
+      <li class="g_nav_bg8"> <a href="{$urlsite}/task/" class="<eq name="nav" value="5">current</eq>"><span>师兄帮帮忙</span></a> </li>
+      <li class="g_nav_bg9">
+        <if condition="$f['new_answer'] neq 0">
+          <div style="" id="new_answer_call" class="new_messages"><b id="_new_answer_num">{$f['new_answer']}</b></div>
+        </if>
+        <a href="{$urlsite}/question/<if condition="$f['new_answer'] eq 0">plaza</if><if condition="$f['new_answer'] neq 0">sender</if>" class="<eq name="nav" value="4">current</eq>"><span>问问</span></a> </li>	  
+      <li class="pos_re_box" id="menu_more_parent">
+        <div href="javascript:void(0);" class="menu_more clear" id="menu_more_link" style="padding:5px 12px;"> <span class="menu_mo"></span><span class="fl pd0" style="white-space:nowrap;">更多(3)</span>
+          <!--menu更多下拉框 start-->
+          <ul class="menu_morelist" id="menu_morelist" style="display:none;">
+            <li style="width:80px;margin-left:0;"> <a href="{$urlsite}/diary/" class="more_skillbox"  style="width:80px;height:40px;">
+              <p class="more_skillico"></p>
+              <p>写两句</p>
+              </a> </li>
+            <li style="width:80px;margin-left:0;"> <a href="{$urlsite}/photo/" class="more_skillbox"  style="width:80px;height:40px;">
+              <p class="more_skillico2"></p>
+              <p>我的相册</p>
+              </a> </li>
+            <li style="border:0;width:80px;margin-left:0;"> <a href="{$urlsite}/question/wenwen/" class="more_skillbox"  style="width:80px;height:40px;">
+              <p class="more_skillico3"></p>
+              <p>小编专访</p>
+              </a> </li>
+          </ul>
+          <!--menu更多下拉框 end-->
+        </div>
+      </li>
+    </ul>
+  </div>
+  <script type="text/javascript">
+            //var is_more_open = false;
+            //鼠标滑过事件
+            $('#menu_more_link').mouseover(function(){
+				$(this).css({'background':'url(<php>echo $urlstatic</php>/img/menu_morebg.png?gv=88_1) no-repeat scroll 0 0 transparent'});
+                $('#menu_morelist').css({'display':'block'});
+            });
+            //鼠标移动监测
+            $("body").mousemove(function(e){
+                if($(e.target).parents('#menu_more_parent')[0]==undefined){
+                    $('#menu_more_link').css({'background':''});
+                    $('#menu_morelist').css({'display':'none'});
+                    //is_more_open = false;
+                }
+            });
+        </script>
+  <script>
+                    var gUid = "18090226";
+                    var gSex = "1";
+                    var gVip = "0";
+                    var gIfChat = "0";
+                    var gAccount = "jaredwu@qq.com";
+                    var gNickName = "jaredwu";
+                    var gAuthKey = "c56ba6a2a263491ab3239d9dce5b223e";
+                    var gShowLog = 0;
+                </script>
+  <div id="pop_list"></div>
+  <div style="display:none;position:absolute;left:900px;top:680px;z-index:1000;" id="closelog">
+    <input type="button" value="关闭" onclick=" $('#sock').css('height',0);">
+    <input type="button" onclick="$('#sock').css('height',300)" value="显示">
+  </div>
+  <div style="width:0px;height:0px;position:absolute;left:100px;top:100px;z-index:1000" id="imflash">
+    <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="0" height="0"  id="sock" name="sock" align="middle"  >
+      <param name="allowScriptAccess" value="sameDomain" />
+      <param name="movie" value="{$urlstatic}/flash/chat.swf" />
+      <param name="quality" value="high" />
+      <param name="bgcolor" />
+      <param name="wmode" value="transparent" />
+    </object>
+  </div>
+</div>

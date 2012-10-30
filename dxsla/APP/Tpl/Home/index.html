@@ -1,0 +1,1102 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$m['username']}的个人档案</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+
+<script language="javascript" src="{$urlstatic2}/js/provinces_zh-CN.js?gv=148_1"></script>
+<script language="javascript" src="{$urlstatic2}/js/skill.js?gv=148_1"></script>
+<script language="javascript" src="{$urlstatic2}/js/photo_group.js?gv=148_1"></script>
+<script language="javascript" src="{$urlstatic2}/js/pub_face_all.js{$urltail}"></script>
+<link href="{$urlstatic2}/css/personal1.css?gv=161_1" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<include file="Public:home_head" />
+<div class="container_cwrap clear">
+  <div class="fm_l_270" style="_width:270px;">
+    <div class="newotherperson_head">
+      <!--<p class="per_text"></p>-->
+      <p class="per_img" style="text-align:center;"><a href="{$urlsite}/home/photo?uid={$m['uid']}&gid=0"><img src="{$urlupload}{$m['default_pic']}_240x240.jpg" alt="点击查看大图" title="点击查看大图" class="face_s{$m['sex']}_b2" /></a></p>
+    </div>
+    <!--我想开始-->
+	<notempty name="m['want_content']">
+    <div class="iwanna_box{$m['sex']} word_break">
+      <div class="iwanna_box_t{$m['sex']}"></div>
+      <p class="iwanna_box_tex{$m['sex']}"><span>{$m['want_content']|do_things=$m['sex']} <a class="f_r underline" onclick="try_meet({$m['uid']},{$m['sex']},'{$m['username']}','{$m['want_content']}')" >约{$m['sex']|ui_sex}</a></span> </p>
+      <div class="iwanna_box_b{$m['sex']}"></div>
+    </div>
+	</notempty>
+	<!--我想结束-->
+    <div class="photo_score_flash">
+      <div class="newperson_l">
+        <div class="gradebox">
+          <dl class="clear">
+            <dt class="fl">印象</dt>
+            <dd class="gradebox_bg texbg" id="score_impress">
+              <if condition="empty($v['score_impress']) OR ($v['score_impress'] lt 1)">
+			  <object width="215" height="40" align="middle" id="markObjIE_score_impress" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000">
+                <param value="always" name="allowScriptAccess">
+                <param value="transparent" name="wmode">
+                <param value="{$urlstatic2}/flash/ping_small.swf?is_videoauth=0&type=score_impress" name="movie">
+                <param value="high" name="quality">
+                <param name="FlashVars " value="is_videoauth=0&type=score_impress" />
+                <embed  id="markObj_score_impress" width="215" height="40" align="middle" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" allowscriptaccess="sameDomain" swliveconnect="true" quality="high" wmode="transparent" src="{$urlstatic2}/flash/ping_small.swf?is_videoauth=0&type=score_impress"></embed>
+              </object>
+			  <else />
+			  您给{$m['sex']|ui_sex}<b class="f_r">{$v['score_impress']}分</b> {$m['sex']|ui_sex}的平均分:<b class="f_r">{$m['score_impress']}</b>
+			  </if>
+            </dd>
+          </dl>
+          <dl class="clear">
+            <dt class="fl">长相</dt>
+            <dd class="gradebox_bg texbg" id="score_face">
+			  <if condition="empty($v['score_face']) OR ($v['score_face'] lt 1)">
+              <object width="215" height="40" align="middle" id="markObjIE_score_face" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000">
+                <param value="always" name="allowScriptAccess">
+                <param value="transparent" name="wmode">
+                <param value="{$urlstatic2}/flash/ping_small.swf?is_videoauth=0&type=score_face" name="movie">
+                <param value="high" name="quality">
+                <param name="FlashVars " value="is_videoauth=0&type=score_face" />
+                <embed  id="markObj_score_face" width="215" height="40" align="middle" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" allowscriptaccess="sameDomain" swliveconnect="true" quality="high" wmode="transparent" src="{$urlstatic2}/flash/ping_small.swf?is_videoauth=0&type=score_face"></embed>
+              </object>
+			  <else />
+			  您给{$m['sex']|ui_sex}<b class="f_r">{$v['score_face']}分</b> {$m['sex']|ui_sex}的平均分:<b class="f_r">{$m['score_face']}</b>
+			  </if>		  
+            </dd>
+          </dl>
+          <dl class="clear">
+            <dt class="fl">身材</dt>
+            <dd class="gradebox_bg texbg" id="score_body">
+			  <if condition="empty($v['score_body']) OR ($v['score_body'] lt 1)">
+              <object width="215" height="40" align="middle" id="markObjIE_score_body" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000">
+                <param value="always" name="allowScriptAccess">
+                <param value="transparent" name="wmode">
+                <param value="{$urlstatic2}/flash/ping_small.swf?is_videoauth=0&type=score_body" name="movie">
+                <param value="high" name="quality">
+                <param name="FlashVars " value="is_videoauth=0&type=score_body" />
+                <embed  id="markObj_score_body" width="215" height="40" align="middle" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" allowscriptaccess="sameDomain" swliveconnect="true" quality="high" wmode="transparent" src="{$urlstatic2}/flash/ping_small.swf?is_videoauth=0&type=score_body"></embed>
+              </object>
+			  <else />
+			  您给{$m['sex']|ui_sex}<b class="f_r">{$v['score_body']}分</b> {$m['sex']|ui_sex}的平均分:<b class="f_r">{$m['score_body']}</b>
+			  </if>			  
+            </dd>
+          </dl>
+          <dl class="clear">
+            <dt class="fl">{$m['sex']|ui_sex=5}</dt>
+            <dd class="gradebox_bg texbg" id="score_temper">
+			  <if condition="empty($v['score_temper']) OR ($v['score_temper'] lt 1)">
+              <object width="215" height="40" align="middle" id="markObjIE_score_temper" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000">
+                <param value="always" name="allowScriptAccess">
+                <param value="transparent" name="wmode">
+                <param value="{$urlstatic2}/flash/ping_small.swf?is_videoauth=0&type=score_temper" name="movie">
+                <param value="high" name="quality">
+                <param name="FlashVars " value="is_videoauth=0&type=score_temper" />
+                <embed  id="markObj_score_temper" width="215" height="40" align="middle" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" allowscriptaccess="sameDomain" swliveconnect="true" quality="high" wmode="transparent" src="{$urlstatic2}/flash/ping_small.swf?is_videoauth=0&type=score_temper"></embed>
+              </object>
+			  <else />
+			  您给{$m['sex']|ui_sex}<b class="f_r">{$v['score_temper']}分</b> {$m['sex']|ui_sex}的平均分:<b class="f_r">{$m['score_temper']}</b>
+			  </if>		  
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="newotherperson_photolist">
+      <p class="clear"><span class="fl"> <a class="f_3" href="javascript:;">{$m['sex']|ui_sex}的个人形象照</a> </span> </p>
+      <ul class="clear">
+        <volist name="personal" id="p">
+          <li><a href="{$urlsite}/home/photo?uid={$m['uid']}&gid={$p['gid']}&pid={$p['pid']}"><img class="face_s{$m['sex']}_b2" alt="点击查看大图" title="点击查看大图" src="{$urlupload}/{$p['path']}_999x80.jpg"></a></li>
+        </volist>
+      </ul>
+    </div>
+    <div class="newotherperson_photolist">
+      <p class="clear bottom_line"> <span class="fl"><a class="f_3" href="{$urlsite}/home/show_group?uid={$m['uid']}">{$m['sex']|ui_sex}的其它相册</a></span> </p>
+      <div class="allphoto clear m_t20">
+        <volist name="pglist" id="g">
+          <dl>
+            <dt class="curreny">
+              <div class="photo_m"><a onclick="load_photo_group({$m['uid']}, {$g['gid']})"><img src="{$urlupload}/{$g['default_pic']}_120x120.jpg" alt="照片" ></a></div>
+            </dt>
+            <dd class="m_t10 fs_14">{$g['name']}</dd>
+            <dd class="f_6">共<span class="f_r1 fs_14">{$g['photonum']}</span>张</dd>
+          </dl>
+        </volist>
+      </div>
+    </div>
+    <p class="p_list"><a class="f_6" href="javascript:;" onclick="perfect_invite({$m['uid']}, 1,this,1)">邀请{$m['sex']|ui_sex}上传更多照片</a></p>
+	<!--随缘推荐 start-->
+	<div class="home_recoboxleft">
+	  <div class="home_reco">
+		<div class="title">随缘推荐</div>
+		<img class="ico_left" src="{$urlstatic}/img/ico_redtrianglel.png"> <img class="ico_right" src="{$urlstatic}/img/ico_redtriangler.png"> </div>
+	  <div class="list clear">
+	  	<volist name="recommendlist" id="r">
+		<dl class="clear">
+		  <dt><a target="_blank" href="/{$r['uid']}" style="position: relative;z-index:1;"><img src="{$urlupload}{$r['default_pic']}_72x72.jpg" alt="{$r['username']}的个人主页" title="{$r['username']}的个人主页"></a></dt>
+		  <dd>
+			<p><a target="_blank" href="/{$r['uid']}" style="position: relative;z-index:1;">{$r['username']}</a></p>
+			<p>{$r['birth_y']|getAge}岁</p>
+			<p></p>
+		  </dd>
+		</dl>
+		</volist>
+	  </div>
+	</div>
+	<!--随缘推荐 end-->
+  </div>
+  <div class="fm_c_680" style="_margin-left:20px;">
+    <div class="newotherperson_main">
+	  <div class="tit f_6 clear">
+        <p class="fl fs_16"><a href="/{$m['uid']}" class="{$m['sex']|ui_sex=4}">{$m['username']}</a> 的个人档案</p>
+        <!--<p class="ico_p clear"><a style="margin-left:18px;" class="f_6" target="_blank" href="{$urldomain}/usergroup/share_score/uid/{$m['uid']}" alt="{$m['username']}的个人形象照得分" title="{$m['username']}的个人形象照得分">{$m['sex']|ui_sex}的得分</a></p>-->
+		
+      </div>
+      <!--我想结束-->
+      <!--个人的基本资料开始-->
+      <div class="person_basics">
+        <div class="clear person_basicsmain">
+          <div class="clear">
+            <dl class="clear">
+              <dt>年龄：</dt>
+              <empty name="m['birth_y']"> <dd><span class="f_9">Ask me</span><else /> <dd><php>$a=date("Y"); $b=$a-$m['birth_y']; echo  $b."岁";</php>
+</dd></empty>
+            </dl>
+            <dl class="clear">
+              <dt>身高：</dt>
+               <empty name="m['height']"> <dd><span class="f_9">Ask me</span><else /> <dd>{$m['height']}cm</dd></empty>
+            </dl>
+            <dl class="clear">
+              <dt>体型：</dt>
+             <empty name="m['stature']"> <dd><span class="f_9">Ask me</span><else /> <dd>{$m['stature']}</dd></empty>
+            </dl>
+            <dl class="clear">
+              <dt>家乡：</dt>
+              <empty name="m['hometown_prov']"> <dd><span class="f_9">Ask me</span><else /> <dd>{$m['hometown_prov']}</dd></empty>
+            </dl>
+            <dl class="clear">
+              <dt>学校：</dt>
+              <empty name="m['school']"> <dd><span class="f_9">Ask me</span><else /> <dd>{$m['school']}</dd></empty>
+            </dl>
+            <dl class="clear">
+              <dt>年级：</dt>
+              <empty name="m['grade']"> <dd><span class="f_9">Ask me</span><else /> <dd>{$m['grade']}</dd></empty>
+            </dl>
+            <dl class="clear">
+              <dt>学院：</dt>
+              <empty name="m['college']"> <dd><span class="f_9">Ask me</span><else /> <dd>{$m['college']}</dd></empty>
+            </dl>
+            <dl class="clear">
+              <dt>血型：</dt>
+               <empty name="m['blood']"> <dd><span class="f_9">Ask me</span><else /> <dd>{$m['blood']}</dd></empty>
+            </dl>
+            <dl class="clear">
+              <dt>星座：</dt>
+             <empty name="m['constellation']"> <dd><span class="f_9">Ask me</span><else /> <dd>{$m['constellation']}</dd></empty>
+            </dl>
+            <dl class="list clear">
+              <dt class="fb_16">交友目的：</dt>
+             <empty name="m['makefriend']"> <dd><span class="f_9">Ask me</span><else /> <dd>{$m['makefriend']}</dd></empty>
+            </dl>
+          </div>
+          <!--按钮开始-->
+          <div class="list2 clear">
+            <div class="list3 clear">
+              <div class="hot_bar clear" title="点击查看什么是热度？" onclick="show_link_hot_tips();">
+                <p class="fl">热度:</p>
+                <p class="hotbg1 fl"> </p>
+              </div>
+              <p class="fl list4 f_green"><span>{$m['login_time']|is_online}</span></p>
+            </div>
+			<div class="perhome_chat">
+			  <div class="chat_bar clear"> <a class="chat_bg clear" onClick="home_chat()"><span class="ico_chatbg fl"></span><span class="fl">打开聊天!</span></a> <a class="say_bg clear" onClick="hello({$m['uid']},{$m['uid']},'{$m['uid']}',0)"><span class="ico_say fl"></span><span class="fl">打招呼!</span></a> <a id="friend_fav_{$m['uid']}" class="add_collet clear" onClick="show_or({$m['uid']},1);"><span class="ico_addbg fl"></span><span id="js_fav_{$m['uid']}" class="fl">收藏</span><span class="or_i fl"></span></a> <a id="friend_for_{$m['uid']}" class="add_stop clear" onClick="show_or({$m['uid']},0);"><span class="drpdwn_link fl"></span><span id="js_forbid_{$m['uid']}" class="fl ">阻止</span><span class="or_i fl"></span></a> <a style="width:60px;" class="or_bg2 clear" onClick="try_meet({$m['uid']},{$m['sex']},'{$m['sex']}','{$m['want_content']}');"><span class="yuebg fl"></span> <span class="fl p_l5">约会</span></a> </div>
+			  <div style="display:none;" id="co_{$m['uid']}" class="add_collet_down">
+				<div class="m_dw2" style="left:181px;">
+				  <i class="tr"></i>
+				  <div id="fav_inner_{$m['uid']}" class="m_dw_inner">
+					<p><a onclick="fav({$m['uid']},{$m['sex']},'{$m['username']}',2)" class="clear"><span class="addbg2 fl"></span><span class="fl p_l5">添加收藏</span></a></p>
+                    <p><a onclick="fav({$m['uid']},{$m['sex']},'{$m['username']}',1)" class="clear"><span class="addbg fl"></span> <span class="fl p_l5">悄悄收藏</span></a></p>               					
+				  </div>
+				  <i class="bl"></i> 
+				</div>
+			  </div>
+			  <div id="or_{$m['uid']}" style="display:none;left:263px" class="m_dw">
+			    <i class="tr"></i>
+				<div id="forbid_inner_{$m['uid']}" class="m_dw_inner">
+				  <p><a title="阻止联系后，系统不会通知对方您阻止了TA，只会通知有人阻止TA，阻止后对方将不能再和您联系" class="clear" onClick="forbid_link({$m['uid']},{$m['sex']},'{$m['username']}',refresh,2);"><span class="drpdwn_link fl"></span><span class="fl p_l5">阻止联系</span></a></p>
+				  <p><a title="静默处理后，您还能收到TA的信息，但不会有新信息提示。对方不会知道您使用了此功能" class="clear" onClick="forbid_link({$m['uid']},{$m['sex']},'{$m['username']}',refresh,1);"><span class="drpdwn_link2 fl"></span><span class="fl p_l5">静默处理</span></a></p>
+				  <p><a class="clear" target="_blank" href="{$urlsite}/other/kf/?mtype=3&amp;fid={$m['uid']}&amp;pid="><span class="qubao fl"></span><span class="fl p_l5">举报</span></a></p>
+				</div>
+				<i class="bl"></i> </div>
+			</div>
+			<p id="perfect_id" class="m_t20">邀请{$m['sex']|ui_sex}：<a onclick="perfect_invite({$m['uid']},5,this,1)" href="javascript:;" class="f_6 pr_20" style="position: relative;z-index:1;">完善更多基本资料</a><a onclick="perfect_invite({$m['uid']}, 1,this,1)" href="javascript:;" class="f_6 pr_20 js_photo" style="position: relative;z-index:1;">上传更多照片</a><a onclick="perfect_invite({$m['uid']},6,this,1)" href="javascript:;" class="f_6 pr_20 js_diary" style="position: relative;z-index:1;">写两句</a><a onclick="perfect_invite({$m['uid']},2,this,1)" href="javascript:;" class="f_6 pr_20 js_answer" style="position: relative;z-index:1;">完成更多的小编专访</a></p>
+			<p class="m_t20">
+<!-- Baidu Button BEGIN -->
+    <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" style="margin-left:0;">
+		<a href="{$urldomain}/usergroup/share_score/uid/{$m['uid']}" style="padding-top:2px; margin-top:5px;" onclick="location.href=this.href">{$m['username']}的照片得分</a>
+        <span class="bds_more">分享到：</span>
+        <a class="bds_qzone"></a>
+        <a class="bds_tsina"></a>
+        <a class="bds_baidu"></a>
+		<a class="shareCount"></a>
+    </div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=658305" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
+</script>
+<!-- Baidu Button END -->			
+			</p>
+            <!--按钮结束-->
+          </div>
+        </div>
+      </div>
+      <!--个人的基本资料结束-->
+    </div>
+    <!--按钮结束-->
+    <!--小编专访 start-->
+    <div class="home_wenwen_box clear">
+      <h2>小编专访({$m['wenwen_num']})</h2>
+      <div id="wenwen_list">
+	    <empty name="wenwenlist">
+		<div class="none_record" style="width: 340px;margin: 10px auto;text-align: center;">
+          <h3>暂时没有参加小编专访</h3>
+          <p><a class="f_bl js_answer" href="javascript:;" onclick="perfect_invite({$m['uid']},2,this,1)" style="position: relative;z-index:1;">邀请{$m['sex']|ui_sex}完成更多的小编专访问题</a></p>
+		</div>
+		<else />
+		
+        <volist name="wenwenlist" id="vo">
+          <div>
+            <dl>
+              <dt>小编：{$vo.wenwen_question}</dt>
+              <dd><span class="f_blue1">{$vo.username}：</span>{$vo.content}&nbsp; <a onclick="show_comment_form({$m['uid']},{$vo.id},4,'comment','home');" class="dashed word_nowrap">评论</a></dd>
+            </dl>
+            <div style="display:none" class="reply_box show_comment" id="comment_{$m['uid']}_{$vo.id}"></div>
+          </div>
+        </volist>
+		
+		</empty>
+      </div>
+      <!--<div class="more_bar clear"><a class="f_0 fr" onclick="load_more_wenwen({$vo.uid},'{$vo.username}',1,0)" id="wenwen_more" code ="0"><span class="down_ico" id="wenwen_show" code="1"></span>还有<span class="f_r" id="wenwen_snum">1</span>条</a><a class="f_0 fr clear" onclick="load_more_wenwen({$vo.uid},'{$vo.username}',1,1)"  style="display:none;margin-right:8px" id ="wenwen_hide"><span class="up_ico"></span>收起</a></div>-->
+    </div>
+    <!--小编专访 end-->
+    <!--写两句 start-->
+    <div class="home_diary clear">
+      <h2>{$m['diary_name']}({$m['diary_num']})</h2>
+	  <empty name="diarylist">
+	  <div class="none_record" style="width: 340px;margin: 10px auto;text-align: center;">
+        <h3>暂无内容</h3>
+		<p><a class="f_bl js_diary" href="javascript:;" onclick="perfect_invite({$m['uid']},6,this,1)" style="position: relative;z-index:1;">邀请{$m['sex']|ui_sex}写两句</a></p>
+      </div>
+	  <else />
+      <ul id="diary_list">
+	  		
+	    <volist name="diarylist" id="d" mod="2" >
+		<li class="dy_list <eq name="mod" value="1"> blue_bg</eq>">
+		 <p class="fs_12 f_6"><span class="f_bl">公元 {$d['set_time']|date="Y年m月d日",###}</span><span class="m_l10">心情：<span class="f_green">{$d['mood']}</span></span> </p>
+          <p class="m_t5"> <span class="fs_20"></span>{$d.content}&nbsp;&nbsp; <a class="word_nowrap dashed" onclick="show_comment_form({$m['uid']},{$d['did']},16,'diary','home')";>评论</a>&nbsp;&nbsp; <span id="praise_{$d['did']}" style="visibility:hidden" class="give_praise word_nowrap"> <a title="给{$m['sex']|ui_sex}{$m['sex']|ui_sex=9}" class="{$m['sex']|ui_sex=8}_zbtn" onclick="praise_diary({$m['uid']},{$d['did']},{$m['sex']},0, {$d['praise_0']})"><a class="brick" title="给{$m['sex']|ui_sex}一板砖" onclick="praise_diary({$m['uid']},{$d['did']},{$m['sex']},1,{$d['praise_1']})"></a>&nbsp;&nbsp; </a> </span> </p>
+          <p class="clear m_t10" id="ding_cai_{$d['did']}">
+<span id="flower_3126" class="flower_3126">
+<php>
+$praise= $m['sex']== 1 ? 'ico_diay1' : 'ico_diay';
+for($i=0;$i<$d['praise_0'];$i++)
+{
+$a="<img class='reward' src=".$urlstatic."/img/".$praise.".gif?jv=1".">";
+echo $a;
+}
+</php>
+</span>
+<span id="poor_3126" class="poor_3126">
+<php>
+for($i=0;$i<$d['praise_0'];$i++)
+{
+$a="<img class='reward' src=".$urlstatic."/img/ico_brick.gif?jv=1".">";
+echo $a;
+}
+</php>
+</span>
+		  </p>
+		  <div id="diary_{$m['uid']}_{$d['did']}" class="reply_box show_comment" style="display:none"></div>
+        </li>
+		</volist>
+		
+      </ul>
+	  </empty>
+    </div>
+    <!--写两句 end-->
+    <!--newall 问问 技能 start-->
+    <div class="home_others">
+      <div class="others_nav bt_newall clear" id="others"> <a class="newall_btn1" id="tab_c_newall" onclick="tab_change('newall')">动态</a> <a class="ask_btn" id="tab_c_ask" onclick="tab_change('ask')">问问(<php>$a=$m['question_num']+$m['answer_num'];echo $a;</php>)</a></div>
+      <!--导航 end-->
+      <!--newall start-->
+      <div class="others_cont tab" id="tab_newall" >
+		<empty name="feedData">
+		<div style="margin-top:20px" class="none_record"><h3>暂时没有新动态</h3></div>
+		<else />
+        <ul class="newall" id="attention_list">
+          <include file="Home:attention" />
+          <!--<li class="more_item" id="load_more_dt"><a href="javascript:void(0)" onclick="load_attention_more(this, {$m.uid});" class="fb_14">查看更多&gt;&gt;</a></li>-->
+        </ul>
+		</empty>
+      </div>
+      <!--动态 end-->
+      <!--问问 start-->
+      <div class="home_question tab" id="tab_ask" style="display:none">
+	  	<empty name="a" value="0">
+		<div class="none_record" style="line-height:normal;">
+        <h3>暂时没有参加问问</h3>
+		<p><a class="f_bl js_question" href="javascript:;" onclick="perfect_invite({$m['uid']},7,this,1)" style="position: relative;z-index:1;">邀请{$m['sex']|ui_sex}参与问问</a></p>
+        </div>
+		<else/>		
+        <!--TA的提问 start-->
+
+        <div id="t_question" class="home_answer">
+          <h2 class="title clear">{$m['sex']|ui_sex}的提问 <span class="f_6 fs_12">(共{$m['question_num']}条)</span></h2>
+          <div style="width: 100%" id="question_list">
+            <volist name="qlist" id="vo">
+              <dl class="list clear ">
+			    <php>$vo['photo_url'] = $vo['photo_url'] ? $vo['photo_url'] : '/000face/ask_' . rand(1, 9) . '.jpg';</php>
+                <dt class="answer_img"><img class="mousezoom_tip" id="imgsmall_{$m.uid}_{$vo.id}" src="{$urlupload}{$vo.photo_url}_72x72.jpg" onclick="scaleImg('{$m.uid}_{$vo.id}','{$urlupload}/{$vo.photo_url}_480x480.jpg')"> <img id="imgbig_{$m.uid}_{$vo.id}" style="display:none;" class="mousezoom_min" onclick="scaleImg('{$m.uid}_{$vo.id}','')" /> </dt>
+                <dd class="text">
+                  <p class="ak fs_14 f_3"><span class="f_9 word_nowrap">[{$qtlist[$vo['type']]}]</span><span class="word_break"> {$vo.question}</span> <a class="dashed word_nowrap font_block" type="home" id="{$vo.id}" onclick="show_answer_form(this);">回答</a>&nbsp;<a id="answer_more_{$vo.id}" class="dashed word_nowrap font_block" href="{$urlsite}/home/question/?uid={$m.uid}&qid={$vo.id}" style="display:none;">查看全部答案</a> </p>
+                  <div class="reply_box clear show_comment" style="display:none" data="{$m.uid}" id="answer_{$vo.id}_home"></div>
+                </dd>
+              </dl>
+            </volist>
+          </div>
+          <!--<div class="more_bar clear"><a class="f_0 fr"  onclick="load_more_question('{$m.uid}',4,0)" id="question_more" code ="0"><span class="down_ico" id="question_show" code="1"></span>还有<span class="f_r" id="question_snum">4</span>条</a> <a class="f_0 fr clear" onclick="load_more_question('{$m.uid}',4,1)" style="display:none;margin-right:8px" id ="question_hide"><span class="up_ico"></span>收起</a></div>-->
+        </div>
+        <!--TA的提问 end-->
+        <!--TA的回答 start-->
+        <div id="t_answer" class="home_answer">
+          <h2 class="title clear">{$m['sex']|ui_sex}的回答 <span class="f_6 fs_12">(共{$m['answer_num']}条)</span></h2>
+          <div style="width:100%" id="answer_list">
+            <volist name="alist" id="vo">
+              <dl class="list clear ">
+			    <php>$vo['photo_url'] = $vo['photo_url'] ? $vo['photo_url'] : '/000face/ask_' . rand(1, 9) . '.jpg';</php>
+                <dt class="answer_img"><img class="mousezoom_tip" id="imgsmall2_{$m.uid}_{$vo.id}" src="{$urlupload}/{$vo.photo_url}_72x72.jpg" onclick="scaleImg2('{$m.uid}_{$vo.id}','{$urlupload}/{$vo.photo_url}_480x480.jpg')"> <img id="imgbig2_{$m.uid}_{$vo.id}" style="display:none;" class="mousezoom_min" onclick="scaleImg2('{$m.uid}_{$vo.id}','')" /> </dt>
+                <dd class="text">
+                  <p class="ak fs_14 f_3"><span class="f_9 word_nowrap">[{$qtlist[$vo['type']]}]</span><span class="word_break"> &nbsp; {$vo.question}</span></p>
+                  <p class="f_6 ar word_break"><span class="f_blue1 word_nowrap">{$vo['username']}：</span><span class="agree"></span><span class="word_break">{$vo.answer_cont}</span> <a data="149" href="javascript:;" class="dashed word_nowrap font_block" onclick="show_comment_form({$m.uid},{$vo.id},10,'comment_answer','home');">评论</a> </p>
+                  <div class="reply_box clear show_comment" id="comment_answer_{$m.uid}_{$vo.id}" style="display:none"></div>
+                </dd>
+              </dl>
+            </volist>
+          </div>
+          <!--<div class="more_bar clear"><a class="f_0 fr"  onclick="load_more_answer('{$m.uid}','jaredwu',4,0)" id="answer_more" code ="0"><span class="down_ico" id="answer_show" code="1"></span>还有<span class="f_r" id="answer_snum">4</span>条</a> <a class="f_0 fr clear" onclick="load_more_answer('{$m.uid}','jaredwu',4,1)"  style="display:none;margin-right:8px" id ="answer_hide"><span class="up_ico"></span>收起</a></div>-->
+        </div>
+        <!--TA的回答 end-->
+		</empty>
+      </div>
+      <!--问问 end-->
+      <!--技能会学 start-->
+      <div class="home_skill tab" id="tab_skill" style="display:none;">
+        <dl>
+          <dt class="clear fs_14">{$m['sex']|ui_sex}懂得</dt>
+          <dd class="clear default knowskill">
+            <div class="clear">
+              <p class="text_w text_limit"><span id="get_skill_value1_{$m.uid}_259330" class="f_3">BBOX</span>，<span class="simple">刚刚开始学习</span><span style="display:none;" class="detaill">刚刚开始学习&nbsp;</span><span style="display:none;" class="pl"><a onclick="show_comment_form({$m.uid},259330,14,'comment_know','home');" href="javascript:void(0);" class="word_nowrap dashed">评论</a></span></p>
+            </div>
+            <div style="display:none" id="comment_know_{$m.uid}_259330" class="reply_box clear show_comment"></div>
+          </dd>
+        </dl>
+        <!--TA想学 end-->
+        <dl class="m_t20">
+          <dt class="fs_14">{$m['sex']|ui_sex}想学</dt>
+          <dd class="clear default learnskill">
+            <div class="clear">
+              <p class="text_w text_limit"><span class="f_3" id="get_skill_value0_{$m['uid']}_89">吉他</span>，<span class="simple">哈哈O(∩_∩)O~</span><span style="display:none;" class="detaill">哈哈O(∩_∩)O~&nbsp;</span><span style="display:none;" class="pl"><a onclick="show_comment_form({$m['uid']},89,15,'comment_skill','home');" href="javascript:void(0);" class="word_nowrap dashed">评论</a></span></p>
+            </div>
+            <div style="display:none" id="comment_skill_{$m['uid']}_89" class="reply_box clear show_comment"></div>
+          </dd>
+        </dl>
+      </div>
+      <!--技能会学 end-->
+    </div>
+    <!--动态 问问 技能 end-->
+  </div>
+</div>
+<script>
+var limit =1;
+var count_answer = 1;
+var is_show = 0;
+var curr_display = 0;
+$(document).ready(function(){
+	$('.text_w').click(function(){ $(this).removeClass('text_limit');$(this).find('.simple').hide();$(this).find('.detaill').show();});
+});
+
+back_to_tip();
+
+function tab_change(id){
+	$(".tab").hide();
+	$("#others").removeClass().addClass('others_nav bt_'+id+' clear');
+	$("#others a").removeClass();
+	$("#tab_c_newall").removeClass().addClass('newall_btn');
+    $("#tab_c_ask").removeClass().addClass('ask_btn');
+    $("#tab_c_skill").removeClass().addClass('skill_btn');
+	$("#tab_"+id).show();
+	$("#tab_c_"+id).removeClass().addClass(id+'_btn1');
+}
+function setMarkFinish(type) {
+    try{
+        if($.browser.msie)
+        {
+            $("#markObjIE_"+type)[0].setMarkFinish();
+        }
+        else
+        {
+            $("#markObj_"+type)[0].setMarkFinish();
+        }
+    }
+    catch(e)
+    {
+        alert(e);
+    }
+    return true;
+}
+var marking = false;
+var current_uid='<php>echo $m['uid'];</php>';
+var current_key='a4c07e64f12a8667f438a3ec99027dfa';
+var is_vip = 0;
+function mark(score, type){
+    if(check_login() == false){
+		setMarkFinish(type);
+        return false ;
+    }
+    if((score<5 || score==10) && myuserinfo.group_type < 2)
+    {
+        var msg_code = '<div class="pop_rader fb_14"><p>5分以下，以及10分，都属特殊分数，仅向<span class="f_green">正式会员</span></p>'
+                        +'<p>的用户开放！<a href="<php>echo $urlsite;</php>/usergroup/" target="_blank">我要成为正式会员</a></p></div>';
+        Win.dialog({width:500,height:150,msg:msg_code,type:'info',enter:setMarkFinish,cancel:setMarkFinish});
+        return false;
+    }
+    $.ajax({
+       type: "POST",
+       url: "/index.php?s=/hot/home/",
+       data: 'uid='+current_uid+'&score='+score+'&sex=1&key='+current_key+'&type='+type,
+       success: function order_result(re){
+            var result = jQuery.parseJSON(re);
+            if(result.stat != 2 ){
+                Win.dialog({height:150,msg:result.errno,type:'alert'});	
+            }
+            else show_last_ping(score, result.score, type);
+       }
+    });
+}
+function show_last_ping(score, ping, id){
+    if(ping == "null" || isNaN(parseInt(ping))) return;
+    var code = '您给<php>echo ui_sex($m['sex'])</php><b class="f_r">'+score+'分</b> <php>echo ui_sex($m['sex'])</php>的平均分:<b class="f_r">'+ping+'</b>';
+    $("#"+id).html(code);
+	$("#"+id).addClass('gradebox_bg texbg');
+}
+
+var answers = false;
+var is_show = 0;
+
+$(document).ready(function(){
+	$('.text_w').css('cursor', 'default');
+	$('.knowskill').hover(
+		function(){ $(this).removeClass('default');$(this).addClass('gray');$(this).find('.text_w2').show();$(this).find('.pl').show();}, 
+		function(){ $(this).removeClass('gray');$(this).addClass('default');$(this).find('.text_w2').hide();$(this).find('.pl').hide();$(this).find('.simple').show();$(this).find('.detaill').hide();$('.text_w').addClass('text_limit');}
+	);
+	$('.learnskill').hover(
+		function(){ $(this).removeClass('default');$(this).addClass('gray');$(this).find('.text_w2').show();$(this).find('.pl').show();}, 
+		function(){ $(this).removeClass('gray');$(this).addClass('default');$(this).find('.text_w2').hide();$(this).find('.pl').hide();$(this).find('.simple').show();$(this).find('.detaill').hide();$('.text_w').addClass('text_limit');}
+	);
+	$('.text_w').click(function(){ $(this).removeClass('text_limit');$(this).find('.simple').hide();$(this).find('.detaill').show();});
+	$('.dy_list').hover(
+		function(){ $(this).find('.give_praise').css('visibility','visible');}, 
+		function(){ $(this).find('.give_praise').css('visibility','hidden');}
+	);
+});
+
+function scaleImg(id,img)
+{
+	bid = 'imgbig_'+id;
+	sid = 'imgsmall_'+id;
+	if(img){
+		$('#'+bid).attr('src',img);
+		$('#'+bid).show();
+		$('#'+sid).hide();
+	}else{
+		$('#'+bid).hide();
+		$('#'+sid).show();
+	}
+}
+
+function scaleImg2(id,img)
+{
+	bid = 'imgbig2_'+id;
+	sid = 'imgsmall2_'+id;
+	if(img){
+		$('#'+bid).attr('src',img);
+		$('#'+bid).show();
+		$('#'+sid).hide();
+	}else{
+		$('#'+bid).hide();
+		$('#'+sid).show();
+	}
+}
+
+function load_more_diary(uid,sex,dcount,type){
+	if(uid <=0 || sex <=0) return false;
+	var page = parseInt($("#diary_more").attr('code'));
+	if($("#diary_show").attr('code') == '0' || type == 1){
+		if(page !=''){
+			$("html,body").animate({scrollTop: $('.more_diary:first').offset().top - 250}, 500);
+			$(".more_diary").remove();
+			$("#diary_more").attr('code',0);
+			$("#diary_show").attr('code',1);
+			$("#diary_snum").html(dcount);
+			$("#diary_hide").hide();
+			$("#diary_more").show();
+		}
+	}else{
+		page = page+1;
+		if(page <=0 ) return false;
+		$.post('/index.php?s=/home/load_more_diary/', {'uid':uid,'sex':sex, 'page':page}, function(data){
+			if(data.errno == 200){
+				$("#diary_list").append($.trim(data.more));
+				 $('.dy_list').hover(
+					function(){ $(this).find('.give_praise').css('visibility','visible');}, 
+					function(){ $(this).find('.give_praise').css('visibility','hidden');}
+				);
+				$("#diary_more").attr('code',page);
+				if((dcount-page*10) <=0 ){
+					$("#diary_hide").show();
+					$("#diary_more").hide();
+				}else{
+					$("#diary_snum").html(dcount-page*10);
+					$("#diary_hide").show();
+				}
+			}
+			if(data.errno == 510){
+				$("#diary_snum").html(dcount);
+				$("#diary_hide").hide();
+				$("#diary_show").attr('code',0);
+				$("#diary_more").show();
+			}
+		}, 'json');
+	}
+}
+
+function load_more_wenwen(uid,nickname,acount,type){
+	if(uid <=0 || nickname =='') return false;
+	var page = parseInt($("#wenwen_more").attr('code'));
+	if(parseInt($("#answer_show").attr('code')) == 0 || type == 1){
+		if(page !=''){
+			$("html,body").animate({scrollTop: $('.wenwen_more:first').offset().top - 250}, 500);
+			$(".wenwen_more").remove();
+			$("#wenwen_more").attr('code',0);
+			$("#wenwen_show").attr('code',1);
+			$("#wenwen_snum").html(acount);
+			$("#wenwen_hide").hide();
+			$("#wenwen_more").show();
+		}
+	}else{
+		page = page+1;
+		if(page <=0 ) return false;
+		$.post('/index.php?s=/home/load_more_wenwen/', {'uid':uid,'nickname':nickname, 'page':page}, function(data){
+			if(data.errno == 200){
+				$("#wenwen_list").append($.trim(data.more));
+				$("#wenwen_more").attr('code',page);	
+				if((acount-page*10) <=0 ){
+					$("#wenwen_hide").show();
+					$("#wenwen_more").hide();
+				}else{
+					$("#wenwen_snum").html(acount-page*10);
+					$("#wenwen_hide").show();
+				}
+			}
+			if(data.errno == 510){
+				$("#wenwen_snum").html(acount);
+				$("#wenwen_hide").hide();
+				$("#wenwen_show").attr('code',0);
+				$("#wenwen_more").show();
+			}
+		}, 'json');
+	}
+}
+
+function load_more_answer(uid,nickname,acount,type){
+	if(uid <=0 || nickname =='') return false;
+	var page = parseInt($("#answer_more").attr('code'));
+	if(parseInt($("#answer_show").attr('code')) == 0 || type == 1){
+		if(page !=''){
+			$("html,body").animate({scrollTop: $('.answer_more:first').offset().top - 250}, 500);
+			$(".answer_more").remove();
+			$("#answer_more").attr('code',0);
+			$("#answer_show").attr('code',1);
+			$("#answer_snum").html(acount);
+			$("#answer_hide").hide();
+			$("#answer_more").show();
+		}
+	}else{
+		page = page+1;
+		if(page <=0 ) return false;
+		$.post('/index.php?s=/home/load_more_answer/', {'uid':uid,'nickname':nickname, 'page':page}, function(data){
+			if(data.errno == 200){
+				$("#answer_list").append($.trim(data.more));
+				$("#answer_more").attr('code',page);				
+				if((acount-page*10) <=0 ){
+					$("#answer_hide").show();
+					$("#answer_more").hide();
+				}else{
+					$("#answer_snum").html(acount-page*10);
+					$("#answer_hide").show();
+				}
+			}
+			if(data.errno == 510){
+				$("#answer_snum").html(acount);
+				$("#answer_hide").hide();
+				$("#answer_show").attr('code',0);
+				$("#answer_more").show();
+			}
+		}, 'json');
+	}
+}
+
+function load_more_question(uid,qcount,type){
+	if(uid <=0) return false;
+	var page = parseInt($("#question_more").attr('code'));
+	if(parseInt($("#question_show").attr('code')) == 0 || type == 1){
+		if(page !=''){
+			$("html,body").animate({scrollTop: $('.more_question:first').offset().top - 250}, 500);
+			$(".more_question").remove();
+			$("#question_more").attr('code',0);
+			$("#question_show").attr('code',1);
+			$("#question_snum").html(qcount);
+			$("#question_hide").hide();
+			$("#question_more").show();
+		}
+	}else{
+		page = page+1;
+		if(page <=0 ) return false;
+		$.post('/home/load_more_question/', {'uid':uid,'page':page}, function(data){
+			if(data.errno == 200){
+				$("#question_list").append($.trim(data.more));
+				$("#question_more").attr('code',page);
+				if((qcount-page*10) <=0 ){
+					$("#question_hide").show();
+					$("#question_more").hide();
+				}else{
+					$("#question_snum").html(qcount-page*10);
+					$("#question_hide").show();
+				}
+			}
+			if(data.errno == 510){
+				$("#question_snum").html(acount);
+				$("#question_hide").hide();
+				$("#question_show").attr('code',0);
+				$("#question_more").show();
+			}
+		}, 'json');
+	}
+}
+
+var limit = 1;
+// 查看动态更多数据
+function load_attention_more(obj, uid) 
+{
+	var prev_class = $("#load_more_dt").prev().attr('class');
+	var is_fa = 0;
+	if(prev_class !=''){
+		if(prev_class.indexOf('fa') > 0){
+			is_fa = 1;
+		}
+	}
+	$.ajax({
+		type: "POST",
+		url: "/index.php?s=/home/load_attention_more/",
+		data: 'page='+limit+'&uid='+uid+'&is_fa='+is_fa,
+		success: function(re){ 
+			var res = jQuery.parseJSON(re);
+			if(res.errno == 200) {	
+				$(obj).parent().before(res.more);
+				limit = res.page+1;
+
+				if (res.is_show == 0) $("#load_more_dt").hide();
+			}else{
+				$("#load_more_dt").hide();
+			}
+		}
+	});
+}
+
+// 查看动态类型更多数据
+function load_home_attention(type,uid,data_id,flag,obj){
+	if (type == null || uid == null || data_id == null) return false;
+	if ($('.'+type+'_'+uid+'_'+flag).length > 0 ) {
+	$('.'+type+'_'+uid+'_'+flag).show();
+	$(obj).parent().html('<a class="fr f_0" href="javascript:void(0)" onclick="hide_home_attention(\''+type+'\',\''+uid+'\',\''+data_id+'\',\''+flag+'\',this);"><span class="up_ico"></span>收起</a>');
+	} else {
+		$.ajax({
+			type: "POST",
+			url: "/index.php?s=/home/load_attention",
+			data: 'type='+type+'&uid='+uid+'&data_id='+data_id+'&flag='+flag,
+			success: function(re) {
+				var res = jQuery.parseJSON(re);
+				if (res.errno == 200) {
+					$('#'+type+'_'+uid+'_'+flag).append(res.more);
+					$(obj).parent().html('<a class="fr f_0" href="javascript:void(0)" onclick="hide_home_attention(\''+type+'\',\''+uid+'\',\''+data_id+'\',\''+flag+'\',this);"><span class="up_ico"></span>收起</a>');
+				} else {
+					Win.dialog({type:'info',msg:'没有查询到数据!'});			
+				}
+			}
+		});
+	}
+}
+
+// 隐藏动态类型信息
+function hide_home_attention(type,uid,data_id,flag,obj)
+{
+	if ($('.'+type+'_'+uid+'_'+flag).length > 0) {
+		if (type == 'question') {
+			$('.myfrend_'+uid+'_'+flag).hide();
+		} else {
+			$('.reply_'+uid+'_'+flag).hide();
+		}
+		var d_count = 0;
+		if(data_id !=''){
+			var d_arr = data_id.split(',');
+			d_count = d_arr.length;
+		}
+		$("html,body").animate({scrollTop: $('.'+type+'_'+uid+'_'+flag+':first').offset().top - 250}, 500);
+		$('.'+type+'_'+uid+'_'+flag).hide();
+		$(obj).parent().html('<a class="fr f_0" href="javascript:void(0)" onclick="load_home_attention(\''+type+'\',\''+uid+'\',\''+data_id+'\',\''+flag+'\',this)"><span class="down_ico"></span><span class="f_r">'+d_count+'</span>未显示</a>');
+	}
+}
+
+function post_answer(answer_vote)
+{
+	if (18090226 == myuserinfo.uid){Win.dialog({type:'info',msg:'不能回答自已的问题'});return false;}
+	if(1 == myuserinfo.sex){Win.dialog({type:'info',msg:'同性之间不能回答'});return false;};
+	if (answers != null && answers[question_id]){
+		Win.dialog({type:'info',width:450,msg:'你已经回答过这个问题了, 请到你的问答查看详细结果'});
+		return false;
+	}
+	if (check_login() == false) return false;
+	if(IM.gFlash) {
+		var answer_cont = cont_filter($('#answer_content').html());
+	}
+	else {
+		var answer_cont = $('#answer_content').val();
+	}
+	var question_id = current_comment_id;
+	var answer_vote = answer_vote;
+	if (answer_cont.length > 200) return false;
+	if (!question_id) return false;
+	var is_show = $("input[name='sync']:checked").val();
+	if(is_show == '' || is_show == null){
+		is_show =0;
+	}
+	$.post('/index.php?s=/answer/answer/', {'from':'other','q_uid':18090226, 'q_id':question_id, 'answer_cont': answer_cont, 'vote':answer_vote, 'show': is_show}, function(data){
+		if(data.code == 1){
+			 if (is_show == 1) {
+				var msg = '<div class="popup_s_info"><img src="<php>echo $urlstatic</php>/img/pop_ratimg5.png"  class="ico">回答成功，问题已成功公开到您的主页！</div>';
+			 } else {
+				var msg = '<img class="ico" src="<php>echo $urlstatic</php>/img/pop_ratimg5.png">回答成功！';
+			 }
+			 hide_comment_form();
+			 $('#answer_question_'+question_id).removeAttr('onclick');
+			 $('#answer_question_'+question_id).html('已回答'); 
+			 $('#answer_more_'+question_id).show();
+			 Win.dialog({type:'info',msg:msg})       	      	
+		}
+		if(data.code == 7){
+			Win.dialog({type:'info',msg:'该问题你已经回答过',enter:function(){location.href="/"+18090226}});
+		}
+		if(data.code >= 4 && data.code <= 6){
+			Win.dialog({type:'info',msg:'你的回答含有敏感词请重新填写'});
+		}
+	}, 'json');
+}
+
+function comment_answer(pay_card){
+	var comment_answer_content = $.trim($('#comment_answer_content').val());
+	var answer_id = current_comment_id;
+	if(typeof myuserinfo != "object" || !myuserinfo.uid){
+		 show_login_form();
+		 return false ;
+	}
+
+	if(myuserinfo.uid == 18090226){
+		Win.dialog({type:'info',msg:'不能给自己评论！'});
+		return false;
+	}
+
+	if(myuserinfo.profile_completed < 0.5 && myuserinfo.login_times > 6){
+		var msg_code = sysmessage_addprofile('reply',(myuserinfo.sex==1)?2:1) ;
+		Win.dialog({width:460,msg:msg_code});
+		return false ;
+	}
+
+	if (comment_answer_content.length<1) {
+		Win.dialog({type:'info',msg:'回复内容不能为空！'});
+		return;
+	}
+
+	if(answer_id<0)
+	{
+		Win.dialog({type:'info',msg:'评论的回答不能为空！'});
+		return ;
+	}
+
+	$("#comment_button").attr("disabled",true);
+	$.ajax({
+	    type: "POST",
+	    url: "/index.php?s=/msg/send/",
+	    data: 'receiver_uid=18090226&content='+comment_answer_content+'&type=10&related='+answer_id+'&pay_card='+pay_card+'&h_question=1',
+	    success: function comment_success(re)
+		{
+			$("#comment_button").attr("disabled",false);
+			var result_obj = jQuery.parseJSON(re);
+			switch(result_obj.stat)
+			{
+				case 0: //
+					Win.dialog({type:'info',msg:'评论成功'});
+					hide_comment_form();
+					break;
+				case 5: //
+					Win.dialog({msg:redbeans(result_obj.nickname,result_obj.pay_card),width:580,height:400,enter:function(){comment_answer(result_obj.pay_card);},cancel:function(){}});
+					break;
+				case 4: //
+					Win.dialog({type:'info',msg:result_obj.error,enter:function(){},cancel:function(){}});
+					break;
+				case 10:
+					$("#fengkoujiao").remove();
+					$(result_obj.error).appendTo("body");
+					var pos = Win.pos(320,250);
+					$("#fengkoujiao").css({"top":pos.wt,"left":pos.wl});
+					break;
+				default: //
+					Win.dialog({type:'info',msg:result_obj.error,cancel:function(){}});
+					break;
+			 }
+		 }
+	});
+}
+
+function praise_diary(uid,d_id,sex,type, num){
+	if(check_login()==false) {
+		return false;
+	}
+	if(type == 0) {
+		if(sex == 1){
+		  var act = '不能给自己叶子！';
+		  var act1 = '同性之间不能送叶子！';
+		}else{
+		  var act = '不能给自己花！';
+		  var act1 = '同性之间不能送花！';
+		}
+	}else {
+		var act = '不能拍自己！';
+		var act1 = '同性之间不能拍砖！';
+	}
+	 
+	if(myuserinfo.uid == uid){
+		Win.dialog({type:'info',msg:act});
+		return false;
+	}
+	if(myuserinfo.sex == sex){
+		 Win.dialog({type:'info',msg:act1});
+		return false;
+	}
+	 $.post('/index.php?s=/diary/praise', {uid:uid, diary_id:d_id, type:type}, function(data) {
+		if(data.errno == 200){
+			if(type == 1){
+				var name = 'poor';
+				var diary_path = version_img("ico_brick.gif");
+				if(num > 40) $("#poor_num_"+d_id).html(num+1);
+			}else{
+				var name = 'flower';
+				if(sex == 1){
+				  var diary_path = version_img("ico_diay1.gif");
+				}else{
+				  var diary_path = version_img("ico_diay.gif");
+				}
+				if(num > 40) $("#flower_num_"+d_id).html(num+1);
+			}
+			$("#praise_"+d_id).html('');
+			$("#praisenew_"+d_id).html('<img width="18" height="18" class="ico" src="'+diary_path+'">');
+			if( num > 0 )
+			{
+				$("#"+name+"_"+d_id).prepend('<img class="reward" src="'+diary_path+'">');
+			}else{
+				if(type == 1){
+					$("#ding_cai_"+d_id).append('<span id="'+name+'_'+d_id+'" class="'+name+'_'+d_id+'"><img class="reward" src="'+diary_path+'"></span>');
+				}else{
+					$("#ding_cai_"+d_id).prepend('<span id="'+name+'_'+d_id+'" class="'+name+'_'+d_id+'"><img class="reward" src="'+diary_path+'"></span>');
+				}
+			}
+		}
+		if(data.errno == 500){
+			Win.dialog({type:'info',msg:data.msg});
+			return false;
+		}
+		return false;
+	},'json');
+} 
+
+function show_video_auto(e)
+{
+	if(check_login()==false)
+	{
+		return false;
+	}
+	$.post("/home/is_show_video",{'uid':e.uid},
+		function(data){
+			if(data.status!=1){
+				if(data.status==2)
+				{
+					var _html='<div class="video_lookimgno" style="height:120px">'
+					+'<p class="fb_14">同样通过视频认证的人才可以查看</p>'
+					+'<p class="f_r fb_12 m_t10">（您还没有通过视频认证）</p>'
+					+'<p class="bot_btn m_t20"><a class="btn1" href="javascript:location.href=\'/videoauth\'">快速认证</a> 或<a href="javascript:Win.close();"> 取消</a></p>'
+					+'</div>';
+					Win.dialog({msg:_html});
+				}else
+				{
+					alert(data.msg);
+				}
+			}else{
+				var _html = data.msg;
+				Win.dialog({width:680,height:500,msg:_html});
+			}
+		},"json");
+}
+function perfect_invite(uid,type,obj,is_re) {
+	if(check_login()==false) {
+		return false;
+	}
+	$.post('/index.php?s=/home/perfect/', {uid:uid, type:type}, function(data) {
+		if(data.errno == 200){
+			if(is_re == 1){
+				$(obj).remove();
+				if(type == 4){
+					$(".js_vide").remove();
+				} else if(type == 1){
+					$(".js_photo").remove();
+				} else if(type == 2){
+					$(".js_answer").remove();
+				} else if(type == 6){
+					$(".js_diary").remove();
+				} else if(type == 7) {
+					$(".js_question").remove();
+				}
+			}
+		}else{
+			alert(data.msg);
+		}
+	},'json');
+	var p_a = $("#perfect_id a");
+	if(p_a.length <=1){
+		$("#perfect_id").remove();
+	}
+}
+function home_chat() {
+	if(check_login()==false)
+	{
+		return false;
+	}
+	IM.open(<php>echo $m['uid']</php>);
+}
+var current_or_uid=0;
+$(document).bind("click",function(e){
+	if($.browser.msie) {
+		var el = event.srcElement;
+	}
+	else {
+		var el = e.target;
+	}
+	if(!(IM.fInObj(el, "add_stop clear"))) {
+		$(".m_dw").hide();
+	}
+	if(!(IM.fInObj(el, "add_collet clear"))){
+		$(".add_collet_down").hide();
+	}
+});
+$(document).ready(function() {
+	if(Cookies.get("locat_pay_card_18090226") == 1 && Cookies.get("locat_pay_uid") == "18090226" && Cookies.get("locat_is_pay_18090226") == 1 && myuserinfo.card_num > 30) {
+		show_mask_info(2,'18090226');
+	}
+	Cookies.clear("locat_pay_card_18090226");
+	Cookies.clear("locat_pay_uid");
+	Cookies.clear("locat_is_pay_18090226");
+	$("#gift_html_close").click(function (){
+	   $("#show_gift_html").remove();
+	});
+});
+function show_or(uid,type)
+{
+	if(type==0){
+		if(current_or_uid>0)
+		{
+			$("#or_"+current_or_uid).hide();
+		}
+		$("#or_"+uid).show();
+	}
+	if(type==1){
+		if(current_or_uid>0)
+		{
+			$("#co_"+current_or_uid).hide();
+		}
+		$("#co_"+uid).show();
+	}
+	current_or_uid = uid;
+}
+function profile_completed(profile_completed_value){
+	if(check_login()==false)
+	{
+		return false;
+	}
+	var msg_code = sysmessage_addprofile('profile',1) ;
+	Win.dialog({width:460,msg:msg_code});
+	return true;
+}
+function check_login(){
+
+	return <php>echo $GLOBALS['islogin'];</php>;
+}
+function back_to_tip()
+ {
+	var $backToTopTxt = '<a class="b_img" ></a>', $backToTopEle = $('<div class="back2top_fat"></div>').appendTo($("body"))
+	.html($backToTopTxt).attr("title", '返回顶部').click(function() {
+	$("html, body").animate({ scrollTop: 0 }, 120);
+	}), $backToTopFun = function() {
+	var st = $(document).scrollTop(), winh = $(window).height();
+	(st > 0)? $backToTopEle.show(): $backToTopEle.hide();
+	//IE6下的定位
+	if (!window.XMLHttpRequest) {
+	$backToTopEle.css("top", st + winh - 166);
+	}
+	};
+	$(window).bind("scroll", $backToTopFun);
+	$(function() { $backToTopFun(); });
+}
+function delete_ifav_confirm(uid,name)
+{
+	Win.dialog({type:'confirm',msg:'是否取消收藏“'+name+'”？',height:100,enter:function(){delete_ifav(uid);},enterName:'确定'});
+}
+function delete_ifav(uid)
+{
+	$.ajax({
+	   type: "POST",
+	   url: "/index.php?s=/fav/delete_ifav/",
+	   data: 'uid='+uid+'&',
+	   success: function order_result(re)
+	   {
+	   		location.reload(1);
+	   }
+	});
+}
+</script>
+<include file="Public:foot" />
+</div>
+</body>
+</html>

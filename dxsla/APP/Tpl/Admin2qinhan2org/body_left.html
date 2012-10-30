@@ -1,0 +1,21 @@
+<php>if(ACTION_NAME == 'chk_photo') { </php>
+    <div class="menu_title1"><a href="{$urladmin}/chk_photo/">按性别查看</a></div>
+    <div class="menu_title2"><a href="{$urladmin}/chk_photo/sex/1/">只看男生</a></div>
+    <div class="menu_title2"><a href="{$urladmin}/chk_photo/sex/2/">只看女生</a></div>
+    <!--<div class="menu_title1"><a href="javascript:void(0);">其他操作</a></div>
+    <div class="menu_title2"><a href="/task_class_create.php">更改性别</a></div>-->
+<php>} elseif(ACTION_NAME == 'user') { </php>
+<div class="menu_title1"><a href="{$urladmin}/user/">会员管理</a></div>
+<div class="menu_title2"><a href="{$urladmin}/user/">会员管理</a></div>
+
+<php>} elseif(ACTION_NAME == 'chk_word') { </php>
+<div class="menu_title1"><a href="{$urladmin}/chk_word/">留言管理</a></div>
+<div class="menu_title2"><a href="{$urladmin}/chk_word/">问问管理</a></div>
+
+<php>} elseif(ACTION_NAME == 'other') { </php>
+    <div class="menu_title1"><a href="{$urladmin}/other/">其他功能</a></div>
+    <div class="menu_title2"><a href="{$urladmin}/other">UID操作</a></div>
+
+
+
+<php>}</php>

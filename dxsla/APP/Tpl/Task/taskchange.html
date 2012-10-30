@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 修改任务</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+
+<script language="javascript" src="{$urlstatic2}/js/skill.js?gv=179_1"></script>
+<script language="javascript">
+function addc(content){
+	document.getElementById("reward").value=content;
+}
+</script>
+</head>
+<body>
+<php>$nav = 5;</php>
+<include file="Public:head" />
+<!--中间部分开始-->
+<div class="container_cwrap clear">
+  <!--左边部分开始-->
+	<div class="fm_l_200"> <include file="Public:left" /> </div>
+  <!--左边部分结束-->
+  <!--右边部分开始-->
+  <div class="nearby_box">
+	  <div class="ad_play"><a href="javascript:;" id="banner_vip" style="display:inline;"><img src="{$urlstatic}/img/task2.png{$urltail}"></a><a style="display:none;" href="javascript:;" id="banner_map"><img src="{$urlstatic}/img/task1.png{$urltail}"></a></div>
+<script>
+setTimeout("turn_banner()",5000);
+function  turn_banner(){
+	if($("#banner_vip").css('display') == 'none'){
+		$("#banner_map").hide();
+		$("#banner_vip").show();
+		
+	}else{
+		$("#banner_vip").hide();
+		$("#banner_map").show();
+	}
+	
+	setTimeout("turn_banner()",6000);
+}
+</script>  
+	<div class="skill_mgnav clear" style="margin-top:20px;">
+      <p class="navbg fl clear"><a href="{$urlsite}/task/" class="unline">任务大厅</a> <a href="{$urlsite}/task/my_task/" class="selected unline">我的任务</a> <a href="{$urlsite}/task/my_help/" class="unline">我参与帮忙的任务</a></p>
+      <p class="fr m_t10" style="margin-top:2px;"><a href="{$urlsite}/task/add/" class="btn1">我要发布任务</a></p>
+    </div>
+    <!--我懂的开始-->
+    <div id="know_div"  >
+      <div class="add_skill">
+        <ul id="skill_know_list">
+          <li class="clear" id="skill_know_li_259330">
+            <p class="text_w" style="width:80px;"><span class="f_3">任务标题：</span></p>			
+			<p class="btn_w" style="width:650px;"><input type="text" name="title" id="title" class="input_1" size="80" value="{$t['title']}"/></p>
+          </li>
+          <li class="clear" id="skill_know_li_259330">
+            <p class="text_w" style="width:80px;"><span class="f_3">详细描述：</span></p>	
+			<p class="btn_w" style="width:650px;"><textarea name="content" id="content" class="input_1" rows="5" cols="80">{$t['content']}</textarea></p>
+          </li>
+          <li class="clear" id="skill_know_li_259330">
+            <p class="text_w" style="width:80px;"><span class="f_3">任务报酬：</span></p>	
+			<p class="btn_w" style="width:650px;"><input type="text" name="reward" id="reward" class="input_1" value="{$t['reward']}"/><a href="#" onclick="addc('请喝饮料');">请喝饮料</a><a href="#" onclick="addc('请吃饭');">请吃饭</a><a href="#" onclick="addc('送个水果');">送一个水果</a><a href="#" onclick="addc('送个礼物');">送一个礼物</a></p>
+          </li>		  
+          <li class="clear" id="skill_know_li_259330">
+            <p class="text_w" style="width:80px;"><span class="f_3">所需技能：</span></p>	
+			<p class="btn_w" style="width:650px;"><select name="need_skill" id="need_skill" class="input_1"><option value="">其他</option><option value="">修电脑</option><option value="">跑腿</option><option value="">C语言</option><option value="">PPT</option></select></p>
+          </li>
+          <li class="clear" id="skill_know_li_259330">
+            <p class="text_w" style="width:80px;"><span class="f_3">任务时效：</span></p>			
+			<p class="btn_w" style="width:650px;"><select name="expire_time" id="expire_time" class="input_1"><option value="1">1天</option><option value="2">3天</option><option value="7">1个星期</option><option value="14">2个星期</option><option value="30">1个月</option></select></p>
+          </li>
+          <li class="clear" id="skill_know_li_259330">
+            <p class="text_w" style="width:80px;"></p>			
+			<p class="btn_w" style="width:650px; padding-top:20px;"><input type="hidden" id="t_id" name="t_id" value="{$t['tid']}" /><input type="button" value="修改任务" class="btn1 btn_b1" onclick="submit_task()" /></p>
+          </li>		  	  
+        </ul>		
+      </div>
+    </div>
+    <!--我懂的结束-->
+  </div>
+  <!--右边部分结束-->
+</div>
+<!--中间结束-->
+  <script>
+function submit_task() {
+	var msg = '';
+	if($('#title').val() == '') {
+		msg = '请填写标题！';
+	} else if($('#content').val() == '') {
+		msg = '请填写描述！';
+	} else if($('#reward').val() == '') {
+		msg = '请填写报酬！';
+	}
+	if(msg) {
+		Win.dialog({msg:msg,type:'info'});
+		return false;
+	}
+
+	//Win.dialog({'msg':'正在提交数据，请稍等......<br />','type':'warn','noclose':true});
+	$.ajax({
+		type: "POST",
+		url : "/index.php?s=/task/change/",
+		data: '&t_id='+$('#t_id').val()+'&title='+$('#title').val()+'&content='+$('#content').val()+'&reward='+$('#reward').val()+'&need_skill='+$('#need_skill').val()+'&expire_time='+$('#expire_time').val(),
+		success: function(re) {
+			var obj = jQuery.parseJSON(re);
+			if(obj.errno == 200) {
+				 Win.dialog({'msg':obj.msg,'type':'info',enter:function() {location.href='/index.php?s=/task/my_task/';},cancel:function() {}});
+			}else{
+				 Win.dialog({'msg':obj.msg,'type':'info'});	
+			}
+		}
+	});
+	return false;
+}
+</script>
+<include file="Public:foot" />
+</div>
+</body>
+</html>

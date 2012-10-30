@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>后台管理</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link href="{$urlstatic2}/css/admin.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+</head>
+<body>
+<include file="header" />
+<div class="body_container">
+  <div class="body_left"> <include file="body_left" /> </div>
+<script type="text/javascript">
+topNav(1);
+leftNav({$sex} - 1);
+</script>
+
+  <div class="body_middle">
+    <div class="title2">
+      <table width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tbody>
+          <tr>
+            <td class="title"><p class="t_left">&nbsp;&nbsp;照片审核</p></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="clr">
+      <table width="100%" cellspacing="0" cellpadding="0" border="0" class="tbl1">
+        <tbody>
+          <tr class="header">
+            <td width="130">当前形象照</td>
+            <td>未审核照片</td>
+          </tr>
+		  
+		  <volist name="photolist" id="vo">
+          <tr class="int1">
+            <td valign="top"><img src="{$urlupload}/{$vo.default_pic}_120x120.jpg" alt="{$vo.username}" title="{$vo.username}" /><br /><button onclick="act_change_sex({$vo.uid})">更换性别</button></td>
+            <td><php>$paths = explode(',', $vo['paths']);</php><volist name="paths" id="p"><p style="width:120px; float:left; padding:3px;"><img src="{$urlupload}/{$p}_120x120.jpg" /><br /><button onclick="act_pass(this, '{$p}')">通过</button>&nbsp;&nbsp;<button onclick="act_del(this, '{$p}')">删除</button></p></volist></td>
+          </tr>
+		  </volist>
+		  
+        </tbody>
+      </table>
+      <div class="pages">{$pages}</div>
+    </div>
+  </div>
+</div>
+<include file="footer" />
+<script type="text/javascript">
+function act_pass(obj, path) {
+	$.ajax({
+	   type: "POST",
+	   url: "<php>echo $urladmin</php>/chk_photo/act/pass",
+	   data: 'path=' + path,
+	   success: function show_desc_result(re)
+	   {
+			$(obj).parent().remove();
+	   }
+	});
+}
+function act_del(obj, path) {
+	$.ajax({
+	   type: "POST",
+	   url: "<php>echo $urladmin</php>/chk_photo/act/del",
+	   data: 'path=' + path,
+	   success: function show_desc_result(re)
+	   {
+			$(obj).parent().remove();
+	   }
+	});
+}
+function act_change_sex(uid) {
+	$.ajax({
+	   type: "POST",
+	   url: "<php>echo $urladmin</php>/chk_photo/act/change_sex",
+	   data: 'uid=' + uid,
+	   success: function show_desc_result(re)
+	   {
+			Win.dialog({type:'info',msg:'更改性别成功！'});
+	   }
+	});
+}
+</script>
+</body>
+</html>

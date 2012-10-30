@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<style type="text/css">
+* {margin:0; padding:0;}
+ul, ol {list-style:none;}
+a {color:#1A4DC1; cursor:pointer; outline:medium none;}
+.f_6, a.f_6 {color:#666666;}
+.fb_13 {font-size:13px;}
+.f_0, a.f_0 {color:#000000;}
+</style>
+<link href="{$urlstatic2}/css/chatbox.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="w_box">
+  <div class="chat_box">
+    <div class="interlocutor" style="margin-left:0;">
+      <div class="locut_container">
+        <dl id="friend_info" class="clear">
+        </dl>
+		<in name="uid" value="0,20853">
+        <dl class="clear">
+          <dt><a id="u_face" href="javascript:;"><img width="72" height="72" border="0" src="{$urlupload}{$m['default_pic']|default='/000face/system.jpg'}_72x72.jpg" alt="0"></a></dt>
+          <dd>
+            <ul>
+              <li id="u_baseinfo" class="f_6"><b>{$m['username']|default='系统通知'}</b></li>
+              <li style="height:22px" id="u_want">我们一直在努力！</li>
+            </ul>
+          </dd>
+        </dl>
+		<else />
+        <dl class="clear">
+          <dt><a id="u_face" target="_blank" href="{$urldomain}/{$m['uid']}"><img width="72" height="72" border="0" src="{$urlupload}{$m['default_pic']}_72x72.jpg" alt="0"></a></dt>
+          <dd>
+            <ul>
+              <li id="u_baseinfo" class="f_6"><a target="_blank" href="{$urldomain}/{$m['uid']}"><b>{$m['username']}</b></a> 21岁
+              </li>
+              <li style="height:22px" id="u_want"><span class="fb_13">{$m['college']}</span></li>
+			  <php>if(!$m['want_content']) $m['want_content'] = '一起告别单身';</php>
+              <li style="height:22px" id="u_want">{$m['want_content']|do_things=$m['sex']}</li>
+            </ul>
+          </dd>
+        </dl>
+		</in>
+		
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

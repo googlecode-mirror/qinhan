@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 邀请有奖</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+</head>
+<body>
+<php>$nav = 99;</php>
+<include file="Public:head" />
+<div class="container_cwrap clear">
+  <!--左边部分开始-->
+  <include file="Public:profile_left" />
+  <!--左边部分结束-->
+  <!--左边部分结束-->
+  <!--右边部分开始-->
+  <div class="newperphoto_r">
+    <div class="shop_box">
+      <div class="title_nav">
+        <ul class="clear">
+		  <li><a id="rsync" class="currt1"  href="{$urlsite}/user/password/">密码安全</a></li>
+          <li><a id="rsync" class="currt1"  href="{$urlsite}/user/rsync/">邀请有奖</a></li>
+		  <li><a id="rsync" class="currt2"  href="{$urlsite}/user/invite/">邀请有奖</a></li>
+        </ul>
+      </div>
+      <div class="newset_box">
+        <dl class="clear">
+          <dt></dt>
+          <dd>
+            <p>发送以下注册链接每邀请1位好友成功加入，奖励1颗红豆。</p>
+            <p class="mt_40"><input type="text" size="40" class="input_1 fl" value="http://jianjiandandan.ivu1314.com/?uid={$GLOBALS['i']['uid']}" />
+				<span style="padding-left:5px;">
+				<object width="50" height="28" id="copyObjIE" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000">
+				  <param value="always" name="allowScriptAccess">
+				  <param value="transparent" name="wmode">
+				  <param value="{$urlstatic2}/flash/clipboard.swf?1310729489" name="movie">
+				  <param value="high" name="quality">
+				  <embed  id="copyObj" width="50" height="28" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" allowscriptaccess="sameDomain" swliveconnect="true" quality="high" wmode="transparent" src="{$urlstatic2}/flash/clipboard.swf?1310729489">
+				</object>
+        		</span></p>
+          </dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <!--中间中间部分结束-->
+</div>
+<!--中间部分结束-->
+<script type="text/javascript">
+function get_copy_str()
+{
+    var str = 'http://jianjiandandan.ivu1314.com/?uid=<php>echo $GLOBALS['i']['uid'];</php>';
+    return str;
+}
+function copy_finish()
+{
+    alert('邀请链接地址复制成功\n您可以在QQ、MSN上粘贴发送给您的朋友！'); 
+}
+</script>
+<include file="Public:foot" />
+</div>
+</body>
+</html>

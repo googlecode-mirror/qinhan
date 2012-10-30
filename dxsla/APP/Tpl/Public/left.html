@@ -1,0 +1,278 @@
+<div class="myhead_box">
+  <div class="my_info clear">
+    <p class="person_img fl"> <a href="{$urlsite}/photo"> <img src="{$urlupload}{$GLOBALS['i']['default_pic']}_72x72.jpg" /> </a> </p>
+    <div class="base_info fl">
+      <p class="fs_14"><a href="{$urlsite}/profile" class="f_0 unline">{$GLOBALS['i']['username']}</a></p>
+      <p class="fs_12 f_9">{$GLOBALS['i']['college']}</p>
+	  <p class="f_6"><lt name="GLOBALS['i']['group_type']" value="2">普通会员<else />正式会员</lt></p>  
+      <div class="photo_msg_box2"><lt name="GLOBALS['i']['group_type']" value="2"><a target="_blank" href="{$urlsite}/usergroup/">成为正式会员！</a></lt></div>
+    </div>
+  </div>
+  <div class="f_6 mark_box">平均：<a class="f_green1 fs_16" href="{$urlsite}/usergroup/share_score/" target="_blank">{$GLOBALS['i']['score_impress']}分</a></div>
+</div>
+<div class="newsbox">
+  <div class="newsbox_m">
+    <ul>
+      <li class="clear line" style="overflow:hidden;display:none;" id="notice_div">
+        <div id="infozone" style="position:absolute;width:160px;height:40px;overflow:hidden;" class="f_green1"></div>
+      </li>
+    </ul>
+    <ul id="left_newsbox">
+      <li class="clear line"> <span class="fl fs_14"><a href="{$urlsite}/hot/in/" class="f_blue1">收到打分</a></span>
+        <if condition="$f['new_receive_score'] neq 0"> <span class="fr"><a href="{$urlsite}/hot/in/" class="f_r fb_12 unline" id="m_ping">新</a></span> </if>
+        <if condition="$f['new_receive_score'] eq 0"> <span class="fr"><a href="{$urlsite}/hot/in/" class="f_6 unline" id="m_ping">{$f['receive_score_num']}</a></span> </if>
+      </li>
+      <li class="clear line"><span class="fl fs_14"><a href="{$urlsite}/fav/out/" class="f_blue1">我收藏的人</a></span><span class="fr f_6"><a href="{$urlsite}/fav/out/" class="f_6 unline" id="m_fav_new">{$f['fav_out_num']}</a></span><a title="我收藏的人当前在线"  href="{$urlsite}/fav/out/?online=1" id='fav_online'></a></li>
+      <li class="clear line"> <span class="fl fs_14"><a href="{$urlsite}/fav/in/" class="f_blue1">谁收藏了我</a></span>
+        <if condition="$f['new_fav_in'] neq 0"><span class="fr  f_r fb_12"><a href="{$urlsite}/fav/in/" class="f_r fb_12 unline" id="m_fav_new">新</a></span> </if>
+        <if condition="$f['new_fav_in'] eq 0"> <span class="fr f_6"><a href="{$urlsite}/fav/in/" class="f_6 unline" id="m_fav_new">{$f['fav_in_num']}</a></span></if>
+      </li>
+      <li class="clear line"> <span class="fl fs_14"><a href="{$urlsite}/attention/more/" class="f_blue1">动态</a></span>
+        <if condition="$f['new_attention'] neq 0"> <span class="fr  f_r fb_12" ><a href="{$urlsite}/attention" class="f_r fb_12 unline" id="m_attention_new">新动态</a></span></if>
+      </li>
+      <li class="clear">
+        <div class="clear list"> <span class="fl fs_14"><a href="{$urlsite}/visit/in/" class="f_blue1">来访者</a></span> <span class="old_messages" > <b> <b> <b>
+          <if condition="$f['new_visitor'] neq 0"> <b><a href="{$urlsite}/visit/in/" id="m_visit_new_count">{$f['new_visitor']}</a></b></if>
+          </b> </b> </b> </span> </div>
+        <div class="list2" id="visit_face">
+          <volist name="visitlist1" id="d"> <a href="{$urldomain}/{$d.uid}" target="_blank"> <img src="{$urlupload}/{$d['default_pic']}_72x72.jpg" width="38" height="38" alt="" title="" border="0" /> </a> </volist>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="newsbox_b"></div>
+</div>
+<script>
+                var visit_new_uid_str = '19506395';
+			</script>
+<!--给新人打分开始-->
+<!--<div class="newsbox m_t5" id="reg_ping_div" style="">
+  <div class="newsbox_m">
+    <div class="grade_bar clear"> <a class="ga3"></a> <a class="ga4"></a> <a class="ga5"></a> <a class="ga6"></a> <a class="ga7"></a> <a class="ga8"></a> <a class="ga9"></a> <a class="ga10"></a> </div>
+    <div class="newpersongrade">
+      <dl class="clear" id="wait_reg_ping_div">
+        <dt><img class="hover" id="wait_reg_ping_photo" src="http://img1.jjdd.com/c72/99/67/9967d9cef59081387899293bebdea214.jpg" alt="" /></dt>
+        <dd id="reg_ping_result" >
+          <p> <span class="f_r">有新人！</span>您的打<br/>
+            分决定{$m['sex']|ui_sex}是否能<br/>
+            加入,6分以下表<br/>
+            示不欢迎加入！ </p>
+        </dd>
+      </dl>
+      <div  id="big_img" class="big_img"> <img id="big_img_url" alt="" src="http://img1.jjdd.com/c240/70/c4/70c442c58673bd296c5262c68b9fe57e.jpg"> </div>
+    </div>
+  </div>
+  <div class="newsbox_b"></div>
+</div>-->
+<!--给新人打分结束-->
+<p class="comment_tip" id="comment_tip_flag" style="left:400px;top:200px;z-index:99999"></p>
+<script>
+var reg_photo_id = 9627888;
+var reg_photo_url = '';
+var big_img_url = '';
+$("#wait_reg_ping_photo").mouseover(function() {
+    $("#big_img").show();
+});
+$("#big_img").mouseout(function(){
+     $("#big_img").hide();
+});
+function reg_mark(score){
+	clearTimeout(time_reg_ping);
+	$.ajax({
+	   type: "POST",
+	   url: "/score/user_mark/",
+	   data: 'pid='+reg_photo_id+'&score='+score,
+	   success: function order_result(re){
+	   		var obj = jQuery.parseJSON(re);
+	   		show_ping_form(reg_photo_id,score,obj.ping_ret);
+	   		
+	   		if(obj.result==1)
+	   		{
+	   			if(obj.photo_id>0) reg_photo_id = obj.photo_id;
+	   			if(obj.img_url!='') reg_photo_url = obj.img_url;
+	   			if(obj.big_img_url!='') big_img_url = obj.big_img_url;
+	   		}
+	   		else
+	   		{
+	   			reg_photo_id = 0;
+	   			reg_photo_url = '';
+	   		}
+	   }
+	});
+	
+}
+function show_reg_ping_tips()
+{
+	var code = '<p>您的打分至关重要，低于<span class="fb_16 f_yelo">60分</span>的人将不予进入，请认真打分！</p>';
+	Win.dialog({type:'info',width:560,msg:code});
+}
+function show_ping_form(photo_id,score,ping_ret)
+{
+	var code = '<div class="pop_appraise">\
+			    	<dl class="clear">\
+			        	<dt><img width=48 src="'+$("#wait_reg_ping_photo").attr("src")+'" alt=""  /></dt>\
+			            <dd>您给<php>echo ui_sex($m['sex'], 3)</php>打了：<span class="fb_20 f_yelo">'+score+'</span> 分</dd>\
+			        </dl>\
+			         <div class="word_box">\
+			            <p>请选择您对<php>echo ui_sex($m['sex'], 3)</php>的评价：</p>\
+			              <ul class="clear">\
+			              ';
+	var i=0;
+	for(index in ping_ret)
+	{
+		var ping_arr = ping_ret[index].split(",");
+		code += '<li  class="font_w'+Math.floor(i/3)+' font_w_flag"  onclick="reg_ping('+photo_id+','+i+')" tip="'+ping_arr[1]+'">'+ping_arr[0]+'</li>';
+		i++;
+	}
+	code +='</ul>\
+			        </div>\
+			    </div>\
+			';
+	Win.dialog({width:580,height:350,msg:code,noclose:true,cancel:function(){show_next_reg_ping();}});
+ 	mouseover_display_font();
+}
+function mouseover_display_font(){
+	$(".font_w_flag").mousemove(function(e) {
+		if($.browser.msie) {
+			$("#comment_tip_flag").css({"width":$(this).attr("tip").length*10});
+		}
+		$("#comment_tip_flag").html($(this).attr("tip")).css({"position":"absolute","top":e.pageY+20,"left":e.pageX+10}).show();
+	  });
+
+	$(".font_w_flag").mouseout(function() {
+		$("#comment_tip_flag").hide();
+	  });
+	  
+}
+function click_custom_ping()
+{
+	if($("#custom_ping").val()=='如果以上选项不够，请点击此处自写，每个人都希望收到别人为他单独写的东西！')
+	{
+		$("#custom_ping").val('');
+	}
+}
+function blur_custom_ping()
+{
+	if($("#custom_ping").val()=='')
+	{
+		$("#custom_ping").val('如果以上选项不够，请点击此处自写，每个人都希望收到别人为他单独写的东西！');
+	}
+}
+function reg_ping(photo_id,content_id) {
+	var content = $("#comment_tip_flag").html();
+    $('#send_ping_btn').attr('disabled',true);
+    $.ajax({
+	   type: "POST",
+	   url: "/score/user_ping/",
+	   data: 'pid='+photo_id+'&content='+encodeURIComponent(content),
+	   success: function ping_success(re)
+				{
+					var obj = jQuery.parseJSON(re);
+					Win.close();
+					switch(obj.result)
+					{
+						case 1://
+								reg_photo_id = obj.photo_id;
+								reg_photo_url = obj.img_url;
+								if(obj.big_img_url!='') big_img_url = obj.big_img_url;
+								show_next_reg_ping();
+								break;
+					 	case 0://
+					 		reg_photo_id = 0;
+							reg_photo_url = '';
+					 		$("#reg_ping_div").fadeOut();
+					}
+				}
+	});
+}
+function show_next_reg_ping()
+{
+	var tmp_code='<div class="font_b">\
+			          <p>点评成功</p>\
+			      </div>';
+	$("#reg_ping_result").html(tmp_code);
+	$("#wait_reg_ping_div").fadeOut('slow',function(){show_next_reg_photo();});
+}
+function show_next_reg_photo()
+{
+	if(reg_photo_url!='')
+	{
+		$("#wait_reg_ping_photo").attr("src",reg_photo_url);
+		$("#big_img_url").attr("src",big_img_url);
+		$("#reg_ping_result").html('<p><span class="f_r">有新人！</span>您的打<br/>分决定他是否能<br/>加入,6分以下表<br/>示不欢迎加入！</p>');
+		$("#wait_reg_ping_div").fadeIn();
+		
+		clearTimeout(time_reg_ping);
+		time_reg_ping = setInterval("notice_reg_ping();",500);
+	}
+	else
+	{
+		$("#reg_ping_div").fadeOut();
+		setTimeout("get_need_ping()",5000);
+	}
+}
+var time_reg_ping;
+$(document).ready(function() { 
+	$(".grade_bar a").click(function(){
+		var score = this.className.substring(2);
+		reg_mark(score);
+	});
+    if(0 == 0 && 775 >= 3 && 0.5 < 0.5){
+		var msg = '<div class="pop_info_contact">'
+				   + '	<p style="color:#676767";>你还不能进行其他操作！</p>'
+				   + '	<p style="margin:15px 0 0 0;">请先<a href="/profile/">完善您的资料</a> <span class="f_r1">50%</span> 以上！</p>'
+				   + '	<div class="clear" style="margin:15px 0 0 100px;">'
+				   + '		<div class="fl">您目前的资料完成度为 <span class="f_blue1">50%</span>&nbsp;</div>'
+				   + '		<div class="fl" style="margin:3px 0 0 0;"><div class="fillbar fl" title="50% completed"><span style="width:25px"></span></div></div>'
+				   + '	</div>'
+				   + '</div>'
+				   + '<div class="opt"><a href="/profile/" class="btn1">知道了</a></div>'
+		msg = '<div class="popup_c">'+msg+'</div>';
+		Win.dialog({'msg':msg,noclose:true});
+	}
+	time_reg_ping = setInterval("notice_reg_ping();",500);
+});
+function notice_reg_ping()
+{
+	if($("#wait_reg_ping_photo").attr('class') == 'hover')
+	{
+		$("#wait_reg_ping_photo").removeClass();
+	}
+	else
+	{
+		$("#wait_reg_ping_photo").addClass('hover');
+	}
+}
+function get_need_ping(score){
+	clearTimeout(time_reg_ping);
+	$.ajax({
+	   type: "GET",
+	   url: "/score/get_need_ping/",
+	   success: function order_result(re){
+	   				var obj = jQuery.parseJSON(re);
+					switch(obj.result)
+					{
+						case 1://
+								reg_photo_id = obj.photo_id;
+								reg_photo_url = obj.img_url;
+								if(obj.big_img_url!='') big_img_url = obj.big_img_url;
+								$("#reg_ping_div").show();
+								show_next_reg_photo();
+								break;
+						default ://
+								setTimeout("get_need_ping()",5000);
+					}
+	   }
+	});
+	
+}
+</script>
+<div class="vda_video_box">
+  <div class="box">
+    <h3>如何保证照片真实？</h3>
+    <p class="list">网络虚拟，但不应虚假。为了营造一个真实轻松的校园交友场所，需要大家从上传真实照片开始。</p>
+    <p class="list">所以，我们将人工审核每位会员的个人形象照。审核标准是性别一致、非网络照片，生活照最佳。</p>
+    <p><a target="_blank" class="input" href="{$urlsite}/photo/up_form/?gid=0">上传形象照</a></p>
+  </div>
+  <p><img src="{$urlstatic}/img/approve_boxbg_b.gif{$urltail}"></p>
+</div>

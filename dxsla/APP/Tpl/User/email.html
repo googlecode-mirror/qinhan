@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 邮箱设置</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+</head>
+<body>
+<!--header start-->
+<php>$nav = 99;</php>
+<include file="Public:head" />
+<div class="container_cwrap clear">
+  <!--左边部分开始-->
+  <include file="Public:profile_left" />
+  <!--左边部分结束-->
+  <!--左边部分结束-->
+  <!--右边部分开始-->
+  <div class="newperphoto_r">
+    <div class="shop_box">
+      <div class="title_nav">
+        <ul class="clear">
+		  <li><a id="rsync" class="currt1"  href="{$urlsite}/user/password/">密码安全</a></li>
+          <li><a id="rsync" class="currt1"  href="{$urlsite}/user/rsync/">同步设置</a></li>
+          <li><a id="rsync" class="currt1"  href="{$urlsite}/user/invite/">邀请有奖</a></li>
+          <li><a id="email" class="currt2" href="{$urlsite}/user/email/">邮箱设置</a></li>
+        </ul>
+      </div>
+      <div class="newset_box">
+        <dl class="clear">
+          <dt><img src="http://pic.jjdd.com/v1/i/pub/newemail.jpg?gv=87_1" alt=""  /></dt>
+          <dd>
+            <p>您当前邮箱：<span class="f_r1">jaredwu@qq.com</span></p>
+            <p>它用于收取新信息通知、新人推荐等，并且是您登录jjdd.com（简简单单）的帐号！</p>
+            <p>如果您忘记了登录密码，它也将用来收取您寻回密码的邮件。</p>
+            <p class="mt_40">如果您要使用其它邮箱作为登录帐号，<a href="/user/form_email/">点此更换</a></p>
+          </dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <!--中间中间部分结束-->
+</div>
+<!--中间部分结束-->
+<include file="Public:foot" />
+</div>
+</body>
+</html>

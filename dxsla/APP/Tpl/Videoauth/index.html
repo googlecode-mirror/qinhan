@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 视频认证</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+
+<link href="{$urlstatic2}/css/video.css?gv=193_1" rel="stylesheet" type="text/css" />
+<link href="{$urlstatic2}/css/photos.css?gv=193_1" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<php>$nav = 7;</php>
+<include file="Public:head" />
+<div class="newperphoto_w clear">
+  <!--左边部分开始-->
+  <div class="newperphoto_l">
+    <dl>
+      <dt>我的档案</dt>
+      <dd><a class="" href="{$urlsite}/profile/">基本资料</a></dd>
+      <dd><a class="" href="{$urlsite}/diary/">{$GLOBALS['i']['diary_name']}</a></dd>
+      <dd><a class="" href="{$urlsite}/photo/">我的相册</a></dd>
+    </dl>
+    <dl>
+      <dt>其他</dt>
+      <!--<dd><a class="" href="{$urlsite}/goods/">道具礼品</a></dd>    -->
+      <dd><a class="cur" href="{$urlsite}/videoauth/">真人认证</a></dd>
+      <dd><a class="" href="{$urlsite}/pay/card_log/?type=link">红豆帐户</a></dd>
+      <dd><a class="" href="{$urlsite}/user/rsync/">设置</a></dd>
+    </dl>
+  </div>
+  <!--中间部分开始-->
+  <div class="photo_manage">
+    <h1>点击下面的"启用摄像头"按钮，并点击"允许"视频连接</h1>
+    <div class="video_flashbox">
+      <!--遮罩层 -->
+      <!--视频认证开始前 start-->
+      <div id="video_flash2" class="video_flash2" style="display:none;">
+        <p class="txt"> <span class="fs_16">为防作弊：您在认证过程中，请根据系统给出的数字对着摄像头做出相应的手势。(做手势时请不要挡住脸)。</span> <span class="fs_12 dp m_t10">不会做？<a href="javascript:exp(2,3);" class="f_ye1 fs_14">查看范例</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:exp(2,4);" class="btn3 _js_begin">知道了，开始认证</a></span> </p>
+      </div>
+      <!--视频认证开始前 end-->
+      <!--视频规范 start-->
+      <div class="video_flash3" style="display:none;">
+        <p class="txt">例如：出现的数字是"2、3"，请对摄像头做手势2和3，做一遍即可。</p>
+        <p class="dp m_t15"><span class="img"><img src="http://pic.jjdd.com/v1/i/pub/flash3_img.gif?gv=97_1"></span><a href="javascript:exp(3,4);" class="btn3 flbtn">开始认证</a></p>
+      </div>
+      <!--视频规范 end-->
+      <!--认证过程 start-->
+      <div class="video_flash4" style="display:none;">
+        <p class="txt">请对摄像头做手势<font class="f_r">1</font>和<font class="f_r">4</font>，做一遍即可。[<span id="_js_second" style="color:red;">15</span>秒]</p>
+      </div>
+      <!--认证过程 end-->
+      <!--认证结束 start-->
+      <div class="video_flash5" style="display:none;">
+        <p class="txt">视频认证结束，请等待客服审核……</p>
+        <a href="JavaScript:exp(4,6);" class="btn3 flbtn">确定</a> </div>
+      <!--认证结束 end-->
+      <!--end遮罩层-->
+      <p class="m_t10 video_flash1 _js_falsh">
+        <object id="markObjIE" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="320" height="320" id="client" align="middle">
+        <param name="allowScriptAccess" value="sameDomain" />
+        <param name="quality" value="high"/>
+        <param name="wmode" value="transparent"/>
+        <param value="Opaque" name="wmode">
+        <param value="transparent" name="wmode"/>
+        <param name="movie" value="{$urlstatic}/flash/sprz_client.swf?callback=start_rz&reload=reload&onload=flash_init&send_video_start=send_video_start&uid=58636465&ver=0.3&time=1325744354" />
+        <param name="quality" value="high" />
+        <param name="bgcolor" value="#ffffff" />
+        <embed id="markObj" src="{$urlstatic}/flash/sprz_client.swf?callback=start_rz&reload=reload&onload=flash_init&send_video_start=send_video_start&uid=58636465&ver=0.3&time=1325744354" quality="high" bgcolor="#ffffff" width="320" height="320" name="client" align="middle" swLiveConnect="true" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="Opaque" />
+        </object>
+      </p>
+    </div>
+    <p class="f_14 f_r">若您在视频认证过程中遇到问题，请联系我们的在线客服： <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2389538290&site=qq&menu=yes" onclick="close_view()"><img border="0" src="http://wpa.qq.com/pa?p=2:2389538290:47" alt="若您在视频认证过程中遇到问题，请联系我们的在线客服" title="若您在视频认证过程中遇到问题，请联系我们的在线客服"></a> </p>
+    <p id="msg" class="m_t20"></p>
+  </div>
+  <!--中间部分结束-->
+</div>
+<!--视频认证javascript-->
+<script>
+var isexitconfirm = false;
+
+window.onbeforeunload = function(){
+    if (isexitconfirm)
+    {
+        return '您正在进行视频认证，您确定要退出页面吗？';
+    }
+}
+
+window.onunload = function(){
+    if (isexitconfirm)
+    {
+        $.ajax({
+           type: "POST",
+           url: "/index.php?s=/videoauth/delrz/",
+           async:false,
+           success: function result(){}
+        });
+    }
+}
+
+function exp(self,next)
+{
+    $('.video_flash'+self).hide();
+    $('.video_flash'+next).show();
+    if(next==4)
+    {
+        send_video();
+        alert_status(1);
+    }
+    else if(next==6)
+    {
+        close_video();
+        location.href='/index.php?s=/videoauth?over=1';
+    }
+    else if(next==5)
+    {
+        close_video();
+        setTimeout("location.href='/index.php?s=/videoauth?over=1';",5000);
+    }else if(next==3)
+    {
+        alert_status(3);
+    }
+}
+//摄像头视频状态辨别
+function check_cam(e)
+{
+    if('allowed'==e){
+        alert_status(5);
+    }else{
+        alert_status(4);
+    }
+}
+
+//初始加载
+function flash_init()
+{
+    isexitconfirm = true;
+}
+//连接失败重新连接
+function reload()
+{
+    isexitconfirm = false;
+    self.location.href = self.location.href;
+}
+//开启
+function send_video() {
+    try{
+        if($.browser.msie)
+        {
+            $("#markObjIE")[0].send_video();
+        }
+        else
+        {
+            $("#markObj")[0].send_video();
+        }
+    }
+    catch(e)
+    {
+        isexitconfirm = false;
+    }
+    return true;
+}
+//关闭
+function close_video() {
+    try{
+        if($.browser.msie)
+        {
+            $("#markObjIE")[0].unload_cam();
+        }
+        else
+        {
+            $("#markObj")[0].unload_cam();
+        }
+    }
+    catch(e)
+    {
+        isexitconfirm = false;
+    }
+    return true;
+}
+//开始录制提交数据
+function send_video_start()
+{
+    if(isexitconfirm){
+         time_over();
+         setTimeout("alert_status(0);",5000);
+         setTimeout("exp(4,5);",15000);
+     }else{
+        return false;
+     }
+}
+var second = 0; 
+//倒计时
+function time_over(e)
+{
+    setTimeout("time_over();",1000);
+    second = second + 1;
+    $('#_js_second').html((15-second));
+}
+//成功连接
+function start_rz()
+{
+    $("#video_flash2").show();
+    alert_status(2);
+}
+//状态提交
+function alert_status(e)
+{
+    $.ajax({
+                type: 'POST',
+                url: "/index.php?s=/videoauth/up_over",
+                data: 'id=3658&be_rz='+e,
+                success: function(data){if(data.status!=1){alert('请刷新页面!');}},
+                dataType: "json"
+        });
+}
+//flash加载失败
+setTimeout("error_flash()",30000);
+//FLASH未加载失败提示
+function error_flash()
+{
+    if(isexitconfirm==false)
+    {
+        var msg_code = '<p class="f_14 f_r">请联系我们的在线客服：'
+                     +'<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2389538290&site=qq&menu=yes" onclick="close_view()"><img border="0" src="http://wpa.qq.com/pa?p=2:2389538290:47" alt="若您在视频认证过程中遇到问题，请联系我们的在线客服" title="若您在视频认证过程中遇到问题，请联系我们的在线客服"></a>'
+                     +'</p>';
+        Win.dialog({type:'info',width:560,msg:msg_code,enter:function(){Win.close();},enterName:'关闭'});
+    }
+}
+
+function close_view(){
+    self.location.href="/index.php?s=/videoauth/rz";
+}
+</script>
+<!--视频认证javascript结束-->
+<include file="Public:foot" />
+</div>
+</body>
+</html>

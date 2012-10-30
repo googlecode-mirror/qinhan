@@ -1,0 +1,329 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$m['username']}的任务</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+
+<script language="javascript" src="{$urlstatic2}/js/face.js{$urltail}"></script>
+<script language="javascript" src="{$urlstatic2}/js/pub_face_all.js{$urltail}"></script>
+<link href="{$urlstatic2}/css/personal.css?gv=179_1" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.icon-title, .icon-desc, .icon-award {background-image:url("<php> echo $urlstatic; </php>/img/icons-deep-50X50.png"); float:left; height:20px; width:20px; margin:3px 5px 0 0;}
+.icon-title {background-position:-88px -123px;}
+.icon-desc {background-position:-316px -9px;}
+.icon-award {background-position:-162px -85px;}
+.icon-img {float:left; width:32px; height:32px; margin-right:5px;}
+</style>
+</head>
+<body>
+<include file="Public:home_head" />
+<style>
+a{z-index:1;position:relative;}
+</style>
+<div class="container_cwrap clear">
+  <div class="fm_l_270" style="_width:270px;">
+    <div class="newotherperson_head">
+      <p class="per_text"></p>
+      <p class="per_img"><a href="{$urlsite}/home/photo?uid={$m['uid']}&gid=0"><img src="{$urlupload}/{$m['default_pic']}
+
+_240x240.jpg" title="点击查看大图" class="face_s{$m['sex']}_b2" /></a></p>
+    </div>
+    <!--我想开始-->
+    <div class="newotherperson_photolist">
+      <p class="clear"><span class="fl"> <a class="f_3" href="{$urlsite}/home/photo?uid={$m['uid']}&gid=0">{$m['sex']|ui_sex}的个人形象照</a> </span> </p>
+      <ul class="clear">
+        <volist name="personal" id="p">
+          <li><a href="{$urlsite}/home/photo?uid={$m['uid']}&gid={$p['gid']}&pid={$p['pid']}"><img class="face_s{$m['sex']}_b2" title="点击查看大图" src="{$urlupload}/{$p['path']}_999x80.jpg"></a></li>
+        </volist>
+      </ul>
+    </div>
+    <div class="newotherperson_photolist">
+      <p class="clear bottom_line"> <span class="fl"><a class="f_3" href="{$urlsite}/home/show_group?uid={$m['uid']}">{$m['sex']|ui_sex}的其它相册</a></span> </p>
+      <div class="allphoto clear m_t20">
+        <volist name="pglist" id="g">
+          <dl>
+            <dt class="curreny">
+              <div class="photo_m"><a onclick="load_photo_group({$m['uid']}, {$g['gid']})"><img src="{$urlupload}/{$g['default_pic']}_120x120.jpg" alt="照片" ></a></div>
+            </dt>
+            <dd class="m_t10 fs_14">{$g['name']}</dd>
+            <dd class="f_6">共<span class="f_r1 fs_14">5</span>张</dd>
+          </dl>
+        </volist>
+      </div>
+    </div>
+    <p class="p_list"><a class="f_6 js_photo" href="javascript:;" onclick="perfect_invite(82, 1,this,1)">邀请{$m['sex']|ui_sex}上传更多照片</a></p>
+  </div>
+  <!--我想结束-->
+  <!--个人的基本资料开始-->
+<!--右半模块结束 start-->
+<div class="fm_c_680">
+  <div class="newotherperson_main">
+    <p class="f_6 fs_16"> <a class="w"  href="{$urldomain}/{$m['uid']}" >{$m['username']}</a> 的任务</p>
+  </div>
+  <div class="home_diary">
+    <div class="diary_updn"><a class="turn" href="{$urlsite}/home/task/?uid={$m['uid']}&tid={$prev_tid}" title="上一页">&lt;&lt;上个任务</a><a class="turn" href="{$urlsite}/home/task/?uid={$m['uid']}&tid={$next_tid}" title="下一页">下个任务&gt;&gt;</a></div>
+    <div class="ask_answer">
+      <div class="question_list clear">
+        <p class="fs_14 word_break"><span class="icon-title"></span>{$t['title']}</p>
+        <div class="no_photo fs_14 f_6" style="clear:both;"><span class="icon-desc"></span>{$t['content']}</div>
+		<div class="no_photo fs_14" style="clear:both;"><span class="icon-award"></span>{$t['reward']}</div>
+        <p class="m_t20 botinfo clear">已有{$t['answer_count']}人参与帮忙</p>
+        <div class="my_reply">
+          <div id="topbg_id" class="topbg2"></div>
+          <div class="box clear">
+            <dl>
+			
+			  <volist name="answerlist" id="a">
+              <dd>
+                <div class="clear">
+                  <div class="text">
+				  	<span class="icon-img"><a href="{$urldomain}/{$a['uid']}"><img src="{$urlupload}{$a['default_pic']}_48x48.jpg" width="32" height="32" /></a></span>
+				  	<span class="f_bl fl"><a href="{$urldomain}/{$a['uid']}">{$a.username}：</a></span>
+                    <p class="word_break">{$a.content}</p>
+                  </div>
+                  <div class="remark_info fs_12"><span class="f_9">{$a.add_time|formatTime}</span> </div>
+                </div>
+                <div class="border"></div>
+              </dd>
+			  </volist>
+			  	  
+            </dl>
+			<div id="page" class="turn_page"><div class="page">{$pages}</div></div>
+          </div>
+        </div>
+        <span class="time f_9 fs_12">{$t['add_time']|formatTime}</span> </div>
+    </div>
+    <div class="diary_updn"><a class="turn" href="{$urlsite}/home/task/?uid={$m['uid']}&tid={$prev_tid}" title="上一页">&lt;&lt;上个任务</a><a class="turn" href="{$urlsite}/home/task/?uid={$m['uid']}&tid={$next_tid}" title="下一页">下个任务&gt;&gt;</a></div>
+	<div class="reply_box">
+      <p class="list"><img src="{$urlstatic}/img/reaply_bg.png" alt=""></p>
+      <div class="reply_box_bg"><div contenteditable="true" style="width:600px;padding:3px;overflow-x:hidden;overflow-y:scroll;background:#fff;border-color:#7E7E7E #CFCFCF #CFCFCF #7E7E7E;border-style:solid;border-width:1px;height:60px;box-shadow:2px 2px 2px rgba(0, 0, 0, 0.1) inset;" type="text" id="reply_content" name="reply_content" onclick="" onkeydown="if(event.keyCode==13 &amp;&amp; event.ctrlKey) submit_reply(18090226,0)" ondragover="return false" ondrop="return false" onmouseup="setRange(this)" onkeyup="setRange(this)" clsss="word_break" onfocus="check_msg_hot(18090226)"></div></div>
+      <div class="clear">
+        <span class="fl"><a id="reply_button" onclick="submit_answer(0)" class="btn1">帮忙</a></span> 
+        <span class="fl"><a onclick="face51New.show(this,'reply_content','_textarea');"><img src="http://pic.jjdd.com/v1/i/pub/ico_ce.gif?gv=108_1" alt="表情" class="ico_b"></a></span> 
+        <span class="fl f_9"><label><input type="checkbox" onclick="" value="1" class="checkbox1" id="anonymity" name="sync">匿名</label></span>
+      </div>
+	</div>
+	
+  </div>
+</div>
+<!--右半模块结束 end-->
+</div>
+<script>
+var limit =1;
+var count_answer = 1;
+var is_show = 0;
+var curr_display = 0;
+$(document).ready(function(){
+	$('.text_w').click(function(){ $(this).removeClass('text_limit');$(this).find('.simple').hide();$(this).find('.detaill').show(); }); 
+});
+back_to_tip();
+
+function perfect_invite(uid, type) {
+	if(check_login()==false) {
+		return false;
+	}
+	$.post('/home/perfect', {uid:uid, type:type}, function(data) {
+		alert(data.msg);
+	},'json');
+}
+
+var current_or_uid=0;
+$(document).bind("click",function(e){
+	if($.browser.msie) {
+		var el = event.srcElement;
+	}
+	else {
+		var el = e.target;
+	}
+	 if(!(IM.fInObj(el, "or_bg clear"))) {
+		$(".m_dw").hide();
+	}
+	if(!(IM.fInObj(el, "add_collet clear"))){
+		$(".add_collet_down").hide();
+	}
+});
+$(document).ready(function() {
+	if(Cookies.get("locat_pay_card_58636465") == 1 && Cookies.get("locat_pay_uid") == "92369262" && Cookies.get("locat_is_pay_58636465") == 1 && myuserinfo.card_num > 30) {
+		show_mask_info(2,'92369262');
+	}
+	Cookies.clear("locat_pay_card_58636465");
+	Cookies.clear("locat_pay_uid");
+	Cookies.clear("locat_is_pay_58636465");
+    $("#gift_html_close").click(function (){
+       $("#show_gift_html").remove();
+    });   
+});
+//返回顶部
+function back_to_tip()
+{
+	var $backToTopTxt = '<a class="b_img" ></a>', $backToTopEle = $('<div class="back2top_fat"></div>').appendTo($("body"))
+	.html($backToTopTxt).attr("title", '返回顶部').click(function() {
+	$("html, body").animate({ scrollTop: 0 }, 120);
+	}), $backToTopFun = function() {
+		var st = $(document).scrollTop(), winh = $(window).height();
+		(st > 0)? $backToTopEle.show(): $backToTopEle.hide();
+		//IE6下的定位
+		if (!window.XMLHttpRequest) {
+			$backToTopEle.css("top", st + winh - 166);
+		}
+	};
+	$(window).bind("scroll", $backToTopFun);
+	$(function() { $backToTopFun(); });
+}
+function show_or(uid,type)
+{
+	if(type==0){
+		if(current_or_uid>0)
+		{
+			$("#or_"+current_or_uid).hide();
+		}
+		$("#or_"+uid).show();
+		current_or_uid = uid;
+	}
+	if(type==1){
+		if(current_or_uid>0)
+		{
+			$("#co_"+current_or_uid).hide();
+		}
+		$("#co_"+uid).show();
+		current_or_uid = uid;
+	}
+}
+function profile_completed(profile_completed_value){
+	if(check_login()==false)
+	{
+		return false;
+	}
+	var msg_code = sysmessage_addprofile('profile',1) ;
+	Win.dialog({width:460,msg:msg_code});
+	return true;
+}
+function check_login(){
+	return true;
+}
+//相片最终页和日记最终页的热度判断
+function check_msg_hot(uid){
+    if(uid == '') return false;
+    $.post("/index.php?s=/msg/check/", { friend:uid}, function (data) {
+        if(data.stat == 5) {
+            var msg_info = redbeans(data.nickname,data.pay_card,data.ret.receiver_userinfo.sex);
+            if(data.vip_linkcount){
+               var vip_linkcount = '<div style="margin-left:20px;"><font class="fb_14">您已经用完了今天的10个穿越热度用户名额。</font><font class="fs_12">（单月vip每天最多穿越10个热度用户）</font></div>';
+               msg_info = vip_linkcount+msg_info;
+            }
+            Win.dialog({'msg':msg_info,'height':400,'width':580,'pay_card':data.pay_card,'enter':function(data){
+                $.post("/index.php?s=/msg/check/", { friend:uid, pay_card:data.pay_card}, function (data) {
+                    if(data.stat) {
+                        Win.dialog({'msg':data.error, 'type':'alert'});
+                    }
+                }, 'json');
+            }});
+        }
+
+        else if(data.stat == 12) {
+            /*
+            Win.dialog({'msg':data.error,'type':'alert','pay_card':data.pay_card,'enter':function(data){
+                $.post("/msg/check/", { friend:uid, pay_card:data.pay_card }, function (data) {
+                    if(data.stat) {
+                        Win.dialog({'msg':data.error, 'type':'alert'});
+                    }
+                }, 'json');
+            }});*/
+        }
+        else if (data.stat) {
+            Win.dialog({'msg':data.error, 'type':'alert'});
+        }
+    },'json');
+}
+function submit_answer(pay_card){
+	var related = <php>echo $t['tid'];</php>;
+	var current_comment_uid = <php>echo $t['uid'];</php>;
+	if(IM.gFlash) {
+		var comment_content = cont_filter($("#reply_content").html());
+	}
+	else {
+		var comment_content = $.trim($("#reply_content").val());
+	}
+    
+	/*if(typeof myuserinfo != "object" || !myuserinfo.uid){
+		 show_login_form();
+		 return false ;
+	}
+
+	if(myuserinfo.uid == current_comment_uid){
+		Win.dialog({type:'info',msg:'不能帮忙自己的任务！'});
+		return false;
+	}
+
+	if(myuserinfo.profile_completed < 0.5 && myuserinfo.login_times > 6){
+		var msg_code = sysmessage_addprofile('reply',(myuserinfo.sex==1)?2:1) ;
+		Win.dialog({width:460,msg:msg_code});
+		return false ;
+	}*/
+    if (comment_content.length<1) {
+        Win.dialog({type:'info',msg:'内容不能为空！'});
+        return;
+    }
+	var is_anonymity = $('#anonymity').attr('checked') ? 1 : 0;
+
+    $("#comment_button").attr("disabled",true);
+    $.ajax({
+	   type: "POST",
+	   url: "/index.php?s=/task/answer_task/",
+	   data: 'receiver_uid='+current_comment_uid+'&content='+encodeURIComponent(comment_content)+'&related='+related+'&is_anonymity='+is_anonymity+'&pay_card='+pay_card,
+	   success: function comment_success(re)
+				{
+					//$("#comment_button").attr("disabled",false);
+					//alert(re);
+					var result_obj = jQuery.parseJSON(re);
+					switch(result_obj.stat)
+					{
+						case 0: 
+							Win.dialog({type:'info',msg:'参与帮忙成功！'});
+							setTimeout("location.reload(true);",1000);
+							break;
+						default:
+							Win.dialog({type:'info',msg:result_obj.error,cancel:function(){}});
+							break;
+					}
+				}
+	});
+}
+function perfect_invite(uid,type,obj,is_re) {
+	if(check_login()==false) {
+		return false;
+	}
+	$.post('/index.php?s=/home/perfect/', {uid:uid, type:type}, function(data) {
+		if(data.errno == 200){
+			if(is_re == 1){
+				$(obj).remove();
+				if(type == 4){
+					$(".js_vide").remove();
+				} else if(type == 1){
+					$(".js_photo").remove();
+				} else if(type == 2){
+					$(".js_answer").remove();
+				} else if(type == 6){
+					$(".js_diary").remove();
+				}
+			}
+		}else{
+			alert(data.msg);
+		}
+	},'json');
+	var p_a = $("#perfect_id a");
+	if(p_a.length <=1){
+		$("#perfect_id").remove();
+	}
+}
+</script>
+<include file="Public:foot" />
+</div>
+</body>
+</html>

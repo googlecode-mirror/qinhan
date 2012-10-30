@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 {$m['username']}的个人形象照得分</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+</head>
+<body>
+<include file="Public:home_head" />
+<div class="invite5" style="text-align:center;">
+  <div style="margin:20px 0;"><a class="f_6" href="/{$m['uid']}">返回{$m['username']}的个人主页</a><notempty name="GLOBALS['islogin']">&nbsp;&nbsp;<a class="f_6" href="{$urlsite}/usergroup/share_score/">查看我的得分</a></notempty></div>
+  <img src="{$urlupload}{$m['default_pic']}_qq.jpg" title="{$m['username']}的个人形象照得分" alt="{$m['username']}的个人形象照得分" />
+  <if condition="$GLOBALS['islogin'] && $GLOBALS['i']['uid'] eq $m['uid']">
+  <div class="m_t20 f_6">分享到QQ空间一次将获得0.5颗红豆，每天限分享1次</div>
+  <div style="margin:20px 0;"><input class="btn1" type="button" value="分享到QQ空间" onclick="share_score();"></div>
+  <else />
+  <div style="padding:20px 0 80px 180px">
+<!-- Baidu Button BEGIN -->
+    <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare" style="margin-left:0;">
+        <span class="bds_more">分享到：</span>
+        <a class="bds_qzone"></a>
+        <a class="bds_tsina"></a>
+        <a class="bds_baidu"></a>
+		<a class="shareCount"></a>
+    </div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=658305" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();
+</script>
+<!-- Baidu Button END --> 
+	  </div> 
+  </if>
+</div>
+<script type="text/javascript">
+function share_score() {
+	if(myuserinfo.qq_api != 1) {
+        var msg_code = '<div class="pop_rader fb_14"><p>你不是通过QQ账号登录本网站，不能分享到QQ空间</p>'
+                        +'<p>可以点击<a href="<php>echo $urlsite;</php>/user/rsync/" target="_blank">设置QQ账号同步</a>后再分享。</p></div>';
+        Win.dialog({width:500,height:150,msg:msg_code,type:'info'});
+        return false;
+	}
+	$.ajax({
+	   type: "POST",
+	   url: "/index.php?s=/user/share_score/",
+	   data: '',
+	   success: function show_desc_result(re)
+	   {
+			return true;
+	   }
+	});
+	Win.dialog({type:'info',msg:'分享成功！'});
+}
+</script>
+<include file="Public:foot" />
+</div>
+</body>
+</html>

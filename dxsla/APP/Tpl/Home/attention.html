@@ -1,0 +1,83 @@
+<?php foreach($feedData as $d) { ?>
+<?php $body = unserialize($d['body']); ?>
+<li class="clear newall_item ">
+<dl class="clear">
+
+<?php if($d['type'] == 1) { ?>
+<dt><p class="time">{$d['add_time']|formatTime}</p><p class="fs_13">写了两句</p></dt>
+<dd id="diary_{$m['uid']}_{$body['did']}">
+<div style="margin-bottom:10px">
+  <p class="word_break fs_14">{$body['content']}&nbsp;&nbsp;<span id="praise_{$b.did}" class="word_nowrap"><a title="给{$m['sex']|ui_sex}{$m['sex']|ui_sex=9}" class="{$m['sex']|ui_sex=8}_zbtn" onclick="praise_diary({$d['uid']},{$body.did},{$m['sex']},0)">&nbsp;&nbsp;</a><a class="brick" title="给{$m['sex']|ui_sex}一板砖" onclick="praise_diary({$d['uid']},{$body.did},{$m['sex']},1)"></a></span>&nbsp;&nbsp;<a class="word_nowrap dashed" onclick="show_comment_form({$d['uid']},{$body.did},16);">评论</a></p>
+  <div id="comment_{$d['uid']}_{$body.did}" class="reply_box" style="display:none" ></div>
+</div>
+</dd>
+
+<?php } elseif($d['type'] == 2) { ?>
+<dt><p class="time">{$d['add_time']|formatTime}</p><p class="fs_13">更新了我想</p></dt>
+<dd>
+<span class="fb_13">“</span><span>想和一个{$m['sex']|ui_sex=3}生,{$body.want_content}</span><span class="fb_13 f_0">”</span> <a onclick="try_meet({$f.uid},{$body.sex},'{$f.username}','{$body.want_content}')" class="f_r underline">约{$m['sex']|ui_sex}</a>
+</dd>
+
+<?php } elseif($d['type'] == 3) { ?>
+<dt><p class="time">{$d['add_time']|formatTime}</p><p class="fs_13">发起<span class="fs_16">{$d['count']}</span>个问题</p></dt>
+<dd id="question_{$m['uid']}_{$d['add_time']}">
+<?php foreach($body as $b) { ?>
+<div>
+  <p class="fs_14 word_break"><span class="fs_14">问题：</span>{$b['question']}</p>
+  <notempty name="b['photo_url']">
+  <p class="m_t5"><img title="点击查看大图" class="mousezoom_tip" src="{$urlupload}/{$b['photo_url']}_120x120.jpg" onclick="scaleImg2('{$b.q_uid}_{$b.q_id}','{$urlupload}/{$b['photo_url']}_480x480.jpg')" id="imgsmall2_{$b.q_uid}_{$b.q_id}"> <img onclick="scaleImg2('{$b.q_uid}_{$b.q_id}','')" class="mousezoom_min" style="display:none;" id="imgbig2_{$b.q_uid}_{$b.q_id}"></p>
+  </notempty>
+  <p class="m_t10 clear"><a id="{$b.q_id}" class="f_0 fr" onclick="show_answer_form(this);">回答</a>&nbsp;<a target="_blank" style="display:none;" href="/home/question/?uid={$b.q_uid}&amp;qid={$b.q_id}" class="dashed word_nowrap font_block" id="answer_more_{$b.q_id}">查看全部答案</a></p>
+</div>
+<div style="display:none" class="myfrend_reply reply_box" data="{$b.q_uid}" id="answer_{$b.q_id}"></div>			
+<?php } ?>
+</dd>
+
+<?php } elseif($d['type'] == 4) { ?>
+<dt><p class="time">{$d['add_time']|formatTime}</p><p class="fs_13">回答了<span class="fs_16">{$d['count']}</span>个问题</p></dt>
+<dd>
+<ul id="answer_question_{$m['uid']}_{$d['add_time']}" class="answer_question">
+<?php foreach($body as $b) { ?>
+<li>
+  <p class="fs_14 f_6 word_break"><span class="f_green word_nowrap">问题：</span>{$b['question']}&nbsp; <a title="我也要回答这个问题" id="{$b.q_id}_{$b.q_uid}" class="f_r fs_12 answer_question dashed word_nowrap" onclick="show_quesiton_answer_form_div(this);">回答</a></p>
+  <notempty name="b['photo_url']">
+  <p class="m_t5"><img title="点击查看大图" class="mousezoom_tip" src="{$urlupload}{$b['photo_url']}_120x120.jpg" onclick="scaleImg2('{$b.q_uid}_{$b.q_id}','{$urlupload}/{$b['photo_url']}_480x480.jpg')" id="imgsmall2_{$b.q_uid}_{$b.q_id}"> <img onclick="scaleImg2('{$b.q_uid}_{$b.q_id}','')" class="mousezoom_min" style="display:none;" id="imgbig2_{$b.q_uid}_{$b.q_id}"></p>
+  </notempty>
+  <div style="display:none" class="myfrend_reply" data="{$b.q_uid}" id="answer_{$b.q_id}_{$b.q_uid}"></div>
+  <p class="fs_14 m_t5 word_break"><span class="fs_14">{$b.a_username}：</span><span class="agree_ico"><img src="{$urlstatic}/img/vote_1.png"></span>{$b['answer']}&nbsp; <a title="评论{$m['sex']|ui_sex}的回答" onclick="show_comment_form({$b.a_uid},{$b.a_id},10);" class="dashed word_nowrap">评论</a></p>
+  <div style="display:none" class="reply_box show_comment" id="comment_{$b.a_uid}_{$b.a_id}"></div>
+</li>
+<?php } ?>
+</ul>
+</dd>
+
+<?php } elseif($d['type'] == 5) { ?>
+<dt><p class="time">{$d['add_time']|formatTime}</p><p class="fs_13">上传了<span class="fs_16">{$d['count']}</span>张照片</p></dt>
+<dd>
+<ul id="photo_{$m['uid']}_{$d['add_time']}" class="pic_list clear">
+<?php foreach($body as $b) { ?>
+<li><a target="_blank" href="{$urlsite}/home/photo?uid={$m['uid']}&amp;gid={$b['gid']}&amp;pid={$b['pid']}"><img border="0" src="{$urlupload}/{$b['path']}_999x80.jpg"></a></li>
+<?php } ?>
+</ul>
+</dd>
+
+
+<?php } elseif($d['type'] == 6) { ?>
+<dt><p class="time">{$d['add_time']|formatTime}</p><p class="fs_13">更新<span class="fs_16">{$d['count']}</span>条小编专访</p></dt>
+<dd>
+<ul id="answer_18090226_1323322139" class="answer_question">
+<?php foreach($body as $b) { ?>
+<li>
+  <p class="fs_14 f_6 word_break"><span class="fs_14">小编：</span>{$b['wenwen_question']}</p>
+  <p class="fs_14 m_t5 word_break"><span class="fs_14">回答：</span><span class="f_6">{$b['wenwen_answer']}&nbsp; <a onclick="show_comment_form({$d['uid']},{$b['id']},4);" class="dashed word_nowrap">评论</a></span></p>
+  <div style="display:none" class="reply_box show_comment" id="comment_{$d['uid']}_{$b['id']}"></div>
+</li>
+<?php } ?>
+</ul>
+</dd>
+
+<?php } ?>
+
+</dl>
+</li>
+<?php } ?>

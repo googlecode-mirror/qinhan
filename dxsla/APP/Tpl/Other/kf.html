@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 意见建议</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<meta name="robots" content="nofollow" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+</head>
+<body>
+<!--header start-->
+<include file="Public:home_head" />
+        <!--中间部分开始-->
+<script>
+function opt() {
+	if($("#message_type").val() == ""){
+		Win.dialog({type:'info',msg:'请选择留言类型!'});
+		return false;
+	}
+	if($("input[name=message_type]:checked").val()==3){
+		if($("#report_addresses").val()=='' || $("#report_addresses").val()=='对方主页地址或者uid皆可'){
+			Win.dialog({type:'info',msg:'请填写对方主页地址或者uid皆可!'});
+			return false;
+		}else{
+			var rval='http://www.jjdd.com/'+$("#report_addresses").val();
+			var re=/http:\/\/www.jjdd.com\/[0-9]+/;
+			if(!re.test(rval)){
+				Win.dialog({type:'info',msg:'填写的信息错误!,格式：http://jianjiandandan.ivu1314.com/12345678或者12345678'});
+				return false;
+			}
+		}
+	}else{
+		$("#report_addresses").val('');
+	}
+	if($("#message_content").val() == ""){
+		Win.dialog({type:'info',msg:'请填写内容!'});
+		return false;
+	}else if($("#message_content").val().length < 5){
+		Win.dialog({type:'info',msg:'内容不能少于5个字!'});
+		return false;
+	}else if($("#message_content").val().length > 2000){
+		Win.dialog({type:'info',msg:'内容不能多于1000字!'});
+		return false;
+	}
+
+	$.ajax({
+		type: "POST",
+		url: "{$urlsite}/other/kf_opt/",
+		data: 'message_type='+$("input[name=message_type]:checked").val()+'&message_content='+$("#message_content").val()+'&customer_link='+$("#customer_link").val()+'&pid='+$("#photo_pid").val()+'&photo_uid='+$("#photo_uid").val()+'&report_addresses='+$("#report_addresses").val(),
+		success: function reply_success(re)
+		{
+			switch(re)
+			{
+				case '-1':
+				Win.dialog({type:'info',msg:'参数不能为空！',height:120});
+				break;
+				case '1':
+				Win.dialog({type:'info',width:460,msg:'<img src="<php>echo $urlstatic</php>/img/popup_g.jpg?gv=92_1" border="0" /> 提交成功，感谢您的信息，我们会马上处理的！',cancel:function(){self.location.href='/';},enter:function(){self.location.href='/';}});
+				break;
+			}
+		}
+	});
+}
+$(document).ready(function(){
+	if($("input[name=message_type]:checked").val()==3){
+		change();
+	}
+	$("input[name=message_type]").change(function (){
+		if($("input[name=message_type]:checked").val()==3){
+			change();
+		}else{
+			$("#report_dl").css('display','none');
+		}
+		if($("input[name=message_type]:checked").val()==7){
+			$("#message_content").val('请输入举报此问题的原因，例如：涉及色情、反动，乱发广告，和问题类别不符等！\r\n请输入：');
+		}
+		else{
+			$("#message_content").val('请告诉我们，她/他冒用的谁的照片，非常感谢！\r\n请输入：');
+		}
+	});
+});
+function change(){
+	$("#report_dl").css('display','block');
+	$("#report_addresses").focus(function(){
+		if($("#report_addresses").val()=='对方主页地址或者uid皆可'){
+			$("#report_addresses").val('');
+		}
+	});
+	$("#report_addresses").blur(function(){
+		if($("#report_addresses").val()==''){
+			$("#report_addresses").val('对方主页地址或者uid皆可');
+		}
+	});
+}
+</script>
+
+    <div class="container_cwrap clear">
+
+        <!--左边部分开始-->    	
+        <div class="fm_l_200">
+            <div class="set_nav">
+                <ul>
+        <!--    <li><a href="{$urlsite}/other/find/" class="">寻找jjdd.com</a></li>-->
+            <li><a href="{$urlsite}/other/about/" class="">关于我们</a></li>
+            <li><a href="{$urlsite}/other/job/" class="">招贤纳士</a></li>
+            <li><a href="{$urlsite}/other/contact/" class="">联系方式</a></li>
+
+            <li><a href="{$urlsite}/other/kf/" class="cur">意见建议</a></li>
+            <li><a href="{$urlsite}/other/reg_agreement/" class="">服务条款</a></li>
+        </ul>            </div>
+        </div>
+        <!--左边部分结束-->
+        <!--中间中间部分开始-->
+        <div class="fm_c_620">
+		<div class="idea_main">
+
+			<h1><span class="ah7">简简单单网(jianjiandandan.ivu1314.com)</span> >> <span class="ah8">意见簿</span> </h1>
+			<dl class="clear">
+				<dt>留言类型：</dt>
+				<dd>
+				<input id="message_type" name="message_type" type="radio" value="1" checked="checked" />建议
+				<input id="message_type" name="message_type" type="radio" value="2" />咨询
+				<input id="message_type" name="message_type" type="radio" value="3" />举报
+				<input id="message_type" name="message_type" type="radio" value="4" />举报问题
+				<input id="message_type" name="message_type" type="radio" value="5" />其它
+				<input type="hidden" name="photo_pid" id="photo_pid" value="0">
+
+				<input type="hidden" name="photo_uid" id="photo_uid" value="0">				
+				
+				</dd>
+			</dl>
+			<dl class="clear" style="display:none" id="report_dl">
+			 <dt>对方账号：</dt>
+				<dd>
+								<input class="input_1" type="text" name="report_addresses" id="report_addresses" value="对方主页地址或者uid皆可" ></dd>
+		   </dl>
+			<dl class="clear">
+
+				<dt>留言内容：</dt>
+				<dd>
+				  <textarea id="message_content" name="message_content" cols="" rows="" class="textarea">请输入举报此问题的原因，例如：涉及色情、反动，乱发广告，和问题类别不符等！请输入：</textarea>
+				</dd>
+			</dl>
+			<dl class="clear"><dt>联系方式：</dt><dd><input class="input_1" id="customer_link" name="customer_link" type="text" />(QQ、Email、电话皆可)</dd></dl> 
+			<p class="pl_65"><input type="submit" value="提 交" onclick="opt();" class="btn1"/></p>
+
+		</div>  
+	</div>
+</div> 
+    <!--中间部分结束-->
+	
+<include file="Public:foot" />
+
+</div>
+</body>
+</html>

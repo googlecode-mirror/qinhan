@@ -1,0 +1,469 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>简简单单网 问问</title>
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<meta content="打分交友,约会交友,同城交友,北京交友,上海交友,位置交友,简单交友,简简单单,在线交友,聊天交友,交友" name="keywords" />
+<meta content="打分，聊天，约会！简简单单，打分交友，一个给你打分，并帮你结识新朋友的网站。 会员之间通过互相之间的照片打分，建立第一印象，轻松进行约会交友，同城交友！" name="description" />
+<link href="{$urlstatic2}/css/head_global_main_ask.css{$urltail}" rel="stylesheet" type="text/css" />
+<script language="javascript" src="{$urlstatic2}/js/global_jquery_hello_dialog_chat.js{$urltail}"></script>
+</head>
+<body>
+<php>$nav = 4;</php>
+<include file="Public:head" />
+<!--中间部分开始-->
+<div class="container_cwrap clear">
+  <!--左边部分开始-->
+  <div class="fm_l_200">
+    <include file="Public:left" />
+  </div>
+  <!--左边部分结束-->
+  <!--中间部分 start-->
+  <div class="ask_center ask_w2 clear">
+    <div class="ask_nav clear"> <a target="_blank" href="{$urlsite}/other/kf/?mtype=7" class="opinion_fb f_6">对“问问”的意见反馈</a>
+      <ul class="fl">
+        <li><a href="{$urlsite}/question/plaza/" class="" >问问广场</a></li>
+        <li><a href="{$urlsite}/question/add/" class="">我要问问</a></li>
+        <li><a href="{$urlsite}/question/sender/" class=" active_nav">问问管理</a></li>
+        <li><a href="{$urlsite}/wenwen/" class="" >小编专访</a></li>
+      </ul>
+    </div>
+    <div class="ask_main1">
+      <div class="question_options"><span class="fl"><a href="{$urlsite}/question/sender/" class="fontstyle1">我的提问</a> <a href="{$urlsite}/answer/my_answer/?order=0">我的回答</a></span> <span class="fr"><a href="{$urlsite}/question/sender/?order=0" class="<eq name="order" value="1">f_bl<else />f_9</eq>">按最新未读回复</a> <a href="{$urlsite}/question/sender/?order=1" class="<eq name="order" value="0">f_bl<else />f_9</eq>">按最新提问时间</a></span> </div>
+      <script language="javascript" src="{$urlstatic2}/js/face.js?gv=148_1"></script>
+      <script language="javascript" src="{$urlstatic2}/js/pub_face_all.js?gv=148_1"></script>
+      <div class="question_list clear">
+        <ul>
+          <li class="clear">
+            <div class="img"><img src="{$urlupload}/{$GLOBALS['i']['default_pic']}_48x48.jpg" width="48" height="48"/> </div>
+            <div class="rightbar"  id="choose_question_id">
+			<empty name="list"><div class="no_question">您还没有提过问题,<a href="{$urlsite}/question/add/">马上去提问&gt;&gt;</a></div></empty>
+            <volist name="list" id="vo">
+<php>
+$agree = round(($vo['agree_count']/($vo['agree_count']+$vo['against_count']))*100);
+$against = round(($vo['against_count']/($vo['agree_count']+$vo['against_count']))*100);
+</php>	
+              <div class="title clear"  id="li_{$vo.id}" onmouseout="$('#show_{$vo.id}').hide();" onmouseover="$('#show_{$vo.id}').show();">
+                <p class="fs_14 word_break"><if condition="$vo[is_anonymity] eq 1"> 匿名</if><span class="f_9 word_nowrap">[{$vo['type_name']}]</span>&nbsp;{$vo.question}</p>
+                <notempty name="vo['photo_url']"> <div class="m_t10"> <img id="imgsmall_{$vo.id}" src="{$urlupload}/{$vo.photo_url}_120x120.jpg" onclick="scaleImg({$vo.id},'{$urlupload}/{$vo.photo_url}_480x480.jpg')" class="mousezoom_tip"/><img id="imgbig_{$vo.id}" style="display:none;" class="mousezoom_min" onclick="scaleImg({$vo.id},'')"> </div><else /><div class="no_img"></div></notempty>
+                <div class="m_t10 botinfo clear">
+                  <p class="fr" id="show_{$vo.id}" style="display:none;"><span id="sync{$vo.id}"><!--<a class="set_top" onclick="question_up({$vo.id})">置顶到我的主页</a><a class="open_myhome" onclick="sync_home(0,{$vo.id},0)">取消公开到我的主页</a>--></span><a class="close" title="删除" id="del_{$vo.id}" onclick="delete_confirm({$vo.id}, 'question')"></a></p>
+                  <p class="fl clear"> <span class="agree fl">{$agree}%</span> <span class="opposition fl">{$against}%</span> <a class="current fl" id="all_reply_{$vo.id}" onclick="load_answer_more({$vo.id},0,0);this.className='current fl';$('#comment_reply_{$vo.id}').removeClass('current');">全部回复<span id="is_comment_0_{$vo.id}">({$vo.answer_count})</span></a> <a class="fl" id="comment_reply_{$vo.id}" onclick="load_answer_more({$vo.id},0,1);this.className='current fl';$('#all_reply_{$vo.id}').removeClass('current');">只看有内容的<span id="is_comment_1_{$vo.id}">({$vo.answer_cont_num})</span></a> </p>
+                </div>
+                <div class="my_reply" id="qreply_{$vo.id}" style="display:none;">
+                  <div class="topbg3" id="topbg_{$vo.id}"></div>
+                  <div class="box clear" >
+                    <dl id="answer_{$vo.id}" a_limit="1" a_filter='2' answer_news="0" last_answer="0">
+                    </dl>
+                    <div class="more" onclick="load_answer_more({$vo.id},1,'2')" id="load_more_answer_{$vo.id}"><a>查看更多&gt;&gt;</a></div>
+                    <p class="m_t10"><a class="f_bl fr" onclick="$('#qreply_{$vo.id}').hide(); $('#answer_{$vo.id}').attr('last_answer', '0');">收起↑</a></p>
+                  </div>
+                </div>
+                <span id="qtime_{$vo.id}" class="time f_9 fs_12">{$vo.add_time|formatTime}</span><if condition="$vo['new_answer'] neq 0">  <div id ="new_answer_{$vo.id}" class="new_askper" onclick="load_answer_more({$vo.id},0,0)"><span class="u_number"><a>{$vo.new_answer}</a></span><span class="u_numberbg"></span></div></if>
+				</div>
+              </volist>
+			</div>
+          </li>
+        </ul>
+        <div class="turn_page" id="page"> </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--中间部分 end-->
+</div>
+<!--内容部分结束-->
+</div>
+</div>
+<script>
+var limit =1;
+var related = '';
+var receiver_uid = '';
+var setstar_id = 0;
+var setpoor_id = 0;
+var star_num = 0;
+var star_type = 0;
+var js_ping_id = 0;
+function delete_iquestion(id) {
+    if (id > 0)
+    {
+        $.ajax({
+            type: "POST",
+            url: "/index.php?s=/question/delete/",
+            data: 'qid_list='+id,
+            success: function(re){ 
+                var obj = jQuery.parseJSON(re);
+                //$("#li_"+id).remove();
+                //Win.dialog({'msg':obj.msg,'type':'info'});
+                location.reload(true);
+            }
+        });
+    }
+    else
+    {
+        Win.dialog({title:'警告', msg:'请选择要删除的问题', type:'alert'});
+        return false;
+    }
+} 
+function delete_ianswer(id,is_comment,q_id)
+{
+    if (id > 0)
+    {
+        $.ajax({
+            type: "POST",
+            url: "/index.php?s=/answer/delete_receiver/",
+            data: 'aid_list='+id,
+            success: function(re){ 
+                var obj = jQuery.parseJSON(re);
+                $("#dl_"+id).remove();
+                var num_all = $("#is_comment_0_"+q_id).html();
+                num_all = num_all.replace('(', '');
+                num_all = num_all.replace(')', '');
+                if(num_all > 0){ $("#is_comment_0_"+q_id).html('('+(num_all - 1)+')');}
+                if(is_comment == 1){
+                    var num_comment = $("#is_comment_1_"+q_id).html();
+                    num_comment = num_comment.replace('(', '');
+                    num_comment = num_comment.replace(')', '');
+                    if(num_comment > 0){ $("#is_comment_1_"+q_id).html('('+(num_comment - 1)+')');}
+                }
+                Win.dialog({'msg':obj.msg,'type':'info'});
+                
+            }
+        });
+    }
+    else
+    {
+        Win.dialog({title:'警告', msg:'请选择要删除的问题', type:'alert'});
+        return false;
+    }
+}
+function delete_confirm()
+{
+    var id = arguments[0];
+    if ('answer' == arguments[1])
+    {
+        is_comment = arguments[2];
+        q_id = arguments[3];
+        Win.dialog({type:'confirm',msg:'是否删除该回答？',height:100,enter:function(){delete_ianswer(id,is_comment,q_id);},enterName:'确定'});
+    }else{
+        Win.dialog({type:'confirm',msg:'是否删除该问题？',height:100,enter:function(){delete_iquestion(id);},enterName:'确定'});
+    }
+}
+function scaleImg(id,img)
+{
+    bid = 'imgbig_'+id;
+    sid = 'imgsmall_'+id;
+    if(img){
+        $('#'+bid).attr('src',img);
+        $('#'+bid).show();
+        $('#'+sid).hide();
+    }else{
+        $('#'+bid).hide();
+        $('#'+sid).show();
+    }
+}
+
+function load_answer_more(id,first_answer,filter)
+{
+    var a_limit = parseInt($("#answer_"+id).attr('a_limit'));//上次页数
+    var a_filter = $("#answer_"+id).attr('a_filter');//上次状态
+    var answer_news = parseInt($("#answer_"+id).attr('answer_news'));
+    var last_answer = 0;
+    $("#qreply_"+id).show();
+    if(filter == 2){
+        filter = a_filter;
+        last_answer = parseInt($("#answer_"+id).attr('last_answer'));
+    }
+    if(first_answer == 0)
+    {
+        if(a_limit > 0)
+        {
+            if(a_filter == filter)
+            {
+                $('#qreply_'+id).hide();
+                $("#answer_"+id).html('');
+                $("#answer_"+id).attr('a_limit', 1);
+                $("#answer_"+id).attr('a_filter', '2');
+                $("#answer_"+id).attr('last_answer', '0');
+                return false;
+            }else if(a_filter != filter)
+            {
+                if(filter == 0)
+                {
+                    $("#topbg_"+id).attr('class', 'topbg3');
+                }else{
+                    $("#topbg_"+id).attr('class', 'topbg2');
+                }
+                $("#answer_"+id).html('');
+                $("#answer_"+id).attr('a_filter', filter);
+                a_limit = 1;
+                $("#load_more_answer_"+id).show();
+                $("#new_answer_"+id).hide();
+                if(answer_news > 0)
+                {
+                    $("#answer_"+id).attr('answer_news', 0);
+                }
+            }
+        }
+    }
+    $.ajax({
+        type: "POST",
+        url: "/index.php?s=/answer/load_more_answer",
+        data: 'limit='+a_limit+'&question_id='+id+'&filter='+filter+'&first_answer='+first_answer+'&answer_news='+answer_news+'&last_answer='+last_answer,
+        success: function(re){ 
+            var obj = jQuery.parseJSON(re);
+            if(obj.errno == 200) {
+                $("#answer_"+id).append(obj.more);
+                a_limit = a_limit+1;
+                $("#answer_"+id).attr('a_limit', a_limit);
+               
+            }else{
+                Win.dialog({'msg':obj.msg,'type':'info'});
+            }
+            if(obj.hide_more == 1) {
+                $("#load_more_answer_"+id).hide();
+            }
+            if(obj.last_answer > 0) {
+                $("#answer_"+id).attr('last_answer', obj.last_answer);
+            }
+            if(obj.answer_news >0){
+                minus_unread('answer', obj.answer_news, 0);
+            }
+        }
+    });
+}
+function ping_star(div_id){
+    if (star_num < 1) return false;
+    var q_uid,q_id,a_id,a_uid,answer,answer_id,content,txt_starnum;
+    answer = $("#"+div_id).attr('data').split('|');
+    q_uid = answer[0];
+    q_id = answer[1];
+    a_id = answer[2];
+    a_uid = answer[3];
+    answer_id = answer[4];
+    txt_starnum = {'1':'一', '2':'二', '3':'三'};
+    if(star_type == 1){
+        content = '给你的答案评了'+txt_starnum[star_num]+'个差评';
+    }else{
+        content = '给你的答案评了'+txt_starnum[star_num]+'个好评';
+    }
+    $.post('/index.php?s=/answer/answer_star/', {'q_uid':q_uid, 'q_id':q_id, 'a_id':a_id, 'a_uid':a_uid,'star_num':star_num,'type':star_type}, function(data){
+        if (data == 1) {
+            $('#set_'+a_id).html('<a class="sp_star bg_postion'+star_num+'"></a>');
+            if(star_type == 1){
+                $('#tippoor_'+a_id+'_'+a_uid).html('差评成功：<span class="sp_defecate bg_postion'+star_num+'"></span>');
+                $('#tip_'+a_id+'_'+a_uid).html('给他好评：<span class="sp_star bg_postion"></span>');
+            }else{
+                $('#tippoor_'+a_id+'_'+a_uid).html('给他差评：<span class="sp_defecate bg_postion"></span>');
+                $('#tip_'+a_id+'_'+a_uid).html('好评成功：<span class="sp_star bg_postion'+star_num+'"></span>');
+            }
+                
+        }
+        if(data == 5){
+            Win.dialog({type:'info',width:460,msg:'你已经给过评价'});
+            return false;
+        }
+    });
+}
+function DisplayCoord(event,type)   
+{  
+    var pageX = event.clientX;
+    if(type == 1){
+        var pos = $("#setpoor_"+setpoor_id).offset();
+    }else{
+        var pos = $("#setstar_"+setstar_id).offset();
+    }
+   
+    var star_pos = pageX - pos.left;
+    if (star_pos < 18) star_num = 1;
+    if (star_pos > 18 && star_pos < 36) star_num = 2; 
+    if (star_pos > 36) star_num = 3;
+    if(type == 1){
+        $('#setpoor_'+setpoor_id).attr('class', 'sp_defecate  bg_postion'+star_num);
+        star_type = 1;
+    }else{
+        $('#setstar_'+setstar_id).attr('class', 'sp_star bg_postion'+star_num);
+        star_type = 0
+    }
+    return star_num;
+}
+
+function submit_comment(pay_card)
+{
+    if(IM.gFlash) {
+        var comment_content = IM.chatFilter($('#comment_content').html());
+    }
+    else {
+         var comment_content = $.trim($('#comment_content').val());
+    }
+    if(typeof myuserinfo != "object" || !myuserinfo.uid){
+         show_login_form();
+         return false ;
+    }
+
+    if(myuserinfo.uid == receiver_uid){
+        Win.dialog({type:'info',msg:'不能给自己评论！'});
+        return false;
+    }
+
+    if(myuserinfo.profile_completed < 0.5 && myuserinfo.login_times > 6){
+        var msg_code = sysmessage_addprofile('reply',(myuserinfo.sex==1)?2:1) ;
+        Win.dialog({ type:'info',width:460,msg:msg_code});
+        return false ;
+    }
+
+    if (comment_content.length<1) {
+        Win.dialog({type:'info',msg:'回复内容不能为空！'});
+        return;
+    }
+
+    if(related<0)
+    {
+        Win.dialog({type:'info',msg:'评论的回答不能为空！'});
+        return ;
+    }
+    
+    $("#comment_button").attr("disabled",true);
+    $.ajax({
+       type: "POST",
+       url: "/index.php?s=/msg/send/",
+       data: 'receiver_uid='+receiver_uid+'&content='+encodeURIComponent(comment_content)+'&type=10&related='+related+'&pay_card='+pay_card+'&category=1&from=my_question',
+       success: function comment_success(re)
+                {
+                    $("#comment_button").attr("disabled",false);
+                    var result_obj = jQuery.parseJSON(re);
+                    switch(result_obj.stat)
+                    {
+                        case 0: //
+                            Win.dialog({type:'info',msg:'回复成功'});
+                           $('.comment').empty();
+                            break;
+                        case 5://
+                            Win.dialog({msg:redbeans(result_obj.nickname,result_obj.pay_card),width:580,height:400,enter:function(){submit_comment(result_obj.pay_card);},cancel:function(){}});
+                            break;
+                        case 4://
+                            Win.dialog({type:'info',msg:result_obj.error,enter:function(){},cancel:function(){}});
+                            break;
+                        case 10:
+                            $("#fengkoujiao").remove();
+                            $(result_obj.error).appendTo("body");
+                            var pos = Win.pos(320,250);
+                            $("#fengkoujiao").css({"top":pos.wt,"left":pos.wl});
+                            break;
+                        default://
+                            Win.dialog({type:'info',msg:result_obj.error,cancel:function(){}});
+                            break;
+                    }
+                }
+    });
+}
+
+function sync_home(id,qid,order_time){
+    $.get('/index.php?s=/question/sync_home/',{'sync':id, 'question_id':qid}, function(){
+        if (id){
+            if(order_time > 0){
+                up = "<span class=\"f_9 fl\" >已置顶到我的主页</span>";
+            }else{
+                up = "<a class=\"set_top\" onclick=\"question_up("+qid+")\">置顶到我的主页</a>";
+            }
+            $("#sync"+qid).html(up+"<a class=\"open_myhome\" onclick=\"sync_home(0,"+qid+","+order_time+")\">取消公开到我的主页</a>");
+        }
+        else{
+            $("#sync"+qid).html("<a class=\"open_myhome\" onclick=\"sync_home(1,"+qid+","+order_time+")\">公开到我的主页</a>");
+        }
+    });
+}
+
+function question_up(qid){
+    $.get('/index.php?s=/question/question_up/',{'question_id':qid}, function(){
+        window.location.reload();
+        //$("#sync"+qid).html("<a class=\"set_top\" >已置顶到我的主页</a><a class=\"open_myhome\" onclick=\"sync_home(0,"+qid+")\">取消公开到我的主页</a>");
+    });
+}
+
+var show_reply_comment = false;
+function reply(answer_id,r_uid,id){
+	$.post("/index.php?s=/msg/check/", { friend:r_uid}, function (data) {
+		if(data.stat == 5) {
+			var msg_info = redbeans(data.nickname,data.pay_card);
+			Win.dialog({'msg':msg_info,'height':400,'width':580,'pay_card':data.pay_card,'enter':function(data){
+				$.post("/msg/check/", { friend:r_uid, pay_card:data.pay_card}, function (data) {
+					if(data.stat) {
+						Win.dialog({'msg':data.error, 'type':'alert'});
+					}
+					else reply_div(answer_id,r_uid,id);
+				}, 'json');
+			}});
+		}
+		else if(data.stat) {
+			Win.dialog({'msg':data.error, 'type':'alert'});
+		}
+		else reply_div(answer_id,r_uid,id);
+	}, 'json');
+}
+function reply_div(answer_id,r_uid,id){
+    if(IM.gFlash) {
+        var edit = '<div contenteditable="true" onfocus="setRange(this)" onkeyup="setRange(this)" onmouseup="setRange(this)" ondrop="return false" ondragover="return false" onKeyDown="if(event.keyCode==13 && event.ctrlKey) submit_comment(0)" onClick="" name="comment_content" id="comment_content" type="text"  maxlength="200" style="padding:3px;overflow-x:hidden;overflow-y:scroll;background:#fff;border-color:#7E7E7E #CFCFCF #CFCFCF #7E7E7E;border-style:solid;border-width:1px;height:60px;box-shadow:2px 2px 2px rgba(0, 0, 0, 0.1) inset;"></div>';
+    }
+    else {
+        var edit = '<textarea onkeydown="if(event.keyCode==13 &amp;&amp; event.ctrlKey) submit_comment(0)" name="comment_content" id="comment_content" class="input1" maxlength="200" style="overflow-y:hidden;" onkeyup="setRange(this)" onmouseup="setRange(this)"></textarea>';
+    }
+    var html='<p>'+edit+'</p><p class="clear m_t10"><span class="fl"><a onClick="submit_comment(0)"  id="comment_button" class="btn1">发送回复</a></span> <span class="fl"><a onClick="face51New.show(this,\'comment_content\',\'_div\');" class="vface" href="javascript:;"><img src="http://pic.jjdd.com/v1/i/pub/ico_ce.gif"></a></span> <span class="fl list"> (评论只有对方本人可见)</span></p>';
+    //
+    var comment_obj = '#comment_'+id;
+    related = answer_id;
+    $('.comment').empty();
+    receiver_uid = r_uid;
+    related = answer_id;
+    $(comment_obj).html(html);
+    if($.browser.msie&&($.browser.version == "8.0") && !show_reply_comment)
+    {
+        $(comment_obj).html(html);
+    }
+    show_reply_comment = true;		
+    $(function(){
+       var _area=$('#comment_content'); 
+       var _max=_area.attr('maxlength'); 
+        _area.bind('keyup change',function(){
+            if(IM.gFlash) {
+                _val=$(this).html(); 
+                _cur=_val.length; 
+                if(_cur>_max){
+                    $(this).html(_val.substring(0,_max)); 
+                } 
+            }
+            else { 
+                _val=$(this).val(); 
+                _cur=_val.length; 
+                if(_cur>_max){
+                    $(this).val(_val.substring(0,_max)); 
+                } 
+            }
+        });
+    }); 
+    $("#comment_content").focus();
+
+//	var text = document.getElementById("comment_content"); //用户看到的文本框
+//	var shadow = document.getElementById("shadow"); //隐藏的文本框
+//	text.oninput = text.onpropertychange = onchange;
+//	function onchange() {
+//		shadow.value = text.value;
+//		setHeight();
+//		setTimeout(setHeight, 0); //针对IE 6/7/8的延迟, 否则有时会有一个字符的出入
+//		function setHeight() { 
+//			if(shadow.scrollHeight == 0)
+//			{
+//				height = 20;
+//			}else{
+//				height = ((shadow.scrollHeight/16)*18);
+//			}
+//			text.style.height = height + "px"; }
+//		}
+}
+</script>
+<include file="Public:foot" />
+</div>
+</body>
+</html>
