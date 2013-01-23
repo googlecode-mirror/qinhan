@@ -3,10 +3,10 @@ class QuestionModel extends Model
 {
 	//触发器，如果question_t1离当前时间太远，则question_t=0，question_t1=question_t3
     public function trigger() {
-		if($GLOBALS['question_t1'] < time() - 86400 * 3 && $GLOBALS['question_t1'] != 0) {
+		if($GLOBALS['i']['question_t1'] < time() - 86400 * 3 && $GLOBALS['i']['question_t1'] != 0) {
 			$member_field = M('member_field');
 			$data['question_t'] = 0;
-			$data['question_t1'] = $GLOBALS['question_t3'];
+			$data['question_t1'] = $GLOBALS['i']['question_t3'];
 			$member_field->where("uid={$GLOBALS['i']['uid']}")->save($data);
 		}
     }
@@ -51,12 +51,12 @@ class QuestionModel extends Model
 			$data['question_t3'] = $old['timeline'];
 		}
 		$data['question_t'] = $old['timeline'];
+
 		//可要可不要，因为定位字段question_t没有清零
-		/*
 		if($old['timeline'] <= $GLOBALS['i']['question_t1']) {
 			$data['question_t1'] = $GLOBALS['i']['question_t3'];
 		}
-		*/		
+
 		$member_field->where("uid={$GLOBALS['i']['uid']}")->save($data);
 	}
 }
