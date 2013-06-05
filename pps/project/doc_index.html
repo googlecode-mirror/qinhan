@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=GBK"/>
+    <title>[<?php echo VHOST?>]项目文档</title>
+
+    <link href="/project/commstyle/css/inspect2.css" rel="stylesheet" type="text/css"/>
+    <link href="/project/commstyle/css/rating.source.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript" src="/project/commstyle/js/jquery.js"></script>
+    <script type="text/javascript" src="/project/commstyle/js/inspect2.js?v=20121111"></script>
+    <script>
+        $.ajaxSetup({
+            ajaxSettings: { contentType: "application/x-www-form-urlencoded;chartset=GB2312"}
+        });
+    </script>
+    <style>
+        td {
+            line-height: 30px;
+            padding: 3px;
+        }
+
+        * {
+            font-family: 微软雅黑 !important
+        }
+
+        .page a {
+            color: blue;
+            text-decoration: underline;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#search_btn').click(function(){
+                url = "?act=doc_index&doc_id=<?php echo $_GET['doc_id']?>&group_name=<?php echo rawurlencode($_GET['group_name'])?>&group_name_1=<?php echo rawurlencode($_GET['group_name_1'])?>&group_name_2=<?php echo rawurlencode($_GET['group_name_2'])?>";
+                window.location.href = url+ "&query_infos="+$("#query_infos").val();
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="wrapper">
+    <!-- 0.3473 -->
+    <?php include "_header.html";?>
+
+    <!--container-->
+    <div id="container">
+        <!--new-i-cols-->
+        <div class="i-cols new-i-cols">
+            <!--内容开始-->
+            <div class="i-col1">
+                <!--i-col1-1-->
+                <div id="new-i-col1-1" class="i-col1-1">
+                    <div class="crumb">您当前的位置：项目文档 >> <?php echo $group_name_2;?> >> <?php echo $group_name;?><span class="fr" style="padding-right:35px;"><a href="/project.php" class="blue" >说明文档</a>&nbsp;|&nbsp;<a href="/project.php?act=php_error_log" class="blue" >PHP错误日志</a></span></div>
+
+                    <div class="bd">
+                        <!--searchBx-->
+                        <div class="searchBx cirBx">
+                            <div>
+                                <form method="get" action="?act=doc_index&list_id=<?php echo $_GET['list_id']?>&doc_id=<?php echo $_GET['doc_id']?>&group_name=<?php echo rawurlencode($_GET['group_name'])?>&group_name_1=<?php echo rawurlencode($_GET['group_name_1'])?>&group_name_2=<?php echo rawurlencode($_GET['group_name_2'])?>">
+                                <span style="margin-left: 20px">
+                                   <span><input name="query_infos" id="query_infos" class="inpc" style="width:250px"/></span>
+                                   <span>&nbsp&nbsp<input type="button" id="search_btn" style="float: right" class="cbtn" value="搜索"></span>
+                                </span>
+                                </form>
+                            </div>
+                            <div class="sLok sd">
+                                <div class="cird" align="right">
+                                    <div class="cird_r">
+                                        <a href="javascript:void(0)" class="blue" id='doc_manage' onclick="newdialog({title:'文档管理',width:'600px',src:'?act=doc_manage&group_name=<?php echo $group_name;?>&group_name_2=<?php echo $group_name_2;?>'});return false">文档项目</a> |
+                                        <?php  if($this->doc_id){ ?>
+                                        <a href="javascript:void(0)" class="blue" onclick="newdialog({title:'项目管理',width:'750px',src:'?act=doc_list_manage&doc_id=<?php echo $_GET['doc_id']?>'});return false">新加API文档</a> |
+                                        <?php }?>
+                                        <a href="project.php?act=doc_config&doc_id=<?php echo $this->doc_id;?>" class="blue">配置中心</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--/searchBx-->
+
+                        </div>
+
+                        <!--main-->
+                        <div id="main" class="mBox" style="clear: both">
+
+                            <div class="m-nav">
+                                <ul>
+                                    <?php $cur_name=array(); foreach($this->all_name as $k=>$v){?>
+                                    <li
+                                    <?php if($this->doc_id == $v['DOC_ID']){ $cur_name=$v; ?>class="cur"<?php }?>><a
+                                        href="?<?php echo http_build_query(array('doc_id'=>$v['DOC_ID'])+$_GET)?>"><span><?php echo $v['DOC_NAME']?></span></a></li>
+                                    <?php }?>
+                                </ul>
+                            </div>
+
+                            <?php  if($this->pageObj->total>1){?>
+                            <!--分页-->
+                            <div style="margin-top:-30px;float:right" class="page  fr"><span>第<?php echo $this->pageObj->currentPage?>/<?php echo $this->pageObj->pages?>页：</span>
+                                <?php  _p("?".http_build_query(array('pageID'=>NULL)+$_GET)."&pageID={p}",false,"?".http_build_query(array('pageID'=>NULL)+$_GET));  ?>
+                                <?php if($this->pageObj->currentPage>1){?>
+                                <a href="<?php echo _p(1)?>" title='第1页' >|&lt;</a> <a href="<?php echo _p($this->pageObj->currentPage-1)?>" title='第<?php echo $this->pageObj->currentPage-1?>页' >&lt;&lt;</a>
+                                <?php }?>
+                                <?php for($i=$this->pageObj->min;$i<=$this->pageObj->max ;$i++){?>
+                                <?php if($this->pageObj->currentPage==$i){?>
+                                <span><?php echo $i?></span>
+                                <?php }else{?>
+                                <a title='第<?php echo $i?>页' href="<?php echo _p($i)?>"><?php echo $i?></a>
+                                <?php }?>
+                                <?php }?>
+                                <?php if($this->pageObj->currentPage < $this->pageObj->pages){?>
+                                <a href="<?php echo _p($this->pageObj->currentPage+1)?>" title='第<?php echo $this->pageObj->currentPage=1?>页' >&gt;&gt;</a> <a href="<?php echo _p($this->pageObj->pages)?>" title='第<?php echo $this->pageObj->pages?>页' >&gt;|</a>
+                                <?php }?>
+                            </div>
+                            <?php }?>
+            <!-- doc list-->
+            <?php $i=1; ?>
+            <?php foreach($this->all_data as $k=>$v){?>
+                            <div class="tBd" style="margin-bottom:20px;" id="list_<?php echo $v['LIST_ID'] ?>">
+                                <span class="noi" style="font-size:23px;color:#0000CC;"><?php echo $i?>
+                                    )<?php echo $v['LIST_NAME'] ?></span>&nbsp;&nbsp;&nbsp;<span
+                                    style="color:red; float:right;"><?php if($_GET['group_name']=='1.数据库' && $_GET['group_name_2']=='A.架构'){?><a href="javascript:vod(0)" class="blue"
+                                                                  onclick="newdialog({title:'项目管理',width:'750px',src:'?act=doc_db&doc_id=<?php echo $_GET['doc_id']?>&list_id=<?php echo $v['LIST_ID']?>&table_name=<?php echo $v['LIST_NAME'];?>&dbtype=<?php if($cur_name['DOC_NAME']=='A.Mysql'){echo 'mysql';}else{echo 'oracle';}?>'});return false">载入表格介绍</a>&nbsp;<?php
+                                                                  }elseif(preg_match("/^http:\/\//",$v['LIST_NAME'])){?>
+                                <a class="blue" <?php if($v['TEST_1'] != ''){?>style="color:red;"<?php }?> href="?act=doc_detail_test&list_id=<?php echo $k?>&doc_id=<?php echo $v['DOC_ID']?>&test_case=test_1&group_name=<?php echo rawurlencode($_GET['group_name']) ?>&group_name_1=<?php echo rawurlencode($_GET['group_name_1']) ?>&group_name_2=<?php echo rawurlencode($_GET['group_name_2']) ?>">
+                                    测试1</a>&nbsp
+                                <a class="blue" <?php if($v['TEST_2'] != ''){?>style="color:red;"<?php }?> href="?act=doc_detail_test&list_id=<?php echo $k?>&doc_id=<?php echo $v['DOC_ID']?>&test_case=test_2&group_name=<?php echo rawurlencode($_GET['group_name']) ?>&group_name_1=<?php echo rawurlencode($_GET['group_name_1']) ?>&group_name_2=<?php echo rawurlencode($_GET['group_name_2']) ?>">
+                                    测试2</a>&nbsp
+                                <a class="blue" <?php if($v['TEST_3'] != ''){?>style="color:red;"<?php }?> href="?act=doc_detail_test&list_id=<?php echo $k?>&doc_id=<?php echo $v['DOC_ID']?>&test_case=test_3&group_name=<?php echo rawurlencode($_GET['group_name']) ?>&group_name_1=<?php echo rawurlencode($_GET['group_name_1']) ?>&group_name_2=<?php echo rawurlencode($_GET['group_name_2']) ?>">
+                                    测试3</a>&nbsp<?php }?><a
+                                    href="?act=doc_detail_manage&list_id=<?php echo $k?>&doc_id=<?php echo $v['DOC_ID']?>&group_name=<?php echo rawurlencode($_GET['group_name']) ?>&group_name_1=<?php echo rawurlencode($_GET['group_name_1']) ?>&group_name_2=<?php echo rawurlencode($_GET['group_name_2']) ?>"
+                                    class="blue">字段管理</a>&nbsp;<a href="javascript:vod(0)" class="blue"
+                                                                  onclick="newdialog({title:'项目管理',width:'750px',src:'?act=doc_list_edit&doc_id=<?php echo $_GET['doc_id']?>&list_id=<?php echo $v['LIST_ID']?>'});return false">编辑</a>&nbsp;<a
+                                    href="?act=doc_list_del&list_id=<?php echo $v['LIST_ID']?>"
+                                    onclick="return confirm('确认删除该项目下所有内容?!')" class="blue">删除</a></span>
+                                <br/>
+                                <?php echo nl2br($v['DES'])?>
+                                <?php if($v[detail]){?>
+                                <table width="100%" border="1" class="tabc assess-table" id="assess-table">
+                                    <thead>
+                                    <tr><th colspan="6">字段列表</th></tr>
+                                    <tr class="tr-th2">
+                                        <th>序号</th>
+                                        <th>名称</th>
+                                        <th>提交方式</th>
+                                        <th>编码</th>
+                                        <th>选项</th>
+                                        <th>备注</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php $j=1;?>
+                                    <?php foreach($v[detail] as $key=>$value){ ?>
+                                    <tr hight='30px'>
+                                        <td><?php  echo $j; ?></td>
+                                        <td style="text-align:left;"><?php  echo $value['DETAIL_NAME']; ?></td>
+                                        <td style="text-align:left;"><?php echo $value['DATA_TYPE']?></td>
+                                        <td style="text-align:left;"><?php echo $value['ENCODING_TYPE']?></td>
+                                        <td
+                                        <?php if($value['DOC_OP'] == '必选'){?>style="color:red;"<?php }?>
+                                        ><?php  echo $value['DOC_OP']; ?></td>
+                                        <td align="left" style="text-align:left;"><?php  echo $value['NOTE']; ?></td>
+                                    </tr>
+                                    <?php $j++?>
+                                    <?php }?>
+                                    </tbody>
+                                </table>
+                                <?php }?>
+                                <?php if($v['contract']){?>
+                                <br/>
+                                <table width="100%" border="1" class="tabc assess-table" id="assess-table">
+                                    <thead>
+                                    <tr><th colspan="4">联系人列表</th></tr>
+                                    <tr class="tr-th2">
+                                        <th>序号</th>
+                                        <th>名称</th>
+                                        <th>部门</th>
+                                        <th>备注</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php $j=1;?>
+                                    <?php foreach($v['contract'] as $key=>$value){?>
+                                    <tr hight='30px'>
+                                        <td><?php  echo $j; ?></td>
+                                        <td style="text-align:left;"><?php  echo $value['DETAIL_NAME']; ?></td>
+                                        <td style="text-align:left;"><?php echo $value['DEPARTMENT']?></td>
+                                        <td align="left" style="text-align:left;"><?php  echo $value['NOTE']; ?></td>
+                                    </tr>
+                                    <?php $j++?>
+                                    <?php }?>
+                                    </tbody>
+                                </table>
+                                <?php }?>
+
+                                <?php if($v['FORMAT']){?>
+                                <br/>
+
+                                <div style="background-color:#FC3; padding:10px; width:300px; font-weight:bold;">
+                                    <h1>返回结果示例</h1>
+                                    <?php echo nl2br($v['FORMAT'])?>
+                                </div>
+                                <?php }?>
+                                <?php $i++;?>
+                            </div>
+                            <?php }?>
+
+                            <?php  if($this->pageObj->total>1){?>
+                            <!--分页-->
+                            <div class="page  fr"><span>第<?php echo $this->pageObj->currentPage?>/<?php echo $this->pageObj->pages?>页：</span>
+                                <?php  _p("?".http_build_query(array('pageID'=>NULL)+$_GET)."&pageID={p}",false,"?".http_build_query(array('pageID'=>NULL)+$_GET));  ?>
+                                <?php if($this->pageObj->currentPage>1){?>
+                                <a href="<?php echo _p(1)?>" title='第1页' >|&lt;</a> <a href="<?php echo _p($this->pageObj->currentPage-1)?>" title='第<?php echo $this->pageObj->currentPage-1?>页' >&lt;&lt;</a>
+                                <?php }?>
+                                <?php for($i=$this->pageObj->min;$i<=$this->pageObj->max ;$i++){?>
+                                <?php if($this->pageObj->currentPage==$i){?>
+                                <span><?php echo $i?></span>
+                                <?php }else{?>
+                                <a title='第<?php echo $i?>页' href="<?php echo _p($i)?>"><?php echo $i?></a>
+                                <?php }?>
+                                <?php }?>
+                                <?php if($this->pageObj->currentPage < $this->pageObj->pages){?>
+                                <a href="<?php echo _p($this->pageObj->currentPage+1)?>" title='第<?php echo $this->pageObj->currentPage=1?>页' >&gt;&gt;</a> <a href="<?php echo _p($this->pageObj->pages)?>" title='第<?php echo $this->pageObj->pages?>页' >&gt;|</a>
+                                <?php }?>
+                            </div><br/>
+                            <!--/分页-->
+                            <?php }?>
+                            <!-- /doc list-->
+                        </div>
+                        <!--/main-->
+                        <!--/内容结束!-->
+                    </div>
+                    <!--/i-col1-1-->
+                </div>
+                <!--/内容结束-->
+
+            </div>
+            <!--/new-i-cols-->
+        </div>
+        <!--/container-->
+        <?php include "_footer.html";?>
+    </div>
+    <!--wrapper-->
+    <!-- 0.3496 -->
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<link href="/project/commstyle/css/inspect2.css" rel="stylesheet" type="text/css" />
+<link href="/project/commstyle/css/rating.source.css" type="text/css" rel="stylesheet" />
+<title>移动位置</title>
+</head>
+
+<body>
+<form action="?act=report_move_do" method="post" id="project_do">
+  <table width="100%" class="cietab assess-table" border="0" cellpadding="0" cellspacing="0" >
+    <thead>
+      <tr>
+        <th colspan="2">移动合并项目</th>
+      </tr>
+    </thead>
+    <tr>
+      <td width="20%" height="30">原V1:</td>
+      <td><input name="v1_o" type="text"  class="inpc" id="v1_o" value="<?php echo $_REQUEST['v1_o']?>" readonly="readonly" /></td>
+    </tr>
+    <tr>
+      <td height="30">原V2:</td>
+      <td><input name="v2_o" type="text"  class="inpc" id="v2_o" value="<?php echo $_REQUEST['v2_o']?>" readonly="readonly" />
+        (分号隔开多个手机号码)</td>
+    </tr>
+    <tr>
+      <td height="30">&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td height="30">新V1</td>
+      <td><input name="v1_n" type="text"  class="inpc" id="v1_n" value="<?php echo $_REQUEST['v1_o']?>" /></td>
+    </tr>
+    <tr>
+      <td height="30">新V2</td>
+      <td><input name="v2_n" type="text"  class="inpc" id="v2_n" value="<?php echo $_REQUEST['v2_o']?>" /></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td><input type="submit" name="button" id="button" value="提交" class="cbtn"/></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

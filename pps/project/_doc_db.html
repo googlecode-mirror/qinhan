@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>项目管理</title>
+<link href="/project/commstyle/css/inspect2.css" rel="stylesheet" type="text/css" />
+<link href="/project/commstyle/css/rating.source.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/project/commstyle/js/jquery.js"></script>
+<style>
+td{line-height:30px; padding:3px;}
+</style>
+</head>
+
+<body>
+
+<form action="" method="get" id="doc_load_db"><table width="100%" class="cietab assess-table" border="0" cellpadding="4" cellspacing="0" >
+<thead>
+  <tr>
+    <th colspan="2">选择数据库</th>
+    </tr>
+</thead>
+  <tr>
+    <td width="20%" align="right">数据库:</td>
+    <td><select name="db" id="db">
+    <?php 
+      $_GET['db']=NULL;
+      if(strpos($_GET['table_name'], '@'))
+      		$_GET['db'] = substr($_GET['table_name'],strpos($_GET['table_name'], '@')+1);
+                
+     $i=0; $oracleDB_config = new oracleDB_config; foreach($oracleDB_config->dbconfig as $k=>$v){ 		   
+     if($_GET['dbtype']=='mysql' && !$v['db']){continue;}elseif($_GET['dbtype']!='mysql' && $v['db']){ continue;} 
+     $i++; ?>
+    <option value="<?php echo $k?>"  <?php if($_GET['db']==$k){?>selected="selected"<?php }?> ><?php echo $k?></option>
+    <?php }?>
+    </select>
+      <input name="act" type="hidden" id="act" value="doc_load_db" />
+      <input name="table_name" type="hidden" id="table_name" value="<?php echo $_GET['table_name'];?>" />
+      <input name="dbtype" type="hidden" id="dbtype" value="<?php echo $_GET['dbtype'];?>" />
+      <input name="list_id" type="hidden" id="list_id" value="<?php echo $_GET['list_id'];?>" /></td>
+    </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><input type="submit" name="button" id="button" value="提交" class="cbtn"/></td>
+  </tr>
+</table></form>
+<?php if($i==1 || $_GET['db']) echo "<script>document.getElementById('doc_load_db').submit();</script>"; ?>
+</body>
+</html>

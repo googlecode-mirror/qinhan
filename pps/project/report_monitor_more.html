@@ -1,0 +1,25 @@
+<div style="margin:10px 10px;">
+<table  id="assess-table" class="tabc assess-table"  border="0" cellpadding="0" cellspacing="0" width="100%">
+	<thead>
+		<tr>
+			<th>序号</th>
+            <th>内容</th>
+            <th>位置</th>
+            <th>耗时</th>
+            <th>总量</th>
+		</tr>
+	</thead>
+	<tbody>
+    <?php if($monitor_more) foreach($monitor_more as $k=>$v){?>
+		<tr class="tr-td-bd <?php if($k%2==0){echo 'odd';}else{echo 'even';}?>">
+			<td style="border-right:1px solid #BACCE1"><?php echo $k+1?></td>
+            <td style="border-right:1px solid #BACCE1; text-align:left"><span title="<?php echo $v['V5']?>"><?php echo nl2br(htmlspecialchars($v['V4']))?></span></td>
+            <td style="border-right:1px solid #BACCE1;text-align:left"><?php echo nl2br(htmlspecialchars($v['V5']))?></td>
+            <td><?php echo htmlspecialchars($v['V6'])?></td>
+            <td><?php echo $v['FUN_COUNT']?></td>
+		</tr>
+    <?php }?>
+	</tbody>
+</table>
+</div>
+

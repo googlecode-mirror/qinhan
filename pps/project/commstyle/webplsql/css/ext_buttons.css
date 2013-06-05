@@ -1,0 +1,31 @@
+.btnImgDownload {
+    background-image: url(img/download_2.png) !important;
+}
+.btnImgInfo {
+    background-image: url(img/info_2.png) !important;
+}
+.btnImgSearch {
+    background-image: url(img/search_3.png) !important;
+}
+.btnImgOn {
+    background-image: url(img/on_1.png) !important;
+}
+.btnImgOff {
+    background-image: url(img/off_1.png) !important;
+}
+.btnImgRecover {
+    background-image: url(img/recover_1.gif) !important;
+}
+.btnImgWriteDb {
+    background-image: url(img/writedb_1.gif) !important;
+}
+.btnImgAdd {
+    background-image: url(img/add_1.gif) !important;
+}
+
+.btnImBug{
+    background-image: url(img/bug_1.gif) !important;
+}
+.btnImEpiphany{
+    background-image: url(img/epiphany_1.png) !important;
+}

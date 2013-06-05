@@ -1,0 +1,42 @@
+*{padding:0px;margin:0px;font-size:14px;}
+a{text-decoration:none;color:blue;}
+a:hover{text-decoration:underline;}
+a::visited{color:blue;}
+body{text-align:center;}
+table,td,th{border:1px solid #909090;padding:5px;}
+td{text-align:left;}
+th{text-align:center;font-weight:bold;background:#e0e0d0;}
+table{border-collapse:collapse;margin:0 auto;width:98%;margin-top:10px;}
+ul li{list-style:none;}
+
+.msg{border:1px solid #c0c0c0;background:orange;font-weight:bold;text-align:left;padding:10px;}
+.optButton{float:left;height:16px;line-height:16px;padding: 0 5px;display:block;cursor:pointer;}
+.buttonFloat{float:left;}
+.bigButton{padding:10px;}
+
+.slideMenu{}
+.slideMenu .optWrapper {position:relative;width:230px;float:left;margin-left:5px;}
+.slideMenu .optWrapper .title{width:100%;height:23px;background:#e0e0ff;border:1px solid #a0a0ff;cursor:pointer;line-height:23px;}
+.slideMenu .optWrapper ul{float:left;list-style:none;position:absolute;width:100%;background:#e0e0e0;border:1px solid #c0c0c0;display:none;}
+.slideMenu .optWrapper li{border-bottom:1px solid #c0c0c0;border-top:1px solid #f0f0f0;padding:5px;}
+.slideMenu .optWrapper li a{width:100%;height:100%;display:block;}
+
+.optBarTop{}
+.clickMenu{}
+.clickMenu .optWrapper {position:relative;margin-left:5px;margin-bottom:2px;}
+.clickMenu .optWrapper .title{width:95%;height:18px;background:#e0e0ff;padding:3px;border:1px solid #a0a0ff;cursor:pointer;}
+.clickMenu .optWrapper .title span{float:left;}
+.clickMenu .optWrapper ul{list-style:none;width:95%;background:#ffffff;border:1px solid #d0d0d0;display:none;}
+.clickMenu .optWrapper li{list-style:none;border-bottom:1px solid #f0f0f0;border-top:1px solid #ffffff;padding:5px;}
+.clickMenu .optWrapper li a{width:100%;height:100%;display:block;}
+.clickMenu .optWrapper input{float:right;}
+
+#helpWrapper{border:1px solid #c0c0c0;background:#FFFFc0;position:absolute;display:none;z-index:9999999;padding:1px;font-size:12px;}
+#helpWrapper *{font-size:12px;}
+#helpWrapper input{padding:2px 5px 0px 5px;}
+#helpWrapper .content{border:1px solid #e0e0ef;width:188px;padding:5px;}
+#helpWrapper a{line-height:18px;text-align:middle;cursor:pointer;}
+
+.tabs label{display:block;cursor:pointer;border:1px solid #c0c0c0;background:#e0e0ff;float:left;height:20px;line-height:20px;padding:0 5px;margin-right:5px;margin-bottom:5px;}
+.clear{clear:both;}
+.dataList li{height:23px;line-height:23px;}

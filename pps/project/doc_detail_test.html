@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=GBK"/>
+    <title>[<?php echo VHOST?>接口测试]用例<?php
+        switch($this->test_case){
+        case 'test_1': echo '1';break;
+        case 'test_2': echo '2';break;
+        case 'test_3': echo '3';break;
+        }
+        ?></title>
+
+    <link href="/project/commstyle/css/inspect2.css" rel="stylesheet" type="text/css"/>
+    <link href="/project/commstyle/css/rating.source.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript" src="/project/commstyle/js/jquery.js"></script>
+    <script type="text/javascript" src="/project/commstyle/js/inspect2.js?v=20121111"></script>
+    <script>
+        $.ajaxSetup({
+            ajaxSettings: { contentType: "application/x-www-form-urlencoded;chartset=GB2312"}
+        });
+    </script>
+    <style>
+        td {
+            line-height: 30px;
+            padding: 3px;
+        }
+
+        * {
+            font-family: 微软雅黑 !important
+        }
+
+        .page a {
+            color: blue;
+            text-decoration: underline;
+        }
+    </style>
+    <script type="text/javascript">
+        function test_do(action){
+            var url = "?act=doc_detail_test_ajax&list_id="+"<?php echo $_GET['list_id'] ?>"+"&test_case="+"<?php echo $_GET['test_case']?>";
+            var data = new Object();
+            data['action'] = action;
+            data['api'] = "<?php echo  $this->list_info['LIST_NAME'];?>";
+            data['test_index']=$('#test_index').val();
+            if($('#auto_test').attr("checked")){
+                data["auto_run"] = "run";
+            }else{
+                data["auto_run"] = "stop";
+            }
+            var ready_test = true;
+
+            var i = 0;
+            $("input[name='item_value']").each(function(){
+                var detail=new Object();
+                var item_name = $(this).attr('id');
+                detail['item_name'] = item_name;
+                detail['item_id'] =  $(this).attr('item_id');
+                detail['item_value']=$(this).val();
+                detail["data_type"]=$("#type_"+item_name).val();
+                detail["coding_type"]=$("#coding_"+item_name).html();
+
+                var option = $("#op_"+item_name).html();
+                if(option=="必选"&& detail['item_value']==""){
+                    ready_test = false;
+                    return false;
+                }
+                data[i]=detail;
+                i++;
+            });
+
+            if(!ready_test){
+                alert("有必选项未赋值");
+                return false;
+            }else{
+                $.post(url,data,function(result){
+                    $("#test_result_div").html(result);
+                    $("#test_result_div").show();
+                });
+            }
+        }
+
+        $(document).ready(function(){
+            $("#save_test").click(function(){
+                test_do("save_test");
+            });
+
+            $("#start_test").click(function(){
+                test_do("start_test");
+            });
+        });
+    </script>
+</head>
+<body>
+<body>
+<!-- 0.3473 -->
+<div id="wrapper">
+    <?php include "_header.html";?>
+
+    <!--container-->
+    <div id="container">
+        <!--new-i-cols-->
+        <div class="i-cols new-i-cols">
+            <!--内容开始-->
+            <div class="i-col1">
+                <!--i-col1-1-->
+                <div id="new-i-col1-1" class="i-col1-1">
+                    <div class="crumb">您当前的位置：接口测试</div>
+
+                    <div class="bd">
+                        <!--searchBx-->
+                        <div class="searchBx cirBx">
+                            <div class="sLok sd">
+                                <div class="cirBx">
+                                    <!--cird-->
+                                </div>
+
+                            </div>
+                            <!--/searchBx-->
+
+                        </div>
+
+                        <!--main-->
+                        <div id="main" class="mBox" style="clear: both">
+                            <span style="float:right" ><a href="?act=doc_index&doc_id=<?php echo $_GET['doc_id']?>&group_name=<?php echo rawurlencode($_GET['group_name']) ?>&group_name_1=<?php echo rawurlencode($_GET['group_name_1']) ?>&group_name_2=<?php echo rawurlencode($_GET['group_name_2']) ?>#list_<?php echo $_GET['list_id'];?>" class="blue">返回文档</a></span>
+                            <br>
+                            <div class="tBd">
+                                <span class="noi" style="font-size:23px;color:#0000CC;">接口：<?php echo  $this->list_info['LIST_NAME'];?></span>
+                                <br/><?php  echo  $this->list_info['DES']?>
+                                <br/>
+                            </div><br/>
+                            <div class="tBd">
+                                <form action="?act=doc_detail_test" method="post" id="test_do">
+                                    <h1>测试用例<?php
+                                      switch($this->test_case){
+                                        case 'test_1': echo '1';break;
+                                        case 'test_2': echo '2';break;
+                                        case 'test_3': echo '3';break;
+                                        }
+                                     ?>数据</h1>
+                                    <table width="70%" class="tabc assess-table" border="0" cellpadding="0" cellspacing="0" >
+                                    <thead class="tr-th2 cur">
+                                    <tr>
+                                        <th>名称</th>
+                                        <th>提交方式</th>
+                                        <th>编码</th>
+                                        <th>选项</th>
+                                        <th>备注</th>
+                                        <th>值</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach ($this->all_detail as $key=>$item):?>
+                                        <tr>
+                                            <td id="item_<?php echo $item['DETAIL_ID']?>"><?php echo $item['DETAIL_NAME'];?></td>
+                                            <td>
+                                                   <select id="type_<?php echo $item['DETAIL_NAME']?>">
+                                                       <option>post</option>
+                                                       <option <?php
+                                                            if( $this->test_datas[$item['DETAIL_NAME']]['data_type'] =='get'|| ($this->test_datas[$item['DETAIL_NAME']]['data_type'] !='post'&& $item['DATA_TYPE']=='get'))
+                                                                echo "selected";
+                                                       ?>
+                                                       >get</option>
+                                                   </select>
+                                            </td>
+                                            <td id="coding_<?php echo $item['DETAIL_NAME']?>"><?php echo $item['ENCODING_TYPE'];?></td>
+                                            <td id="op_<?php echo $item['DETAIL_NAME']?>"><?php echo $item['DOC_OP'];?></td>
+                                            <td><?php echo $item['NOTE'];?></td>
+                                            <td><input  class="inpc"  name="item_value" item_id="<?php echo $item['DETAIL_ID']?>" id="<?php echo $item['DETAIL_NAME']?>" value="<?php echo $this->test_datas[$item['DETAIL_NAME']]['item_value']?>"/></td>
+                                        </tr>
+                                    <?php endforeach;?>
+                                    </tbody>
+                                </table>
+                                    <br />
+                                    <span ><label  for="test_index">测试成功判断标准</label>&nbsp
+                                        <input name="test_index" class="inpc" id="test_index" value="<?php  echo $this->test_index;?>" /></td></span>
+                                    <span>&nbsp&nbsp&nbsp<input id="auto_test" name="auto_test" type="checkbox" <?php if( $this->auto_run == 'run') echo 'checked'?>/> <label  for="auto_test">自动测试</label></span>
+                                    <br /><br />
+                                    <span style="margin-left: 170px"><input style="width: 80px;text-align: center" id="save_test" class="cbtn"  value="保存"/>&nbsp<input style="width: 80px;text-align: center"  id="start_test"  class="cbtn" value="测试" /></span>
+                            </div>
+                            <br />
+                            <div class="tBd" id="test_result_div" style="display: none">
+                            </div>
+                        </div>
+                        <!--/main-->
+                        <!--/内容结束!-->
+                    </div>
+                    <!--/i-col1-1-->
+                </div>
+                <!--/内容结束-->
+
+            </div>
+            <!--/new-i-cols-->
+        </div>
+        <!--/container-->
+        <?php include "_footer.html";?>
+    </div>
+    <!--wrapper-->
+    <!-- 0.3496 -->
+</body>
+</html>
