@@ -1,0 +1,77 @@
+body,ul,li,p,div{margin:0;padding:0; font-family:"微软雅黑";font-size:12px;}
+.fl{flaot:left;}
+.fr{float:right;}
+.clear{clear:both;line-height:0px;font:0;}
+
+.pass_login_label_rem{vertical-align: middle;left: 0px;line-height:12px;}
+a.pass_login_input_rem,a.pass_login_input_rem:hover,a.pass_login_input_rem:active,a.pass_login_input_rem_ed,a.pass_login_input_rem_ed:hover,a.pass_login_input_rem_ed:active{vertical-align: middle; background:  url(../img/pc_iframe_spread/checkboxpicture.png);width:18px;height:18px;display:inline-block;}
+a.pass_login_input_rem{background-position: -0px 0;}
+a.pass_login_input_rem:hover{background-position: -18px 0;}
+a.pass_login_input_rem:active{background-position: -36px 0;}
+a.pass_login_input_rem_ed{background-position: -72px 0;}
+a.pass_login_input_rem_ed:hover{background-position: -90px 0;}
+a.pass_login_input_rem_ed:active{background-position: -108px 0;}
+
+.app_list{width:776px;margin:10px 0 0 0;}
+.app_list li{overflow:hidden;list-style:none;height:79px;clear:both;vertical-align:top;}
+.app_listbox{width:194px;height:79px;float:left; background:url(../img/pc_iframe_spread/app_listbox_bg1.png) no-repeat;}
+.app_listbox_last{ background:url(../img/pc_iframe_spread/app_listbox_bg2.png) no-repeat}
+.app_list li.gray{ background:#ededed;}
+.app_listinfo .app_photo{width:57px;height:57px;float:left;margin-right:10px;}
+.app_listinfo .app_name{overflow: hidden; white-space: nowrap; width: 95px; text-overflow:ellipsis;}
+.app_listinfo{width:162px;height:57px;margin:10px auto;color:#000;}
+.add_checkbox{margin:10px 0;float:left;}
+.app_listbox .checkbox{width:18px;height:18px;margin:30px 5px 0 5px;display:inline-block;float:left;}
+.app_listinfo p{height:14px;line-height:14px;width:95px;display:inline-block;-webkit-margin-before: 0em;
+-webkit-margin-after: 0em;-webkit-margin-start: 0px;-webkit-margin-end: 0px;}
+.app_listinfo .price{color:#fe9365;padding:7px 0 8px 0;}
+.linethrough{text-decoration: line-through;}
+.app_popfater{position:relative; z-index:10;}
+.app_listbox_pop{ position:absolute;top:-7px ;width:174px;height:139px; z-index:9999;line-height:18px;}
+.app_listbox_pop_1{background:url(../img/pc_iframe_spread/pop_bg1.png) no-repeat;padding:15px 15px 15px 22px;left:181px; }
+.app_listbox_pop_2{background:url(../img/pc_iframe_spread/pop_bg1_2.png) no-repeat;padding:15px 22px 15px 15px;left:-201px; }
+.app_listbox_pop_3{background:url(../img/pc_iframe_spread/pop_bg2.png) no-repeat;padding:15px 15px 15px 22px;left:181px;top:-86px; }
+.app_listbox_pop_4{background:url(../img/pc_iframe_spread/pop_bg2_2.png) no-repeat;padding:15px 15px 15px 22px;left:-201px;top:-86px; }
+.app_listbox_popname{padding-bottom:11px;font-size:13px;}
+.app_listbox_popname .fl{overflow: hidden; white-space: nowrap; width:95px; text-overflow:ellipsis;float:left;}
+.app_listbox_popname .fr{width:60px;float:right;}
+.app_listbox_popname img{margin:3px 0 0 1px;}
+.app_listbox_popother{color:#666;}
+
+/*login*/
+.login{width:418px;height:261px;padding:8px;background:url(../img/pc_iframe_spread/login_bg.png) no-repeat;}
+a.close,a.close:hover,a.close:active{ background: url(../img/pc_iframe_spread/home_windowers_1.png) no-repeat;width:46px;height:28px;display:block;float:right;margin-top:2px;}
+a.close:hover{ background-position:-46px 0;}
+a.close:active{ background-position:-92px 0;}
+.clear{clear:both;font-size:0;width:0;height:0;visibility:hidden;line-height:0;overflow:hidden;}
+.login_info{margin:40px auto 0 auto;width:209px; position:relative; z-index:10;}
+.tips_error{ position:absolute; z-index:999;width:209px;height:20px;top:-20px;left:0;color:#FE9365;}
+.login_namebox,.login_passwordbox{height:26px;line-height:26px;width:172px;padding:1px 1px 1px 36px;border:none;}
+.login_namebox{background: url(../img/pc_iframe_spread/login_namebox.png) no-repeat;}
+.login_passwordbox{ background: url(../img/pc_iframe_spread/login_passwordbox.png) no-repeat;margin-top:15px;}
+.login_box1,.login_box2{margin-top:18px;float:left;}
+.login_box1{width:124px;}
+.login_box2{width:84px;}
+.pass_login_label_rem{vertical-align: middle;left: 0px;line-height:12px;}
+a.pass_login_input_rem,a.pass_login_input_rem:hover,a.pass_login_input_rem:active,a.pass_login_input_rem_ed,a.pass_login_input_rem_ed:hover,a.pass_login_input_rem_ed:active{vertical-align: middle; background:  url(../img/pc_iframe_spread/checkboxpicture.png);width:18px;height:18px;display:inline-block;}
+a.pass_login_input_rem{background-position: -0px 0;}
+a.pass_login_input_rem:hover{background-position: -18px 0;}
+a.pass_login_input_rem:active{background-position: -36px 0;}
+a.pass_login_input_rem_ed{background-position: -72px 0;}
+a.pass_login_input_rem_ed:hover{background-position: -90px 0;}
+a.pass_login_input_rem_ed:active{background-position: -108px 0;}
+a.login_butt_login,a.login_butt_cancel{width:85px;height:30px;display:block;}
+a.login_butt_login,a.login_butt_login:hover,a.login_butt_login:active{background:url(../img/pc_iframe_spread/login_butt_login.png) no-repeat;}
+a.login_butt_login:hover{background-position: -85px 0;}
+a.login_butt_login:active{background-position: -170px 0;}
+a.login_butt_cancel,a.login_butt_cancel:hover,a.login_butt_cancel:active{background:url(../img/pc_iframe_spread/login_butt_cancel.png) no-repeat;}
+a.login_butt_cancel:hover{background-position: -85px 0;}
+a.login_butt_cancel:active{background-position: -170px 0;}
+
+/*安装错误提示*/
+.error_bg{ background:url(../img/pc_iframe_spread/error_bg.png) no-repeat;width:194px;height:79px;}
+
+/*出错提示*/
+.error{width:418px;height:261px;padding:8px;background:url(../img/pc_iframe_spread/error_bg_2.png) no-repeat;}
+.error_info{ background:url(../img/pc_iframe_spread/jingshi_icon.png) no-repeat; width:250px;word-wrap: break-word;padding:10px 0 0 60px;min-height:50px;_height:50px;color:#f41111;line-height:20px;margin:60px auto 0 auto;}
+
